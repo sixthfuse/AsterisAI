@@ -1,0 +1,128 @@
+{
+  "scenario_id": "FLOW-10",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "c1b4547d388caa454590cce08feaca251592fb566ea51de34cce99868a87c2f4",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "7a33754b15f3654a05d0fde256df1f6ec8eb52a28d4633f996e0cdf438bfdfa6",
+  "packet_sha256": "7cb3f5b6c3e926cd871d14c456fd3dce041c2863647f29e96c417aaae562519a",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08c5565c4b390ca9006aa080b1ce5087d09b70e21c8b230ede",
+  "usage": {
+    "input_tokens": 25655,
+    "input_tokens_details": {
+      "cache_write_tokens": 24262,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 891,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 26546
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "source_or_evidence_gap",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "E5 places CMGT 7330 under Construction Controls and Techniques, although both the frozen curriculum and retrieved E44/E76 place it under Organization Management. The raw model answer and final answer are identical."
+        },
+        "notes": "Program identity is correct in prose and state. Most overview and choice-rule claims are supported, but the claim that required program coursework must precede the project sequence is not established by the supplied rules. Secondary list_dump_or_repetition: a lengthy curriculum overview is disproportionate to a simple program-identification statement. No clarification was needed. Context retention is inapplicable on turn 1; frustration and next-step guidance are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly explains the required OR choice, not both courses, and preserves CMGT 8700 and department approval. Program state is correct. The answer need not enumerate all graduation requirements for this focused question. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly rejects skipping both and correctly explains the mandatory final-project choice. Restating the alternatives is responsive to the follow-up, not an unwanted catalog dump. Correct program state and referent retention. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The turn-4 tool context asserts completed_courses=[CMGT8800, CMGT8810], although the student only asks hypothetically, 'If I complete CMGT 8810'. Neither completion was reported. These context facts are not in the model's tool arguments."
+        },
+        "notes": "The final academic answer remains correct: CMGT 8810 satisfies the final-project alternative without requiring CMGT 8800, and it does not imply all graduation requirements are met. Program identity is correct in both prose and state. The erroneous student-completion context is separate from the accurate answer; the precise deterministic extraction subcomponent is not shown. Prose repeats the alternatives and conclusion slightly more than needed. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

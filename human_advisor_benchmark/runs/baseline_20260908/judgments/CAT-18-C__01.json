@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-18-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "c40a8942404ed25e3b2842769324b0c8a87d9071b9f01a11522f828f25da8b8c",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "df757198b05aaf7b0f00bac0d6406b2e4b4b311b570588b771e09c5b2d3d99a9",
+  "response_id": "resp_08b93a2cf5463d3d006aa07c0f88f087d0a669ef393342ef5f",
+  "usage": {
+    "input_tokens": 61368,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 61365
+    },
+    "output_tokens": 670,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 62038
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two-sentence introduction matches frozen delivery, credit, elective, review and international-applicant records. Both state and prose identify 5430ACERT correctly. Context retention is inapplicable on turn 1; no clarification, frustration handling or next step is needed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer correctly declines an immediate-job guarantee but ends with the repeated curriculum-review notice and generic 'Details' link, rather than a practical employment-related next step; finalization preserves this answer."
+        },
+        "notes": "Career-advancement purpose and curriculum-review claims match the snapshot. The answer honestly states that available information supplies neither a guarantee nor a placement timeline, without inventing statistics or predicting this student's outcome. The expected practical next step is missing: the generic program link is not targeted guidance for evaluating employment prospects. No necessary clarification or frustration handling applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "tool_or_transport_failure",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; response intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation even though the final acknowledgment appropriately stops advising."
+        },
+        "notes": "The concise final response respects the stop and contains no academic claims, so factual correctness is inapplicable. Active program 5430ACERT is preserved. The unnecessary retrieval is attributable to the observed forced tool routing, not a freely chosen model tool call; the exact upstream subcomponent is not established. No next step or necessary clarification is appropriate."
+      }
+    ]
+  },
+  "attempt": 1
+}

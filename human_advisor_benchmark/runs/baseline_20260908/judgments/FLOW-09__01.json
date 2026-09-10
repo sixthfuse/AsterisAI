@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-09",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "51f8fb79e946054a67d417cd0ec589391ce8baa9e3866e060f011238c5f4e96b",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "317d28813e725c9dd448a6afc9bff8811c4833a31142d4290ca2f36b09a98a73",
+  "packet_sha256": "6117f40d23a504febe486887b7be32032b3bcb0ed6d675625775d5bdc7f17190",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_02eb4538f6fca08e006aa08156b11087d0b7456b7fc77edec5",
+  "usage": {
+    "input_tokens": 19970,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 19967
+    },
+    "output_tokens": 1435,
+    "output_tokens_details": {
+      "reasoning_tokens": 63
+    },
+    "total_tokens": 21405
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": null,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the explicit BTech credential, resolution returns candidates 7710DIPMA and 8800BTECH with program_id null. The response asks the student to choose between two identically named Construction Management options rather than answering."
+        },
+        "notes": "No substantive academic claims to assess. Context retention is inapplicable on turn 1; no necessary clarification, frustration, or next step was expected. The duplicate labels make the unnecessary clarification especially unhelpful."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 0,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 0,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 0,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 0
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The response renders 'CMGT 8800; None; None; None; None (minimum grade: 2)' as prerequisites. Certified text instead requires program coursework except the final project, two years of related experience, an industry topic, and an industry sponsor. CMGT 8800 is an exception, not a prerequisite; 2 denotes years, not a grade. The observed turn contains no model call."
+        },
+        "notes": "The correct course is named, but the BTech program remains absent from state. The supplied structured prerequisite row itself contains a misleading COURSE entry, while its notes and the course text preserve the exception. Attribution to a specific deterministic formatter or academic component is not established. No clarification, frustration handling, or next step was required."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution and final state remain scoped to CMGT8700 with program_id null. Calls explicitly requesting CMGT8800 and CMGT8810 both return the CMGT8700 record. Nevertheless, the final prose correctly says department approval is required for both requested alternatives."
+        },
+        "notes": "The approval claim is verified by frozen course records and academic rules, so factual correctness is fully credited. It does not imply both final projects must be completed. Observed tool returns do not substantiate the claim, which limits evidence discipline despite the correct answer. The exact component overriding course arguments is not established. No next step or clarification was needed."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The campus question is resolved as course scope for CMGT8700 and the initial tool choice forces get_course_details. Only that course record is returned. The answer consequently cannot supply Burnaby, although frozen program_campuses, programs, and all program_offerings establish it."
+        },
+        "notes": "Prose correctly identifies the Construction Management BTech referent, unlike the retained course-only state. Its sole affirmative academic claim, the CMGT8700 title, is correct; the missing campus answer is not scored as a false campus claim. The limitation is honest relative to retrieved evidence but overbroad about available Asteris data. No actionable way to resolve that limitation is offered. Raw and finalized answers match; no finalization corruption is observed."
+      }
+    ]
+  },
+  "attempt": 6
+}

@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-11-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "3a3fddee918c950d4be973237fc85ed579eb9d1d78203fcec3ef4b93c3817d72",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "190da7b0c5f4c2976867285393dfaee1da449925844e00f098c9b0398d22c23a",
+  "response_id": "resp_0f437a291c5c8d62006aa07993727c87d087873cab9d6c4812",
+  "usage": {
+    "input_tokens": 61064,
+    "input_tokens_details": {
+      "cache_write_tokens": 59671,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 704,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 61768
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two sentences within the requested brevity limit. Program identity, delivery wording, audience, school, credits and course examples match frozen records. The second sentence is slightly catalog-like but not an excessive dump. Context retention is inapplicable on turn 1; no clarification, frustration handling or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer repeats the part-time/online description and NSER 7300/7500 examples from turn 1 despite an employment question, then offers only 'review the program details' rather than an outcomes-focused practical next step. Finalization leaves this unchanged."
+        },
+        "notes": "Correctly refuses to guarantee employment and accurately distinguishes surveys one to two years after graduation from immediate employment evidence. All checkable academic claims are supported. State and prose retain 810BBSN; the generic PROGRAM_INFO label does not prevent the prose from answering outcomes. The link is verified but guidance does not specify reviewing outcome reports or investigating current hiring. No necessary clarification or frustration handling applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval, failing the frozen tools_empty expectation. The final answer nevertheless acknowledges stopping briefly and provides no further advice."
+        },
+        "notes": "User-facing stop response is appropriate and the active program remains 810BBSN. The unnecessary retrieval is attributable to the forced routing rather than a freely chosen model tool call; the exact routing subcomponent is not shown. No academic claims occur, so factual correctness is null. No clarification or next-step guidance is required."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,104 @@
+{
+  "scenario_id": "CAT-01-A",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b320861749f94d6e8cfdd93338c8556045cd9b794e2a85def6bd2cf3ca91aa36",
+  "response_id": "resp_0c518c2a85fac378006aa073c08e0487d085f5bedaac44a1a1",
+  "usage": {
+    "input_tokens": 79608,
+    "input_tokens_details": {
+      "cache_write_tokens": 78254,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 657,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 80265
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "unnecessary_clarification",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The request was for a 'brief introduction', but the raw model answer lists seven first-year courses and all four second-year path courses. Finalization leaves this unnecessary curriculum detail unchanged."
+        },
+        "notes": "All academic claims match the frozen overview, course records, pathway alternatives, campus information and intake dates. Both prose and state identify M600MSC correctly. The introduction is useful but more catalog-like than requested. Context retention is not applicable on turn 1; no necessary clarification, frustration handling or actionable next step is required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The campus response joins the Downtown postal code directly to 'The stored program listing says' without punctuation and repeats the campus listing. The trace shows no model calls and identifies campus_information as the response tool."
+        },
+        "notes": "Burnaby, possible Downtown or field locations, and both full addresses are supported by frozen campus and program-campus records. State correctly retains M600MSC. The issue is presentation, not location accuracy; the trace does not identify the particular deterministic formatting subcomponent. Necessary clarification, frustration handling and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Provides the exact frozen official program URL with the correct credential label. Prose, resolver state and tool selection all retain M600MSC. Repeating the link is expressly requested, not unwanted repetition. No necessary clarification, frustration handling or additional next-step guidance applies."
+      }
+    ]
+  },
+  "attempt": 1
+}

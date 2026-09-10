@@ -1,0 +1,130 @@
+{
+  "scenario_id": "FLOW-05",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "5562b499a849f11b35495c5893c17a67d947837bbed1926f5932fddcccc4448e",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c96b1e14f737881023efce78b4fb208de2ca5b2ee4a246ee28de7aa4caa6f4c1",
+  "packet_sha256": "719de7244ddac2d4c5dc1be996c179683ee29cf103ce984a24ccb3785f3e3131",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_07138d624aef659d006aa109d7969087d0b984f7481fb69926",
+  "usage": {
+    "input_tokens": 88422,
+    "input_tokens_details": {
+      "cache_write_tokens": 87068,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2374,
+    "output_tokens_details": {
+      "reasoning_tokens": 1537
+    },
+    "total_tokens": 90796
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response accurately summarizes the 374-program catalog by credential and field without incorrectly selecting one program. Context retention is not applicable on the first turn; no necessary clarification, frustration, or required next step was present."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "It correctly identifies the sole active biochemistry match as program 9940BSC and accurately reports its credential, study mode, delivery, and joint location. No clarification or substantive next step was required."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The selected program and all stated pathway details match the frozen evidence, but the retrieved program-details result omitted frozen entrance/application records. Consequently, the final answer did not mention that a criminal record check is an entrance requirement or clearly state that applications go through UBC Science/UBC Admissions before eligible students apply for the specialization in June."
+        },
+        "notes": "The two admission pathways remain correctly labeled as alternatives, and the 76%/September 2026 70% thresholds and course requirements are accurate. The answer appropriately flags honours eligibility and transfer equivalencies for institutional confirmation and gives an actionable official-page next step. Its completeness is reduced by omission of the separately stored criminal-record-check entrance requirement and application workflow."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The response and campus result correctly use program 9940BSC and report Burnaby Campus and UBC Vancouver, but both resolver and final conversation state retain academic_scope='admission' even though this turn's requested scope is campus."
+        },
+        "notes": "The user-facing answer is factually correct and preserves the intended program. The stale hidden academic scope did not alter the result, but it is a state/scope defect. The phrase 'has the stored location' is somewhat database-like rather than natural advising language. No clarification or further next step was needed."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

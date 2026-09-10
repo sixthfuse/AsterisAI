@@ -1,0 +1,1355 @@
+{
+  "reviewer": "Current task agent; evidence review, not a blinded human panel",
+  "sampling": "Purposefully selected diagnostic anchors. Do not merge into automated-score prevalence denominators.",
+  "findings": [
+    {
+      "scenario_id": "CAT-04-B",
+      "turn": 3,
+      "root_cause": "scope_confusion",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The response says successful first-two-year completion leads to the Civil Engineering Diploma 'subject to the program’s continuation requirements'. Stored program overview and Level-5 progression rules attach continuation requirements to entry into the final two BEng years, not the diploma award. Correct source evidence was present in get_program_details; finalization retained the raw model claim.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: programs 8660BENG",
+        "database_before.json: progression_requirements 8660BENG",
+        "test_admission_normalization_six.py"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-13",
+      "turn": 1,
+      "root_cause": "response_generation_quality",
+      "pattern": "or_and_elective_confusion",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+        "ai_advisor.py:1768"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-07",
+      "turn": 1,
+      "root_cause": "clarification_logic",
+      "pattern": "credential_ambiguity",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Asking which credential is appropriate, but the choices are rendered as 'Civil Technology; Civil Technology?' without credential labels. The response is generated before any model call. This prevents a useful initial clarification.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "ai_advisor.py:2336",
+        "transcripts/FLOW-07.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-07",
+      "turn": 2,
+      "root_cause": "entity_resolution",
+      "pattern": "credential_ambiguity",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The student specifies 'The associate certificate.' The state remains ambiguous and the advisor repeats identical program names instead of selecting 5430ACERT. No model call occurs.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "transcripts/FLOW-07.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-07",
+      "turn": 3,
+      "root_cause": "entity_resolution",
+      "pattern": "credential_ambiguity",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Explicit 'Civil Technology certificate' still leaves ambiguous state and repeats the identical-label question instead of selecting 5430CERT. No model call occurs.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "transcripts/FLOW-07.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-07",
+      "turn": 4,
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "After the explicit certificate correction, a campus follow-up again receives the unresolved identical-label question. This is a downstream continuation of the credential-resolution failure.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "transcripts/FLOW-07.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-14",
+      "turn": 2,
+      "root_cause": "retrieval_routing",
+      "pattern": "tool_or_transport_failure",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "medium",
+      "evidence": "A course-specific work-experience question within a BTech discussion drops program state for CMGT8700. The model searches programs repeatedly and the turn ends with tool_round_limit_reached. The first deterministic program-context loss and subsequent model tool choices both contribute; no academically false answer is emitted.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "prior_attempts/FLOW-14.json"
+      ],
+      "historical_attempt": true
+    },
+    {
+      "scenario_id": "FLOW-14",
+      "turn": 2,
+      "root_cause": "retrieval_routing",
+      "pattern": "source_or_evidence_gap",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "medium",
+      "evidence": "On the resumed run, the CMGT 8700 experience question again drops program state to course scope. The model searches programs, then calls get_program_progression_requirements without the retained program and reports that the 2-year threshold cannot be verified. The frozen prerequisite_conditions for CMGT8700 explicitly publish 2 years. Deterministic state loss and restricted retrieval are implicated; no fabricated numeric result is emitted.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "transcripts/FLOW-14.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-17",
+      "turn": 3,
+      "root_cause": "retrieval_routing",
+      "pattern": "source_or_evidence_gap",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "medium",
+      "evidence": "After unique Biochemistry discovery, 'admisson reqs?' stays family-scoped, forces search_programs, then uses compare_programs. It says admission requirements cannot be verified, although frozen ADMISSION records exist for 9940BSC. This is lost access to available evidence, not proof that the academic database lacks the requirements.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: academic_rule_sets 9940BSC",
+        "prior_attempts/FLOW-17.json"
+      ],
+      "historical_attempt": true
+    },
+    {
+      "scenario_id": "FLOW-17",
+      "turn": 3,
+      "root_cause": "retrieval_routing",
+      "pattern": "source_or_evidence_gap",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "medium",
+      "evidence": "On the resumed run, after unique Biochemistry discovery, the typo fragment admisson reqs? stays family-scoped and forces search_programs. It returns a program list and says category results lack admission requirements. The frozen ADMISSION records exist for 9940BSC, but the flow never retrieves them. This is a failure to answer with available evidence.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: academic_rule_sets 9940BSC",
+        "transcripts/FLOW-17.json"
+      ]
+    },
+    {
+      "scenario_id": "CAT-06-A",
+      "turn": 1,
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Finalization changes the correct raw CHEM 203 - Introduction to Organic Chemistry into a label containing CHEM 213. The frozen courses table identifies CHEM 203 and CHEM 213 as distinct courses. The before/after finalization event directly demonstrates the introduced wrong course identity.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: courses UBC-CHEM-203 and UBC-CHEM-213",
+        "transcripts/CAT-06-A.json: turn 1 finalization"
+      ]
+    },
+    {
+      "scenario_id": "CAT-06-B",
+      "turn": 3,
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Finalization inserts UBC-CHEM-111, UBC-CHEM-121 and UBC-CHEM-141 into the correctly named raw CHEM 123 - Principles of Chemistry 2. These are distinct frozen course records with a different title. Unrequested calculus course IDs are also inserted. The saved raw/final event isolates this corruption to deterministic finalization.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: courses UBC-CHEM-123, UBC-CHEM-111, UBC-CHEM-121, UBC-CHEM-141",
+        "transcripts/CAT-06-B.json: turn 3 finalization"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-03",
+      "turn": 1,
+      "root_cause": "response_generation_quality",
+      "pattern": "or_and_elective_confusion",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators. The identical first-turn response recurs in FLOW-03. Its evaluator pattern missing_next_step is inconsistent with the evidence; this labeled review classifies it as OR/alternative corruption, without changing numeric scores.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+        "ai_advisor.py:1768"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-02",
+      "turn": 1,
+      "root_cause": "retrieval_routing",
+      "pattern": "scope_mismatch",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The broad Nursing-family question receives 13 BSNs and an unqualified all-BSN claim. The frozen active catalog also contains Critical Care Nursing Specialty 680XADCERT and Neonatal Nursing Specialty 680FASCERT, both Advanced Certificates with status Active. Retrieval supplies the narrow BSN set; model prose presents it without a coverage limitation. This materially excludes available credential options. Review assigns scope_mismatch instead of the evaluator's unknown_or_human_boundary label.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: programs 680XADCERT and 680FASCERT",
+        "transcripts/FLOW-02.json: turns 1 and 3"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-02",
+      "turn": 3,
+      "root_cause": "retrieval_routing",
+      "pattern": "scope_mismatch",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The broad Nursing-family question receives 13 BSNs and an unqualified all-BSN claim. The frozen active catalog also contains Critical Care Nursing Specialty 680XADCERT and Neonatal Nursing Specialty 680FASCERT, both Advanced Certificates with status Active. Retrieval supplies the narrow BSN set; model prose presents it without a coverage limitation. This materially excludes available credential options. Review assigns scope_mismatch instead of the evaluator's unknown_or_human_boundary label.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: programs 680XADCERT and 680FASCERT",
+        "transcripts/FLOW-02.json: turns 1 and 3"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "awkward_or_impersonal",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E1 presents a long list of database credential labels, including overlapping Bachelor's Degree and Master's Degree variants, rather than a student-oriented overview with program examples. It also calls the BCIT catalog programs 'Asteris' offerings. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-05",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "awkward_or_impersonal",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E2 correctly identifies the unique Combined Honours program but again says 'Asteris offers' while the retrieved catalog and linked institutional source are BCIT. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-05",
+      "turn": 2,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "source_or_evidence_gap",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Finalization changes the clean E3 admission answer into E4: 'CHEM 121 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141' and '3.0 credits of UBC-MATH-100 — UBC-MATH-102 — UBC-MATH-104 — Differential Calculus'. These inserted identifier chains obscure course alternatives and readability. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-05",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Resolution E80 and get_program_details use 9940BSC, but returned conversation_state E57 still has program_id=null and scope=program_family rather than persisting the uniquely referenced program. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-05",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "retrieval_routing",
+      "pattern": "comparison_set_collapsed",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The call requesting get_program_details for 7710DIPMA returns E216, explicitly containing 8800BTECH. The final comparison consequently lacks diploma curriculum and admission information despite their presence in the frozen database. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-06",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "entity_resolution",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "After 'I mean the diploma,' resolution E214 and final state E139 still identify 8800BTECH; E9 confirms the failed state check against 7710DIPMA. Even the explicit diploma-details call returns BTech data. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-06",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "entity_resolution",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The zero-model-call turn resolves 'that one' to 8800BTECH and retains that ID in E139 despite the explicit diploma clarification on turn 3. The returned campus relationship corresponds to the BTech. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-06",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The saved zero-model answer is 'Prerequisites: CMGT 8800; None; None; None; None (minimum grade: 2)'. The frozen CMGT8700 course record instead says completion of program courses with an exception for CMGT8800, and minimum two years related work experience, an industry topic and sponsor. The renderer turns an exception into a prerequisite, experience years into a grade, and drops non-course conditions.",
+      "scenario_id": "FLOW-09",
+      "turn": 2,
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "transcripts/FLOW-09.json: turn 2",
+        "database_before.json: courses CMGT8700",
+        "ai_advisor.py: course_prerequisites_answer"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Resolution and final state remain scoped to CMGT8700 with program_id null. Calls explicitly requesting CMGT8800 and CMGT8810 both return the CMGT8700 record. Nevertheless, the final prose correctly says department approval is required for both requested alternatives. Taxonomy-only review: original pattern student_fact_lost_or_not_corrected does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-09",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "retrieval_routing",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The campus question is resolved as course scope for CMGT8700 and the initial tool choice forces get_course_details. Only that course record is returned. The answer consequently cannot supply Burnaby, although frozen program_campuses, programs, and all program_offerings establish it. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-09",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E5 places CMGT 7330 under Construction Controls and Techniques, although both the frozen curriculum and retrieved E44/E76 place it under Organization Management. The raw model answer and final answer are identical. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-10",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The resolver and final state retain CMGT8700 but leave program_id null despite the established Construction Management program. The answer nevertheless correctly applies the retrieved two-year course threshold. Taxonomy-only review: original pattern list_dump_or_repetition does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-14",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-14__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "scope_mismatch",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The graduation question remains resolved as course scope with program_id null and intent COURSE_INFO. Forced initial retrieval targets CMGT8700; subsequent requests for CMGT8800 and CMGT8810 also return CMGT8700 data. Taxonomy-only review: original pattern list_dump_or_repetition does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-14",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-14__01.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-29",
+      "turn": 4,
+      "root_cause": "response_generation_quality",
+      "pattern": "or_and_elective_confusion",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators. The identical response is present at FLOW-29 turn 4.",
+      "review_status": "confirmed_by_task_agent",
+      "source_refs": [
+        "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+        "ai_advisor.py:1768"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-31",
+      "turn": 2,
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "deterministic",
+      "severity": "critical",
+      "confidence": "high",
+      "review_status": "confirmed_by_task_agent",
+      "evidence": "The saved finalization event transforms correct raw MATH 2423 - Introductory Statistics for Civil Engineering into MATH 2423 - Introductory CIVL 1020 - Statistics for Civil Engineering. The frozen courses table identifies MATH2423 and CIVL1020 as distinct records with distinct titles. This confirms the same course-title replacement defect beyond UBC courses.",
+      "source_refs": [
+        "transcripts/FLOW-31.json: turn 2 finalization",
+        "database_before.json: courses MATH2423 and CIVL1020"
+      ]
+    },
+    {
+      "root_cause": "retrieval_routing",
+      "pattern": "scope_mismatch",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E18 again routes the explicit graduation correction to a family search with forced search_programs. E2 repeats the category listing and says available Asteris data lacks graduation requirements, although turn 2 retrieved TOTAL_132_CREDITS and extensive curriculum evidence. The model's broad absence claim remains unchanged in finalization. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-17",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-17__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "comparison_set_collapsed",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "For 'Where are they taught?', resolver and returned state retain only M500MENG, and the unchanged raw/final answer names only Smart Grid. Applied Computing, explicitly compared in the preceding answer, is omitted. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-21",
+      "turn": 2,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-21__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "comparison_set_collapsed",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The comparative question 'Which one accepts international applicants?' again resolves solely to M500MENG and receives only Smart Grid's international-applicant information, omitting Applied Computing's affirmative eligibility. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-21",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-21__01.json"
+      ]
+    },
+    {
+      "root_cause": "entity_resolution",
+      "pattern": "credential_ambiguity",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Explicit 'Construction Management BTech alone' yields ambiguous candidates 7710DIPMA and 8800BTECH, null program_id, and the duplicate prompt 'Construction Management; Construction Management?' with no model calls. Taxonomy-only review: original pattern comparison_set_collapsed does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-22",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-22__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Retrieved admission notes say alternate-entry bridging courses 'may be required before applying' and specified international credentials 'will require' comprehensive evaluation. The unchanged raw/final answer instead says bridging 'may be recommended' and qualifying international education 'may need' evaluation, weakening mandatory conditions. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-23",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-23__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The resolver correctly identifies CMGT8700 but stores only course scope and course_id; final state still has program_id null rather than retaining 8800BTECH. The actual prose correctly answers about CMGT 8700 and does not name a wrong program. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-27",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-27__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "With 30 history messages omitted, resolution retains M600MSC; E26 confidently says 'We’re back to Applied Computing' although the first program was Applied Circular Economy: Zero Waste Buildings. Taxonomy-only review: original pattern student_fact_lost_or_not_corrected does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-07",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-07__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The raw and final answers place 'Plus 6 credits' under Term 7 and describe Term 8 as continuing 'as applicable.' Certified curriculum components specify a 3-credit specialty elective in each of Terms 7 and 8. The correct distribution was available in the tool result. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-33",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-33__01.json"
+      ]
+    },
+    {
+      "root_cause": "entity_resolution",
+      "pattern": "background_as_topic",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The resolver replaces M600MSC with 5410DIPLT when the student adds a civil engineering diploma as background. Retrieval then requests Civil Engineering Diploma details, and final state remains 5410DIPLT despite the unchanged Computing application target. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-33",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-33__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The resolution and returned state still identify 5410DIPLT, and campus_information returns the Civil Engineering relationship rather than M600MSC. No model call is observed on this turn. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-33",
+      "turn": 4,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-33__01.json"
+      ]
+    },
+    {
+      "root_cause": "clarification_logic",
+      "pattern": "credential_ambiguity",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The resolution trace correctly retains candidates 7710DIPMA and 8800BTECH with ambiguous scope, but the fallback asks 'Construction Management; Construction Management?' without credential labels. The necessary clarification offers no distinguishable choices. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-34",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-34__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "source_or_evidence_gap",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The raw model answer correctly identifies all 12 part-time Specialty Nursing programs, but then says the available data 'does not independently verify this approval requirement.' Turn 1's comparison evidence explicitly supplied 'International students must receive program head approval before applying.' Finalization leaves this qualification unchanged. Taxonomy-only review: original pattern awkward_or_impersonal does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-35",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-35__01.json"
+      ]
+    },
+    {
+      "root_cause": "scope_confusion",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E2 and final E1 say the pathway continues into Levels 3 and 4 for Bachelor of Engineering students, after listing only Levels 1–2 as Diploma-level courses. Frozen program_courses and the retrieved level results assign Levels 3–4, including the Level 4 elective choice, to Diploma 5410DIPLT. The error already occurs in the raw model answer; finalization only changes course-code formatting. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-39",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-39__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The first program in the full conversation is Applied Computing MSc, but resolution and state remain 8800BTECH. With 30 history messages omitted, the model asserts 'You’re referring to Construction Management — Bachelor of Technology' rather than recovering the earlier subject or acknowledging uncertainty. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-01",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-01__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E2 already contains an extensive nine-term curriculum, elective pool and admissions checklist in response to a request simply to keep Nursing as the subject. Finalization preserves that excessive scope. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "source_or_evidence_gap",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E14 correctly states international exclusion but labels the Nursing program URL as a place to review 'available programs'; it does not supply the available-programs destination. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 8,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E16 answers the guarantee question using minimum entrance requirements rather than explicitly connecting 'that' to the immediately preceding international-applicant exclusion. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 9,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E23 partly simplifies the human-confirmation answer but adds entrance and international-status recap, and groups mandatory influenza/CPR items with conditional fit testing under 'may also need'. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 11,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E34 correctly names Nursing but follows a simple topic-identification question with seven previously supplied program facts and a link. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 15,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E36 follows a simple program-switch request with a full core-course list, both Year 2 paths, LIBS applicability commentary and intake details. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "With 30 history messages omitted, resolution and tool context remain M600MSC. E31 then asserts 'The first program you mentioned was Applied Computing' although turn 1 named Nursing, and supplies an MSc curriculum dump rather than returning to Nursing or acknowledging uncertainty. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-03",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-03__01.json"
+      ]
+    },
+    {
+      "root_cause": "scope_confusion",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E7 nests the Mandatory Applicant Questionnaire only under alternate entry, although rule group 78 requires it for both routes. It also weakens the specified international credential-evaluation requirement to 'may require' without naming the country exceptions. Taxonomy-only review: original pattern unverified_claim_or_guarantee does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-04",
+      "turn": 20,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-04__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Raw E4 already includes ten Level 4 course listings in response to a request merely to keep Civil Engineering Diploma as the subject; finalization only formats course codes. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-05",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E27 answers a simple topic switch with Year 2 course names, substitution mappings, continuation rules and completion limits; this content is already present in raw model output. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-05",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "After 30 history messages are omitted, resolver E85 retains M600MSC for 'the first program I mentioned today'; raw/final E26 confidently says 'You’re back at the Applied Computing Master of Science' rather than restoring Civil Engineering Diploma or acknowledging uncertainty. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-05",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-05__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E6 explains why high-school grades do not establish the undergraduate admission average, but does not explicitly reconnect 'it' to the program-course progression average identified in turn 2. E88 supplied that continuation evidence. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-44",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-44__01.json"
+      ]
+    },
+    {
+      "root_cause": "clarification_logic",
+      "pattern": "missing_next_step",
+      "layer": "unresolved",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The advisor appropriately asks which program, but does not also request relevant completed courses, as the frozen expectation specifies. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "FLOW-48",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/FLOW-48__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Finalization changes the clean CHEM 123 label in E11 into 'CHEM 123 — UBC-CHEM-123 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141 — Principles of Chemistry 2' in E12, conflating distinct courses. The model already supplied an unsolicited multi-year curriculum dump. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-06",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "awkward_or_impersonal",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E2 has clean chemistry alternatives and '3.0 credits of differential calculus'; final E3 inserts chains of internal chemistry and calculus IDs into those phrases. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-06",
+      "turn": 7,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "awkward_or_impersonal",
+      "layer": "deterministic",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Finalization replaces E24's ordinary 'differential calculus' with 'UBC-MATH-100 — UBC-MATH-102 — UBC-MATH-104 — Differential Calculus' in E23. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-06",
+      "turn": 10,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "For 'Now switch to Applied Computing MSc,' raw and final E30 supply a full core-course and pathway catalogue rather than a proportionate acknowledgment or short introduction. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-06",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Despite the first program being Combined Honours in Biochemistry and Forensic Science, resolver E286 retains M600MSC and the model says 'We’re back to the Applied Computing Master of Science.' Thirty history messages are omitted; the model confidently repeats the MSc catalogue instead of acknowledging uncertainty. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-06",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-06__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "After acknowledging the requested subject, raw and final E26 add the entire elective pool, completion rules, and admissions checklist although the student only asked to keep Accounting as the subject. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-08",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-08__01.json"
+      ]
+    },
+    {
+      "root_cause": "unsupported_inference",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E10 says to confirm 'Whether the signed departmental assessment is required in your case'; retrieved E236 includes condition 489 explicitly stating that the signed assessment and any assigned bridging/upgrading are required. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-08",
+      "turn": 10,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-08__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E30 correctly acknowledges the switch but then lists every Year 1 course, both Year 2 paths, and substitutions despite the user only requesting a topic switch. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-08",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-08__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "With 30 history messages omitted, resolution remains M600MSC and the forced details call retrieves that program. Raw and final E9 repeat Applied Computing admissions instead of returning to Accounting or acknowledging uncertainty and asking which program. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-08",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-08__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Raw and final E15 append the entire curriculum to a request simply to retain Electronics as the subject. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-09",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E19 retains nine confirmation bullets and a four-course sublist after the student requests a simpler version of E11. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-09",
+      "turn": 11,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "After correctly switching to M600MSC, raw/final E29 supplies the entire course list and a LIBS applicability discussion for a simple topic-switch request. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-09",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E9/E10 says 'A pre-entry assessment and possible bridging courses may be required' for alternate entry. Retrieved E5 explicitly requires a completed Pre-entry Assessment form; only bridging courses are conditional. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-09",
+      "turn": 20,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The first program was Electronics, but resolution E206 and persistent E75 remain M600MSC. E1 confidently gives an Applied Computing catalog/admission dump rather than returning to Electronics or acknowledging uncertainty; 30 history messages were omitted. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-09",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-09__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The raw answer acknowledges the subject but adds a full course list, admissions, and international rules to a request only to retain the topic. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Despite 'short overview,' E1 repeats the entire six-course list already supplied in turn 1. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 2,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E3 includes the full six-course catalog again inside a pre-application answer. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 7,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E5 repeats the complete course list under completion verification and discusses the work component twice. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 10,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "Asked to simplify, E8 retains eight categories and again enumerates all six courses instead of compressing the prior answer into a few key confirmation tasks. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 11,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "A simple reported completion triggers another complete six-course list and graduation explanation in E15. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 14,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E25 correctly names the program, then repeats six overview fields when only the active program's identity was requested. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 15,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "The requested topic switch receives a long overview with course pathways, international policy, application timing, and unsolicited LIBS transfer discussion. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E7 lists all three application rounds and says international applicants need a permit before starting, but omits E2's explicit requirement to hold a valid BCIT study permit to apply in the third round. This omission is already in raw E6 despite E2 being retrieved. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 20,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "After 30 history messages are omitted, resolution/state remain M600MSC. Raw and final E21 assert 'Returning to the Master of Science in Applied Computing,' although the first program in the full conversation was Business Administration Graduate Certificate. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-10",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-10__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E16 acknowledges the subject but then supplies a full curriculum, admissions and international restrictions without being asked; raw and final answers match. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-11",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-11__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E30 correctly names the program but follows with repeated credential, school, delivery, overview and five course examples for a simple topic-identification question. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-11",
+      "turn": 15,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-11__01.json"
+      ]
+    },
+    {
+      "root_cause": "scope_confusion",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E9/E10 nests the Mandatory Applicant Questionnaire under alternate entry and calls its references 'alternate-entry' requirements. Frozen group 78 and tool E80 place questionnaire and references outside the OR entry routes as common requirements. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-11",
+      "turn": 20,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-11__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "With 30 history messages omitted, resolution retains M600MSC; E34 confidently says 'We’re returning to Applied Computing' rather than returning to nursing or admitting uncertainty. Finalization preserves this false referent. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-11",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-11__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E15 acknowledges the requested subject but then supplies a full curriculum and entrance-requirements dump; raw and final answers are identical. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 1,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E1 gives useful admission and clinical requirements, then repeats all neonatal, elective, core/management and Liberal Studies course names already supplied in turn 1. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 7,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "After appropriately declining a job guarantee, E17 adds online delivery and a list of two clinical courses unrelated to the guarantee question. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 16,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "evidence": "E32 correctly switches programs but adds all first-year courses, path courses and unsolicited LIBS 7001 applicability commentary to a simple switch request. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 19,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "scope_confusion",
+      "pattern": "scope_mismatch",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "E9/E10 place the Mandatory Applicant Questionnaire and its two references under 'Alternate-entry applicants'. Retrieved group 78 places questionnaire and references outside the OR entry-route group, applying to all applicants. The answer also calls alternate-entry pre-entry assessment something that 'may be required', while E4 requires the completed assessment. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 20,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "wrong_or_lost_subject",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "The first program was neonatal nursing, but resolution and retrieval remain M600MSC after 30 omitted history messages. E29 confidently says 'We’re back to Applied Computing, Master of Science' and repeats its curriculum instead of restoring nursing or acknowledging a memory limit. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "LONG-12",
+      "turn": 21,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/LONG-12__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Under 'Verified', the model states applicants 'educated outside' five countries require ICES evaluation. Rule 205 limits that trigger to completed post-secondary studies and says other Canadian credential evaluation services may be considered. It also changes required post-conditional-selection criminal and immunization documents to 'may require'. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "CAT-03-B",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/CAT-03-B__01.json"
+      ]
+    },
+    {
+      "root_cause": "response_generation_quality",
+      "pattern": "wrong_academic_rule_or_arithmetic",
+      "layer": "model_language",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Under verified alternate-entry rules, the raw model answer says 'A pre-entry assessment and possible bridging courses may apply.' The retrieved and frozen admission text explicitly says alternate-entry applicants 'must complete a Pre-entry Assessment form'. Finalization preserves the model's weakening of a mandatory application step. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "CAT-13-B",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/CAT-13-B__01.json"
+      ]
+    },
+    {
+      "root_cause": "conversation_state",
+      "pattern": "unknown_or_human_boundary",
+      "layer": "mixed",
+      "severity": "critical",
+      "confidence": "high",
+      "evidence": "Persisted program_family state again forces catalog search. The raw and final answer then say international acceptance and review status cannot be verified from available data, undermining the earlier answer despite turn 1's explicit 5430CERT evidence of international exclusion and curriculum review. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+      "scenario_id": "CAT-19-B",
+      "turn": 3,
+      "review_status": "taxonomy_review_only",
+      "source_refs": [
+        "judgments/CAT-19-B__01.json"
+      ]
+    },
+    {
+      "scenario_id": "FLOW-03",
+      "turn": 2,
+      "root_cause": "formatting_repetition",
+      "pattern": "list_dump_or_repetition",
+      "layer": "model_language",
+      "severity": "noncritical",
+      "confidence": "high",
+      "review_status": "critical_flag_rejected_by_task_agent",
+      "evidence": "The evaluator flagged CMGT8700 coursework, topic and sponsor requirements as unsupported because its scoped evidence packet omitted that course prerequisite record. The full frozen courses table CMGT8700 explicitly contains those requirements, and the production instructions also supply them. This is not a confirmed invented academic rule. The response still contains an unsolicited curriculum dump, supported by its repetition/naturalness scores of 2. Original numeric scores remain untouched; the source-coverage limitation is disclosed.",
+      "source_refs": [
+        "database_before.json: courses CMGT8700 prerequisite_text_clean",
+        "transcripts/FLOW-03.json: turn 2 response and model instructions",
+        "judgments/FLOW-03__01.json: turn 2"
+      ]
+    }
+  ]
+}

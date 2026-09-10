@@ -1,0 +1,257 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-09",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The saved zero-model answer is 'Prerequisites: CMGT 8800; None; None; None; None (minimum grade: 2)'. The frozen CMGT8700 course record instead says completion of program courses with an exception for CMGT8800, and minimum two years related work experience, an industry topic and sponsor. The renderer turns an exception into a prerequisite, experience years into a grade, and drops non-course conditions.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-09.json: turn 2",
+      "database_before.json: courses CMGT8700",
+      "ai_advisor.py: course_prerequisites_answer"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Construction Management BTech.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Construction Management BTech.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Construction Management; Construction Management?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.984,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "7710DIPMA",
+                "8800BTECH"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "What are the prerequisites for CMGT 8700 in this program?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Construction Management BTech."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "What are the prerequisites for CMGT 8700 in this program?",
+        "expected": "Retain program topic while retrieving course prerequisites. Preserve coursework, two years, topic and sponsor requirements.",
+        "scope": "prerequisites",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "CMGT 8700 — Industry Based Project Proposal\n\nPrerequisites: CMGT 8800; None; None; None; None (minimum grade: 2)",
+        "tools_used": [
+          "get_course_details"
+        ],
+        "verification": {
+          "count": 6,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "course",
+          "program_id": null,
+          "course_id": "CMGT8700",
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.547,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": "CMGT8700",
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "course",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": "CMGT8700",
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-08-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "39968e082f83368fea9bbf011f06bfb9abce37c09ee1ff34d047f8c5df051cfa",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "648791a94026d4c58ace759d3af40e4d73ed31b6e1ed278fd796109df3885ebb",
+  "response_id": "resp_0bc8b0c3f786f03d006aa078dad4ec87d0ab6b01e33edf0320",
+  "usage": {
+    "input_tokens": 62099,
+    "input_tokens_details": {
+      "cache_write_tokens": 60745,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 715,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 62814
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two sentences within the requested brevity limit. Delivery, CPA preparation, elective count, General Education credits, and course identities match the frozen records. The second sentence is somewhat dense with course codes, but not a catalog dump. Optional work terms are described at program level without claiming personal eligibility. Context retention is inapplicable on turn 1; no necessary clarification, frustration handling, or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "source_or_evidence_gap",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final answers give only 'You can review the program details here' as a next step. This repeats the program link without a practical action directed at assessing employment prospects or preparing for a job search."
+        },
+        "notes": "Correctly refuses a personal employment guarantee without inventing statistics or a hiring timeline. Skills and full-time domestic work-term restrictions are supported. Accounting remains correct in both prose and state. Repeating the work terms is relevant to the outcomes question rather than an unwanted curriculum dump. Guidance is only partially useful against the explicit practical-next-step expectation. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through an explicit tool_choice and executes it; tools_used is not empty. The final answer nevertheless appropriately says 'Understood. I’ll stop here.'"
+        },
+        "notes": "The visible response fully respects the stop and preserves the active Accounting program in state. The failure is unnecessary forced retrieval, not continued advising in the prose; the trace does not identify the specific routing subcomponent. No academic claims are made, so factual correctness is null. Necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

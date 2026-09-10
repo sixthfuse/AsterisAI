@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-15",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "506ec4c0aaacd1c7f95082b95afa541a3bc054cf3c70a2e56c3d48336fb7806f",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "9281e404ab4710d59e31fd0e6b23138dadc4187b0c68ba32013112eb6e8771d1",
+  "packet_sha256": "a1c5e94f32c2f6390643cd16b5c4b68cd4af20044f551c5d457ea000e1aa7781",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0d0e3b00848a74c3006aa081e9978887d093c54cea83dddf27",
+  "usage": {
+    "input_tokens": 36695,
+    "input_tokens_details": {
+      "cache_write_tokens": 35302,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1051,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 37746
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 2,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The answer asks for the program but shifts from graduation to 'what courses you're eligible to take next' and omits completed coursework. The zero-model-call trace records scope 'none' and intent PROGRAM_PROGRESS; the exact deterministic subcomponent is not identifiable."
+        },
+        "notes": "No academic facts or eligibility determination are asserted, so factual correctness is null. Program clarification is appropriate, but completion details are also needed. Context retention is inapplicable on turn 1; no frustration is expressed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Raw answer E6 supplies an unsolicited eight-item program overview, including campus, delivery, focus and active status, before asking for completion details. Finalization preserves this structure."
+        },
+        "notes": "The overview's academic claims match E7 and the frozen program/course records. Both state and prose identify 8660BENG correctly, and the final question retains graduation context. Asking for completions is useful, not an unnecessary clarification; clarification dimensions are null because the frozen setting is allowed. 'Which courses you told me' is awkward since none had been specified. No frustration applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 4,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E2 asks for 'the courses you told me you completed' although the student only said 'some courses.' This awkward wording originates in the raw model answer and is unchanged."
+        },
+        "notes": "The substantive clarification is necessary and appropriately offers course details or completion through a level. State and prose retain Civil Engineering BEng and the graduation objective. No checkable academic requirements are asserted, so factual correctness is null. The request is not a harmful repetition because the student's answer remains insufficient. No frustration applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "medium",
+          "evidence": "E4 correctly explains that Levels 5–8 remain, but adds seven example courses and repeats Level 4 elective/co-op information that is not needed to resolve the graduation question; finalization only adjusts course-code formatting."
+        },
+        "notes": "The answer accepts the stated Level 4 completion without demanding reconfirmation and correctly distinguishes diploma from BEng completion. All listed coursework, elective counts and optional co-op characterization match the frozen records. The inability to verify continuation requirements reflects their absence from the retrieved program-details payload, not their absence from the frozen database, which contains six progression requirements. No false continuation decision is made. Referral to the program office is reasonable but could specify requesting a graduation audit. State retains program 8660BENG and level 4; tool-context defaults of diploma_completed=false and work_hours=0 are not student-confirmed facts, but the prose does not use them to deny eligibility. No frustration applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

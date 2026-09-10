@@ -1,0 +1,154 @@
+{
+  "phase": "2A",
+  "title": "Human Advisor Experience — Deterministic & State Hardening",
+  "date": "2026-09-08",
+  "status": "implementation_and_deterministic_validation_complete_live_language_validation_blocked_by_api_credits",
+  "model_rule": {
+    "work_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "astra_used": false,
+    "language_judge_run": false
+  },
+  "baseline": {
+    "run_id": "baseline_20260908",
+    "scenarios": 120,
+    "turns": 636,
+    "weighted_score_percent": 89.52,
+    "deterministic_failure_turns": 112,
+    "mixed_failure_turns": 34,
+    "source_confirmed_critical_findings": 10
+  },
+  "targeted_structural_validation": {
+    "run_id": "phase2a_deterministic_20260908",
+    "scenario_ids": [
+      "FLOW-07", "FLOW-13", "CAT-06-A", "CAT-06-B", "CAT-04-B", "LONG-07",
+      "FLOW-02", "FLOW-01", "FLOW-06", "FLOW-09", "FLOW-18", "FLOW-21",
+      "FLOW-22", "FLOW-23", "FLOW-30", "FLOW-31", "FLOW-42", "FLOW-47"
+    ],
+    "scenarios": {
+      "baseline_passed": 11,
+      "candidate_passed": 18,
+      "total": 18,
+      "baseline_percent": 61.11,
+      "candidate_percent": 100.0
+    },
+    "turns": {
+      "baseline_passed": 68,
+      "candidate_passed": 87,
+      "total": 87,
+      "baseline_percent": 78.16,
+      "candidate_percent": 100.0
+    },
+    "entity_resolution": {
+      "baseline_passed": 59,
+      "candidate_passed": 71,
+      "applicable": 71,
+      "baseline_percent": 83.1,
+      "candidate_percent": 100.0
+    },
+    "context_retention": {
+      "baseline_passed": 57,
+      "candidate_passed": 68,
+      "applicable": 68,
+      "baseline_percent": 83.82,
+      "candidate_percent": 100.0
+    },
+    "scope_accuracy": {
+      "baseline_passed": 73,
+      "candidate_passed": 87,
+      "applicable": 87,
+      "baseline_percent": 83.91,
+      "candidate_percent": 100.0
+    },
+    "release_gates": {
+      "passed": 11,
+      "total": 11,
+      "prerequisite_semantics": "pass",
+      "course_code_identity": {
+        "status": "pass",
+        "frozen_replays": ["CAT-06-A/1", "CAT-06-B/3", "FLOW-31/2"],
+        "unrelated_codes_inserted": 0
+      },
+      "academic_scope_binding": "pass",
+      "null_pathway": "pass",
+      "family_completeness": "pass",
+      "credential_disambiguation": "pass",
+      "course_in_program_context": "pass",
+      "family_followup_continuity": "pass",
+      "comparison_continuity": "pass",
+      "long_history_return": "pass",
+      "stop_and_question_handling": "pass"
+    },
+    "crashes": 0,
+    "errors": 0,
+    "regressions": 0
+  },
+  "failure_accounting": {
+    "targeted_deterministic_failure_turn_labels": {
+      "fixed_structurally": 15,
+      "remaining_in_target": 0
+    },
+    "targeted_mixed_failure_turn_labels": {
+      "deterministic_contributor_fixed": 5,
+      "generated_language_verified": 0
+    },
+    "full_baseline_deterministic_labels_outside_target_not_individually_readjudicated": 97,
+    "source_confirmed_critical": {
+      "deterministic_fixed": 7,
+      "mixed_deterministic_side_fixed_language_unverified": 2,
+      "model_language_remaining": 1,
+      "remaining_model_language_ids": ["CAT-04-B/3"]
+    }
+  },
+  "live_sol_attempt": {
+    "run_id": "phase2a_sol_medium_20260908",
+    "requested_scenarios": 18,
+    "started_scenarios": 4,
+    "successful_turns": 0,
+    "request_errors": 4,
+    "error_class": "api_credits_exhausted",
+    "remaining_scenarios_stopped_by_circuit_breaker": 14,
+    "language_metrics_available": false
+  },
+  "tests": {
+    "focused_deterministic_state_routing": {"passed": 20, "failed": 0, "errors": 0},
+    "full_python": {"passed": 520, "failed": 0, "errors": 0},
+    "benchmark_tool": {"passed": 30, "failed": 0, "errors": 0},
+    "browser_state": {"passed": 5, "failed": 0, "errors": 0}
+  },
+  "data_integrity": {
+    "database_changed": false,
+    "baseline_and_phase2a_snapshot_sha256": "c8833accc12d28cb5911fe8d7e49652abdff3a503f1ca34caae061c089572cd5",
+    "active_programs": 374,
+    "governed_active_programs": 374,
+    "active_courses": 3976
+  },
+  "root_causes_fixed": [
+    "prerequisite_group_operator_and_non_course_condition_rendering",
+    "course_title_and_code_identity_corruption",
+    "academic_rule_scope_binding",
+    "null_pathway_dereference",
+    "active_program_family_completeness",
+    "same_name_credential_disambiguation",
+    "course_mentions_within_program_context",
+    "unique_result_followup_activation",
+    "comparison_set_persistence",
+    "prior_subject_and_reported_course_structured_state",
+    "plain_and_compound_stop_routing"
+  ],
+  "remaining_phase2b_ranked": [
+    "scope_safe generated explanation for CAT-04-B/3 and FLOW-02 mixed findings",
+    "brevity and list dumping",
+    "directness and naturalness",
+    "comparison synthesis",
+    "useful next-step guidance",
+    "unsupported inference avoidance",
+    "frustration wording when a substantive question remains",
+    "long-conversation generated-answer quality"
+  ],
+  "phase2b_readiness": {
+    "ready_to_begin_with_sol_medium": true,
+    "release_certified": false,
+    "required_before_release": "rerun and score the saved 18-scenario live Sol target when API credits are available"
+  }
+}

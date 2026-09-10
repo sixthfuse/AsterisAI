@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-42",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "185611e9f1ba8a88598caab34a5305726cd12140170fa1d90cb09b6e00d7a7a5",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "31433b56a84fffb9ff86f0fd5fbdf3752a1e0903e2e40710faf3511a2d90dd0e",
+  "packet_sha256": "53a0d41030b13b3c679b7618c320f0cec34c82a7772a7dc80cacd03b10593e10",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0bf6f418ddbc2551006aa08491a8c887d0b6a0d65294bb2435",
+  "usage": {
+    "input_tokens": 59424,
+    "input_tokens_details": {
+      "cache_write_tokens": 58031,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1464,
+    "output_tokens_details": {
+      "reasoning_tokens": 46
+    },
+    "total_tokens": 60888
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The raw and final answer label Level 2 courses 'Year 2 / Level 2'. E18 explicitly places both taught terms in the first year, with the thesis or project/internship in the second year. The correct evidence was returned by get_program_details."
+        },
+        "notes": "Program identity and state correctly resolve M600MSC. Admission alternatives, grades, course credits, pathway choices, continuation average, maximum completion time, and intake dates otherwise match the frozen evidence. The year/level conflation materially misstates sequencing. Context retention is inapplicable on turn 1; no required clarification, frustration, or actionable next-step need."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 2,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the explicit 'Construction Management BTech', resolution returns candidates 7710DIPMA and 8800BTECH with program_id null. With no model calls, the final response asks 'Which program do you mean: Construction Management; Construction Management?'"
+        },
+        "notes": "The resolver recognizes the new program family but fails to use the supplied credential to complete the switch. Identical displayed options make the unnecessary clarification especially unhelpful. No substantive academic claims are made, so factual correctness is null rather than a verified success. No necessary clarification, frustration, or next-step guidance applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "For a general program overview, the raw answer lists every course in Terms 1–4, many courses in Terms 5–9, and seven specialty course options. This catalog-style expansion dominates the overview and persists in the final answer."
+        },
+        "notes": "Both state and prose correctly switch to full-time Nursing 8875BSN. Checkable claims match the frozen nursing records, including six specialty credits from one specialty, theory passing grade, licensure distinction, competitive admission, and intake dates. The entrance summary says requirements 'include' the listed items, rather than claiming completeness; it omits mathematics and detailed Academic Foundations composition. Finalization only capitalizes APRIL and does not cause the substantive UX issue. No clarification, frustration, or next-step requirement applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 0,
+          "context_retention": 0,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "No history messages were omitted, and the first program was Applied Computing MSc. Nevertheless, resolution retains 8875BSN, the tool retrieves Nursing, and the raw answer says 'You’re back at the ... Bachelor of Science in Nursing program.' Finalization preserves that wrong subject."
+        },
+        "notes": "The nursing academic claims themselves are supported, including mathematics alternatives and Neonatal Resuscitation; factual correctness therefore remains 4 despite complete irrelevance to the requested return. The unsupported claim concerns conversational identity, not an invented nursing policy. Wrong deterministic state and the model's uncorrected assertion jointly produce the failure. The response also repeats and expands the previous nursing catalog into all nine terms and the specialty pool. This is a subject-navigation failure rather than a false academic rule attributed explicitly to Computing. No clarification was needed or asked; no frustration or next-step requirement applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

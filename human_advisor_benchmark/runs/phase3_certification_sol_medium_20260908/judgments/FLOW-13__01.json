@@ -1,0 +1,130 @@
+{
+  "scenario_id": "FLOW-13",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "2ec1c2c42a09b8fc360a90bad413b335cdbe0b76790566af7b8dd708c4909715",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "2453130f7d8a4a4f8efc372a8d25a3bde054664e7096bb834ae2efef72d6a56b",
+  "packet_sha256": "1a2018c5e1e138cd4d2682bc6b592cecb42f48e28125252734b4f4d4afad5dd4",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0b55ad0df6e7861c006aa10a48134887d09aab02bc39ec0c28",
+  "usage": {
+    "input_tokens": 10617,
+    "input_tokens_details": {
+      "cache_write_tokens": 9263,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1179,
+    "output_tokens_details": {
+      "reasoning_tokens": 437
+    },
+    "total_tokens": 11796
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer correctly identifies LIBS 7001 and presents all three prerequisite routes as OR alternatives, matching the frozen records. Context retention is not applicable on the first turn."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer correctly calculates that 49% is one percentage point below the 50% ENGL 1177 threshold and preserves the OR nature of the other routes."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After the user corrected the grade to 50%, the response prose correctly used 50%, but the returned conversation state and tool context still recorded ENGL1177 with grade 49.0. The raw model answer and final answer were both correct, so the defect is confined to state updating."
+        },
+        "notes": "The visible answer is academically correct: exactly 50% meets the ENGL 1177 option. However, the persistent structured state fails to retain the user's corrected grade."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The answer correctly recalls the user's stated 50% and explains that only one OR alternative is required, but the returned conversation state and tool context continue to store the obsolete 49.0 grade."
+        },
+        "notes": "The visible response fully answers the question and is supported by the prerequisite group marked OR. The only failure is the continuing stale grade in structured state."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

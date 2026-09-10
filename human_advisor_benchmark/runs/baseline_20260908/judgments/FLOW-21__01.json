@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-21",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "4b8ae16d07543272f77af3ee0c0c17f8951f7632e99323e8cf7deaccc27ddce0",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c7c8fce6b87d7ad55591a11e5f2ad1979b2e0ef22f28eec1eaae3c1bd46e90ac",
+  "packet_sha256": "21b99667bbae0eb07f7992d5bdbbf6947fdb0c4709cb97b8829054cd2389bfdf",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0c5ee394ab2f5c4a006aa0828b3e4087d0876c2e9a6ecc7c7d",
+  "usage": {
+    "input_tokens": 60703,
+    "input_tokens_details": {
+      "cache_write_tokens": 59310,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1483,
+    "output_tokens_details": {
+      "reasoning_tokens": 55
+    },
+    "total_tokens": 62186
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "mixed",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Resolution selects only M500MENG. Even the explicit get_program_details request for M600MSC returns E98, the Smart Grid record, leaving the comparison materially asymmetric. Separately, the model lists all four Term 3 subject options without the published 'Complete three courses (9.0 credits)' qualification, making the curriculum misleading."
+        },
+        "notes": "The prose correctly distinguishes both named credentials and their basic delivery/location facts despite single-program state. Computing details genuinely were not returned, so declining to invent its admissions requirements is appropriate, although the frozen database contains them. Smart Grid entry GPA alternatives and 33 credits are supported. The unnecessary one-sided curriculum dump reduces relevance and naturalness. Finalization inserts course codes but leaves contradictory 'Display course code unavailable' labels; some codes were already present in tool curriculum fields. Context is inapplicable on turn 1; no required clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "For 'Where are they taught?', resolver and returned state retain only M500MENG, and the unchanged raw/final answer names only Smart Grid. Applied Computing, explicitly compared in the preceding answer, is omitted."
+        },
+        "notes": "Burnaby and the Smart Grid delivery distinctions are supported, including part-time online in E5; they are not fabricated merely because the generic delivery field says blended. The answer should also give Computing's Burnaby location and possible Downtown/field locations. Model prose fails to recover the plural antecedents from the full history, alongside incorrect single-subject state. No clarification, frustration handling, or next step was needed."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The comparative question 'Which one accepts international applicants?' again resolves solely to M500MENG and receives only Smart Grid's international-applicant information, omitting Applied Computing's affirmative eligibility."
+        },
+        "notes": "All stated Smart Grid claims, including full-time eligibility, part-time online restriction, study permit, and intake dates, are explicitly supported by E5 and E12. E15's general positive flags and unpublished permit field do not invalidate that more specific evidence. The answer does not explicitly claim Computing is ineligible or promise personal admission; its failure is incomplete comparison rather than a false stated exclusion. Both programs should have been addressed. Required clarification, frustration handling, and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After a simple request to focus on Computing, the raw model answer supplies a full Year 1 course list, both Year 2 course lists, progression threshold, and substitution details. Finalization leaves this unsolicited curriculum dump unchanged."
+        },
+        "notes": "Explicit narrowing is correctly reflected in both M600MSC state and prose. Academic claims match the supplied Computing records: two-year normal duration, five-year maximum, international eligibility and permit, intake dates, 70% pre-project/thesis average, alternative pathways, and approved substitutions. The issue is proportionality, not unnecessary clarification or incorrect academic guidance. No required clarification, frustration, or necessary next step applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

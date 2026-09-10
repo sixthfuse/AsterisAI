@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-47",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "ceb285dab6af26026190fd4aaa2a7ba5be669dd93442d2b8d7df89bdf8df1397",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b830f8deceb95b0f9018fd163ffd6a335da7b2d246030742c6e9596ee8ad3ddb",
+  "packet_sha256": "80bbbe75e3fc4b6ccb9a201bde9391372fb52a221cb716a548fe986757afe1f8",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_00b3bcf25addb99b006aa084fc660087d0b8aa5007dc6c5884",
+  "usage": {
+    "input_tokens": 22231,
+    "input_tokens_details": {
+      "cache_write_tokens": 20838,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 901,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 23132
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer, unchanged by finalization, expands a general introduction into a full course-and-credit list, substitutions, detailed admission routes, and immigration information. This is an unrequested catalog-style dump."
+        },
+        "notes": "Academic claims match the frozen overview, curriculum, admission, completion, and offering records; alternative routes and Year 2 paths remain OR. State and prose both identify M600MSC correctly. Context is inapplicable on turn 1; no clarification, frustration handling, or actionable next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": 2,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The response supplies address-heavy fragments followed by 'The stored program listing says' and repeats the campus distinction, rather than giving a smooth single sentence acknowledging the request for less information. The trace contains no model call."
+        },
+        "notes": "The 35-word answer passes the length check and correctly distinguishes Burnaby from possible Downtown or field locations, with verified addresses. It retains the program and answers rather than stopping, but does not fully accommodate the expressed frustration. No unnecessary clarification occurred. Deterministic attribution does not identify a particular internal component. Necessary clarification and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly gives the certified Master of Science credential in Applied Computing, retains M600MSC in both state and prose, and respects the preference for brevity. No necessary clarification, explicit frustration handling, or next step applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 2,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Stop.', the response remains classified PROGRAM_INFO and invokes get_program_details before acknowledging 'Stopped.' The trace explicitly forces that function through tool_choice, and the tools_empty assertion fails."
+        },
+        "notes": "The visible acknowledgement is appropriately brief and stops the prose, but execution does not honor the no-tools stop boundary. The forced tool choice supports routing attribution rather than blaming voluntary model tool selection. Program state remains correct. There are no academic claims to assess; necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-33",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "dbad04c033a69180d2e1d532294a710551f9f62a758f1c7f0244222539bc1cb6",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "888ac7bf8a5557907ab33708c6daa0215b44e256bc548a38ab27b73d6999b27d",
+  "packet_sha256": "ed0269bb67e16f5648495916ccda214a3f4f9462374552ff65c5eba3090a79fd",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_09caf7ffc0791eba006aa083d74f4487d096d086c25c2099d7",
+  "usage": {
+    "input_tokens": 61684,
+    "input_tokens_details": {
+      "cache_write_tokens": 60291,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1158,
+    "output_tokens_details": {
+      "reasoning_tokens": 84
+    },
+    "total_tokens": 62842
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "source_or_evidence_gap",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The raw and final answers place 'Plus 6 credits' under Term 7 and describe Term 8 as continuing 'as applicable.' Certified curriculum components specify a 3-credit specialty elective in each of Terms 7 and 8. The correct distribution was available in the tool result."
+        },
+        "notes": "Program identity and most overview, admission, licensure, and intake claims match the snapshot. The six-credit specialty total is supported, but its term allocation is materially misleading. A separate list_dump_or_repetition issue is the unsolicited nine-term curriculum and entire specialty pool in response to a general overview request. Context retention is inapplicable on turn 1; no clarification, frustration handling, or actionable next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Both state and prose correctly switch to M600MSC. Alternate entry, GPA, computing preparation, pre-entry assessment, possible bridging, competitive review, intake timing, and international requirements are supported by E4/E18/E23. The answer appropriately avoids assuming that a nursing background establishes a bachelor's degree or computing competence. The checklist is somewhat formal but useful. Guidance could be more actionable by identifying submission of the pre-entry assessment to the program area, rather than ending with only the program link. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 1,
+          "context_retention": 2,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver replaces M600MSC with 5410DIPLT when the student adds a civil engineering diploma as background. Retrieval then requests Civil Engineering Diploma details, and final state remains 5410DIPLT despite the unchanged Computing application target."
+        },
+        "notes": "The prose partially preserves context by explicitly discussing Applied Computing MSc and avoiding an eligibility guarantee. Its Civil diploma claims are supported by E5/E19 and the course records; the cautious interdisciplinary examples are not guarantees. However, it diverts into obtaining a diploma the student already describes having, and fails to apply the previously retrieved MSc bachelor's-degree, GPA, and computing-preparation requirements. Human review is appropriate for preparation assessment, but should not replace explaining those known requirements. Finalization only changes course-code formatting. No referent clarification or frustration handling was required."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolution and returned state still identify 5410DIPLT, and campus_information returns the Civil Engineering relationship rather than M600MSC. No model call is observed on this turn."
+        },
+        "notes": "The visible Burnaby Campus name and full address are correct for Applied Computing too; wrong hidden state must not be treated as a false address claim. Nevertheless, the intended Computing record also mentions possible Downtown Campus or field locations, which the misrouted answer omits. This is a state-retention failure with a coincidentally correct main-campus answer, not a critical academic falsehood. No clarification, frustration handling, or next step was needed."
+      }
+    ]
+  },
+  "attempt": 2
+}

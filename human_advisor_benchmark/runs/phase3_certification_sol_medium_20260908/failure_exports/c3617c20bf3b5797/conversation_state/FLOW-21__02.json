@@ -1,0 +1,1517 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-21",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The prose correctly answers for both antecedents and comparison_program_ids still contains M600MSC and M500MENG, but the returned conversation state incorrectly sets unique_result_program_id to M600MSC, implying a unique Applied Computing result during a two-program comparison.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng.",
+        "expected": "Compare both named programs; do not select one or merge their facts.",
+        "scope": "comparison",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)",
+        "tools_used": [
+          "compare_programs"
+        ],
+        "verification": {
+          "count": 2,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare applied computing msc and smart grid systems and technologies meng programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "M600MSC",
+            "M500MENG"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 10.032,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "M600MSC",
+                "M500MENG"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "compare applied computing msc and smart grid systems and technologies meng programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng.\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"compare applied computing msc and smart grid systems and technologies meng programs\",\"comparison_program_ids\":[\"M600MSC\",\"M500MENG\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: compare applied computing msc and smart grid systems and technologies meng programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_08f96368e6abdb58006aa10383b66087d0a728745fab4ca254",
+            "created_at": 1788937091.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"Compare all supported program attributes for Applied Computing MSc and Smart Grid Systems and Technologies MEng (programs M600MSC and M500MENG), including credential, admissions, curriculum, delivery, duration, progression/practical work, source URLs, and unknown values. Return both members.\"}",
+                "call_id": "call_qiX0zoFvxbQCvizldcFuSHVC",
+                "name": "compare_programs",
+                "type": "function_call",
+                "id": "fc_08f96368e6abdb58006aa10384b0bc87d094c0b8da2bd62a42",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937094.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1828,
+              "input_tokens_details": {
+                "cache_write_tokens": 198,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 74,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1902
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "compare_programs",
+          "arguments": {
+            "query": "Compare all supported program attributes for Applied Computing MSc and Smart Grid Systems and Technologies MEng (programs M600MSC and M500MENG), including credential, admissions, curriculum, delivery, duration, progression/practical work, source URLs, and unknown values. Return both members."
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "comparison": "applicant_requirement",
+            "matching_programs": [],
+            "program_count": 2,
+            "programs": [
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "classification": "verified program record",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Master of Science / Master's Degree",
+                  "Full-time",
+                  "In person",
+                  "Burnaby; possible Downtown Campus or field locations"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "classification": "verified program record",
+                "credential": "Master of Engineering",
+                "delivery_method": "Blended",
+                "evidence": [
+                  "Master of Engineering",
+                  "Full-time/Part-time",
+                  "Blended",
+                  "Burnaby Campus"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M500MENG",
+                "program_name": "Smart Grid Systems and Technologies",
+                "source_url": "https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+                "study_mode": "Full-time/Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_qiX0zoFvxbQCvizldcFuSHVC",
+                "output": "{\"comparison\": \"applicant_requirement\", \"program_count\": 2, \"programs\": [{\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"classification\": \"verified program record\", \"evidence\": [\"Master of Science / Master's Degree\", \"Full-time\", \"In person\", \"Burnaby; possible Downtown Campus or field locations\"], \"human_confirmation_required\": false}, {\"program_id\": \"M500MENG\", \"program_name\": \"Smart Grid Systems and Technologies\", \"credential\": \"Master of Engineering\", \"study_mode\": \"Full-time/Part-time\", \"campus\": \"Burnaby Campus\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\", \"classification\": \"verified program record\", \"evidence\": [\"Master of Engineering\", \"Full-time/Part-time\", \"Blended\", \"Burnaby Campus\"], \"human_confirmation_required\": false}], \"matching_programs\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_08f96368e6abdb58006aa10383b66087d0a728745fab4ca254"
+          },
+          "response": {
+            "id": "resp_08f96368e6abdb58006aa1038785e887d0b0164b16c62c0d47",
+            "created_at": 1788937095.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_08f96368e6abdb58006aa10388bf0487d0a2c090dad73ec9bf",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQOM6ZlV0564uNYYi18VvZObsZFe2H1Mk8JYz5Dv7XgNpe01C5SIB0qDE4WG1J4Jsmb8lAyqzCHlCaWlJnudeto0cVeCwPFwgm-7d23HKZliLPcyBJRgX6ebBwHT0K9ikXKzdS0TWXqAnWFVMYgAvqEgjX8_NjoXI48uQ37mihLl99_22syv-Hi7lBXAkBCnYFpz-xZpFWiiUmvDe8yQtAPyMfkGwXUE4ispfRK_i0kpVqZ7Zg_kP9Zpk2pQ1JGrvXklMBbd4yqQnbI4CbjhGNgcyYVDpe62C0zAkJRvmd5H-0XPAcIZEV7zAokGYQXXnbiDBdLN7QbzH5g-JkW_tmhDV3KdZHXrNDlFnoLHl41V5mNYjQGlifCFjDXElbKA_yNhEMRO1dl0e19FvheDATnCKpy9RUmifqgLCVcMs3p0epe9WiHUInt129wjKqR-kki1w_8sSjkjh4_FZkkQCQxGMkVStBgcrS7yAUX8pmo0Ib-i-YT6d0Oc2qFk2r94-LRrooF41V0qHmsJepRFG4cDjpZ1l1bq9OsRAmyMOdtmy9uIvfD33WonJlxZVJbuwzVUtsKjf0vloGSDoIjGC1GLSEDNcaDF21yIU8CL1lEMKEQssowy1hKgRNTvIvBX54JDzfCCGmsT-QKnf_EH-QH-dqP-1WXePlJTGaMp2T5Cwn8qZ2Aot7nnXJlrK_scBfWF4hbnUa6h80I96EdANWjTVeDZ5wnt0mZIXmoDhuQXR2AtKHNWoWo4RW4MIyLu0n-zCkHNZIc4UqhQdgpS2BI2nIs_sGJVk7zd37grVjQ4s3C-OO9pmFFe3MA_-D1DbxXmmZ3CJL3dBVJIsI9dgLPniE-w4jaNoartSti3GwOhHMmpL-xTquUJFzYb7t_wnrz8vDdDNUilAKQRNcEN0uK4pGlAFe7dbjgd_6_wXxgnHLoSfSzBRYtZZmswBrx9GYiY17JyNYFdgdi6huLThjbRne-jmRoLwyID-e6OpoE5soVgC4vcsb4uORDhvuqRX1X80vp_KB7H39-nF_oYyvwmcv1I60NRROwzU3_ucD_LVGXcS8LHKJFo3boMZD8uV5Ka1w7UHmLpI3j9tcONn7gVUr9--X1FZ9bh1a0o44g-RuPBcy1zusayY7_mIVYdpVTCfbJg0PVZak4AWn_JwBz70oKglJxfux3n1x0XMbtjBhCKeib-1we2Dlgt36HghIfY71UKmmVW_j0idPg5Jl9FqA9nx6kjMIbv5GDOZVfC-5DtZH8BgTea55HLOq_nnA-kcGxdNEg9yaWZqprxrd3N2oMYSQltXaDpnJnMZtC-JgFdQiKhnHW_EARLB7k68ayiTR3mLPeti5cWg7exUnFzyQ-NkVCPe-n42QoZSxIQTxU_GI-hsrmWNIOGTBjxbv6Auf7jc-_WZ0hnjbQzxLYR8ViMRtbxpgJFg2vZGdgkuLw5dAxWapWgp9kTfMx3ZHYvS_jmpQI_hXTHvAcyB4xQH9PpnhBBnjmOhxLBFKxJIDqTUV0XVAundB6PgKle2aPMQvFR5-vGyrf4kNr0i0ohoX3YM6XaUaiuxQfPeo68Lfl_EDsGot8f60mVq2l0yFHdERPNXHSkc6AU8hRXg6V8aQ==",
+                "status": null
+              },
+              {
+                "id": "msg_08f96368e6abdb58006aa10389ae1487d0beccf63b10f77efb",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937100.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_08f96368e6abdb58006aa10383b66087d0a728745fab4ca254",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2125,
+              "input_tokens_details": {
+                "cache_write_tokens": 573,
+                "cached_tokens": 1549
+              },
+              "output_tokens": 255,
+              "output_tokens_details": {
+                "reasoning_tokens": 61
+              },
+              "total_tokens": 2380
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)",
+          "final_answer": "The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)"
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Where are they taught?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng."
+          },
+          {
+            "role": "assistant",
+            "content": "The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare applied computing msc and smart grid systems and technologies meng programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "M600MSC",
+            "M500MENG"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Where are they taught?",
+        "expected": "Answer campuses for both antecedents.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "- **Applied Computing MSc** is taught primarily at **Burnaby**, with possible delivery at the **Downtown Campus or field locations**.\n- **Smart Grid Systems and Technologies MEng** is taught at **Burnaby Campus**.\n\nSo, both use Burnaby, but Applied Computing may also involve other locations.",
+        "tools_used": [
+          "search_programs",
+          "search_programs",
+          "search_programs",
+          "compare_programs"
+        ],
+        "verification": {
+          "count": 5,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare applied computing msc and smart grid systems and technologies meng programs",
+          "result_query": null,
+          "unique_result_program_id": "M600MSC",
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "M600MSC",
+            "M500MENG"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "compare applied computing msc and smart grid systems and technologies meng programs:campus"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 11.453,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "M600MSC",
+                "M500MENG"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "compare applied computing msc and smart grid systems and technologies meng programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Where are they taught?\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"compare applied computing msc and smart grid systems and technologies meng programs\",\"comparison_program_ids\":[\"M600MSC\",\"M500MENG\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nRecent conversation:\nUser: Compare Applied Computing MSc and Smart Grid Systems and Technologies MEng.\nAssistant: The practical difference is study format and flexibility:\n\n- **Applied Computing — Master of Science (MSc)**: full-time, in person, primarily at Burnaby, with possible delivery at the Downtown Campus or field locations.\n- **Smart Grid Systems and Technologies — Master of Engineering (MEng)**: full-time or part-time, blended delivery, at Burnaby Campus.\n\nBoth are master’s programs, but they lead to different credentials and focus on different disciplines. Curriculum, admission, duration, and practical-work differences were not returned in the comparison data, so they cannot be compared reliably here.\n\nProgram pages:\n- [Applied Computing MSc](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)\n- [Smart Grid Systems and Technologies MEng](https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/)\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: compare applied computing msc and smart grid systems and technologies meng programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "search_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0fb9661e8a519a47006aa1038d891487d092872c429985ccae",
+            "created_at": 1788937101.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"compare applied computing msc and smart grid systems and technologies meng programs\"}",
+                "call_id": "call_Uijx6PH4Gh6hSumEd2xFyefJ",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_0fb9661e8a519a47006aa1038e4be887d0bce262e185006d2e",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "search_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937102.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2028,
+              "input_tokens_details": {
+                "cache_write_tokens": 398,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 31,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2059
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_programs",
+          "arguments": {
+            "query": "compare applied computing msc and smart grid systems and technologies meng programs"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Where are they taught?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "active_program_count": 1,
+            "distinct_credentials": [
+              "Master of Science / Master's Degree"
+            ],
+            "programs": [
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_Uijx6PH4Gh6hSumEd2xFyefJ",
+                "output": "{\"programs\": [{\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"delivery_method\": \"In person\"}], \"active_program_count\": 1, \"distinct_credentials\": [\"Master of Science / Master's Degree\"]}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0fb9661e8a519a47006aa1038d891487d092872c429985ccae"
+          },
+          "response": {
+            "id": "resp_0fb9661e8a519a47006aa1038f21e487d0a4403c19c8ca122e",
+            "created_at": 1788937103.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0fb9661e8a519a47006aa1038fc4d087d0a8f402337244233a",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQORdVN2Z3I3aSK7kjjkuou3L-58jTbwZzmJXp1szrVBgBsW3OqRIn5p8uO091V0NctcWcWIgyv6YS_grZVKc-VT9FFiXeQaPxJTrQzUigkFM9PMA_Enx5uW2F4Uy2KDm6kLyI8UOv2hw78xqEnekA71FtcX3b-nJkm3pJ155JtAvA_TGGlLjkaEoh5O7EP1C8fyiWv__NCqBUSwy7GQoaMMSE35tz1wkGKvMRzn1YbDPGloub1dWeZ9VZX4-BGDTaOUq1v7z82Iz43OF4iXue8P9nOrlBCzvwRvQwe9WEquuWVZrUdQ1rYIO1lcBzr2zv0kJ4we5T3BXedP383qmGzod4TmZDiKZ3MzTOtdT4bYlpc4jwFU90MXl6p7V_sfLBdeKaJ6xSFe3CJlA_2rGBkMtf5sxPHH140t-9R5qcNVWJZOviX9vzNCc3ifP7ONlBC5ONqM_vBgOzlqxJCnAUuh6uNKbNXdK5c3TIJXc0rSkEMp6jgzTb4pfdx3yiqXbu11rCfOYbGrmACKneGy2JlkSyBzb_-1rSc9kz1n2ryxO0sHVKazXSNsfwJBtKRW0jVFHiLDJp_Ni52KjAA_LePbQr-81PzPd2oWfbTp5Mg3GW_0WmAVO4HNwSLCgE9zbRpyEO03cXCxY9WlRiJhIdbQx-DGBHVqUeVDf3gdFV6bp7Hd5oT0xev89USG93ZkjPROivXFEkphmYIFCsb9T1kuzWh87SCVl4OvM3noB7M3CFPh2Ora0LGX5IU8m7CX-SW7a23KTeuDTcFkYSLEDIuilIX0pNbELa5-gCRhnNq3khZUbXrGluaImNFJxB7MKl2Tn2RXkgTib7zNCIIXreszmWyurEIt6OgeICtTKwnjl0WU1fqmJoGRAtKlFidP0aSNhMGSJHRRB17JlUNzhRj0NrLd03Esyb3-HZq54b-JmBv2199blleePIKPh6DR-E6PwzTAGY1RW_QTLUpr5U5Q18CBbCKO3GixEIGJizCvDWXlH8bTI4i7-xONh9BjtOyd1AuyW-Rxef5zEYhLHiJE8ynN110Sx1E1Go1vTPw4_w3qOiaeT_U-H1nI5lczfukB5fB6P3yNOhbE13OM5zuYaLDtDwQzqQCsYL_Mt2sfgvZOF7LnbU2dnLwZ-Mp0MnZUDtq_jYS2rqjX-Mg7WOCTCHdXo_FA-yuvglsJm8UbU3ew3vyyZq7MgxKwduNzoZRtLI4xWuUl3myPbyX7hN1s5sXI7rGSxtFMepDYrQim50ae60OTfn5ij_LIPLGeFe0tjtC_Rsge7uJeTxYa9SVLXCDXooebSz0USOM_aqYPDJDIMmI_FTvPk71y4YSQs9kGdreGiiyCS8a8FGS7ZVTnZEMpqBxOrG3tnjNGM28mOhioCLAtmpoegOGSvMy1mTXJPVEzYXDNux7-vtKSiLq8M-7jqQrao73ODKQTy60RIXdTjXUlD1vCoZ1r8LOiWdqNcH9Sbtwglr-m3cdpG1UyGcmHwY5DyTyuZDRqxCG_3f-8vadHR7aOq6chIUp_ncVlRPQb8YalwsERb_sTTyx6c6tYzQjEVFJbg17vYX2ID5o7r28ff3MOriYiG_fMCt5dr_hRAXV5t-hsmgrGXlnyxJA_KIYg4Bq8od4gDFatiSjR_5xNnyz3UKkEN-WcSx_c",
+                "status": null
+              },
+              {
+                "arguments": "{\"query\":\"Applied Computing MSc\"}",
+                "call_id": "call_vWKqm8IUbRQhoO3bCghKnHFE",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_0fb9661e8a519a47006aa1039123cc87d09b45dfa35d3d4626",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              },
+              {
+                "arguments": "{\"query\":\"Smart Grid Systems and Technologies MEng\"}",
+                "call_id": "call_T2pgrvrrvxeNzX28DC07dq4F",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_0fb9661e8a519a47006aa1039123dc87d09717162f98fb3d22",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937105.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0fb9661e8a519a47006aa1038d891487d092872c429985ccae",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2184,
+              "input_tokens_details": {
+                "cache_write_tokens": 156,
+                "cached_tokens": 2025
+              },
+              "output_tokens": 129,
+              "output_tokens_details": {
+                "reasoning_tokens": 69
+              },
+              "total_tokens": 2313
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_programs",
+          "arguments": {
+            "query": "Applied Computing MSc"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Where are they taught?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "active_program_count": 1,
+            "distinct_credentials": [
+              "Master of Science / Master's Degree"
+            ],
+            "programs": [
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_programs",
+          "arguments": {
+            "query": "Smart Grid Systems and Technologies MEng"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Where are they taught?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "active_program_count": 1,
+            "distinct_credentials": [
+              "Master of Science / Master's Degree"
+            ],
+            "programs": [
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_vWKqm8IUbRQhoO3bCghKnHFE",
+                "output": "{\"programs\": [{\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"delivery_method\": \"In person\"}], \"active_program_count\": 1, \"distinct_credentials\": [\"Master of Science / Master's Degree\"]}",
+                "type": "function_call_output"
+              },
+              {
+                "call_id": "call_T2pgrvrrvxeNzX28DC07dq4F",
+                "output": "{\"programs\": [{\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"delivery_method\": \"In person\"}], \"active_program_count\": 1, \"distinct_credentials\": [\"Master of Science / Master's Degree\"]}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0fb9661e8a519a47006aa1038f21e487d0a4403c19c8ca122e"
+          },
+          "response": {
+            "id": "resp_0fb9661e8a519a47006aa10391cb7087d093804291391e1c90",
+            "created_at": 1788937105.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0fb9661e8a519a47006aa103939e8487d09553f37fc28291f6",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQOUOI1EDk2xTbUyEyiJaYEk27hhQthJTnBSKIeT5FsXY8wSRvouHQfMVfT7HEoUQEFSxbN3-HT2iDJz-1vUMgUE5RHauXQGVtFdpmDqw9kN6GfJtOay_8zUxlrGxZAHhkcnRZ5DEA_-fU9DCcxPG1Yw2ia-BjwDi2abLrRDYwRcTgwRTQkYgx1l_bcDO6efzZ6wkAXFVJoU_cwU1-xER3P56CA6mC-7h_VUm2v0prpRdiD5d2ne9_5aHuwJUFPWIPvgT4tIHaslBsRsHMxftpzFdvZKS2QtGDJSxfz7KAAnsxNo10_jdwReDag-zWrr8VNdRuiOhQseg73PNEEH9yM2XboEgTW2iKZa2cO71O-J84Ys7kp3rirmFBTle0ZBGk_DziljbXw-wLV_I2Mz_5mrJyXuq9NDdKipjuK57mZFTHl-RiLYPpy1k1YRMQk9nGHzZ5u3PWKT29T4Heg8FtLWEdN0r3XqvGdkIos73k4bfDeP9AyxWwB0ABHuYrSDoKHcrbJwReW1krMcAFjetqVxi6muPHvHTMl6dpwgA_AaDAPJExX52pMIDEIzz89NevALiuNfbguX_nRnchyu3zZWQO0A7c0t_U0aGF0XJFggkZjlLWTOmRUAH_avVQZroGmJSzZ9-YRhTC3QgoPF1QN-QBTwr1Yntro3qDrHA0sHWyweIRr4XYqGiAOn8GNj11i-b7-X8cMRXb21cCf9zkLbohH2Z2yhkmdz557_MxtHHEXwAwV6yDDCpENRB7xQ5LYe-p0a1ozIl6M6giXcqNJNHaqZTXefUKLAtuqgCkhLjxDBTP0KxWcs3fuVrT3rsUBirWvn8TlByCu8qi2v_9mQriWPlT5GY8Gp96WnAXwqwkzY4eV5OhZZ4Lc0Rx70Zuzj422RcTAeAuKoZSz6sxF5Ejg0iFP7DoJpqsI_Ast_HoiuNfpmbtBCbXQ_FzPmNNZd6fJzKoetWdpGDMYO8wwxDf23hhhzlLFkXnxD41YLf2d9D6Uzwdt1rrrAb8cBpgQNJthvMm835t651AuICDm0KC-BCj1Q41AOECmgBZPzWtQELX437Rg6Q3ToquVA6PZhBqoFkbeMSskJHeZVlOi8ZWXM6eCV1QP77FtOFj6oKWzqHYFRU8stNYdYCr0MqoaU2vOgKlLdfSR1345xCl79Unaj1FhP6dB0rKjPcQ_A8Xs7OxQd0jBBLkr1PwDBqHkvLRl70dePeM9H7_Zf78xa9-94QK2LvNTeSiowfmJydt73VEHvdwC9zNQeoTPCeRozppqQunmp1Ort4eegLuy9XWlvtB6_Ql4VnQO_zgR98FYHjic7rUSBU2sE0CKIdXEyP4ko3-glUQrBFM8PeCFzig==",
+                "status": null
+              },
+              {
+                "arguments": "{\"query\":\"campus and teaching location for Applied Computing MSc and Smart Grid Systems and Technologies MEng\"}",
+                "call_id": "call_RIO8AP6v83OmzYHwXI4axi9r",
+                "name": "compare_programs",
+                "type": "function_call",
+                "id": "fc_0fb9661e8a519a47006aa103940ee887d09260486c12e35409",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937108.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0fb9661e8a519a47006aa1038f21e487d0a4403c19c8ca122e",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2561,
+              "input_tokens_details": {
+                "cache_write_tokens": 377,
+                "cached_tokens": 2181
+              },
+              "output_tokens": 69,
+              "output_tokens_details": {
+                "reasoning_tokens": 32
+              },
+              "total_tokens": 2630
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "compare_programs",
+          "arguments": {
+            "query": "campus and teaching location for Applied Computing MSc and Smart Grid Systems and Technologies MEng"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "M600MSC",
+              "M500MENG"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Where are they taught?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare applied computing msc and smart grid systems and technologies meng programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "comparison": "applicant_requirement",
+            "matching_programs": [],
+            "program_count": 2,
+            "programs": [
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "classification": "verified program record",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Master of Science / Master's Degree",
+                  "Full-time",
+                  "In person",
+                  "Burnaby; possible Downtown Campus or field locations"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "classification": "verified program record",
+                "credential": "Master of Engineering",
+                "delivery_method": "Blended",
+                "evidence": [
+                  "Master of Engineering",
+                  "Full-time/Part-time",
+                  "Blended",
+                  "Burnaby Campus"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M500MENG",
+                "program_name": "Smart Grid Systems and Technologies",
+                "source_url": "https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+                "study_mode": "Full-time/Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_RIO8AP6v83OmzYHwXI4axi9r",
+                "output": "{\"comparison\": \"applicant_requirement\", \"program_count\": 2, \"programs\": [{\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"classification\": \"verified program record\", \"evidence\": [\"Master of Science / Master's Degree\", \"Full-time\", \"In person\", \"Burnaby; possible Downtown Campus or field locations\"], \"human_confirmation_required\": false}, {\"program_id\": \"M500MENG\", \"program_name\": \"Smart Grid Systems and Technologies\", \"credential\": \"Master of Engineering\", \"study_mode\": \"Full-time/Part-time\", \"campus\": \"Burnaby Campus\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\", \"classification\": \"verified program record\", \"evidence\": [\"Master of Engineering\", \"Full-time/Part-time\", \"Blended\", \"Burnaby Campus\"], \"human_confirmation_required\": false}], \"matching_programs\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0fb9661e8a519a47006aa10391cb7087d093804291391e1c90"
+          },
+          "response": {
+            "id": "resp_0fb9661e8a519a47006aa103957cc087d092c1692a9d9a2075",
+            "created_at": 1788937109.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "msg_0fb9661e8a519a47006aa10396e13087d08a113e1eea43a331",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "- **Applied Computing MSc** is taught primarily at **Burnaby**, with possible delivery at the **Downtown Campus or field locations**.\n- **Smart Grid Systems and Technologies MEng** is taught at **Burnaby Campus**.\n\nSo, both use Burnaby, but Applied Computing may also involve other locations.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937112.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0fb9661e8a519a47006aa10391cb7087d093804291391e1c90",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2931,
+              "input_tokens_details": {
+                "cache_write_tokens": 370,
+                "cached_tokens": 2558
+              },
+              "output_tokens": 67,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2998
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "- **Applied Computing MSc** is taught primarily at **Burnaby**, with possible delivery at the **Downtown Campus or field locations**.\n- **Smart Grid Systems and Technologies MEng** is taught at **Burnaby Campus**.\n\nSo, both use Burnaby, but Applied Computing may also involve other locations.",
+          "final_answer": "- **Applied Computing MSc** is taught primarily at **Burnaby**, with possible delivery at the **Downtown Campus or field locations**.\n- **Smart Grid Systems and Technologies MEng** is taught at **Burnaby Campus**.\n\nSo, both use Burnaby, but Applied Computing may also involve other locations."
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-39",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "23493a55abcc580d3755bd2cd20034a476e2d720b5e966ce3e446d1759f6f2bb",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "7c6acdb6b94933a1d5214ba6d033e914b5462304151cd1d3722be2624208a7be",
+  "packet_sha256": "2c179f0db346bb42d760b2ec8a7c1c0c472edeb0aaa8ab11048f431b65dcb850",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_096351a1e532a229006aa08455652c87d09a9402e08688d8ab",
+  "usage": {
+    "input_tokens": 25078,
+    "input_tokens_details": {
+      "cache_write_tokens": 23685,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 936,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 26014
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "credential_ambiguity",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "E2 and final E1 say the pathway continues into Levels 3 and 4 for Bachelor of Engineering students, after listing only Levels 1–2 as Diploma-level courses. Frozen program_courses and the retrieved level results assign Levels 3–4, including the Level 4 elective choice, to Diploma 5410DIPLT. The error already occurs in the raw model answer; finalization only changes course-code formatting."
+        },
+        "notes": "Resolver and persisted program identity are correct. Delivery, overview, application route, and listed course identities/credits are supported, but the curriculum boundary is materially misleading. Secondary list_dump_or_repetition: an unsolicited 17-course list is disproportionate to this overview request. Context is not applicable on turn 1; no required clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Provides the certified canonical Diploma URL without #overview and retains 5410DIPLT in state. No clarification, frustration handling, or further next step is needed."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer correctly opens with 'No' and denies decision authority, but then repeats the Diploma application route and program link for a simple question about the assistant's authority."
+        },
+        "notes": "Academic route claims match the frozen record; this is not merely a refusal without academic claims. State retains the intended Diploma. Finalization adds a supported BCIT Admissions URL, improving the actionable referral without changing the answer's meaning. Minor excess only; no authority misrepresentation. No required clarification or frustration."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E3 repeats three application-route and credential-award bullets already covered in earlier answers, although the user asks about institutional confirmation of unpublished requirements. Raw and final answers are identical."
+        },
+        "notes": "Correctly preserves the Diploma identity and refers unpublished specifics to BCIT rather than inventing requirements or guaranteeing confirmation. The general institutional referral is appropriate; the particular availability/process of confirmation remains explicitly unverified, not treated as a certified fact. Checkable route and award claims match the snapshot. Guidance names appropriate offices but supplies only the program page rather than the available Admissions resource. No required clarification or frustration."
+      }
+    ]
+  },
+  "attempt": 2
+}

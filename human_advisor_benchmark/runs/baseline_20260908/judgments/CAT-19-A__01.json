@@ -1,0 +1,112 @@
+{
+  "scenario_id": "CAT-19-A",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "393e7655d40fa801ecc7dc24dbaa09b522f8744f1f801ab1feee621c48846434",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "20fa51a46502a831e7dc3723f7d111b3c652b1917303d66a1e4921a1163c8e0c",
+  "response_id": "resp_03c4fa66205b4a8a006aa07c23e4f087d08c1fbb9d0da1195f",
+  "usage": {
+    "input_tokens": 94090,
+    "input_tokens_details": {
+      "cache_write_tokens": 92736,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 707,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 94797
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite get_program_details selecting 5430CERT and accurate Certificate prose, returned state has program_id=null and scope=program_family rather than retaining the named credential."
+        },
+        "notes": "The introduction matches frozen overview, credit and admission records. Math is correctly presented as recommended, not mandatory. State failure does not make the academic answer incorrect. Context is inapplicable on turn 1; no required clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "missing_next_step",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolver retains program_family with no program_id and sets program_set_query=true, forcing search_programs. Raw and final prose broaden singular 'it' to 'both the Certificate and Associate Certificate options'."
+        },
+        "notes": "Burnaby and online correctly answer the location question for 5430CERT; the additional Associate Certificate delivery claim is supported by observed catalog evidence, although not separately covered by the detailed raw program tables. The issue is unnecessary family broadening and missing credential state, not a wrong campus or delivery/location confusion. No clarification, frustration handling, or next step is needed."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution and returned state still use program_family with program_id=null, triggering a forced catalog search, while the model and unchanged final answer supply the exact 5430CERT source URL."
+        },
+        "notes": "The student-facing answer correctly recovers the intended Certificate and exact stored official page despite the unresolved structured entity. Source fidelity and relevance are fully satisfied; context score reflects persistent state loss rather than wrong prose. No necessary clarification, frustration handling, or additional next step applies."
+      }
+    ]
+  },
+  "attempt": 1
+}

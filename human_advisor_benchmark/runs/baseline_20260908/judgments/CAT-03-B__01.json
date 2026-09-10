@@ -1,0 +1,112 @@
+{
+  "scenario_id": "CAT-03-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "74dd13e1c0579c6562b886ca66f96f1c1d3766692f9c8697e7d65b3059e1e5e4",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "34b46ca2f2b49771134c7a12dc29c54531536ca4ec41b238f32f41d2a3430864",
+  "response_id": "resp_0363f73eed4704d3006aa07bfad5a887d08c89f2d43e2ef222",
+  "usage": {
+    "input_tokens": 102076,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 102073
+    },
+    "output_tokens": 845,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 102921
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer correctly says international applications are not accepted, but adds credential, delivery, length and five curriculum examples to a narrow availability question."
+        },
+        "notes": "Program 8875BSN is correct in state and prose. International rule 209 explicitly supports the denial; all added academic facts match the snapshot. Finalization adds a supported International Students link. Context retention is inapplicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer opens with 'Meeting the minimum entrance requirements' although the preceding discussion was international exclusion, and relegates that exclusion to 'Also'. It directs the user to 'your myCommunication account' without conditioning this on having applied."
+        },
+        "notes": "Correct state and program name persist. Competitive ranking, seat limits, conditional documents and full acceptance are supported by rule 205. No claim that the student actually meets requirements or has been admitted. The answer would be more attentive if it led with the previously established international restriction. Account guidance is sourced but not tailored to an interested applicant. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "source_or_evidence_gap",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Under 'Verified', the model states applicants 'educated outside' five countries require ICES evaluation. Rule 205 limits that trigger to completed post-secondary studies and says other Canadian credential evaluation services may be considered. It also changes required post-conditional-selection criminal and immunization documents to 'may require'."
+        },
+        "notes": "Most claims, including dates, grades, foundation courses, international exclusion and specialty credits, match the snapshot. The minimum list says 'include', so omission of math is not treated as a false exhaustive list. Personal eligibility, equivalencies, decisions and current seats are appropriately reserved for BCIT, and exceptions are not asserted to exist. However, the purportedly verified policy summary broadens the evaluation trigger and weakens mandatory documents. Correct tool evidence was available in the raw model trace; finalization only capitalizes APRIL. Repeated curriculum examples and extensive unrelated requirements distract from the international verification boundary. Confirmation topics are useful but lack a focused contact route. State and prose retain 8875BSN. No required clarification or explicit frustration."
+      }
+    ]
+  },
+  "attempt": 2
+}

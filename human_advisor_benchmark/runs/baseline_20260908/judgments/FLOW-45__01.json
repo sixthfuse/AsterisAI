@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-45",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "42677e1e0d04d394fbf2500c3129afd321632d75995bb643902299396507fc9b",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b9fee1755fe85438071cdb45556faf5409329bb2ef699a18fe5b05f261359ce4",
+  "packet_sha256": "39a0537af2e43c29034f7f3768a56fef2c4a298b3c8047bd36f452423afac28b",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_01c68b04d3845ff3006aa084d545a887d089cc2fe15fe416ae",
+  "usage": {
+    "input_tokens": 27439,
+    "input_tokens_details": {
+      "cache_write_tokens": 26046,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1024,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 28463
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The student only identifies their program, but E4 adds a six-component curriculum list with numerous course codes. This unsolicited catalog-style detail appears unchanged in the raw model answer and final answer."
+        },
+        "notes": "Program identity, delivery, curriculum roles, credit minima, substitution and OR choice match the frozen records. The state correctly identifies 8800BTECH. Context retention is inapplicable on turn 1; no required clarification, frustration or actionable next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "or_and_elective_confusion",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "E2 leads with 'The remaining final-project alternative is CMGT 8810' and reiterates that it remains after CMGT 8800 completion. The tool supplies the 'Choose one final project' OR group, yet the unchanged raw/final answer never explains that the requirement is already satisfied and 8810 is not additionally required."
+        },
+        "notes": "Correctly retains the reported completion and program in prose and tool context. Although it explicitly says 'one' of the courses, its answer to what remains is materially misleading for graduation planning. Prerequisite and approval claims are supported. No clarification was needed; frustration and next-step dimensions do not apply."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the explicit withdrawal of completion, turn 3 tool context still contains completed_courses: [{course_id: 'CMGT8800'}]. E3 correctly acknowledges 'have not completed it' and says one project must still be completed."
+        },
+        "notes": "The visible answer correctly handles the correction, preserves OR alternatives, and cites supported sequencing, approval and work-experience requirements. The stale completion is an internal context failure, not an incorrect visible academic conclusion. 'The program also stores a requirement' is slightly mechanical and adds peripheral detail. No official record mutation is observed. No required clarification, explicit frustration or necessary next step."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Turn 4 tool context again lists CMGT8800 as completed despite turn 3's correction. The model nevertheless accurately says 'you have not completed CMGT 8800' and refuses to mark the requirement complete."
+        },
+        "notes": "Correct visible refusal and supported OR requirement; no assertion of satisfaction or record-changing action. Program state remains correct. Context score reflects the persistent stale student fact in tool context, not a failure of the prose to remember. The short alternatives list repeats prior information but remains pertinent. No required clarification, frustration or additional actionable next step."
+      }
+    ]
+  },
+  "attempt": 3
+}

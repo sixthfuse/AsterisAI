@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-30",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "71f8f7372bf599fa0a2e06a3e9ea029ef12c2947bd00a681ee853acb1292c91c",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "825b67aeed6cac12a38fbc2e011a73f4f3be67f0f5bce81f18f4e45ad0a2ab39",
+  "packet_sha256": "5bfe897029295c1acacfbe695a74f8a3c6ecd670906d8b7c82c61d17fbefaf3e",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_074801f9042bb7cf006aa083846e5887d082c0828213f9b6b7",
+  "usage": {
+    "input_tokens": 21698,
+    "input_tokens_details": {
+      "cache_write_tokens": 20305,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 907,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 22605
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "For a general introduction, E1 enumerates every Year 1 course, both Year 2 course lists, a substitution, and detailed admission highlights. This catalog-like level of detail originates in the raw model answer and is unchanged at finalization."
+        },
+        "notes": "The overview and academic claims match the frozen records, including OR entry routes and Year 2 paths, credits, possible locations, and intake dates. State correctly retains M600MSC. The issue is disproportionate curriculum detail, not unnecessary clarification. Context retention is inapplicable on turn 1; no required clarification, frustration, or actionable next step applies."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 4,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Briefly honors the stop without lookup. Although resolved_program is null in the response envelope, conversation state preserves M600MSC. No academic claims are made, so factual correctness is null; required clarification and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E3 joins two full addresses into a single line and runs the postal code directly into 'The stored program listing says', then repeats the campus information. The observed response has no model calls."
+        },
+        "notes": "Correctly resumes the Computing context after the stop. Both addresses and the distinction between offered Burnaby and possible Downtown/field locations match frozen evidence. Attribution is to deterministic output, without identifying an unsupported specific subcomponent. No frustration, required clarification, or next step applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": 2,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Thanks, that's all', the turn is routed as PROGRAM_INFO with a forced get_program_details call. The raw model answer says 'You’re welcome!' but then repeats campus information and supplies a full-details link; finalization leaves it unchanged."
+        },
+        "notes": "The extra location claims are accurate and the program state remains correct, but closure should not trigger another lookup or repeat the preceding answer. Forced retrieval supports a routing contribution, while the model also adds unnecessary prose after acknowledging closure. Required clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

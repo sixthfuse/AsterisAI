@@ -1,0 +1,1414 @@
+{
+  "classification": {
+    "scenario_id": "CAT-12-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly refuses to guarantee employment, but ends with the vague phrase “applicable decision process and your circumstances” and provides no actionable next step, despite the frozen expectation requiring one. The trace shows no model or tool call for this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Specialty Nursing Neonatal Bachelor of Science in Nursing, in two sentences.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Specialty Nursing Neonatal Bachelor of Science in Nursing, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "810CBSN"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "BCIT’s active, part-time Specialty Nursing (Neonatal) Bachelor of Science in Nursing is delivered fully online and combines neonatal theory with clinical training, including **NSNE 7100 Neonatal Theory 1** and **NSNE 7900 Clinical Preceptorship in Neonatal Nursing**. The 60-credit curriculum also includes core/management courses, 12 credits of Liberal Studies, and at least 3 approved elective credits; [view the full program](https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/).",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 11,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "810CBSN",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 11.313,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "810CBSN",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "810CBSN",
+            "program_name": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Tell me about Specialty Nursing Neonatal Bachelor of Science in Nursing, in two sentences.\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: 810CBSN. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"810CBSN\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_08eb835656e64055006aa1019aa53487d0955867763633d2a1",
+            "created_at": 1788936602.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"810CBSN\"}",
+                "call_id": "call_QBw9vswz88tn6p5jNNDxmVvS",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_08eb835656e64055006aa1019bdda887d0b7e2d0dc40523290",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936604.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1802,
+              "input_tokens_details": {
+                "cache_write_tokens": 146,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 22,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1824
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "810CBSN"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Tell me about Specialty Nursing Neonatal Bachelor of Science in Nursing, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "810CBSN",
+            "program_name": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "810CBSN",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 257,
+                            "condition_type": "GRADE",
+                            "description": "English Studies 12 at 73% or equivalent",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "executable": true,
+                              "verification": "structured"
+                            },
+                            "sort_order": 1,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": null,
+                            "condition_id": 258,
+                            "condition_type": "CREDENTIAL",
+                            "description": "Post-secondary diploma in nursing",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "verification": "structured"
+                            },
+                            "sort_order": 2,
+                            "subject_id": "NURSING_DIPLOMA",
+                            "unit": null
+                          },
+                          {
+                            "accepted_values": null,
+                            "condition_id": 259,
+                            "condition_type": "LICENSURE",
+                            "description": "Professional registration requires institutional verification",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 3,
+                            "subject_id": "PRACTICING_RN_REGISTRATION",
+                            "unit": null
+                          },
+                          {
+                            "accepted_values": null,
+                            "condition_id": 260,
+                            "condition_type": "WORK_EXPERIENCE",
+                            "description": "Published minimum acute-care experience; recency and equivalence require confirmation",
+                            "minimum_value": "6",
+                            "parameters": {
+                              "executable": true,
+                              "recency_qualification": "human_confirmation",
+                              "verification": "structured"
+                            },
+                            "sort_order": 4,
+                            "subject_id": "ACUTE_CARE",
+                            "unit": "MONTHS"
+                          },
+                          {
+                            "accepted_values": null,
+                            "condition_id": 261,
+                            "condition_type": "DOCUMENT",
+                            "description": "Resume and placement documentation require confirmation",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 5,
+                            "subject_id": "RESUME",
+                            "unit": null
+                          }
+                        ],
+                        "label": "Admission requirements",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 61,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Specialty Nursing entrance requirements",
+                    "notes": "About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you’ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* Domestic students: January 2nd* International students: November 1st* Spring/Summer (April) May 1st* Domestic students: April 1st* International students: February 1st* Fall (September) October 1st* Domestic students: September 1st* International students: July 2nd* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements The following are requirements for entry into Specialty Nursing certificate and degree courses. Enforcement or waiving of any or all entry requirements is at the discretion of the program head. If you have any questions about your experience or qualifications, please contact the program head. English language proficiency: Category 1 – English Studies 12 (73%) or equivalent Post-secondary education: diploma in nursing Current practicing registration with one of the following: BC College of Nurses and Midwives (BCCNM) or Canadian provincial equivalent or Registered Nurse (RN) license number (if practicing outside Canada) Work Experience: minimum six months work experience in an acute care setting Submit a resume of work experience with your application. Exceptions may be granted for undergraduate students taking entry-level theory courses or new graduates. A resume is required for placement in the program. If you have questions about whether your work experience qualifies, please contact the program head. Interested nurses from international practice, residential, or other areas of care lacking recent (within two years) acute care experience may be required to complete a refresher course. BCIT recommends the following programs: Douglas College Kwantlen Polytechnic University Thompson Rivers University Please contact one of the institutions above, as well as the program head, to determine an appropriate preparatory course of study. Read more about how to meet BCIT’s entrance requirements Clinical requirements Note: Effective immediately, all healthcare workers who come into contact with patients at publicly funded healthcare facilities or in the community, including at long-term care facilities, will have to get the influenza vaccine or wear a mask during flu season. This policy affects all students who will be entering a clinical setting. As such, you will be required to provide proof of your immunization or agree to wear a mask at all times prior to being placed in your clinical studies. Basic Cardiac Life Support Certification All students participating in clinical courses must have current Cardiopulmonary Resuscitation (CPR), Level C or Level Health Care Provider (HCP). CPR certification must be from a Canadian provider and include a practical component. The original certificate must be presented upon application to clinical courses. BC College of Nurses and Midwives (BCCNM) registration As well as providing this information at the time of admission, BCIT requires students to provide proof of BCCNM membership, Canadian provincial equivalent, or RN license number for each clinical course. Without proper registration, you will not be permitted to continue in the course. Face Respirator Fit Testing A face piece respiratory fit test is required before students are permitted to enter the clinical practicum. Upon successful completion of the fit test, the original certificate must be presented to the program and annual re-fitting is required. Students are expected to carry their certificate with them at all times during their practicum. For the Respirator Fit Testing, fit testing with a N95 respirator (1860, 1860s, or 1870) is required and must be performed, in accordance with CSA Standard CAN/CSA-Z94.4-02. Fit Testing must also include inspection, cleaning, maintenance, and storage of protective equipment. Students will be given specific instructions in preparation for their fit testing by the provider they choose. International applicants This program is available to international applicants who will complete the program from outside Canada or who currently have a valid work permit in Canada that will be valid for the duration of clinical training. Study permit: International applicants accepted into this program are not eligible for a study permit. Post-graduation Work Permit (PGWP) eligibility : While this program currently meets the study program - graduates with a bachelor’s degree criteria to apply for a PGWP, this program is not eligible for a PGWP due to other criteria not being met. There are no field of study requirements (CIP) for graduates with a bachelor’s degree. Apply to program International students must receive program head approval before applying. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply Prior Learning Assessment & Recognition (PLAR) The program faculty assesses learners with previous Specialty Nursing course work and relevant work experience on an individual basis. The program assesses learners with previous BCIT course work for potential credit into the degree program. The program may grant transfer of credit for non-BCIT Specialty courses. The program assesses experiential learning through prior learning assessment processes. The Registrar's office assesses transfer of credit for Liberal Studies courses. BCIT requires original, sealed transcripts and course outlines to assess transfer of credit. myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 160,
+                    "scope": "ADMISSION",
+                    "study_mode": "PART_TIME"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "Specialty sequence, employment and placement conditions",
+                    "notes": "Graduate employment outcomes The BCIT student outcomes report presents summary findings from the annual survey of former students administered by BC Stats one to two years after graduation. These reports combine the last three years of available results for the 2023-2025 BCIT Outcomes Surveys of 2022-2024 graduates and for Degree 2021-2023 graduates. The reports are organized into three-page summaries containing information on graduates’ labour market experiences and opinions regarding their education. More detailed information can be accessed at the BC Student Outcomes website. To view these results, you may need to have the Adobe Acrobat Reader installed in your Web browser. Specialty Nursing (Neonatal)",
+                    "rule_set_id": 162,
+                    "scope": "CONTINUATION",
+                    "study_mode": "PART_TIME"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International applicant eligibility and permit restrictions",
+                    "notes": "This program is available to international applicants who will complete the program from outside Canada or who currently have a valid work permit in Canada that will be valid for the duration of clinical training. Study permit: International applicants accepted into this program are not eligible for a study permit. Post-graduation Work Permit (PGWP) eligibility : While this program currently meets the study program - graduates with a bachelor’s degree criteria to apply for a PGWP, this program is not eligible for a PGWP due to other criteria not being met. There are no field of study requirements (CIP) for graduates with a bachelor’s degree. International students must receive program head approval before applying.",
+                    "rule_set_id": 163,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "PART_TIME"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "PLAR and transfer credit",
+                    "notes": "Prior Learning Assessment & Recognition (PLAR) The program faculty assesses learners with previous Specialty Nursing course work and relevant work experience on an individual basis. The program assesses learners with previous BCIT course work for potential credit into the degree program. The program may grant transfer of credit for non-BCIT Specialty courses. The program assesses experiential learning through prior learning assessment processes. The Registrar's office assesses transfer of credit for Liberal Studies courses. BCIT requires original, sealed transcripts and course outlines to assess transfer of credit. Transfer credit Do you have credits from another BC/Yukon post-secondary school? Do you want to know if they transfer to courses here at BCIT? Check out BCIT's Transfer Equivalency Database to find out.",
+                    "rule_set_id": 161,
+                    "scope": "TRANSFER",
+                    "study_mode": "PART_TIME"
+                  }
+                ]
+              },
+              "campus": "Online",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [
+                  {
+                    "applies_to": "EACH_CLINICAL_COURSE",
+                    "description": "Proof of current professional registration is required for clinical participation.",
+                    "executable": false,
+                    "parameters": {},
+                    "requirement_code": "RN_REGISTRATION",
+                    "requirement_name": "Practicing RN registration",
+                    "requirement_type": "LICENSURE",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "verification_method": "HUMAN_CONFIRMATION"
+                  },
+                  {
+                    "applies_to": "CLINICAL_COURSES",
+                    "description": "Current qualifying CPR certification with the required practical component must be confirmed.",
+                    "executable": false,
+                    "parameters": {},
+                    "requirement_code": "CPR_CERTIFICATION",
+                    "requirement_name": "Current CPR certification",
+                    "requirement_type": "CERTIFICATION",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "verification_method": "HUMAN_CONFIRMATION"
+                  },
+                  {
+                    "applies_to": "CLINICAL_PRACTICUM",
+                    "description": "Current fit-testing evidence and any required renewal must be confirmed.",
+                    "executable": false,
+                    "parameters": {},
+                    "requirement_code": "RESPIRATOR_FIT_TEST",
+                    "requirement_name": "Respirator fit testing",
+                    "requirement_type": "HEALTH_AND_SAFETY",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "verification_method": "HUMAN_CONFIRMATION"
+                  },
+                  {
+                    "applies_to": "CLINICAL_PLACEMENT",
+                    "description": "Compliance with the published immunization or masking policy must be confirmed.",
+                    "executable": false,
+                    "parameters": {},
+                    "requirement_code": "INFLUENZA_POLICY",
+                    "requirement_name": "Influenza immunization or masking",
+                    "requirement_type": "HEALTH_AND_SAFETY",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "verification_method": "HUMAN_CONFIRMATION"
+                  },
+                  {
+                    "applies_to": "CLINICAL_COURSES",
+                    "description": "A completed clinical application is required for clinical courses.",
+                    "executable": true,
+                    "parameters": {},
+                    "requirement_code": "CLINICAL_APPLICATION",
+                    "requirement_name": "Completed clinical application",
+                    "requirement_type": "DOCUMENT",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "verification_method": "SELF_REPORTED"
+                  }
+                ],
+                "practice_hours": [
+                  {
+                    "description": "Clinical practice is required, but no authoritative numeric threshold is stated in the audit.",
+                    "executable": false,
+                    "parameters": {
+                      "clinical_courses": [
+                        "NSNE7300",
+                        "NSNE7900",
+                        "NSSC7000"
+                      ]
+                    },
+                    "required_hours": null,
+                    "requirement_code": "PUBLISHED_CLINICAL_HOURS",
+                    "requirement_name": "Clinical practice hours",
+                    "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/",
+                    "tracking_scope": "PROGRAM",
+                    "verification_method": "HUMAN_CONFIRMATION"
+                  }
+                ],
+                "program_id": "810CBSN"
+              },
+              "courses": [
+                {
+                  "course_id": "BUSA7250",
+                  "course_name": "Management Skills and Applications",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/",
+                  "term": null
+                },
+                {
+                  "course_id": "COMM7100",
+                  "course_name": "Intercultural Communication Competency and Diversity Awareness for Professionals",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Liberal Studies Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/intercultural-communication-competency-and-diversity-awareness-for-professionals-comm-7100/",
+                  "term": null
+                },
+                {
+                  "course_id": "LIBS7021",
+                  "course_name": "Health Ethics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Liberal Studies Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/health-ethics-libs-7021/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7100",
+                  "course_name": "Neonatal Theory 1",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-theory-1-nsne-7100/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7200",
+                  "course_name": "Neonatal Theory 2",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-theory-2-nsne-7200/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7300",
+                  "course_name": "Neonatal Clinical 1",
+                  "course_type": "CLINICAL",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-clinical-1-nsne-7300/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7900",
+                  "course_name": "Clinical Preceptorship in Neonatal Nursing",
+                  "course_type": "CLINICAL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/clinical-preceptorship-in-neonatal-nursing-nsne-7900/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7911",
+                  "course_name": "Neonatal Respiratory Care",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-respiratory-care-nsne-7911/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7920",
+                  "course_name": "Neonatal Acute Care",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Complete an additional 3.0 credits of electives from the following",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-acute-care-nsne-7920/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSNE7940",
+                  "course_name": "Advanced Concepts in Neonatal Nursing",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete an additional 3.0 credits of electives from the following",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-concepts-in-neonatal-nursing-nsne-7940/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSPN7150",
+                  "course_name": "The Breastfeeding Experience",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/the-breastfeeding-experience-nspn-7150/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSPN7450",
+                  "course_name": "Neonatal Resuscitation",
+                  "course_type": "REQUIRED",
+                  "credits": "1.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/neonatal-resuscitation-nspn-7450/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC7000",
+                  "course_name": "Palliative Approach in Nursing Practice",
+                  "course_type": "CLINICAL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete an additional 3.0 credits of electives from the following",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/palliative-approach-in-nursing-practice-nssc-7000/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC7115",
+                  "course_name": "Teaching and Learning in Specialty Nursing",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/teaching-and-learning-in-specialty-nursing-nssc-7115/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8000",
+                  "course_name": "Systematic Inquiry",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/systematic-inquiry-nssc-8000/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8130",
+                  "course_name": "Independent Study in Specialty Nursing",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/independent-study-in-specialty-nursing-nssc-8130/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8300",
+                  "course_name": "Creative Leadership",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/creative-leadership-nssc-8300/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8500",
+                  "course_name": "Professional Growth",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/professional-growth-nssc-8500/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8600",
+                  "course_name": "Community Nursing: Facilitating Health",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/community-nursing-facilitating-health-nssc-8600/",
+                  "term": null
+                },
+                {
+                  "course_id": "NSSC8800",
+                  "course_name": "Community Nursing: Facilitating Health Action",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Core/Management Component",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/community-nursing-facilitating-health-action-nssc-8800/",
+                  "term": null
+                }
+              ],
+              "credential": "Bachelor of Science in Nursing",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 169,
+                    "component_name": "Required Courses",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "NSNE7100",
+                        "course_name": "Neonatal Theory 1",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7100",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-theory-1-nsne-7100/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSNE7200",
+                        "course_name": "Neonatal Theory 2",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7200",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-theory-2-nsne-7200/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSNE7300",
+                        "course_name": "Neonatal Clinical 1",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7300",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-clinical-1-nsne-7300/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSNE7900",
+                        "course_name": "Clinical Preceptorship in Neonatal Nursing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7900",
+                        "source_url": "https://www.bcit.ca/courses/clinical-preceptorship-in-neonatal-nursing-nsne-7900/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSNE7911",
+                        "course_name": "Neonatal Respiratory Care",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7911",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-respiratory-care-nsne-7911/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSPN7150",
+                        "course_name": "The Breastfeeding Experience",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSPN 7150",
+                        "source_url": "https://www.bcit.ca/courses/the-breastfeeding-experience-nspn-7150/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSPN7450",
+                        "course_name": "Neonatal Resuscitation",
+                        "course_role": "REQUIRED",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSPN 7450",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-resuscitation-nspn-7450/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Required Courses: (21.0 credits) *Contact Program Head for more information.",
+                    "required_credits": "21.0"
+                  },
+                  {
+                    "completion_rule": {
+                      "course_count": null,
+                      "minimum_credits": "3.0",
+                      "requirement_text": "Complete at least 3 credits from the approved complete an additional 3.0 credits of elective from the following pool.",
+                      "rule_type": "MINIMUM_CREDITS_FROM_POOL"
+                    },
+                    "component_id": 170,
+                    "component_name": "Complete an additional 3.0 credits of electives from the following",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "NSNE7920",
+                        "course_name": "Neonatal Acute Care",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7920",
+                        "source_url": "https://www.bcit.ca/courses/neonatal-acute-care-nsne-7920/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSNE7940",
+                        "course_name": "Advanced Concepts in Neonatal Nursing",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSNE 7940",
+                        "source_url": "https://www.bcit.ca/courses/advanced-concepts-in-neonatal-nursing-nsne-7940/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC7000",
+                        "course_name": "Palliative Approach in Nursing Practice",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 7000",
+                        "source_url": "https://www.bcit.ca/courses/palliative-approach-in-nursing-practice-nssc-7000/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Complete an additional 3.0 credits of electives from the following: Electives must be approved by the Program Head. Acute Care of at-Risk Newborns (ACORN) offered through Perinatal Services BC Selected electives from the Pediatric Nursing Specialty Program Selected electives from the Perinatal Nursing Specialty Program",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 171,
+                    "component_name": "Core/Management Component",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "BUSA7250",
+                        "course_name": "Management Skills and Applications",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "BUSA 7250",
+                        "source_url": "https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC7115",
+                        "course_name": "Teaching and Learning in Specialty Nursing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 7115",
+                        "source_url": "https://www.bcit.ca/courses/teaching-and-learning-in-specialty-nursing-nssc-7115/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8000",
+                        "course_name": "Systematic Inquiry",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8000",
+                        "source_url": "https://www.bcit.ca/courses/systematic-inquiry-nssc-8000/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8130",
+                        "course_name": "Independent Study in Specialty Nursing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8130",
+                        "source_url": "https://www.bcit.ca/courses/independent-study-in-specialty-nursing-nssc-8130/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8300",
+                        "course_name": "Creative Leadership",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8300",
+                        "source_url": "https://www.bcit.ca/courses/creative-leadership-nssc-8300/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8500",
+                        "course_name": "Professional Growth",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8500",
+                        "source_url": "https://www.bcit.ca/courses/professional-growth-nssc-8500/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8600",
+                        "course_name": "Community Nursing: Facilitating Health",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8600",
+                        "source_url": "https://www.bcit.ca/courses/community-nursing-facilitating-health-nssc-8600/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "NSSC8800",
+                        "course_name": "Community Nursing: Facilitating Health Action",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "NSSC 8800",
+                        "source_url": "https://www.bcit.ca/courses/community-nursing-facilitating-health-action-nssc-8800/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Core/Management Component: (24.0 credits) Required courses: (21.0 credits) Electives: (3.0 credits) Note: Alternative Nursing electives need to be approved by the Program Head.",
+                    "required_credits": "24.0"
+                  },
+                  {
+                    "component_id": 172,
+                    "component_name": "Liberal Studies Component",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "COMM7100",
+                        "course_name": "Intercultural Communication Competency and Diversity Awareness for Professionals",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMM 7100",
+                        "source_url": "https://www.bcit.ca/courses/intercultural-communication-competency-and-diversity-awareness-for-professionals-comm-7100/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "LIBS7021",
+                        "course_name": "Health Ethics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "LIBS 7021",
+                        "source_url": "https://www.bcit.ca/courses/health-ethics-libs-7021/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Liberal Studies Component: (12.0 credits) Required courses: (6.0 credits) Electives: (6.0 credits) 6.0 credits of General Education [PDF] electives at a 100-level minimum in at least two different academic disciplines. Total Credits: 60.0",
+                    "required_credits": "12.0"
+                  }
+                ],
+                "credit_requirements": [
+                  {
+                    "allows_external_courses": false,
+                    "approval_required": false,
+                    "course_count": null,
+                    "minimum_credits": "3.0",
+                    "notes": "Complete an additional 3.0 credits of electives from the following: Electives must be approved by the Program Head. Acute Care of at-Risk Newborns (ACORN) offered through Perinatal Services BC Selected electives from the Pediatric Nursing Specialty Program Selected electives from the Perinatal Nursing Specialty Program",
+                    "requirement_name": "Complete an additional 3.0 credits of electives from the following",
+                    "requirement_text": "Complete at least 3 credits from the approved complete an additional 3.0 credits of elective from the following pool.",
+                    "rule_type": "MINIMUM_CREDITS_FROM_POOL",
+                    "study_mode": "ALL"
+                  }
+                ],
+                "program_id": "810CBSN",
+                "substitutions": []
+              },
+              "delivery_method": "Program delivery Online: This program is delivered fully online.",
+              "program_id": "810CBSN",
+              "program_name": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+              "program_overview": "The only neonatal certification program in Canada, BCIT’s Neonatal specialty nursing program is known in the health care industry for delivering quality e",
+              "school": "School of Health Sciences",
+              "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/",
+              "status": "Active",
+              "study_mode": "Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_QBw9vswz88tn6p5jNNDxmVvS",
+                "output": "{\"program\": {\"program_id\": \"810CBSN\", \"program_name\": \"Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\", \"program_overview\": \"The only neonatal certification program in Canada, BCIT\\u2019s Neonatal specialty nursing program is known in the health care industry for delivering quality e\", \"school\": \"School of Health Sciences\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/\", \"courses\": [{\"course_id\": \"BUSA7250\", \"course_name\": \"Management Skills and Applications\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"COMM7100\", \"course_name\": \"Intercultural Communication Competency and Diversity Awareness for Professionals\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/intercultural-communication-competency-and-diversity-awareness-for-professionals-comm-7100/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Liberal Studies Component\"}, {\"course_id\": \"LIBS7021\", \"course_name\": \"Health Ethics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/health-ethics-libs-7021/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Liberal Studies Component\"}, {\"course_id\": \"NSNE7100\", \"course_name\": \"Neonatal Theory 1\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-theory-1-nsne-7100/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSNE7200\", \"course_name\": \"Neonatal Theory 2\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-theory-2-nsne-7200/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSNE7300\", \"course_name\": \"Neonatal Clinical 1\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-clinical-1-nsne-7300/\", \"level\": null, \"term\": null, \"course_type\": \"CLINICAL\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSNE7900\", \"course_name\": \"Clinical Preceptorship in Neonatal Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/clinical-preceptorship-in-neonatal-nursing-nsne-7900/\", \"level\": null, \"term\": null, \"course_type\": \"CLINICAL\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSNE7911\", \"course_name\": \"Neonatal Respiratory Care\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-respiratory-care-nsne-7911/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSNE7920\", \"course_name\": \"Neonatal Acute Care\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-acute-care-nsne-7920/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete an additional 3.0 credits of electives from the following\"}, {\"course_id\": \"NSNE7940\", \"course_name\": \"Advanced Concepts in Neonatal Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-concepts-in-neonatal-nursing-nsne-7940/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete an additional 3.0 credits of electives from the following\"}, {\"course_id\": \"NSPN7150\", \"course_name\": \"The Breastfeeding Experience\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/the-breastfeeding-experience-nspn-7150/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSPN7450\", \"course_name\": \"Neonatal Resuscitation\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-resuscitation-nspn-7450/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"NSSC7000\", \"course_name\": \"Palliative Approach in Nursing Practice\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/palliative-approach-in-nursing-practice-nssc-7000/\", \"level\": null, \"term\": null, \"course_type\": \"CLINICAL\", \"required\": false, \"notes\": \"Complete an additional 3.0 credits of electives from the following\"}, {\"course_id\": \"NSSC7115\", \"course_name\": \"Teaching and Learning in Specialty Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/teaching-and-learning-in-specialty-nursing-nssc-7115/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8000\", \"course_name\": \"Systematic Inquiry\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/systematic-inquiry-nssc-8000/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8130\", \"course_name\": \"Independent Study in Specialty Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-study-in-specialty-nursing-nssc-8130/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8300\", \"course_name\": \"Creative Leadership\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/creative-leadership-nssc-8300/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8500\", \"course_name\": \"Professional Growth\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/professional-growth-nssc-8500/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8600\", \"course_name\": \"Community Nursing: Facilitating Health\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/community-nursing-facilitating-health-nssc-8600/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}, {\"course_id\": \"NSSC8800\", \"course_name\": \"Community Nursing: Facilitating Health Action\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/community-nursing-facilitating-health-action-nssc-8800/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Core/Management Component\"}], \"curriculum\": {\"program_id\": \"810CBSN\", \"components\": [{\"component_id\": 169, \"component_name\": \"Required Courses\", \"component_order\": 1, \"required_credits\": \"21.0\", \"notes\": \"Required Courses: (21.0 credits) *Contact Program Head for more information.\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7100\", \"course_name\": \"Neonatal Theory 1\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-theory-1-nsne-7100/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7100\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7200\", \"course_name\": \"Neonatal Theory 2\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-theory-2-nsne-7200/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7200\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7300\", \"course_name\": \"Neonatal Clinical 1\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-clinical-1-nsne-7300/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7300\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7900\", \"course_name\": \"Clinical Preceptorship in Neonatal Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/clinical-preceptorship-in-neonatal-nursing-nsne-7900/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7900\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7911\", \"course_name\": \"Neonatal Respiratory Care\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-respiratory-care-nsne-7911/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7911\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSPN7150\", \"course_name\": \"The Breastfeeding Experience\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/the-breastfeeding-experience-nspn-7150/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSPN 7150\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSPN7450\", \"course_name\": \"Neonatal Resuscitation\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-resuscitation-nspn-7450/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSPN 7450\"}]}, {\"component_id\": 170, \"component_name\": \"Complete an additional 3.0 credits of electives from the following\", \"component_order\": 2, \"required_credits\": null, \"notes\": \"Complete an additional 3.0 credits of electives from the following: Electives must be approved by the Program Head. Acute Care of at-Risk Newborns (ACORN) offered through Perinatal Services BC Selected electives from the Pediatric Nursing Specialty Program Selected electives from the Perinatal Nursing Specialty Program\", \"courses\": [{\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7920\", \"course_name\": \"Neonatal Acute Care\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/neonatal-acute-care-nsne-7920/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7920\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"NSNE7940\", \"course_name\": \"Advanced Concepts in Neonatal Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-concepts-in-neonatal-nursing-nsne-7940/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSNE 7940\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC7000\", \"course_name\": \"Palliative Approach in Nursing Practice\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/palliative-approach-in-nursing-practice-nssc-7000/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 7000\"}], \"completion_rule\": {\"rule_type\": \"MINIMUM_CREDITS_FROM_POOL\", \"minimum_credits\": \"3.0\", \"requirement_text\": \"Complete at least 3 credits from the approved complete an additional 3.0 credits of elective from the following pool.\", \"course_count\": null}}, {\"component_id\": 171, \"component_name\": \"Core/Management Component\", \"component_order\": 3, \"required_credits\": \"24.0\", \"notes\": \"Core/Management Component: (24.0 credits) Required courses: (21.0 credits) Electives: (3.0 credits) Note: Alternative Nursing electives need to be approved by the Program Head.\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"BUSA7250\", \"course_name\": \"Management Skills and Applications\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"BUSA 7250\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC7115\", \"course_name\": \"Teaching and Learning in Specialty Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/teaching-and-learning-in-specialty-nursing-nssc-7115/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 7115\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8000\", \"course_name\": \"Systematic Inquiry\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/systematic-inquiry-nssc-8000/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8000\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8130\", \"course_name\": \"Independent Study in Specialty Nursing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-study-in-specialty-nursing-nssc-8130/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8130\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8300\", \"course_name\": \"Creative Leadership\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/creative-leadership-nssc-8300/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8300\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8500\", \"course_name\": \"Professional Growth\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/professional-growth-nssc-8500/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8500\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8600\", \"course_name\": \"Community Nursing: Facilitating Health\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/community-nursing-facilitating-health-nssc-8600/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8600\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"NSSC8800\", \"course_name\": \"Community Nursing: Facilitating Health Action\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/community-nursing-facilitating-health-action-nssc-8800/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"NSSC 8800\"}]}, {\"component_id\": 172, \"component_name\": \"Liberal Studies Component\", \"component_order\": 4, \"required_credits\": \"12.0\", \"notes\": \"Liberal Studies Component: (12.0 credits) Required courses: (6.0 credits) Electives: (6.0 credits) 6.0 credits of General Education [PDF] electives at a 100-level minimum in at least two different academic disciplines. Total Credits: 60.0\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"COMM7100\", \"course_name\": \"Intercultural Communication Competency and Diversity Awareness for Professionals\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/intercultural-communication-competency-and-diversity-awareness-for-professionals-comm-7100/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"COMM 7100\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7021\", \"course_name\": \"Health Ethics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/health-ethics-libs-7021/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"LIBS 7021\"}]}], \"credit_requirements\": [{\"requirement_name\": \"Complete an additional 3.0 credits of electives from the following\", \"minimum_credits\": \"3.0\", \"study_mode\": \"ALL\", \"allows_external_courses\": false, \"approval_required\": false, \"notes\": \"Complete an additional 3.0 credits of electives from the following: Electives must be approved by the Program Head. Acute Care of at-Risk Newborns (ACORN) offered through Perinatal Services BC Selected electives from the Pediatric Nursing Specialty Program Selected electives from the Perinatal Nursing Specialty Program\", \"rule_type\": \"MINIMUM_CREDITS_FROM_POOL\", \"requirement_text\": \"Complete at least 3 credits from the approved complete an additional 3.0 credits of elective from the following pool.\", \"course_count\": null}], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"810CBSN\", \"rule_sets\": [{\"rule_set_id\": 160, \"scope\": \"ADMISSION\", \"name\": \"Specialty Nursing entrance requirements\", \"study_mode\": \"PART_TIME\", \"exact_choice_count\": null, \"notes\": \"About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you\\u2019ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* Domestic students: January 2nd* International students: November 1st* Spring/Summer (April) May 1st* Domestic students: April 1st* International students: February 1st* Fall (September) October 1st* Domestic students: September 1st* International students: July 2nd* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements The following are requirements for entry into Specialty Nursing certificate and degree courses. Enforcement or waiving of any or all entry requirements is at the discretion of the program head. If you have any questions about your experience or qualifications, please contact the program head. English language proficiency: Category 1 \\u2013 English Studies 12 (73%) or equivalent Post-secondary education: diploma in nursing Current practicing registration with one of the following: BC College of Nurses and Midwives (BCCNM) or Canadian provincial equivalent or Registered Nurse (RN) license number (if practicing outside Canada) Work Experience: minimum six months work experience in an acute care setting Submit a resume of work experience with your application. Exceptions may be granted for undergraduate students taking entry-level theory courses or new graduates. A resume is required for placement in the program. If you have questions about whether your work experience qualifies, please contact the program head. Interested nurses from international practice, residential, or other areas of care lacking recent (within two years) acute care experience may be required to complete a refresher course. BCIT recommends the following programs: Douglas College Kwantlen Polytechnic University Thompson Rivers University Please contact one of the institutions above, as well as the program head, to determine an appropriate preparatory course of study. Read more about how to meet BCIT\\u2019s entrance requirements Clinical requirements Note: Effective immediately, all healthcare workers who come into contact with patients at publicly funded healthcare facilities or in the community, including at long-term care facilities, will have to get the influenza vaccine or wear a mask during flu season. This policy affects all students who will be entering a clinical setting. As such, you will be required to provide proof of your immunization or agree to wear a mask at all times prior to being placed in your clinical studies. Basic Cardiac Life Support Certification All students participating in clinical courses must have current Cardiopulmonary Resuscitation (CPR), Level C or Level Health Care Provider (HCP). CPR certification must be from a Canadian provider and include a practical component. The original certificate must be presented upon application to clinical courses. BC College of Nurses and Midwives (BCCNM) registration As well as providing this information at the time of admission, BCIT requires students to provide proof of BCCNM membership, Canadian provincial equivalent, or RN license number for each clinical course. Without proper registration, you will not be permitted to continue in the course. Face Respirator Fit Testing A face piece respiratory fit test is required before students are permitted to enter the clinical practicum. Upon successful completion of the fit test, the original certificate must be presented to the program and annual re-fitting is required. Students are expected to carry their certificate with them at all times during their practicum. For the Respirator Fit Testing, fit testing with a N95 respirator (1860, 1860s, or 1870) is required and must be performed, in accordance with CSA Standard CAN/CSA-Z94.4-02. Fit Testing must also include inspection, cleaning, maintenance, and storage of protective equipment. Students will be given specific instructions in preparation for their fit testing by the provider they choose. International applicants This program is available to international applicants who will complete the program from outside Canada or who currently have a valid work permit in Canada that will be valid for the duration of clinical training. Study permit: International applicants accepted into this program are not eligible for a study permit. Post-graduation Work Permit (PGWP) eligibility : While this program currently meets the study program - graduates with a bachelor\\u2019s degree criteria to apply for a PGWP, this program is not eligible for a PGWP due to other criteria not being met. There are no field of study requirements (CIP) for graduates with a bachelor\\u2019s degree. Apply to program International students must receive program head approval before applying. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply Prior Learning Assessment & Recognition (PLAR) The program faculty assesses learners with previous Specialty Nursing course work and relevant work experience on an individual basis. The program assesses learners with previous BCIT course work for potential credit into the degree program. The program may grant transfer of credit for non-BCIT Specialty courses. The program assesses experiential learning through prior learning assessment processes. The Registrar's office assesses transfer of credit for Liberal Studies courses. BCIT requires original, sealed transcripts and course outlines to assess transfer of credit. myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies\", \"groups\": [{\"rule_group_id\": 61, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"Admission requirements\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 257, \"condition_type\": \"GRADE\", \"subject_id\": \"ENGLISH_STUDIES_12\", \"minimum_value\": \"73\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {\"executable\": true, \"verification\": \"structured\"}, \"description\": \"English Studies 12 at 73% or equivalent\", \"sort_order\": 1}, {\"condition_id\": 258, \"condition_type\": \"CREDENTIAL\", \"subject_id\": \"NURSING_DIPLOMA\", \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"executable\": true, \"verification\": \"structured\"}, \"description\": \"Post-secondary diploma in nursing\", \"sort_order\": 2}, {\"condition_id\": 259, \"condition_type\": \"LICENSURE\", \"subject_id\": \"PRACTICING_RN_REGISTRATION\", \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"executable\": false, \"verification\": \"human_confirmation\"}, \"description\": \"Professional registration requires institutional verification\", \"sort_order\": 3}, {\"condition_id\": 260, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": \"ACUTE_CARE\", \"minimum_value\": \"6\", \"unit\": \"MONTHS\", \"accepted_values\": null, \"parameters\": {\"executable\": true, \"verification\": \"structured\", \"recency_qualification\": \"human_confirmation\"}, \"description\": \"Published minimum acute-care experience; recency and equivalence require confirmation\", \"sort_order\": 4}, {\"condition_id\": 261, \"condition_type\": \"DOCUMENT\", \"subject_id\": \"RESUME\", \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"executable\": false, \"verification\": \"human_confirmation\"}, \"description\": \"Resume and placement documentation require confirmation\", \"sort_order\": 5}], \"children\": []}]}, {\"rule_set_id\": 162, \"scope\": \"CONTINUATION\", \"name\": \"Specialty sequence, employment and placement conditions\", \"study_mode\": \"PART_TIME\", \"exact_choice_count\": null, \"notes\": \"Graduate employment outcomes The BCIT student outcomes report presents summary findings from the annual survey of former students administered by BC Stats one to two years after graduation. These reports combine the last three years of available results for the 2023-2025 BCIT Outcomes Surveys of 2022-2024 graduates and for Degree 2021-2023 graduates. The reports are organized into three-page summaries containing information on graduates\\u2019 labour market experiences and opinions regarding their education. More detailed information can be accessed at the BC Student Outcomes website. To view these results, you may need to have the Adobe Acrobat Reader installed in your Web browser. Specialty Nursing (Neonatal)\", \"groups\": []}, {\"rule_set_id\": 163, \"scope\": \"INTERNATIONAL\", \"name\": \"International applicant eligibility and permit restrictions\", \"study_mode\": \"PART_TIME\", \"exact_choice_count\": null, \"notes\": \"This program is available to international applicants who will complete the program from outside Canada or who currently have a valid work permit in Canada that will be valid for the duration of clinical training. Study permit: International applicants accepted into this program are not eligible for a study permit. Post-graduation Work Permit (PGWP) eligibility : While this program currently meets the study program - graduates with a bachelor\\u2019s degree criteria to apply for a PGWP, this program is not eligible for a PGWP due to other criteria not being met. There are no field of study requirements (CIP) for graduates with a bachelor\\u2019s degree. International students must receive program head approval before applying.\", \"groups\": []}, {\"rule_set_id\": 161, \"scope\": \"TRANSFER\", \"name\": \"PLAR and transfer credit\", \"study_mode\": \"PART_TIME\", \"exact_choice_count\": null, \"notes\": \"Prior Learning Assessment & Recognition (PLAR) The program faculty assesses learners with previous Specialty Nursing course work and relevant work experience on an individual basis. The program assesses learners with previous BCIT course work for potential credit into the degree program. The program may grant transfer of credit for non-BCIT Specialty courses. The program assesses experiential learning through prior learning assessment processes. The Registrar's office assesses transfer of credit for Liberal Studies courses. BCIT requires original, sealed transcripts and course outlines to assess transfer of credit. Transfer credit Do you have credits from another BC/Yukon post-secondary school? Do you want to know if they transfer to courses here at BCIT? Check out BCIT's Transfer Equivalency Database to find out.\", \"groups\": []}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"810CBSN\", \"clinical_placement\": [{\"requirement_code\": \"RN_REGISTRATION\", \"requirement_name\": \"Practicing RN registration\", \"requirement_type\": \"LICENSURE\", \"applies_to\": \"EACH_CLINICAL_COURSE\", \"executable\": false, \"verification_method\": \"HUMAN_CONFIRMATION\", \"description\": \"Proof of current professional registration is required for clinical participation.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {}}, {\"requirement_code\": \"CPR_CERTIFICATION\", \"requirement_name\": \"Current CPR certification\", \"requirement_type\": \"CERTIFICATION\", \"applies_to\": \"CLINICAL_COURSES\", \"executable\": false, \"verification_method\": \"HUMAN_CONFIRMATION\", \"description\": \"Current qualifying CPR certification with the required practical component must be confirmed.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {}}, {\"requirement_code\": \"RESPIRATOR_FIT_TEST\", \"requirement_name\": \"Respirator fit testing\", \"requirement_type\": \"HEALTH_AND_SAFETY\", \"applies_to\": \"CLINICAL_PRACTICUM\", \"executable\": false, \"verification_method\": \"HUMAN_CONFIRMATION\", \"description\": \"Current fit-testing evidence and any required renewal must be confirmed.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {}}, {\"requirement_code\": \"INFLUENZA_POLICY\", \"requirement_name\": \"Influenza immunization or masking\", \"requirement_type\": \"HEALTH_AND_SAFETY\", \"applies_to\": \"CLINICAL_PLACEMENT\", \"executable\": false, \"verification_method\": \"HUMAN_CONFIRMATION\", \"description\": \"Compliance with the published immunization or masking policy must be confirmed.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {}}, {\"requirement_code\": \"CLINICAL_APPLICATION\", \"requirement_name\": \"Completed clinical application\", \"requirement_type\": \"DOCUMENT\", \"applies_to\": \"CLINICAL_COURSES\", \"executable\": true, \"verification_method\": \"SELF_REPORTED\", \"description\": \"A completed clinical application is required for clinical courses.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {}}], \"practice_hours\": [{\"requirement_code\": \"PUBLISHED_CLINICAL_HOURS\", \"requirement_name\": \"Clinical practice hours\", \"required_hours\": null, \"tracking_scope\": \"PROGRAM\", \"executable\": false, \"verification_method\": \"HUMAN_CONFIRMATION\", \"description\": \"Clinical practice is required, but no authoritative numeric threshold is stated in the audit.\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-810cbsn/\", \"parameters\": {\"clinical_courses\": [\"NSNE7300\", \"NSNE7900\", \"NSSC7000\"]}}]}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_08eb835656e64055006aa1019aa53487d0955867763633d2a1"
+          },
+          "response": {
+            "id": "resp_08eb835656e64055006aa1019ccae087d0983a572524077dc3",
+            "created_at": 1788936604.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_08eb835656e64055006aa1019d989487d0befcdb1234757494",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQGlymvAzsRLF2f5wKRWWbd3wvUK-n-3DJqJ0SAT38BZLOj3ZfEUElCsy9hrl-hRd9wjYHlq6BENOzSE7guFlIgozPTKnWuCQIeoscyYdH6RQBJ_QkWFIIomY_Y_m8jt280_qY6wwpT3Yogq7RGhSmXwmMvbyruFh2eDIuM1AU3zAJ117TQu3GIhrmOza0DxlrX82t1NlBMss615IauMx2h989eDFW4boyEU_e1jDm2O2ILeo5GadG_38vxUKd2MwjZ3Ph8ceazbXI_FANqNxw2Bq-5lUVCURGYSPA769g0FtXjNVIB9KEEwPBpXDR3z-C41zODFbT_59YOsLPQ4M6fYsext2qUMlTiqZA8aH4a81SRZmaDD20VVrzn4yUdci2I9S2j9yqrvOEc5dLpw6CNzH8QeJbOuUMaVAAdejZSFYSTQ42PQ1meOw-tBUz_1-mN6Kqskjn5v6Fwz7-ogxyBBEG0J5jTi-8jZO40L-R2UjwfbIxniNxCjH1dF-P-V5C8Dxdzz_SOkP28hAkkExd64wTczcmzplpfz36d2jmZaMrRuHa7UWSBOWQKAzfHtYs6DLIznRLdexCDOJlHNvw3-ppADoQt7j0twizbKit7LaetNJtJt1H8BSB-W8CFZbM0mYklZwoylA4mIUdvQMXk5_G7ffjhJsnCKMTIzCYXp7FWjsZveCV9AQwAFcOfJVs-h4G4WrZr6IhWNiWtFcC7jw_7FHFRJG7PEICpdm8Ki7i4H8TEpXPlo6xGkLCmVguAwtRyB1JebwcRWF8RXu6q9NWsOiWvA0JUQeXZwvLM9ShmKz0DQZElY3L3ZLuZY_lj9QjO4UIoHH3uPSS5w7mStRjk5v4OIWROqPHy8GyGdvydiRMxwQ4uw4t637oCVbgmvz7mdMd8Ta53RVtNWxW7x71sWJjaH7MwsQnYun_JqdGO5Og9RmZK0OQSNw0nnq6cPyat9VD2hJsJ5dItkirY_r4Z-6EgJDror2B4iJ6CABUMbOmWiDmM0vylAG9cx7ko1Odk1FA8yRGMFUQqYOYSfPSEJ13vkJqKi1S-4UGIv4Y7Gk3MummWmRW_mnNmwFgcTCWkElpHvKTbh-zHbcqo8uK8Kgt_T_lRKzxgXqVz1qgdyfUZ9u7-Fa19F3Ao0xSRBvMurXXxVrDWkBdAlqhGJrPREcSigiGnnJsDULNYHogyF1qsgo601Y9ol42aNzSDE2SIcMAp26WhnPszFonufF78dBt9FHjcaB2x52pKK_WMC5fzixOSZ4h1EKp3VL9E3S_4ERxyTwIsrJv8c7t4UmbCXMZQvJjRokLuxtmPZdENcPdH_UGgNmFLmMN_SZLbivWeTy3781PSxIS8afyVUnK52pGTTDMDA5T2r9zd1z6aJ0_Es0vhfJYVRg4boSAeyhieo0nUqrgsrf1BzPphUhP7eLRAeyfruadI5qI39khJxZKkrurfdX43vDCmm8NjBOR23_pERqWTIVMKLJAW8NaPB_nBb5073qOBbQg3-cri79aCamXCVc2DlhnOVtifeexwiP3WPL2PU3QHfpIVP0GLrOYJ735TIyCpMKEOe1-Zlfzqt5ctvTjLMxcJwBL2vw_si0GWg2_LJBX6wl2Y97GB58h7D0jlvG7QiauWM_EwjY4Pd44B0euVMqX-_G0l_6Yq1oYSacS_VA7MxyXzR6I8m6bexam5hi3grH_5Wg6awTxWAR1SU6TwwcfwS_KYPSa46v1jFJRlvJ_ffRFCh-OkcLXBlV5cgx8nV0lNmOR11hrI5ndDHAiOuUTvHXIWOOverTtEymeieHFkYpfh-5w064Kt9gJOvcC0a_qlS6evZ-F-N77hfjt9YQO_I6arblFhFJBYs-Lu23LxhoPXlqKPYu8CrqRe9BZPvhYwS0yrs9DdiXaqcxG3NmuwqnJ_D",
+                "status": null
+              },
+              {
+                "id": "msg_08eb835656e64055006aa1019fa38c87d0abcdb7ac1baf7428",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "BCIT’s active, part-time Specialty Nursing (Neonatal) Bachelor of Science in Nursing is delivered fully online and combines neonatal theory with clinical training, including **NSNE 7100 Neonatal Theory 1** and **NSNE 7900 Clinical Preceptorship in Neonatal Nursing**. The 60-credit curriculum also includes core/management courses, 12 credits of Liberal Studies, and at least 3 approved elective credits; [view the full program](https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/).",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936613.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_08eb835656e64055006aa1019aa53487d0955867763633d2a1",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 9421,
+              "input_tokens_details": {
+                "cache_write_tokens": 7619,
+                "cached_tokens": 1799
+              },
+              "output_tokens": 243,
+              "output_tokens_details": {
+                "reasoning_tokens": 105
+              },
+              "total_tokens": 9664
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "BCIT’s active, part-time Specialty Nursing (Neonatal) Bachelor of Science in Nursing is delivered fully online and combines neonatal theory with clinical training, including **NSNE 7100 Neonatal Theory 1** and **NSNE 7900 Clinical Preceptorship in Neonatal Nursing**. The 60-credit curriculum also includes core/management courses, 12 credits of Liberal Studies, and at least 3 approved elective credits; [view the full program](https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/).",
+          "final_answer": "BCIT’s active, part-time Specialty Nursing (Neonatal) Bachelor of Science in Nursing is delivered fully online and combines neonatal theory with clinical training, including **NSNE 7100 Neonatal Theory 1** and **NSNE 7900 Clinical Preceptorship in Neonatal Nursing**. The 60-credit curriculum also includes core/management courses, 12 credits of Liberal Studies, and at least 3 approved elective credits; [view the full program](https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/)."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 59
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "810CBSN"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "810CBSN"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Specialty Nursing Neonatal Bachelor of Science in Nursing, in two sentences."
+          },
+          {
+            "role": "assistant",
+            "content": "BCIT’s active, part-time Specialty Nursing (Neonatal) Bachelor of Science in Nursing is delivered fully online and combines neonatal theory with clinical training, including **NSNE 7100 Neonatal Theory 1** and **NSNE 7900 Clinical Preceptorship in Neonatal Nursing**. The 60-credit curriculum also includes core/management courses, 12 credits of Liberal Studies, and at least 3 approved elective credits; [view the full program](https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/)."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "810CBSN",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "810CBSN"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "810CBSN",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "810CBSN:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.547,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "810CBSN",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "810CBSN",
+            "program_name": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "810CBSN"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "810CBSN"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

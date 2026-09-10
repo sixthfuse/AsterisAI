@@ -1,0 +1,1591 @@
+{
+  "classification": {
+    "scenario_id": "CAT-02-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step, despite the frozen expectation requiring one. The phrase “applicable decision process” is also vague and unnatural for a question about employment.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Construction Management Bachelor of Technology, in two sentences.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Construction Management Bachelor of Technology, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Construction Management is a Bachelor of Technology degree-completion program offered full- or part-time in person at Burnaby, developing management, technical, and interpersonal construction-project skills. Coursework includes **CMGT 7190 – Construction Planning and Controls** and **CMGT 7330 – Finance for Construction Managers**; see the [program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/).",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 21,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Construction Management",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 8.406,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "8800BTECH",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Tell me about Construction Management Bachelor of Technology, in two sentences.\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: 8800BTECH. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"8800BTECH\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0401cf48c4514da3006aa1007bb0c087d0bd6fd93d1eec11c8",
+            "created_at": 1788936315.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"8800BTECH\"}",
+                "call_id": "call_XT9rhE2lyKKYo1cYDGTR6QrE",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0401cf48c4514da3006aa1007ce5dc87d08d7671a4ae0d3d37",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936317.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1800,
+              "input_tokens_details": {
+                "cache_write_tokens": 144,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 23,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1823
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8800BTECH"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Tell me about Construction Management Bachelor of Technology, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8800BTECH",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "conditions": [
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 3,
+                                    "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "parameters": {},
+                                    "sort_order": 1,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 4,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "parameters": {},
+                                    "sort_order": 2,
+                                    "subject_id": null,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway A",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 3,
+                                "sort_order": 1
+                              },
+                              {
+                                "children": [],
+                                "conditions": [
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 5,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "parameters": {},
+                                    "sort_order": 1,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 6,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "parameters": {},
+                                    "sort_order": 2,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 7,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "parameters": {},
+                                    "sort_order": 3,
+                                    "subject_id": null,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway B",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 4,
+                                "sort_order": 2
+                              },
+                              {
+                                "children": [],
+                                "conditions": [
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 8,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "parameters": {},
+                                    "sort_order": 1,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 9,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 8 years North American construction-management experience in mid/senior roles",
+                                    "minimum_value": "8",
+                                    "parameters": {
+                                      "field": "construction management",
+                                      "region": "North America",
+                                      "role_level": "mid_or_senior"
+                                    },
+                                    "sort_order": 2,
+                                    "subject_id": null,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway C",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 5,
+                                "sort_order": 3
+                              },
+                              {
+                                "children": [],
+                                "conditions": [
+                                  {
+                                    "accepted_values": [
+                                      "cabinetmaker",
+                                      "carpenter",
+                                      "electrician",
+                                      "industrial mechanic/millwright",
+                                      "metal fabricator",
+                                      "plumber",
+                                      "refrigeration & air conditioning mechanic",
+                                      "welder level A"
+                                    ],
+                                    "condition_id": 10,
+                                    "condition_type": "RED_SEAL_TRADE",
+                                    "description": "Approved Red Seal trade",
+                                    "minimum_value": null,
+                                    "parameters": {},
+                                    "sort_order": 1,
+                                    "subject_id": null,
+                                    "unit": null
+                                  },
+                                  {
+                                    "accepted_values": [
+                                      "Pre-Calculus 11",
+                                      "Foundations Math 11",
+                                      "Workplace Math 11",
+                                      "BLDT 1011",
+                                      "accepted BC/Yukon equivalent"
+                                    ],
+                                    "condition_id": 11,
+                                    "condition_type": "MATH_OPTION_GRADE",
+                                    "description": "One accepted math option at 60%",
+                                    "minimum_value": "60",
+                                    "parameters": {},
+                                    "sort_order": 2,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 12,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "parameters": {},
+                                    "sort_order": 3,
+                                    "subject_id": null,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "accepted_values": null,
+                                    "condition_id": 13,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+                                    "minimum_value": "1",
+                                    "parameters": {
+                                      "excludes": "apprenticeship hours",
+                                      "field": "construction industry"
+                                    },
+                                    "sort_order": 4,
+                                    "subject_id": null,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway D",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 6,
+                                "sort_order": 4
+                              }
+                            ],
+                            "conditions": [],
+                            "label": "Exactly one entry pathway",
+                            "operator": "OR",
+                            "parent_group_id": 1,
+                            "rule_group_id": 2,
+                            "sort_order": 3
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 1,
+                            "condition_type": "PRE_ENTRY_ASSESSMENT",
+                            "description": "Approved departmental pre-entry assessment before application",
+                            "minimum_value": null,
+                            "parameters": {},
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          },
+                          {
+                            "accepted_values": null,
+                            "condition_id": 2,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "English Studies 12 at 73% or equivalent",
+                            "minimum_value": "73",
+                            "parameters": {},
+                            "sort_order": 2,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": [
+                              "ICES comprehensive evaluation",
+                              "accepted Canadian credential-assessment service"
+                            ],
+                            "condition_id": 18,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+                            "minimum_value": null,
+                            "parameters": {
+                              "applies_outside": [
+                                "Canada",
+                                "United States",
+                                "United Kingdom",
+                                "Australia",
+                                "New Zealand"
+                              ],
+                              "requires": "course-by-course evaluation and GPA calculation"
+                            },
+                            "sort_order": 4,
+                            "subject_id": null,
+                            "unit": null
+                          },
+                          {
+                            "accepted_values": [
+                              "master's degree alone"
+                            ],
+                            "condition_id": 19,
+                            "condition_type": "CREDENTIAL_EXCLUSION",
+                            "description": "A master's degree alone is not sufficient for admission",
+                            "minimum_value": null,
+                            "parameters": {},
+                            "sort_order": 5,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "Admission requirements",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 1,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Construction Management admission",
+                    "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways.",
+                    "rule_set_id": 1,
+                    "scope": "ADMISSION",
+                    "study_mode": null
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "children": [],
+                            "conditions": [
+                              {
+                                "accepted_values": null,
+                                "condition_id": 16,
+                                "condition_type": "COURSE",
+                                "description": "CMGT 8800 after CMGT 8700 and department approval",
+                                "minimum_value": "50",
+                                "parameters": {},
+                                "sort_order": 1,
+                                "subject_id": "CMGT8800",
+                                "unit": "PERCENT"
+                              },
+                              {
+                                "accepted_values": null,
+                                "condition_id": 17,
+                                "condition_type": "COURSE",
+                                "description": "CMGT 8810 after CMGT 8700 and department approval",
+                                "minimum_value": "50",
+                                "parameters": {},
+                                "sort_order": 2,
+                                "subject_id": "CMGT8810",
+                                "unit": "PERCENT"
+                              }
+                            ],
+                            "label": "Choose one final project",
+                            "operator": "OR",
+                            "parent_group_id": 8,
+                            "rule_group_id": 9,
+                            "sort_order": 2
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 15,
+                            "condition_type": "COURSE",
+                            "description": "Complete CMGT 8700",
+                            "minimum_value": null,
+                            "parameters": {},
+                            "sort_order": 1,
+                            "subject_id": "CMGT8700",
+                            "unit": null
+                          }
+                        ],
+                        "label": "Professional Standards",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 8,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Professional Standards capstone choice",
+                    "notes": "CMGT 8700 followed by one of CMGT 8800 or CMGT 8810.",
+                    "rule_set_id": 3,
+                    "scope": "COMPLETION",
+                    "study_mode": null
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 14,
+                            "condition_type": "WORK_EXPERIENCE",
+                            "description": "Minimum 2 years related work experience total; qualifying admission experience counts toward the total",
+                            "minimum_value": "2",
+                            "parameters": {
+                              "admission_experience_counts": true,
+                              "field": "related"
+                            },
+                            "sort_order": 0,
+                            "subject_id": null,
+                            "unit": "YEAR"
+                          }
+                        ],
+                        "label": "Capstone and graduation eligibility",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 7,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Capstone and graduation work experience",
+                    "notes": "Admission work experience counts toward the two-year total.",
+                    "rule_set_id": 2,
+                    "scope": "CONTINUATION",
+                    "study_mode": null
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2107,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time and Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "8800BTECH"
+              },
+              "courses": [],
+              "credential": "Bachelor of Technology / Bachelor's Degree",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 1,
+                    "component_name": "Construction Controls and Techniques",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "CMGT7160",
+                        "course_name": "Statistics for Construction Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/statistics-for-construction-management-cmgt-7160/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7190",
+                        "course_name": "Construction Planning and Controls",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 7190",
+                        "source_url": "https://www.bcit.ca/courses/construction-planning-and-controls-cmgt-7190/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7211",
+                        "course_name": "Heavy Equipment in Construction",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/heavy-equipment-in-construction-cmgt-7211/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7400",
+                        "course_name": "Project Planning for Quality & Risk Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/project-planning-for-quality-and-risk-management-cmgt-7400/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 2,
+                    "component_name": "Organization Management",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "BUSA7250",
+                        "course_name": "Management Skills and Applications",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "BUSA 7250",
+                        "source_url": "https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7330",
+                        "course_name": "Finance for Construction Managers",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 7330",
+                        "source_url": "https://www.bcit.ca/courses/finance-for-construction-managers-cmgt-7330/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7420",
+                        "course_name": "Construction Law",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/construction-law-cmgt-7420/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8435",
+                        "course_name": "Construction Enterprise Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/construction-enterprise-management-cmgt-8435/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": "12"
+                  },
+                  {
+                    "component_id": 3,
+                    "component_name": "Stakeholder Engagement",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "CMGT7535",
+                        "course_name": "Leadership and Interpersonal Skills",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 7535",
+                        "source_url": "https://www.bcit.ca/courses/leadership-and-interpersonal-skills-cmgt-7535/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7660",
+                        "course_name": "Environmental Considerations in Construction",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/environmental-considerations-in-construction-cmgt-7660/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8602",
+                        "course_name": "Engagement of Project Stakeholders",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/engagement-of-project-stakeholders-cmgt-8602/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": "9"
+                  },
+                  {
+                    "component_id": 4,
+                    "component_name": "Management Electives",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "CMGT7125",
+                        "course_name": "Construction Schedule and Delay Analysis",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 7125",
+                        "source_url": "https://www.bcit.ca/courses/construction-schedule-and-delay-analysis-cmgt-7125/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7220",
+                        "course_name": "Health and Safety in Construction",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/health-and-safety-in-construction-cmgt-7220/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7605",
+                        "course_name": "Industrial Relations",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/industrial-relations-cmgt-7605/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7840",
+                        "course_name": "Technical Presentations",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/technical-presentations-cmgt-7840/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8040",
+                        "course_name": "Building - Civil Services",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/building-civil-services-cmgt-8040/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8050",
+                        "course_name": "Budgeting/Conceptual Estimating",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/budgeting-conceptual-estimating-cmgt-8050/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8060",
+                        "course_name": "Risk Management in Design & Construction of Buildings",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/risk-management-in-design-and-construction-of-buildings-cmgt-8060/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "EENG7000",
+                        "course_name": "Introduction to Climate Change, Ecology, and Systems Thinking",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "EENG 7000",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-climate-change-ecology-and-systems-thinking-eeng-7000/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7101",
+                        "course_name": "Engineering, Technology and Management",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/engineering-technology-and-management-tmgt-7101/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7102",
+                        "course_name": "Project Management/Resource Utilization",
+                        "course_role": "ELECTIVE",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7102",
+                        "source_url": "https://www.bcit.ca/courses/project-management-resource-utilization-tmgt-7102/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7111",
+                        "course_name": "High Technology Marketing Strategies",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/high-technology-marketing-strategies-tmgt-7111/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7112",
+                        "course_name": "Marketing Research",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7112",
+                        "source_url": "https://www.bcit.ca/courses/marketing-research-tmgt-7112/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7113",
+                        "course_name": "Marketing Programs and Plans",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7113",
+                        "source_url": "https://www.bcit.ca/courses/marketing-programs-and-plans-tmgt-7113/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7121",
+                        "course_name": "Principles of Finance",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7121",
+                        "source_url": "https://www.bcit.ca/courses/principles-of-finance-tmgt-7121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7124",
+                        "course_name": "Technology and International Finance",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/technology-and-international-finance-tmgt-7124/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7134",
+                        "course_name": "Technology and International Trade and Competition",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7134",
+                        "source_url": "https://www.bcit.ca/courses/technology-and-international-trade-and-competition-tmgt-7134/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7143",
+                        "course_name": "Problem Solving and Decision-Making",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7143",
+                        "source_url": "https://www.bcit.ca/courses/problem-solving-and-decision-making-tmgt-7143/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7144",
+                        "course_name": "Human Resource Planning and Control",
+                        "course_role": "ELECTIVE",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7144",
+                        "source_url": "https://www.bcit.ca/courses/human-resource-planning-and-control-tmgt-7144/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TMGT7145",
+                        "course_name": "Leadership in a World of Change",
+                        "course_role": "ELECTIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "TMGT 7145",
+                        "source_url": "https://www.bcit.ca/courses/leadership-in-a-world-of-change-tmgt-7145/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": "4"
+                  },
+                  {
+                    "component_id": 5,
+                    "component_name": "Liberal Studies Component",
+                    "component_order": 5,
+                    "courses": [
+                      {
+                        "course_id": "LIBS7001",
+                        "course_name": "Critical Reading and Writing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "LIBS 7001",
+                        "source_url": "https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "LIBS7002",
+                        "course_name": "Applied Ethics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "LIBS 7002",
+                        "source_url": "https://www.bcit.ca/courses/applied-ethics-libs-7002/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "LIBS7013",
+                        "course_name": "Race, Class and Gender: Intersections",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/race-class-and-gender-intersections-libs-7013/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": "12"
+                  },
+                  {
+                    "component_id": 6,
+                    "component_name": "Professional Standards",
+                    "component_order": 6,
+                    "courses": [
+                      {
+                        "course_id": "CMGT8800",
+                        "course_name": "Industry Based Project*",
+                        "course_role": "CHOICE",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 8800",
+                        "source_url": "https://www.bcit.ca/courses/industry-based-project-cmgt-8800/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8810",
+                        "course_name": "Industry Based Project*",
+                        "course_role": "CHOICE",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 8810",
+                        "source_url": "https://www.bcit.ca/courses/industry-based-project-cmgt-8810/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT7810",
+                        "course_name": "Advanced Industry Communication",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/advanced-industry-communication-cmgt-7810/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8211",
+                        "course_name": "Industry Collaborations",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/industry-collaborations-cmgt-8211/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CMGT8700",
+                        "course_name": "Industry Based Project Proposal",
+                        "course_role": "REQUIRED",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CMGT 8700",
+                        "source_url": "https://www.bcit.ca/courses/industry-based-project-proposal-cmgt-8700/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": null,
+                    "required_credits": "11"
+                  }
+                ],
+                "credit_requirements": [
+                  {
+                    "allows_external_courses": false,
+                    "approval_required": false,
+                    "course_count": null,
+                    "minimum_credits": "12",
+                    "notes": "9 mandatory credits plus 3 elective credits.",
+                    "requirement_name": "Liberal Studies total",
+                    "requirement_text": "Complete at least 12 credits for Liberal Studies total.",
+                    "rule_type": "MINIMUM_CREDITS",
+                    "study_mode": null
+                  },
+                  {
+                    "allows_external_courses": true,
+                    "approval_required": true,
+                    "course_count": null,
+                    "minimum_credits": "4",
+                    "notes": "Approved external management courses may satisfy this requirement.",
+                    "requirement_name": "Management elective credits",
+                    "requirement_text": "Complete at least 4 credits from the approved management elective credits pool.",
+                    "rule_type": "MINIMUM_CREDITS_FROM_POOL",
+                    "study_mode": null
+                  }
+                ],
+                "program_id": "8800BTECH",
+                "substitutions": [
+                  {
+                    "description": "Part-time students may take 3 additional approved Liberal Studies elective credits instead of LIBS 7013.",
+                    "replaced_course_id": "LIBS7013",
+                    "replacement_credits": "3",
+                    "replacement_type": "CREDIT_POOL",
+                    "study_mode": "Part-time"
+                  }
+                ]
+              },
+              "delivery_method": "In person",
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+              "status": "Active",
+              "study_mode": "Full-time and Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_XT9rhE2lyKKYo1cYDGTR6QrE",
+                "output": "{\"program\": {\"program_id\": \"8800BTECH\", \"program_name\": \"Construction Management\", \"program_overview\": \"Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.\", \"school\": \"School of Construction and the Environment\", \"credential\": \"Bachelor of Technology / Bachelor's Degree\", \"study_mode\": \"Full-time and Part-time\", \"campus\": \"Burnaby\", \"delivery_method\": \"In person\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/\", \"courses\": [], \"curriculum\": {\"program_id\": \"8800BTECH\", \"components\": [{\"component_id\": 1, \"component_name\": \"Construction Controls and Techniques\", \"component_order\": 1, \"required_credits\": null, \"notes\": null, \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7160\", \"course_name\": \"Statistics for Construction Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/statistics-for-construction-management-cmgt-7160/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7190\", \"course_name\": \"Construction Planning and Controls\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/construction-planning-and-controls-cmgt-7190/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 7190\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7211\", \"course_name\": \"Heavy Equipment in Construction\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/heavy-equipment-in-construction-cmgt-7211/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7400\", \"course_name\": \"Project Planning for Quality & Risk Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/project-planning-for-quality-and-risk-management-cmgt-7400/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}, {\"component_id\": 2, \"component_name\": \"Organization Management\", \"component_order\": 2, \"required_credits\": \"12\", \"notes\": null, \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"BUSA7250\", \"course_name\": \"Management Skills and Applications\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"BUSA 7250\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7330\", \"course_name\": \"Finance for Construction Managers\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/finance-for-construction-managers-cmgt-7330/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 7330\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7420\", \"course_name\": \"Construction Law\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/construction-law-cmgt-7420/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8435\", \"course_name\": \"Construction Enterprise Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/construction-enterprise-management-cmgt-8435/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}, {\"component_id\": 3, \"component_name\": \"Stakeholder Engagement\", \"component_order\": 3, \"required_credits\": \"9\", \"notes\": null, \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7535\", \"course_name\": \"Leadership and Interpersonal Skills\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/leadership-and-interpersonal-skills-cmgt-7535/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 7535\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7660\", \"course_name\": \"Environmental Considerations in Construction\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/environmental-considerations-in-construction-cmgt-7660/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8602\", \"course_name\": \"Engagement of Project Stakeholders\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/engagement-of-project-stakeholders-cmgt-8602/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}, {\"component_id\": 4, \"component_name\": \"Management Electives\", \"component_order\": 4, \"required_credits\": \"4\", \"notes\": null, \"courses\": [{\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7125\", \"course_name\": \"Construction Schedule and Delay Analysis\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/construction-schedule-and-delay-analysis-cmgt-7125/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 7125\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7220\", \"course_name\": \"Health and Safety in Construction\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/health-and-safety-in-construction-cmgt-7220/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7605\", \"course_name\": \"Industrial Relations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/industrial-relations-cmgt-7605/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7840\", \"course_name\": \"Technical Presentations\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/technical-presentations-cmgt-7840/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8040\", \"course_name\": \"Building - Civil Services\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/building-civil-services-cmgt-8040/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8050\", \"course_name\": \"Budgeting/Conceptual Estimating\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/budgeting-conceptual-estimating-cmgt-8050/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8060\", \"course_name\": \"Risk Management in Design & Construction of Buildings\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/risk-management-in-design-and-construction-of-buildings-cmgt-8060/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"EENG7000\", \"course_name\": \"Introduction to Climate Change, Ecology, and Systems Thinking\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/introduction-to-climate-change-ecology-and-systems-thinking-eeng-7000/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"EENG 7000\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7101\", \"course_name\": \"Engineering, Technology and Management\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/engineering-technology-and-management-tmgt-7101/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7102\", \"course_name\": \"Project Management/Resource Utilization\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/courses/project-management-resource-utilization-tmgt-7102/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7102\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7111\", \"course_name\": \"High Technology Marketing Strategies\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/high-technology-marketing-strategies-tmgt-7111/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7112\", \"course_name\": \"Marketing Research\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/marketing-research-tmgt-7112/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7112\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7113\", \"course_name\": \"Marketing Programs and Plans\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/marketing-programs-and-plans-tmgt-7113/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7113\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7121\", \"course_name\": \"Principles of Finance\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/principles-of-finance-tmgt-7121/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7121\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7124\", \"course_name\": \"Technology and International Finance\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/technology-and-international-finance-tmgt-7124/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7134\", \"course_name\": \"Technology and International Trade and Competition\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/technology-and-international-trade-and-competition-tmgt-7134/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7134\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7143\", \"course_name\": \"Problem Solving and Decision-Making\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/problem-solving-and-decision-making-tmgt-7143/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7143\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7144\", \"course_name\": \"Human Resource Planning and Control\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/human-resource-planning-and-control-tmgt-7144/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7144\"}, {\"course_role\": \"ELECTIVE\", \"study_mode\": \"ALL\", \"course_id\": \"TMGT7145\", \"course_name\": \"Leadership in a World of Change\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/leadership-in-a-world-of-change-tmgt-7145/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"TMGT 7145\"}]}, {\"component_id\": 5, \"component_name\": \"Liberal Studies Component\", \"component_order\": 5, \"required_credits\": \"12\", \"notes\": null, \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7001\", \"course_name\": \"Critical Reading and Writing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"LIBS 7001\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7002\", \"course_name\": \"Applied Ethics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-ethics-libs-7002/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"LIBS 7002\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7013\", \"course_name\": \"Race, Class and Gender: Intersections\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/race-class-and-gender-intersections-libs-7013/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}, {\"component_id\": 6, \"component_name\": \"Professional Standards\", \"component_order\": 6, \"required_credits\": \"11\", \"notes\": null, \"courses\": [{\"course_role\": \"CHOICE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8800\", \"course_name\": \"Industry Based Project*\", \"credits\": \"6.00\", \"source_url\": \"https://www.bcit.ca/courses/industry-based-project-cmgt-8800/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 8800\"}, {\"course_role\": \"CHOICE\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8810\", \"course_name\": \"Industry Based Project*\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/industry-based-project-cmgt-8810/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 8810\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT7810\", \"course_name\": \"Advanced Industry Communication\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-industry-communication-cmgt-7810/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8211\", \"course_name\": \"Industry Collaborations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/industry-collaborations-cmgt-8211/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"CMGT8700\", \"course_name\": \"Industry Based Project Proposal\", \"credits\": \"1.00\", \"source_url\": \"https://www.bcit.ca/courses/industry-based-project-proposal-cmgt-8700/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"CMGT 8700\"}]}], \"credit_requirements\": [{\"requirement_name\": \"Liberal Studies total\", \"minimum_credits\": \"12\", \"study_mode\": null, \"allows_external_courses\": false, \"approval_required\": false, \"notes\": \"9 mandatory credits plus 3 elective credits.\", \"rule_type\": \"MINIMUM_CREDITS\", \"requirement_text\": \"Complete at least 12 credits for Liberal Studies total.\", \"course_count\": null}, {\"requirement_name\": \"Management elective credits\", \"minimum_credits\": \"4\", \"study_mode\": null, \"allows_external_courses\": true, \"approval_required\": true, \"notes\": \"Approved external management courses may satisfy this requirement.\", \"rule_type\": \"MINIMUM_CREDITS_FROM_POOL\", \"requirement_text\": \"Complete at least 4 credits from the approved management elective credits pool.\", \"course_count\": null}], \"substitutions\": [{\"study_mode\": \"Part-time\", \"replaced_course_id\": \"LIBS7013\", \"replacement_type\": \"CREDIT_POOL\", \"replacement_credits\": \"3\", \"description\": \"Part-time students may take 3 additional approved Liberal Studies elective credits instead of LIBS 7013.\"}]}, \"academic_rules\": {\"program_id\": \"8800BTECH\", \"rule_sets\": [{\"rule_set_id\": 1, \"scope\": \"ADMISSION\", \"name\": \"Construction Management admission\", \"study_mode\": null, \"exact_choice_count\": 1, \"notes\": \"Mandatory pre-entry assessment, common English, and exactly one of four pathways.\", \"groups\": [{\"rule_group_id\": 1, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"Admission requirements\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 1, \"condition_type\": \"PRE_ENTRY_ASSESSMENT\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {}, \"description\": \"Approved departmental pre-entry assessment before application\", \"sort_order\": 1}, {\"condition_id\": 2, \"condition_type\": \"ENGLISH_GRADE\", \"subject_id\": \"ENGLISH_STUDIES_12\", \"minimum_value\": \"73\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"English Studies 12 at 73% or equivalent\", \"sort_order\": 2}, {\"condition_id\": 18, \"condition_type\": \"INTERNATIONAL_CREDENTIAL_EVALUATION\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": [\"ICES comprehensive evaluation\", \"accepted Canadian credential-assessment service\"], \"parameters\": {\"requires\": \"course-by-course evaluation and GPA calculation\", \"applies_outside\": [\"Canada\", \"United States\", \"United Kingdom\", \"Australia\", \"New Zealand\"]}, \"description\": \"Specified international post-secondary credentials require an accepted comprehensive credential evaluation\", \"sort_order\": 4}, {\"condition_id\": 19, \"condition_type\": \"CREDENTIAL_EXCLUSION\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": [\"master's degree alone\"], \"parameters\": {}, \"description\": \"A master's degree alone is not sufficient for admission\", \"sort_order\": 5}], \"children\": [{\"rule_group_id\": 2, \"parent_group_id\": 1, \"operator\": \"OR\", \"label\": \"Exactly one entry pathway\", \"sort_order\": 3, \"conditions\": [], \"children\": [{\"rule_group_id\": 3, \"parent_group_id\": 2, \"operator\": \"AND\", \"label\": \"Pathway A\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 3, \"condition_type\": \"RELATED_POSTSECONDARY_CREDENTIAL_GPA\", \"subject_id\": null, \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"Construction-related diploma or degree from a recognized institution with minimum 67% GPA\", \"sort_order\": 1}, {\"condition_id\": 4, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": null, \"minimum_value\": \"1\", \"unit\": \"YEAR\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"At least 1 year construction-industry work experience\", \"sort_order\": 2}], \"children\": []}, {\"rule_group_id\": 4, \"parent_group_id\": 2, \"operator\": \"AND\", \"label\": \"Pathway B\", \"sort_order\": 2, \"conditions\": [{\"condition_id\": 5, \"condition_type\": \"UNRELATED_POSTSECONDARY_CREDENTIAL_GPA\", \"subject_id\": null, \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"Unrelated diploma or degree from a recognized institution with minimum 67% GPA\", \"sort_order\": 1}, {\"condition_id\": 6, \"condition_type\": \"BRIDGING_CREDENTIAL_GPA\", \"subject_id\": null, \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"BCIT Construction Operations Associate Certificate with minimum 67% GPA\", \"sort_order\": 2}, {\"condition_id\": 7, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": null, \"minimum_value\": \"1\", \"unit\": \"YEAR\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"At least 1 year construction-industry work experience\", \"sort_order\": 3}], \"children\": []}, {\"rule_group_id\": 5, \"parent_group_id\": 2, \"operator\": \"AND\", \"label\": \"Pathway C\", \"sort_order\": 3, \"conditions\": [{\"condition_id\": 8, \"condition_type\": \"UNRELATED_POSTSECONDARY_CREDENTIAL_GPA\", \"subject_id\": null, \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"Unrelated diploma or degree from a recognized institution with minimum 67% GPA\", \"sort_order\": 1}, {\"condition_id\": 9, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": null, \"minimum_value\": \"8\", \"unit\": \"YEAR\", \"accepted_values\": null, \"parameters\": {\"field\": \"construction management\", \"region\": \"North America\", \"role_level\": \"mid_or_senior\"}, \"description\": \"At least 8 years North American construction-management experience in mid/senior roles\", \"sort_order\": 2}], \"children\": []}, {\"rule_group_id\": 6, \"parent_group_id\": 2, \"operator\": \"AND\", \"label\": \"Pathway D\", \"sort_order\": 4, \"conditions\": [{\"condition_id\": 10, \"condition_type\": \"RED_SEAL_TRADE\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": [\"cabinetmaker\", \"carpenter\", \"electrician\", \"industrial mechanic/millwright\", \"metal fabricator\", \"plumber\", \"refrigeration & air conditioning mechanic\", \"welder level A\"], \"parameters\": {}, \"description\": \"Approved Red Seal trade\", \"sort_order\": 1}, {\"condition_id\": 11, \"condition_type\": \"MATH_OPTION_GRADE\", \"subject_id\": null, \"minimum_value\": \"60\", \"unit\": \"PERCENT\", \"accepted_values\": [\"Pre-Calculus 11\", \"Foundations Math 11\", \"Workplace Math 11\", \"BLDT 1011\", \"accepted BC/Yukon equivalent\"], \"parameters\": {}, \"description\": \"One accepted math option at 60%\", \"sort_order\": 2}, {\"condition_id\": 12, \"condition_type\": \"BRIDGING_CREDENTIAL_GPA\", \"subject_id\": null, \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"Construction Operations Associate Certificate with minimum 67% GPA\", \"sort_order\": 3}, {\"condition_id\": 13, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": null, \"minimum_value\": \"1\", \"unit\": \"YEAR\", \"accepted_values\": null, \"parameters\": {\"field\": \"construction industry\", \"excludes\": \"apprenticeship hours\"}, \"description\": \"At least 1 year construction-industry experience in addition to apprenticeship hours\", \"sort_order\": 4}], \"children\": []}]}]}]}, {\"rule_set_id\": 3, \"scope\": \"COMPLETION\", \"name\": \"Professional Standards capstone choice\", \"study_mode\": null, \"exact_choice_count\": null, \"notes\": \"CMGT 8700 followed by one of CMGT 8800 or CMGT 8810.\", \"groups\": [{\"rule_group_id\": 8, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"Professional Standards\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 15, \"condition_type\": \"COURSE\", \"subject_id\": \"CMGT8700\", \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {}, \"description\": \"Complete CMGT 8700\", \"sort_order\": 1}], \"children\": [{\"rule_group_id\": 9, \"parent_group_id\": 8, \"operator\": \"OR\", \"label\": \"Choose one final project\", \"sort_order\": 2, \"conditions\": [{\"condition_id\": 16, \"condition_type\": \"COURSE\", \"subject_id\": \"CMGT8800\", \"minimum_value\": \"50\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"CMGT 8800 after CMGT 8700 and department approval\", \"sort_order\": 1}, {\"condition_id\": 17, \"condition_type\": \"COURSE\", \"subject_id\": \"CMGT8810\", \"minimum_value\": \"50\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {}, \"description\": \"CMGT 8810 after CMGT 8700 and department approval\", \"sort_order\": 2}], \"children\": []}]}]}, {\"rule_set_id\": 2, \"scope\": \"CONTINUATION\", \"name\": \"Capstone and graduation work experience\", \"study_mode\": null, \"exact_choice_count\": null, \"notes\": \"Admission work experience counts toward the two-year total.\", \"groups\": [{\"rule_group_id\": 7, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"Capstone and graduation eligibility\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 14, \"condition_type\": \"WORK_EXPERIENCE\", \"subject_id\": null, \"minimum_value\": \"2\", \"unit\": \"YEAR\", \"accepted_values\": null, \"parameters\": {\"field\": \"related\", \"admission_experience_counts\": true}, \"description\": \"Minimum 2 years related work experience total; qualifying admission experience counts toward the total\", \"sort_order\": 0}], \"children\": []}]}, {\"rule_set_id\": 2107, \"scope\": \"INTERNATIONAL\", \"name\": \"International eligibility source evidence\", \"study_mode\": \"Full-time and Part-time\", \"exact_choice_count\": null, \"notes\": \"{\\\"evidence\\\":[{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/regular-credential-programs/\\\"},{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\\\"}],\\\"offering_scope\\\":\\\"Any Domestic Only offering remains mode/intake-specific.\\\",\\\"pgwp\\\":\\\"ELIGIBLE_TO_APPLY\\\",\\\"status\\\":\\\"ACCEPTED_AVAILABLE\\\",\\\"study_permit\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\"}\", \"groups\": []}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"8800BTECH\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0401cf48c4514da3006aa1007bb0c087d0bd6fd93d1eec11c8"
+          },
+          "response": {
+            "id": "resp_0401cf48c4514da3006aa1007debd487d09472b4cfdae129fb",
+            "created_at": 1788936318.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0401cf48c4514da3006aa1007f160887d0b9a718f57c6b297b",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQCD7zgiqepC0Ex8p-ivbA-ZKxXY-rJ7IGD2eGqvTLtNe8kdCJ20STgcp26UbbzHGy8R3jZLrvVGDSmqtBakIcx7sQOF3J5C1mlRFACvmtBw-PtzbpBpt1UeGE8Xo-mYObs3gCh9swYbYxHZDHox49UFc10aSM0rGC-IKBRWLLXwiwZk_nuZ9deLfb8EETcmwKq50uFfZHgM_zfjGKpaJoEFqbVqH1KsANG8icW4eF_ln1RORqXD8_78gV9FV7HYwpMcyJgLKyLqmu4b4RIvMukQStkjotIHha9_F3xUQbR6ORoO3WjMygA0z55UcZf38QaSEUx1txtgFwjtVUrBaYVOHGJ8zvZQVKUqEIs99jbfiVWYHK-1yh5Hvh4IZ7UQ6IMmIasI-fNIK8zfOlnoLdws6yC9t9YuZqOmcLlSBrHP4GzFmWMB__r2l-jNkYxgqmQswSTwkhFZXG-yqSAf6EyxM0ST4aDmR1TOBfQ94xZg9Dfp5Or9_E7Vohy59BjX9xeznzpTbg_-lKaE-Tbnfco-zXXkgvDKW1vEAvCTPfwVcJTsSFrg-yUDG4eFVi5EvVL0gIkG8RgdJf5ZZqfxoYVOAKcOYfdhde7N_-ENzqjl7lqXu18Bl9bBAgvs7MDYlppLYAVlFvwipaerNVRgB8MadlgLFw10NSL5rKg65lc58Mag3syiPW6HCnRnvvX3-UDE-85kv166FDjNOjgTBfD6yQd766VPXfe37OJLbX2wGN99L--NZGHt6hjSSmaOxlOfZ9ubBH340gTMsUiWS33PggA6XfaxxqHsYS2NTdokKSGhL4DCVIMtOew2Wgnu7OkigjvV02AyveNWH7zA7E0HZEyU7v3p8YcXJKAAMAiS_1JtnxdND2atb_HpNZv9WzREHXj7H800PJa9DQlqGvMLbV34e_LRW6BwFQ1sBgZQ073qla_QTnwrXXOzWn0KiwgGEqKaDxkbz7y5M9QWjKwBpDnivk5qBvC_4LRGFMLYvMMnw4j4Dp-kMd88i0wfCLQd0Kmrt_jxjj5pI-lLtQB26OOWXhEuZrZYITvp2vSC9NYsxAvN5e6td2uvb2yo9s6WK-gtglgZA3gPG-MBFWuC8CNWZnI-fh8BYeC0gl5PhJOTOyQphaAap5iQqE5Gc6LU7-OXM0AnOPvQNllMBHm6hww5YiW7IIgUPZSVSZG-Hae2tawlIqw_ztTR7WPdAAga_c2FwgY_SeuIU7FjEaotN4f2glUkX_ah3Vr5OwiqkTQrox5z4E4nsy_DqU2qEYpfHXg97OlyjG2qGtuBJEbi9u8TnBniU-nYXOXDrWubCv6j9xhQDE7G9GtLrQyed8MUsHctJ3C_ert5TZl6MFw1-eFOxM11iMqOTmi2mvOIpQJvzlABQyU66qgvkd4hTgUp6doF0ZQt-bNBvvp8M-ZVxvUBzP2bF4xnYhVrFKk3hFO8PgjfOEwz5TK1VJVdkv6Ya6F6mUMJzzgy-cE7bt1SyOLGgOTvALBy5X_HYGZHugemrYEwjl0Jk2esnHBhvmF5_DrrNAgKZDEGuAuQPYYBN4LSMEudVbhiO2ScKKIxN1cpd4DKXd9qYrwaMbTnaa9AioGcCllSJ8zXTaRHkuNEpMHbbPIqs46H0mSW0Ck7NjI1MQyN-BRBcmRB8rajzGe5zt2wKDY5LfIITdvOtM7O_crfV6i_gEX5L8SqnkrbYIU6yIHPgwWa9dprSajRUHZX9ZufnQAzcjmERdR_Km64c6AfzsclOqZFaoNQLE5W31A5Iztv0m3_zqazpoHwgp-hcAsc9vCrhjBwgEzNhMKyC1YACZ6-6vaS_82_PLv-3wUdszKV2mKq5NK-aOR2LRPZ-H2B92tGdk833alx5fUGM25Nej37-741RgVwJe2FCnPj0WdptqdPlMMt6bdpMYluOUNOi8HFercDNgCvqfpKr1aOh6A7opE7LieMX35HzJhAROD10Yd-Qez30NfjxVQ1c7PDAbw_qOv1xYExOs1xiDLK7jCGCQtAf8JqwONK913OaJFmuGBlWC1G-BDnPUItwpAr155135FvF_Fw5EEgUPI-8UB4K9wsWDoWyKeKhjO6Ep2ANzqy0_k1YBRfznMOJzVPVgox8mRltf7u5knQz6m2IoRe5zno9R-nWi3JW0wBwQRNE0B1upi0OJ602-UgGMEr0J2whEbWZB0Rw2Vh2623BogeSYZdyVUIHkHFi6M=",
+                "status": null
+              },
+              {
+                "id": "msg_0401cf48c4514da3006aa10082000487d08a790f07eee9afb7",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Construction Management is a Bachelor of Technology degree-completion program offered full- or part-time in person at Burnaby, developing management, technical, and interpersonal construction-project skills. Coursework includes **CMGT 7190 – Construction Planning and Controls** and **CMGT 7330 – Finance for Construction Managers**; see the [program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/).",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936323.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0401cf48c4514da3006aa1007bb0c087d0bd6fd93d1eec11c8",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 8292,
+              "input_tokens_details": {
+                "cache_write_tokens": 6492,
+                "cached_tokens": 1797
+              },
+              "output_tokens": 242,
+              "output_tokens_details": {
+                "reasoning_tokens": 141
+              },
+              "total_tokens": 8534
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Construction Management is a Bachelor of Technology degree-completion program offered full- or part-time in person at Burnaby, developing management, technical, and interpersonal construction-project skills. Coursework includes **CMGT 7190 – Construction Planning and Controls** and **CMGT 7330 – Finance for Construction Managers**; see the [program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/).",
+          "final_answer": "Construction Management is a Bachelor of Technology degree-completion program offered full- or part-time in person at Burnaby, developing management, technical, and interpersonal construction-project skills. Coursework includes **CMGT 7190 – Construction Planning and Controls** and **CMGT 7330 – Finance for Construction Managers**; see the [program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 45
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8800BTECH"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Construction Management Bachelor of Technology, in two sentences."
+          },
+          {
+            "role": "assistant",
+            "content": "Construction Management is a Bachelor of Technology degree-completion program offered full- or part-time in person at Burnaby, developing management, technical, and interpersonal construction-project skills. Coursework includes **CMGT 7190 – Construction Planning and Controls** and **CMGT 7330 – Finance for Construction Managers**; see the [program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Construction Management",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "8800BTECH:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.656,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "8800BTECH",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8800BTECH"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

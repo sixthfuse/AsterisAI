@@ -1,0 +1,3262 @@
+{
+  "scenario_id": "CAT-04-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Tell me about Civil Engineering Bachelor of Engineering, in two sentences.",
+      "advisor": "The Civil Engineering Bachelor of Engineering is a four-year, full-time, in-person Burnaby program combining engineering fundamentals, hands-on training, design, management, and communication; successful completion of the first two years awards a Civil Engineering Diploma. Later studies include courses such as CIVL 7072 Design of Concrete and Masonry Structures and CIVL 7090 Capstone Design Project, with full details at https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/.",
+      "expectation": {
+        "question": "Tell me about Civil Engineering Bachelor of Engineering, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8660BENG"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Can you guarantee I'll get a job immediately after graduating?",
+      "advisor": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8660BENG"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "Never mind, let's stop.",
+      "advisor": "Okay, we can stop here.",
+      "expectation": {
+        "question": "Never mind, let's stop.",
+        "expected": "Acknowledge stopping briefly and stop advising; preserve the active topic.",
+        "scope": "stop",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": true,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "tools_empty",
+            "dimension": "frustration_handling",
+            "root_cause": "conversation_state"
+          },
+          {
+            "op": "max_words",
+            "value": 35,
+            "dimension": "frustration_handling",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8660BENG"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "8660BENG",
+        "program_name": "Civil Engineering Bachelor of Engineering",
+        "credential": "Bachelor's Degree",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "8660BENG",
+        "program_name": "Civil Engineering Bachelor of Engineering",
+        "program_overview": "The BEng in Civil Engineering is composed of four years of full-time academic study. The first two years of the degree program present a broad, practical overview of the field of civil engineering, with engineering fundamentals stressed and reinforced across the curriculum. You will receive an abundance of learning opportunities to apply these fundamentals to the solution of real-world design scenarios that would be encountered by both technologists and engineers. Throughout the program, we will present opportunities to strengthen your graphical, written, and oral communication skills. You will spend a significant amount of time on hands-on training in material testing, surveying, manual and computer-aided drafting, and receive instruction in the use of engineering software tools. You will receive a Diploma in Civil Engineering credential upon successful completion of the first two years of academic study within this degree program.  If you meet the continuation requirements, you may continue into the final two years of the degree program which are academically rigorous. We will thoroughly investigate the theoretical foundations of civil engineering science and design topics. At the same time, you will apply the practical civil engineering knowledge you have gained in course assignments and project work. You will also be challenged to view the engineer’s role from an interdisciplinary and multidisciplinary perspective. You will learn about the role of the engineer in project and construction management and enrich your educational experience with complementary studies courses relating to social sciences and the humanities. To further develop your engineering skills for professional practice, you will work with classmates to complete a team-based capstone design project.",
+        "area_id": "A04",
+        "school": "School of Construction and the Environment",
+        "credential": "Bachelor's Degree",
+        "study_mode": "Full-time",
+        "campus": "Burnaby",
+        "delivery_method": "In Person",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/"
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "8660BENG",
+        "international_eligibility": "ACCEPTED_AVAILABLE",
+        "authoritative_raw": "\nInternational evidence: {\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "8660BENG-2026-09-BBY",
+        "program_id": "8660BENG",
+        "start_date": "2026-09-08",
+        "study_mode": "Full Time",
+        "campus": "Burnaby",
+        "delivery_method": "In Person",
+        "application_status": "Closed",
+        "source_url": "https://www.bcit.ca/admission/program-availability/"
+      }
+    ],
+    "program_campuses": [
+      {
+        "program_id": "8660BENG",
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "relationship_type": "offered",
+        "notes": "Burnaby",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/"
+      }
+    ],
+    "program_courses": [
+      {
+        "program_id": "8660BENG",
+        "course_id": "CHEM6020",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Elective",
+        "required": false,
+        "notes": "Choose 2 of the Level 4 electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL1012",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL1020",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL1024",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL1060",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL2020",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL2024",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL2025",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL2026",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3012",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3020",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3033",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3041",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3050",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3052",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL3074",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4024",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Elective",
+        "required": false,
+        "notes": "Choose 2 of the Level 4 electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4033",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4041",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4052",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4053",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Elective",
+        "required": false,
+        "notes": "Choose 2 of the Level 4 electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4074",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4090",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL5990",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Work Term",
+        "required": false,
+        "notes": "Co-op stream; after Level 4, September to December."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL6990",
+        "level": 6,
+        "term": "Summer",
+        "course_type": "Work Term",
+        "required": false,
+        "notes": "Co-op stream; after Level 6, May to August."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7001",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7011",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7012",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7020",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7021",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7022",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7023",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7030",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7033",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7040",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7042",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7050",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7060",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7061",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7062",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7063",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 1 technical elective."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7070",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7072",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7073",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 1 technical elective."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7074",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7075",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7080",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7089",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7090",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7091",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Technical elective",
+        "required": false,
+        "notes": "Choose 2 technical electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7092",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7990",
+        "level": 5,
+        "term": "Winter/Summer",
+        "course_type": "Work Term",
+        "required": false,
+        "notes": "Co-op stream; after Level 5, January to August."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL8990",
+        "level": 8,
+        "term": "Summer",
+        "course_type": "Work Term",
+        "required": false,
+        "notes": "Co-op stream; final work term."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "COMM1142",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "COMM2242",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "COMM3342",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "COMM4442",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "ELEX7355",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "LIBS7005",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Liberal Studies elective",
+        "required": false,
+        "notes": "Choose 1 Liberal Studies elective."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "LIBS7007",
+        "level": 6,
+        "term": "Winter",
+        "course_type": "Liberal Studies elective",
+        "required": false,
+        "notes": "Choose 1 Liberal Studies elective."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "LIBS7025",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH1422",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH2422",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH2423",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH3423",
+        "level": 3,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH6010",
+        "level": 4,
+        "term": "Winter",
+        "course_type": "Elective",
+        "required": false,
+        "notes": "Choose 2 of the Level 4 electives."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH7010",
+        "level": 5,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MINE7041",
+        "level": 7,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "OPMT7031",
+        "level": 8,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "PHYS1192",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "PHYS2192",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "SURV1130",
+        "level": 1,
+        "term": "Fall",
+        "course_type": "Core",
+        "required": true
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "SURV2230",
+        "level": 2,
+        "term": "Winter",
+        "course_type": "Core",
+        "required": true
+      }
+    ],
+    "program_requirements": [
+      {
+        "program_id": "8660BENG",
+        "course_id": "CHEM6020",
+        "requirement_type": "Elective",
+        "level": 4,
+        "level_duration_weeks": 20,
+        "notes": "Choose 2 of listed electives:",
+        "choice_group": "LEVEL4_ELECTIVE",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4024",
+        "requirement_type": "Elective",
+        "level": 4,
+        "level_duration_weeks": 20,
+        "notes": "Choose 2 of listed electives:",
+        "choice_group": "LEVEL4_ELECTIVE",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL4053",
+        "requirement_type": "Elective",
+        "level": 4,
+        "level_duration_weeks": 20,
+        "notes": "Choose 2 of listed electives:",
+        "choice_group": "LEVEL4_ELECTIVE",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "MATH6010",
+        "requirement_type": "Elective",
+        "level": 4,
+        "level_duration_weeks": 20,
+        "notes": "Choose 2 of listed electives:",
+        "choice_group": "LEVEL4_ELECTIVE",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "LIBS7005",
+        "requirement_type": "Liberal Studies elective",
+        "level": 6,
+        "level_duration_weeks": 15,
+        "notes": "Choose one liberal studies elective from the following:",
+        "choice_group": "LEVEL6_LIBERAL_STUDIES",
+        "choice_required": 1
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "LIBS7007",
+        "requirement_type": "Liberal Studies elective",
+        "level": 6,
+        "level_duration_weeks": 15,
+        "notes": "Choose one liberal studies elective from the following:",
+        "choice_group": "LEVEL6_LIBERAL_STUDIES",
+        "choice_required": 1
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7063",
+        "requirement_type": "Technical elective",
+        "level": 7,
+        "level_duration_weeks": 15,
+        "notes": "Choose one technical elective from the following:",
+        "choice_group": "LEVEL7_TECHNICAL",
+        "choice_required": 1
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7073",
+        "requirement_type": "Technical elective",
+        "level": 7,
+        "level_duration_weeks": 15,
+        "notes": "Choose one technical elective from the following:",
+        "choice_group": "LEVEL7_TECHNICAL",
+        "choice_required": 1
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7042",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7061",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7074",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7075",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7080",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7091",
+        "requirement_type": "Technical elective",
+        "level": 8,
+        "level_duration_weeks": 15,
+        "notes": "Choose two of the following technical electives:",
+        "choice_group": "LEVEL8_TECHNICAL",
+        "choice_required": 2
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL5990",
+        "requirement_type": "Work Term",
+        "level": 4,
+        "notes": "Cooperative stream; after level 4 (September to December)."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL6990",
+        "requirement_type": "Work Term",
+        "level": 5,
+        "notes": "Cooperative stream; after level 6 (May to August)."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL7990",
+        "requirement_type": "Work Term",
+        "level": 6,
+        "notes": "Cooperative stream; after level 5 (January to August)."
+      },
+      {
+        "program_id": "8660BENG",
+        "course_id": "CIVL8990",
+        "requirement_type": "Work Term"
+      }
+    ],
+    "progression_requirements": [
+      {
+        "progression_requirement_id": 4,
+        "program_id": "8660BENG",
+        "from_level": 4,
+        "to_level": 5,
+        "requirement_type": "GPA",
+        "requirement_value": "70%",
+        "description": "A minimum 70% continuation GPA is required for continuation into Level 5. The continuation GPA is calculated using first-attempt grades from Levels 2, 3 and 4, according to the current BCIT program requirements.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Continuation GPA requirement for Bachelor of Engineering entry into Level 5. Current BCIT requirement."
+      },
+      {
+        "progression_requirement_id": 6,
+        "program_id": "8660BENG",
+        "from_level": 6,
+        "to_level": 7,
+        "requirement_type": "WORK_EXPERIENCE",
+        "requirement_value": "700 hours",
+        "description": "A total of at least 700 hours of relevant practical work experience is required to continue to Level 7.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Practical work experience requirement for continuation to Level 7."
+      },
+      {
+        "progression_requirement_id": 5,
+        "program_id": "8660BENG",
+        "from_level": 4,
+        "to_level": 5,
+        "requirement_type": "WORK_EXPERIENCE",
+        "requirement_value": "300 hours",
+        "description": "Completion of 300 hours of practical work experience is required for continuation into Level 5.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Practical work experience requirement."
+      },
+      {
+        "progression_requirement_id": 2,
+        "program_id": "8660BENG",
+        "from_level": 4,
+        "to_level": 5,
+        "requirement_type": "COURSE_COMPLETION",
+        "requirement_value": "CHEM6020",
+        "description": "Completion of CHEM 6020 is required for continuation into Level 5.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Bachelor continuation requirement."
+      },
+      {
+        "progression_requirement_id": 3,
+        "program_id": "8660BENG",
+        "from_level": 4,
+        "to_level": 5,
+        "requirement_type": "COURSE_COMPLETION",
+        "requirement_value": "MATH6010",
+        "description": "Completion of MATH 6010 is required for continuation into Level 5.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Bachelor continuation requirement."
+      },
+      {
+        "progression_requirement_id": 1,
+        "program_id": "8660BENG",
+        "from_level": 4,
+        "to_level": 5,
+        "requirement_type": "DIPLOMA_COMPLETION",
+        "requirement_value": "Civil Engineering Diploma",
+        "description": "Completion of the BCIT Civil Engineering Diploma is required to continue into Level 5 of the Bachelor of Engineering program.",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Bachelor continuation requirement."
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 374,
+        "program_id": "8660BENG",
+        "rule_scope": "ADMISSION",
+        "rule_name": "COMPETITIVE_INITIAL_ADMISSION",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+        "notes": "Competitive initial admission requires high-school graduation, Category 1 English, specified mathematics and sciences, one approved Grade 12 academic course, and the Mandatory Applicant Questionnaire. Departmental ranking is a human institutional decision. Level 5 continuation is not an admission condition in this rule set."
+      },
+      {
+        "rule_set_id": 2100,
+        "program_id": "8660BENG",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "International eligibility source evidence",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/international-applicants/regular-credential-programs/",
+        "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}"
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 239,
+        "rule_set_id": 374,
+        "operator": "AND",
+        "label": "Step 1 minimum requirements and Step 2 assessment",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 517,
+        "rule_group_id": 239,
+        "condition_type": "GRADE",
+        "subject_id": "ENGLISH_STUDIES_12",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "accepted_values": [
+          "Category 1 equivalent"
+        ],
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true,
+          "accepted_equivalent": true
+        },
+        "description": "Category 1 English: English Studies 12 at 73% or equivalent.",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 518,
+        "rule_group_id": 239,
+        "condition_type": "GRADE",
+        "subject_id": "PRE_CALCULUS_12",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "accepted_values": [
+          "accepted BC/Yukon equivalent"
+        ],
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true,
+          "accepted_equivalent": true
+        },
+        "description": "Pre-Calculus 12 at 73% or another accepted BC/Yukon course.",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 516,
+        "rule_group_id": 239,
+        "condition_type": "HIGH_SCHOOL_GRADUATION",
+        "parameters": {
+          "semantic": "credential",
+          "executable": true
+        },
+        "description": "High school graduation.",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 519,
+        "rule_group_id": 239,
+        "condition_type": "GRADE",
+        "subject_id": "CHEMISTRY_11",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true
+        },
+        "description": "Chemistry 11 at 73%.",
+        "sort_order": 4
+      },
+      {
+        "condition_id": 520,
+        "rule_group_id": 239,
+        "condition_type": "GRADE",
+        "subject_id": "PHYSICS_12",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true
+        },
+        "description": "Physics 12 at 73%.",
+        "sort_order": 5
+      },
+      {
+        "condition_id": 521,
+        "rule_group_id": 239,
+        "condition_type": "GRADE",
+        "subject_id": "APPROVED_GRADE_12_ACADEMIC_COURSE",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "parameters": {
+          "reason": "approved-course list requires institutional equivalency confirmation",
+          "semantic": "threshold",
+          "executable": false,
+          "human_confirmation": true
+        },
+        "description": "One approved Grade 12 academic course at 73%.",
+        "sort_order": 6
+      },
+      {
+        "condition_id": 522,
+        "rule_group_id": 239,
+        "condition_type": "DOCUMENT",
+        "subject_id": "MANDATORY_APPLICANT_QUESTIONNAIRE",
+        "parameters": {
+          "semantic": "document",
+          "executable": false,
+          "human_confirmation": true
+        },
+        "description": "Submit the Mandatory Applicant Questionnaire for competitive selection.",
+        "sort_order": 7
+      },
+      {
+        "condition_id": 523,
+        "rule_group_id": 239,
+        "condition_type": "DEPARTMENT_ASSESSMENT",
+        "subject_id": "COMPETITIVE_RANKING",
+        "parameters": {
+          "semantic": "institutional_decision",
+          "executable": false,
+          "human_confirmation": true
+        },
+        "description": "The program area ranks qualified applicants using academic success, recency, and complete records.",
+        "sort_order": 8
+      }
+    ],
+    "course_identity": [
+      {
+        "course_id": "LIBS7005",
+        "course_name": "Technology, Invention and Power",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/libs7005/",
+        "display_course_code": "LIBS 7005"
+      },
+      {
+        "course_id": "LIBS7007",
+        "course_name": "Technology and Society",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/libs7007/",
+        "display_course_code": "LIBS 7007"
+      },
+      {
+        "course_id": "CHEM6020",
+        "course_name": "Chemistry for Civil Engineering",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/chem6020/"
+      },
+      {
+        "course_id": "CIVL1012",
+        "course_name": "Introduction to Civil Engineering",
+        "credits": 1.0,
+        "source_url": "https://www.bcit.ca/outlines/civl1012/"
+      },
+      {
+        "course_id": "CIVL1020",
+        "course_name": "Statistics",
+        "credits": 5.0,
+        "source_url": "https://www.bcit.ca/outlines/civl1020/"
+      },
+      {
+        "course_id": "CIVL1024",
+        "course_name": "Graphical Communication 1",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/outlines/civl1024/"
+      },
+      {
+        "course_id": "CIVL1060",
+        "course_name": "Applied Hydrology",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl1060/"
+      },
+      {
+        "course_id": "CIVL2020",
+        "course_name": "Mechanics of Materials 1",
+        "credits": 6.5,
+        "source_url": "https://www.bcit.ca/outlines/civl2020/"
+      },
+      {
+        "course_id": "CIVL2024",
+        "course_name": "Graphical Communication 2",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/outlines/civl2024/"
+      },
+      {
+        "course_id": "CIVL2025",
+        "course_name": "Applied Hydraulics",
+        "credits": 5.5,
+        "source_url": "https://www.bcit.ca/outlines/civl2025/"
+      },
+      {
+        "course_id": "CIVL2026",
+        "course_name": "Construction Materials",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl2026/"
+      },
+      {
+        "course_id": "CIVL3012",
+        "course_name": "Sustainability in Engineering",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3012/"
+      },
+      {
+        "course_id": "CIVL3020",
+        "course_name": "Computer Applications",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3020/"
+      },
+      {
+        "course_id": "CIVL3033",
+        "course_name": "Construction Management 1",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3033/"
+      },
+      {
+        "course_id": "CIVL3041",
+        "course_name": "Soil Mechanics",
+        "credits": 3.5,
+        "source_url": "https://www.bcit.ca/outlines/civl3041/"
+      },
+      {
+        "course_id": "CIVL3050",
+        "course_name": "Road Design",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3050/"
+      },
+      {
+        "course_id": "CIVL3052",
+        "course_name": "Municipal Engineering 1",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3052/"
+      },
+      {
+        "course_id": "CIVL3074",
+        "course_name": "Structural Engineering 1",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl3074/"
+      },
+      {
+        "course_id": "CIVL4024",
+        "course_name": "Land Development Modeling",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl4024/"
+      },
+      {
+        "course_id": "CIVL4033",
+        "course_name": "Construction Management 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl4033/"
+      },
+      {
+        "course_id": "CIVL4041",
+        "course_name": "Geotechnical Analysis and Design",
+        "credits": 5.5,
+        "source_url": "https://www.bcit.ca/outlines/civl4041/"
+      },
+      {
+        "course_id": "CIVL4052",
+        "course_name": "Municipal Engineering 2",
+        "credits": 5.5,
+        "source_url": "https://www.bcit.ca/outlines/civl4052/"
+      },
+      {
+        "course_id": "CIVL4053",
+        "course_name": "Traffic Engineering Fundamentals",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl4053/"
+      },
+      {
+        "course_id": "CIVL4074",
+        "course_name": "Structural Engineering 2",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/outlines/civl4074/"
+      },
+      {
+        "course_id": "CIVL4090",
+        "course_name": "Industry Project",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl4090/"
+      },
+      {
+        "course_id": "CIVL5990",
+        "course_name": "Cooperative Education Work Term 1",
+        "credits": 15.0,
+        "source_url": "https://www.bcit.ca/outlines/civl5990/"
+      },
+      {
+        "course_id": "CIVL6990",
+        "course_name": "Cooperative Education Work Term 2",
+        "credits": 15.0,
+        "source_url": "https://www.bcit.ca/outlines/civl6990/"
+      },
+      {
+        "course_id": "CIVL7001",
+        "course_name": "Engineering and Society",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7001/"
+      },
+      {
+        "course_id": "CIVL7011",
+        "course_name": "Uncertainty in Civil Engineering",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7011/"
+      },
+      {
+        "course_id": "CIVL7012",
+        "course_name": "Computational Methods",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7012/"
+      },
+      {
+        "course_id": "CIVL7020",
+        "course_name": "Fluid Mechanics and Thermal Science",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7020/"
+      },
+      {
+        "course_id": "CIVL7021",
+        "course_name": "Mechanics of Materials 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7021/"
+      },
+      {
+        "course_id": "CIVL7022",
+        "course_name": "Structure and Properties of Materials",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7022/"
+      },
+      {
+        "course_id": "CIVL7023",
+        "course_name": "Engineering Dynamics",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7023/"
+      },
+      {
+        "course_id": "CIVL7030",
+        "course_name": "Civil Engineering Contracts and Law",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7030/"
+      },
+      {
+        "course_id": "CIVL7033",
+        "course_name": "Project Management in Civil Engineering",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7033/"
+      },
+      {
+        "course_id": "CIVL7040",
+        "course_name": "Geotechnical Engineering 1",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7040/"
+      },
+      {
+        "course_id": "CIVL7042",
+        "course_name": "Geotechnical Engineering 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7042/"
+      },
+      {
+        "course_id": "CIVL7050",
+        "course_name": "Transportation Engineering",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7050/"
+      },
+      {
+        "course_id": "CIVL7060",
+        "course_name": "Enviromental Engineering",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7060/"
+      },
+      {
+        "course_id": "CIVL7061",
+        "course_name": "Storm Water Management",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7061/"
+      },
+      {
+        "course_id": "CIVL7062",
+        "course_name": "Water Quality Engineering",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7062/"
+      },
+      {
+        "course_id": "CIVL7063",
+        "course_name": "Water Resource Engineering",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7063/"
+      },
+      {
+        "course_id": "CIVL7070",
+        "course_name": "Structural Analysis",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7070/"
+      },
+      {
+        "course_id": "CIVL7072",
+        "course_name": "Design of Concrete and Masonry Structures",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7072/"
+      },
+      {
+        "course_id": "CIVL7073",
+        "course_name": "Design of Steel Structures",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7073/"
+      },
+      {
+        "course_id": "CIVL7074",
+        "course_name": "Analysis and Design of Timber Structures",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7074/"
+      },
+      {
+        "course_id": "CIVL7075",
+        "course_name": "Seismic Design",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7075/"
+      },
+      {
+        "course_id": "CIVL7080",
+        "course_name": "Building Science for Civil Engineering",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7080/"
+      },
+      {
+        "course_id": "CIVL7089",
+        "course_name": "Capstone Design Proposal",
+        "credits": 1.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7089/"
+      },
+      {
+        "course_id": "CIVL7090",
+        "course_name": "Capstone Design Project",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7090/"
+      },
+      {
+        "course_id": "CIVL7091",
+        "course_name": "Civil Engineering Applied Research Project",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7091/"
+      },
+      {
+        "course_id": "CIVL7092",
+        "course_name": "Civil Engineering Design",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7092/"
+      },
+      {
+        "course_id": "CIVL7990",
+        "course_name": "Cooperative Education Work Term 3",
+        "credits": 15.0,
+        "source_url": "https://www.bcit.ca/outlines/civl7990/"
+      },
+      {
+        "course_id": "CIVL8990",
+        "course_name": "Cooperative Education Work Term 4",
+        "credits": 15.0,
+        "source_url": "https://www.bcit.ca/outlines/civl8990/"
+      },
+      {
+        "course_id": "COMM1142",
+        "course_name": "Communication for Civil Engineering 1",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/comm1142/"
+      },
+      {
+        "course_id": "COMM2242",
+        "course_name": "Communication for Civil Engineering 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/comm2242/"
+      },
+      {
+        "course_id": "COMM3342",
+        "course_name": "Communications for Civil Engineering 3",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/outlines/comm3342/"
+      },
+      {
+        "course_id": "COMM4442",
+        "course_name": "Communication for Civil Engineering 4",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/outlines/comm4442/"
+      },
+      {
+        "course_id": "ELEX7355",
+        "course_name": "The Science of Electronic Sensing and Measurement",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/elex7355/"
+      },
+      {
+        "course_id": "LIBS7025",
+        "course_name": "Thinking in Humanities & Social Sciences",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/libs7025/"
+      },
+      {
+        "course_id": "MATH1422",
+        "course_name": "Differential Calculus for Civil Engineering",
+        "credits": 5.0,
+        "source_url": "https://www.bcit.ca/outlines/math1422/"
+      },
+      {
+        "course_id": "MATH2422",
+        "course_name": "Integral Calculus for Civil Engineering",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/outlines/math2422/"
+      },
+      {
+        "course_id": "MATH2423",
+        "course_name": "Introductory Statistics for Civil Engineering",
+        "credits": 0.5,
+        "source_url": "https://www.bcit.ca/outlines/math2423/"
+      },
+      {
+        "course_id": "MATH3423",
+        "course_name": "Multivariable Calculus and Linear Algebra for Civil Engineering",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/math3423/"
+      },
+      {
+        "course_id": "MATH6010",
+        "course_name": "Advanced Mathematics for Civil Engineering 1",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/math6010/"
+      },
+      {
+        "course_id": "MATH7010",
+        "course_name": "Advanced Mathematics for Civil Engineering 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/math7010/"
+      },
+      {
+        "course_id": "MINE7041",
+        "course_name": "Geology",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/mine7041/"
+      },
+      {
+        "course_id": "OPMT7031",
+        "course_name": "Engineering Economics",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/opmt7031/"
+      },
+      {
+        "course_id": "PHYS1192",
+        "course_name": "Physics for Civil Engineering 1",
+        "credits": 5.0,
+        "source_url": "https://www.bcit.ca/outlines/phys1192/"
+      },
+      {
+        "course_id": "PHYS2192",
+        "course_name": "Physics for Civil Engineering 2",
+        "credits": 6.5,
+        "source_url": "https://www.bcit.ca/outlines/phys2192/"
+      },
+      {
+        "course_id": "SURV1130",
+        "course_name": "Surveying for Civil Engineering 1",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/outlines/surv1130/"
+      },
+      {
+        "course_id": "SURV2230",
+        "course_name": "Surveying for Civil Engineering 2",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/outlines/surv2230/"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "The Civil Engineering Bachelor of Engineering is a four-year, full-time, in-person Burnaby program combining engineering fundamentals, hands-on training, design, management, and communication; successful completion of the first two years awards a Civil Engineering Diploma. Later studies include courses such as CIVL 7072 Design of Concrete and Masonry Structures and CIVL 7090 Capstone Design Project, with full details at https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/.",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 8,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Civil Engineering Bachelor of Engineering",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8660BENG",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 59
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8660BENG"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8660BENG"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "8660BENG",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "pathway": {
+              "name": "Civil Engineering"
+            },
+            "program_id": "8660BENG",
+            "program_name": "Civil Engineering Bachelor of Engineering",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"8660BENG\"}",
+              "call_id": "call_y4AXsmrXYJfxGEU101idGfuW",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_0b0304c834f74464006aa100b3da2c87d0a2db5a949beeb73d",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8660BENG"
+          },
+          "context": {
+            "current_question": "Tell me about Civil Engineering Bachelor of Engineering, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "pathway": {
+              "name": "Civil Engineering"
+            },
+            "program_id": "8660BENG",
+            "program_name": "Civil Engineering Bachelor of Engineering",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8660BENG",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 516,
+                            "condition_type": "HIGH_SCHOOL_GRADUATION",
+                            "description": "High school graduation.",
+                            "parameters": {
+                              "executable": true,
+                              "semantic": "credential"
+                            },
+                            "sort_order": 1
+                          },
+                          {
+                            "accepted_values": [
+                              "Category 1 equivalent"
+                            ],
+                            "condition_id": 517,
+                            "condition_type": "GRADE",
+                            "description": "Category 1 English: English Studies 12 at 73% or equivalent.",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "accepted_equivalent": true,
+                              "executable": true,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 2,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": [
+                              "accepted BC/Yukon equivalent"
+                            ],
+                            "condition_id": 518,
+                            "condition_type": "GRADE",
+                            "description": "Pre-Calculus 12 at 73% or another accepted BC/Yukon course.",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "accepted_equivalent": true,
+                              "executable": true,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 3,
+                            "subject_id": "PRE_CALCULUS_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 519,
+                            "condition_type": "GRADE",
+                            "description": "Chemistry 11 at 73%.",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "executable": true,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 4,
+                            "subject_id": "CHEMISTRY_11",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 520,
+                            "condition_type": "GRADE",
+                            "description": "Physics 12 at 73%.",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "executable": true,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 5,
+                            "subject_id": "PHYSICS_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 521,
+                            "condition_type": "GRADE",
+                            "description": "One approved Grade 12 academic course at 73%.",
+                            "minimum_value": "73",
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation": true,
+                              "reason": "approved-course list requires institutional equivalency confirmation",
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 6,
+                            "subject_id": "APPROVED_GRADE_12_ACADEMIC_COURSE",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 522,
+                            "condition_type": "DOCUMENT",
+                            "description": "Submit the Mandatory Applicant Questionnaire for competitive selection.",
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation": true,
+                              "semantic": "document"
+                            },
+                            "sort_order": 7,
+                            "subject_id": "MANDATORY_APPLICANT_QUESTIONNAIRE"
+                          },
+                          {
+                            "condition_id": 523,
+                            "condition_type": "DEPARTMENT_ASSESSMENT",
+                            "description": "The program area ranks qualified applicants using academic success, recency, and complete records.",
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation": true,
+                              "semantic": "institutional_decision"
+                            },
+                            "sort_order": 8,
+                            "subject_id": "COMPETITIVE_RANKING"
+                          }
+                        ],
+                        "label": "Step 1 minimum requirements and Step 2 assessment",
+                        "operator": "AND",
+                        "rule_group_id": 239,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPETITIVE_INITIAL_ADMISSION",
+                    "notes": "Competitive initial admission requires high-school graduation, Category 1 English, specified mathematics and sciences, one approved Grade 12 academic course, and the Mandatory Applicant Questionnaire. Departmental ranking is a human institutional decision. Level 5 continuation is not an admission condition in this rule set.",
+                    "rule_set_id": 374,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2100,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "credential_award_evidence": [
+                  "You will receive a Diploma in Civil Engineering credential upon successful completion of the first two years of academic study within this degree program."
+                ],
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Completion of the BCIT Civil Engineering Diploma is required to continue into Level 5 of the Bachelor of Engineering program.",
+                    "from_level": 4,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 5,
+                    "type": "DIPLOMA_COMPLETION",
+                    "value": "Civil Engineering Diploma"
+                  },
+                  {
+                    "description": "Completion of CHEM 6020 is required for continuation into Level 5.",
+                    "from_level": 4,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 5,
+                    "type": "COURSE_COMPLETION",
+                    "value": "CHEM6020"
+                  },
+                  {
+                    "description": "Completion of MATH 6010 is required for continuation into Level 5.",
+                    "from_level": 4,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 5,
+                    "type": "COURSE_COMPLETION",
+                    "value": "MATH6010"
+                  },
+                  {
+                    "description": "A minimum 70% continuation GPA is required for continuation into Level 5. The continuation GPA is calculated using first-attempt grades from Levels 2, 3 and 4, according to the current BCIT program requirements.",
+                    "from_level": 4,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 5,
+                    "type": "GPA",
+                    "value": "70%"
+                  },
+                  {
+                    "description": "Completion of 300 hours of practical work experience is required for continuation into Level 5.",
+                    "from_level": 4,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 5,
+                    "type": "WORK_EXPERIENCE",
+                    "value": "300 hours"
+                  },
+                  {
+                    "description": "A total of at least 700 hours of relevant practical work experience is required to continue to Level 7.",
+                    "from_level": 6,
+                    "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+                    "to_level": 7,
+                    "type": "WORK_EXPERIENCE",
+                    "value": "700 hours"
+                  }
+                ]
+              },
+              "campus": "Burnaby",
+              "clinical_and_practice_requirements": {
+                "program_id": "8660BENG"
+              },
+              "courses": [
+                {
+                  "course_id": "CIVL1012",
+                  "course_name": "Introduction to Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "1.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl1012/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL1020",
+                  "course_name": "Statistics",
+                  "course_type": "Core",
+                  "credits": "5.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl1020/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL1024",
+                  "course_name": "Graphical Communication 1",
+                  "course_type": "Core",
+                  "credits": "2.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl1024/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL1060",
+                  "course_name": "Applied Hydrology",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl1060/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "COMM1142",
+                  "course_name": "Communication for Civil Engineering 1",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/comm1142/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "MATH1422",
+                  "course_name": "Differential Calculus for Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "5.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/math1422/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "PHYS1192",
+                  "course_name": "Physics for Civil Engineering 1",
+                  "course_type": "Core",
+                  "credits": "5.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/phys1192/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "SURV1130",
+                  "course_name": "Surveying for Civil Engineering 1",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/surv1130/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL2020",
+                  "course_name": "Mechanics of Materials 1",
+                  "course_type": "Core",
+                  "credits": "6.50",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl2020/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL2024",
+                  "course_name": "Graphical Communication 2",
+                  "course_type": "Core",
+                  "credits": "2.50",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl2024/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL2025",
+                  "course_name": "Applied Hydraulics",
+                  "course_type": "Core",
+                  "credits": "5.50",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl2025/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL2026",
+                  "course_name": "Construction Materials",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl2026/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "COMM2242",
+                  "course_name": "Communication for Civil Engineering 2",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/comm2242/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "MATH2422",
+                  "course_name": "Integral Calculus for Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "6.00",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/math2422/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "MATH2423",
+                  "course_name": "Introductory Statistics for Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "0.50",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/math2423/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "PHYS2192",
+                  "course_name": "Physics for Civil Engineering 2",
+                  "course_type": "Core",
+                  "credits": "6.50",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/phys2192/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "SURV2230",
+                  "course_name": "Surveying for Civil Engineering 2",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 2,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/surv2230/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL3012",
+                  "course_name": "Sustainability in Engineering",
+                  "course_type": "Core",
+                  "credits": "2.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3012/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3020",
+                  "course_name": "Computer Applications",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3020/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3033",
+                  "course_name": "Construction Management 1",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3033/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3041",
+                  "course_name": "Soil Mechanics",
+                  "course_type": "Core",
+                  "credits": "3.50",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3041/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3050",
+                  "course_name": "Road Design",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3050/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3052",
+                  "course_name": "Municipal Engineering 1",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3052/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL3074",
+                  "course_name": "Structural Engineering 1",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl3074/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "COMM3342",
+                  "course_name": "Communications for Civil Engineering 3",
+                  "course_type": "Core",
+                  "credits": "2.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/comm3342/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "MATH3423",
+                  "course_name": "Multivariable Calculus and Linear Algebra for Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 3,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/math3423/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CHEM6020",
+                  "course_name": "Chemistry for Civil Engineering",
+                  "course_type": "Elective",
+                  "credits": "4.00",
+                  "level": 4,
+                  "notes": "Choose 2 of the Level 4 electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/chem6020/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4024",
+                  "course_name": "Land Development Modeling",
+                  "course_type": "Elective",
+                  "credits": "4.00",
+                  "level": 4,
+                  "notes": "Choose 2 of the Level 4 electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl4024/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4033",
+                  "course_name": "Construction Management 2",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl4033/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4041",
+                  "course_name": "Geotechnical Analysis and Design",
+                  "course_type": "Core",
+                  "credits": "5.50",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl4041/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4052",
+                  "course_name": "Municipal Engineering 2",
+                  "course_type": "Core",
+                  "credits": "5.50",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl4052/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4053",
+                  "course_name": "Traffic Engineering Fundamentals",
+                  "course_type": "Elective",
+                  "credits": "4.00",
+                  "level": 4,
+                  "notes": "Choose 2 of the Level 4 electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl4053/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4074",
+                  "course_name": "Structural Engineering 2",
+                  "course_type": "Core",
+                  "credits": "6.00",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl4074/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL4090",
+                  "course_name": "Industry Project",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl4090/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL5990",
+                  "course_name": "Cooperative Education Work Term 1",
+                  "course_type": "Work Term",
+                  "credits": "15.00",
+                  "level": 4,
+                  "notes": "Co-op stream; after Level 4, September to December.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl5990/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "COMM4442",
+                  "course_name": "Communication for Civil Engineering 4",
+                  "course_type": "Core",
+                  "credits": "2.50",
+                  "level": 4,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/comm4442/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "MATH6010",
+                  "course_name": "Advanced Mathematics for Civil Engineering 1",
+                  "course_type": "Elective",
+                  "credits": "4.00",
+                  "level": 4,
+                  "notes": "Choose 2 of the Level 4 electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/math6010/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7012",
+                  "course_name": "Computational Methods",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7012/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7021",
+                  "course_name": "Mechanics of Materials 2",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7021/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7060",
+                  "course_name": "Enviromental Engineering",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7060/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7070",
+                  "course_name": "Structural Analysis",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7070/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7990",
+                  "course_name": "Cooperative Education Work Term 3",
+                  "course_type": "Work Term",
+                  "credits": "15.00",
+                  "level": 5,
+                  "notes": "Co-op stream; after Level 5, January to August.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7990/",
+                  "term": "Winter/Summer"
+                },
+                {
+                  "course_id": "ELEX7355",
+                  "course_name": "The Science of Electronic Sensing and Measurement",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/elex7355/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "MATH7010",
+                  "course_name": "Advanced Mathematics for Civil Engineering 2",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 5,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/math7010/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL6990",
+                  "course_name": "Cooperative Education Work Term 2",
+                  "course_type": "Work Term",
+                  "credits": "15.00",
+                  "level": 6,
+                  "notes": "Co-op stream; after Level 6, May to August.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl6990/",
+                  "term": "Summer"
+                },
+                {
+                  "course_id": "CIVL7001",
+                  "course_name": "Engineering and Society",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7001/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7011",
+                  "course_name": "Uncertainty in Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7011/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7020",
+                  "course_name": "Fluid Mechanics and Thermal Science",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7020/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7022",
+                  "course_name": "Structure and Properties of Materials",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7022/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7040",
+                  "course_name": "Geotechnical Engineering 1",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7040/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7092",
+                  "course_name": "Civil Engineering Design",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 6,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7092/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "LIBS7005",
+                  "course_name": "Technology, Invention and Power",
+                  "course_type": "Liberal Studies elective",
+                  "credits": "3.00",
+                  "level": 6,
+                  "notes": "Choose 1 Liberal Studies elective.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/libs7005/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "LIBS7007",
+                  "course_name": "Technology and Society",
+                  "course_type": "Liberal Studies elective",
+                  "credits": "3.00",
+                  "level": 6,
+                  "notes": "Choose 1 Liberal Studies elective.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/libs7007/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7023",
+                  "course_name": "Engineering Dynamics",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7023/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7033",
+                  "course_name": "Project Management in Civil Engineering",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7033/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7062",
+                  "course_name": "Water Quality Engineering",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7062/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7063",
+                  "course_name": "Water Resource Engineering",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 7,
+                  "notes": "Choose 1 technical elective.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7063/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7072",
+                  "course_name": "Design of Concrete and Masonry Structures",
+                  "course_type": "Core",
+                  "credits": "4.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7072/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7073",
+                  "course_name": "Design of Steel Structures",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 7,
+                  "notes": "Choose 1 technical elective.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7073/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7089",
+                  "course_name": "Capstone Design Proposal",
+                  "course_type": "Core",
+                  "credits": "1.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7089/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "LIBS7025",
+                  "course_name": "Thinking in Humanities & Social Sciences",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/libs7025/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "MINE7041",
+                  "course_name": "Geology",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 7,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/mine7041/",
+                  "term": "Fall"
+                },
+                {
+                  "course_id": "CIVL7030",
+                  "course_name": "Civil Engineering Contracts and Law",
+                  "course_type": "Core",
+                  "credits": "2.00",
+                  "level": 8,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7030/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7042",
+                  "course_name": "Geotechnical Engineering 2",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7042/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7050",
+                  "course_name": "Transportation Engineering",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 8,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7050/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7061",
+                  "course_name": "Storm Water Management",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7061/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7074",
+                  "course_name": "Analysis and Design of Timber Structures",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7074/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7075",
+                  "course_name": "Seismic Design",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7075/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7080",
+                  "course_name": "Building Science for Civil Engineering",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7080/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7090",
+                  "course_name": "Capstone Design Project",
+                  "course_type": "Core",
+                  "credits": "6.00",
+                  "level": 8,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/civl7090/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL7091",
+                  "course_name": "Civil Engineering Applied Research Project",
+                  "course_type": "Technical elective",
+                  "credits": "4.00",
+                  "level": 8,
+                  "notes": "Choose 2 technical electives.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl7091/",
+                  "term": "Winter"
+                },
+                {
+                  "course_id": "CIVL8990",
+                  "course_name": "Cooperative Education Work Term 4",
+                  "course_type": "Work Term",
+                  "credits": "15.00",
+                  "level": 8,
+                  "notes": "Co-op stream; final work term.",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/outlines/civl8990/",
+                  "term": "Summer"
+                },
+                {
+                  "course_id": "OPMT7031",
+                  "course_name": "Engineering Economics",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 8,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/outlines/opmt7031/",
+                  "term": "Winter"
+                }
+              ],
+              "credential": "Bachelor's Degree",
+              "curriculum": {
+                "program_id": "8660BENG"
+              },
+              "delivery_method": "In Person",
+              "program_id": "8660BENG",
+              "program_name": "Civil Engineering Bachelor of Engineering",
+              "program_overview": "The BEng in Civil Engineering is composed of four years of full-time academic study. The first two years of the degree program present a broad, practical overview of the field of civil engineering, with engineering fundamentals stressed and reinforced across the curriculum. You will receive an abundance of learning opportunities to apply these fundamentals to the solution of real-world design scenarios that would be encountered by both technologists and engineers. Throughout the program, we will present opportunities to strengthen your graphical, written, and oral communication skills. You will spend a significant amount of time on hands-on training in material testing, surveying, manual and computer-aided drafting, and receive instruction in the use of engineering software tools. You will receive a Diploma in Civil Engineering credential upon successful completion of the first two years of academic study within this degree program.  If you meet the continuation requirements, you may continue into the final two years of the degree program which are academically rigorous. We will thoroughly investigate the theoretical foundations of civil engineering science and design topics. At the same time, you will apply the practical civil engineering knowledge you have gained in course assignments and project work. You will also be challenged to view the engineer’s role from an interdisciplinary and multidisciplinary perspective. You will learn about the role of the engineer in project and construction management and enrich your educational experience with complementary studies courses relating to social sciences and the humanities. To further develop your engineering skills for professional practice, you will work with classmates to complete a team-based capstone design project.",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_0b0304c834f74464006aa100b66e6487d0a60326bc4ad3269d",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQC5wpHxTp3Ixa0mBOKInCpzD0m-Ow-JNKU8ChRyXs_Vfs41oEcEvZkrt9i7Jj445K01vhKxdrGn6eufSf3HPzFTyF72PLBtkx3oz2li0enS8hJ7WpzrY7nJK9_HFGE75eoc2dEhbp015VebdE9LpjdXoUwdWls8mKo3-SNPKqhrbwPm2R2yxeaqrOb1sbAXVvVFpbnOJQoamrW7-ZfAGAFBKoUpiniVlrEb2JSw42Jr1UxUN9wBR3Iki1oJpc-_-Fy9iDAOYv-TWQZIhgzweMKB0Yxp0qvjrbOcrEfIgmmGjOmd65QjIb-dTCSLQ5U7umOrdN4TJoxPhZE4UumCWYfia4g2zTY_4CESqU4lpROMZlrlwaOwLhW8AMOk4reZuO8MdkaYxQGqUpMgQTp9mmW8OXTho4Zb5_MUgoz8JKA1b0qqUowHM1FRbo4IEppBkak6ygQ6t9ZSYApnkIA5DOFDMSNvTCxcdLuAzKTJjs4qFB6Nc8egiq48S4OgLR2gVakLXlFK6PVZgV0e3DvOQMN7Y1-2ZK8IH_smb362r34hytoKyhETRymqh5Pi9sXQZd6V0iZm8gSot1LFqhUSNcOaxStH-SBy2iVBnHkCfCNqQ3pnW11g7SoGvlvOvQLXMfJ8ZQBYhl94L02bMbuHxAk4gffTZtGRvo9M0RorfoZf_7DAxdJgDPd1y7Yb-Z9SvlRZ5NbC-d8Q6n-P8i-VthLGWcJGdMlRelH0G6AXiAcYSqij-S9blCo6sQADfKqzPjuy-pLUwG1hL3ymcdcOPVs2fbd3VicdIfUq2pBqrP0HbrUwGylL7df5X02GWcEUkvJ_HJMVIjOz5qTa_ixjURvjCk5z0_0RFLRdnSYubrbZ2J010VGKMb-lCuT9p68FfHIYnLbUit96svBBOUNzp-jrYp2-i5SU0yyeIhS3Ph43fycLVsCkwF_38cKS-o0zwxIT-NBjsqfAYngr5aQ5Ut_aWn5TZXxvOpPdj_vjGNw9NoKdmDycJk05PDGQIF9BimJLrowCDF5vg7Ts5_f2OUsxkzXfFeqs2SrMaAwfFDypNYyEB0CrkG5kxnNNf4Qo-jZvo6vUieNfzYjqwig_bigibPUjhmuUsK6RKJ0vnjad_xENxuZfY04oLHtQ6uYCf3b7jk4fg1megQQT7dmohfihay-yxCSA67BgqVuWOCGchVkViydQwnkAb8v3UObGEBa3FCHv1ijgKtGgDTzMeHxe2plvHuaPmJtgPOA10V0sUkmX1nv62XYZqLjG3h5AbnqfjdM26SGbvUxfpt-ildESJQlrN3ArQwHY9ImwBVLCX4g5c9PuIsRd8QN6o209liz3Yh0JZ8i6Yin9NwZGxBhNX6h3a_j6zaxAiU-X4L0FLRiXqMXfNowRcHazit3EtbRlpY2AxczzBHqLzjRh69lErwZNCyOP1yaiamJc7HS9wJ5wx2cOEDFjTDt1DLGpT-eX_5FTHGwzIy4MU0pP3Hafv_eay-9e9m0pGBTVihs1IFDo9NzbTvYB3mxhZIg_NrGbnzorABCxZ3XtfBGaSCs5zZ9DfofdSjGrEZEycZMEKuSCCaKxZk2RtwvaKgTGReaDQ_n9sHgkSwRAiaFFJtUS8V4Pi0_AfcSKUZASQeJfj1CZFG4dHFQ1xNmS4dX3ttUJgo3x7Gp_ga8H3SQuRNwd2XL7dGvxUy2q0w8i6xTdBM8="
+            },
+            {
+              "id": "msg_0b0304c834f74464006aa100b7b63487d0a443b22d6c9cc8d3",
+              "content": [
+                {
+                  "text": "The Civil Engineering Bachelor of Engineering is a four-year, full-time, in-person Burnaby program combining engineering fundamentals, hands-on training, design, management, and communication; successful completion of the first two years awards a Civil Engineering Diploma. Later studies include courses such as CIVL 7072 Design of Concrete and Masonry Structures and CIVL 7090 Capstone Design Project, with full details at https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/.",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The Civil Engineering Bachelor of Engineering is a four-year, full-time, in-person Burnaby program combining engineering fundamentals, hands-on training, design, management, and communication; successful completion of the first two years awards a Civil Engineering Diploma. Later studies include courses such as CIVL 7072 Design of Concrete and Masonry Structures and CIVL 7090 Capstone Design Project, with full details at https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/.",
+          "final_answer": "The Civil Engineering Bachelor of Engineering is a four-year, full-time, in-person Burnaby program combining engineering fundamentals, hands-on training, design, management, and communication; successful completion of the first two years awards a Civil Engineering Diploma. Later studies include courses such as CIVL 7072 Design of Concrete and Masonry Structures and CIVL 7090 Capstone Design Project, with full details at https://www.bcit.ca/programs/civil-engineering-bachelor-of-engineering-full-time-8660beng/."
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Civil Engineering Bachelor of Engineering",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8660BENG",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "8660BENG:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8660BENG"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8660BENG"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "8660BENG",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "pathway": {
+              "name": "Civil Engineering"
+            },
+            "program_id": "8660BENG",
+            "program_name": "Civil Engineering Bachelor of Engineering",
+            "program_set_query": false
+          }
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "Okay, we can stop here.",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8660BENG",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "8660BENG:outcomes"
+          ],
+          "stopped": true,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "tools_empty",
+          "dimension": "frustration_handling",
+          "root_cause": "conversation_state",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "op": "max_words",
+          "value": 35,
+          "dimension": "frustration_handling",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 5
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8660BENG"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8660BENG"
+        }
+      ],
+      "observed_trace": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

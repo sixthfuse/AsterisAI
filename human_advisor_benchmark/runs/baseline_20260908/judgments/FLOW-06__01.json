@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-06",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "d554962cc07f788274960932aba3752b33dbd80ca047c345c30af0f0349343ec",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b35fa3ef51753aaae1e2c97873f98fbfa03b6a5792d63efaa05c2295a19fa0ff",
+  "packet_sha256": "a9c76b21790b16f98a50bdb4bc2fdc2d870ae037fdfc4891c1e876fa93758e19",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08d21753b972b22b006aa08067a9a487d08af863b00d50b31b",
+  "usage": {
+    "input_tokens": 69621,
+    "input_tokens_details": {
+      "cache_write_tokens": 68228,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1196,
+    "output_tokens_details": {
+      "reasoning_tokens": 117
+    },
+    "total_tokens": 70817
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 2,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The call requesting get_program_details for 7710DIPMA returns E216, explicitly containing 8800BTECH. The final comparison consequently lacks diploma curriculum and admission information despite their presence in the frozen database."
+        },
+        "notes": "The prose correctly distinguishes credentials and delivery formats, but state retains only 8800BTECH. The model honestly describes its retrieval limitation rather than claiming the diploma has no curriculum. Its assertion that the diploma is the shorter credential is not established by the supplied duration evidence; factual scoring does not verify that comparison. BTech credit minimums and project alternatives are supported. Repeated limitation statements slightly weaken presentation. Referral to the linked institutional page is reasonable but generic. Context on turn 1, required clarification, and frustration handling are inapplicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 3,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 3,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final answer begin 'Yes' but immediately say that 'the other program—the Construction Management Diploma—is a diploma, not a degree.' This opening is awkward for the unresolved referent."
+        },
+        "notes": "Both possibilities are explicitly and correctly labeled, substantially satisfying referent clarification without another question. The opening affirmative unnecessarily implies a selected interpretation, but the complete answer does not misclassify either credential. State remains BTech rather than representing the unresolved comparison. No next step or frustration handling is needed; unnecessary-clarification scoring is inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'I mean the diploma,' resolution E214 and final state E139 still identify 8800BTECH; E9 confirms the failed state check against 7710DIPMA. Even the explicit diploma-details call returns BTech data."
+        },
+        "notes": "The visible answer successfully recovers the intended diploma and correctly states that it is not a degree, is part-time, and is blended at Burnaby and online. These claims are supported by the search result and frozen diploma records. The failure is hidden entity persistence, not wrong prose. Required clarification, frustration handling, and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The zero-model-call turn resolves 'that one' to 8800BTECH and retains that ID in E139 despite the explicit diploma clarification on turn 3. The returned campus relationship corresponds to the BTech."
+        },
+        "notes": "The answer nevertheless gives the correct diploma campus and address, independently supported by the frozen diploma delivery record and campus table. It does not claim that all teaching is in person; online delivery was already explained on turn 3. Correct output therefore coexists with incorrect state and mis-targeted evidence selection. Required clarification, frustration handling, and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

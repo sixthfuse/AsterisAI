@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-03",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "be398308b470a76753484bbb6daa61c74bad11330f6136ae652e5b6ec6b2b417",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "bee650fb73f8e624148fecfc24be6f2f37e2693c722e11e22c94a782e5686273",
+  "packet_sha256": "e896efe7d780123c24801607d32c639257225f214a4969061335fe6611a44e9a",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08a2a6ff252105ba006aa0800998f487d0969adf5371a141c8",
+  "usage": {
+    "input_tokens": 28264,
+    "input_tokens_details": {
+      "cache_write_tokens": 26871,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1159,
+    "output_tokens_details": {
+      "reasoning_tokens": 88
+    },
+    "total_tokens": 29423
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 3,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The answer renders prerequisites as 'ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group 84 is OR: ENGL 1177 or equivalent at 50%, six BCIT Communication credits at 1100-level or above, or three first-year post-secondary humanities/social-science credits. The deterministic response loses both credit-based alternatives and their OR relationship."
+        },
+        "notes": "Course identity and state correctly resolve LIBS7001. Only a resolution trace is supplied; no model call is observed, but the particular deterministic subcomponent responsible cannot be identified. Context is inapplicable on turn 1; clarification detection, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "unsupported_inference",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "E1 asserts that CMGT 8700 requires completion of required coursework, an industry topic, and an industry sponsor. These additional prerequisites are absent from both the supplied frozen records and tool result E112. They appear in the raw model answer and remain unchanged in finalization, presented as established requirements."
+        },
+        "notes": "The additional CMGT 8700 requirements are unverified, not demonstrated false; factual correctness of the full set of claims is therefore not assessable. Program identity, delivery, curriculum membership, elective credit minimum, part-time substitution, final-project OR choice, and two-year experience rule otherwise match the supplied evidence. Both prose and state correctly switch to 8800BTECH. The broad overview also becomes an unsolicited course-by-course catalog list, reducing proportionality and readability; no unnecessary clarification occurs. No frustration, required clarification, or actionable next step is involved."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The response to 'Tell me about the Downtown Campus' supplies only its address, despite the campus result also providing a short description of its business-and-technology-core setting. The answer is accurate but offers little overview."
+        },
+        "notes": "The address exactly matches the frozen campus record. State correctly switches to campus scope and Downtown Campus, clearing the prior program. This is a minor completeness issue rather than an entity or context failure. The observed response is deterministic, but its specific generating subcomponent is not established. Required clarification, frustration handling, and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The explicit program target correctly overrides the campus topic in both state and prose. Common admission requirements and all four alternative pathways accurately preserve credential, GPA, experience, mathematics, trade, and apprenticeship exclusions. International evaluation boundaries and the master's-only exclusion match the frozen rules. International availability is appropriately distinguished from unpublished study-permit information, with a general institutional-confirmation suggestion. Finalization adds a verified BCIT Admissions link to an already supplied program link, introducing only minor redundancy. The requested admission list is not an unsolicited catalog dump. No frustration or required clarification applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

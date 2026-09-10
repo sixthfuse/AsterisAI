@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-24",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "eababa5afc90167f943ee442fc694a222c3344b35fbea0cda8ac04600bd080ab",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b512828d8e92d78bfaafd12fa07408fd55ce7e12fe724f3de80367382fcc1fad",
+  "packet_sha256": "3734e3b57969e87e9ef7d9890e3fdd033d4ce9ec102cb841b1ec97856cf70ca0",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_09177f1e5b93d3af006aa082bc4fec87d09d1e535e43cb7217",
+  "usage": {
+    "input_tokens": 25181,
+    "input_tokens_details": {
+      "cache_write_tokens": 23788,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 961,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 26142
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E1 supplies a full course-by-course curriculum and substitution list in response to a simple expression of interest. This appears in the raw model answer and is unchanged by finalization."
+        },
+        "notes": "Academic claims match the frozen overview, curriculum, admission alternatives, and intake records. Both prose and resolver state identify M600MSC correctly. The overview is useful but disproportionately catalog-like. Context is not applicable on turn 1; no required clarification, frustration, or actionable next-step need."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Honestly states that live seat counts are unavailable and directs the student to the program office via the verified program page. No numeric inventory or academic eligibility claim is made, so factual correctness is null. The correct program persists in state and the URL. The metadata's exact_count_available flag does not establish live availability and is appropriately not echoed. No clarification or explicit frustration applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After correctly refusing to invent a seat count, E5 repeats the Year 1 course list and Year 2 pathways already presented in E1, although the student asks only for an availability guess. The raw model answer contains this diversion and finalization preserves it."
+        },
+        "notes": "All repeated academic details and intake dates are supported, with pathways remaining alternatives. The key safety expectation is met: no seat count is manufactured. Program and availability context are retained, but irrelevant curriculum dominates the response. 'My best guess' is awkward framing for a statement of uncertainty. The official program-office direction is actionable. Pressure to guess alone is not explicit frustration; necessary clarification is not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "unsupported_inference",
+          "pattern": "unverified_claim_or_guarantee",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E4 says the program office/admissions team 'can confirm the exact number.' The evidence supports referring the student to the program area, but does not establish that an exact inventory will be provided. This wording is in the raw model output."
+        },
+        "notes": "The relevant official program page satisfies the frozen expectation of a verified contact or official source; no email is invented. Referring to the program office is legitimate guidance, but certainty about exact-number confirmation is slightly overstated. No academic claim or actual inventory is supplied, so factual correctness is null rather than verified. Correct state and conversational referent persist. No explicit frustration or necessary clarification applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-22",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "ef6e31d3a1c38d20923508f6742d519b805ab73886e0b4e83047b52e9ac9b8eb",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "e6b7f9c2e759be013f3aaed3550ac7cccf229c056eed9344aa88ab88745f90ee",
+  "packet_sha256": "1518700fe7708b0cf0c3246a40bfb418ce7265f3f85a66072f1f08656cc1c9cf",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_01f34d66080277a5006aa08275884c87d0850b532bfce092c8",
+  "usage": {
+    "input_tokens": 62605,
+    "input_tokens_details": {
+      "cache_write_tokens": 61251,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 970,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 63575
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": null,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 1,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 4,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "comparison_set_collapsed",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "A substantive three-program raw answer was replaced with 'I could not complete that advising lookup' and error tool_round_limit_reached."
+        },
+        "notes": "Final answer contains no academic claims. Raw output identified all three credentials and retained campus qualifiers, but omitted most comparative requirements. Resolver state retained only M600MSC with program_set_query=false; details calls for Nursing and Construction also returned Applied Computing. Generic referral provides limited recovery guidance. Context and frustration dimensions are inapplicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "comparison_set_collapsed",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution and returned state select only M600MSC, program_set_query=false. Answer names all three but verifies only the MSc and says the other two cannot be verified, despite prior search results identifying their bachelor credentials."
+        },
+        "notes": "The affirmative academic claim—that Applied Computing is a master's degree—is correct. Uncertainty is not a claim that the other programs are nondegrees, so this is an omission rather than false credential classification. Frozen catalog establishes all three as degrees. Initial details call was forced; model did not recover remaining credential evidence. Its claimed verification gap needs a useful recovery step, not solely an MSc link. No required clarification or frustration."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 0,
+          "context_retention": 0,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "comparison_set_collapsed",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Zero model calls; resolution switches to campus_directory and clears program identity. Final answer lists five campus addresses rather than comparing the three programs' locations."
+        },
+        "notes": "Campus names and addresses match frozen campus records, despite being irrelevant. Construction is at Burnaby; Applied Computing has possible Downtown/field qualifiers; Nursing search evidence lists Burnaby. None of that program comparison reaches the answer. Unrequested directory dump drives repetition penalty. No clarification, frustration, or next-step requirement."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 1,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "comparison_set_collapsed",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Explicit 'Construction Management BTech alone' yields ambiguous candidates 7710DIPMA and 8800BTECH, null program_id, and the duplicate prompt 'Construction Management; Construction Management?' with no model calls."
+        },
+        "notes": "The intended family is recognized but the explicit credential is ignored. Frozen records distinguish the diploma from the BTech, so clarification is unnecessary and its identical labels are unusable. No academic assertions to score for factual correctness; no explicit frustration, required clarification, or genuine next-step need."
+      }
+    ]
+  },
+  "attempt": 1
+}

@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-08",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "d2c515e4bf8ae551e997c6cc8124b9ebb1357a05888490ac658372a985b0585c",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "dc2d5400ac7f610282216f78bcd6e77b3c9b9029398219c0f02018652f03dde4",
+  "packet_sha256": "33397f34621e3b3867cca0c489fcd057c4af0ae9afba66d249f80bb8264426ec",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_005491a349941d76006aa10a05bb0887d09a7fee3e050e2a83",
+  "usage": {
+    "input_tokens": 22226,
+    "input_tokens_details": {
+      "cache_write_tokens": 20872,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2401,
+    "output_tokens_details": {
+      "reasoning_tokens": 1661
+    },
+    "total_tokens": 24627
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly established program 8800BTECH and accurately summarized its admission pathways. The full requirements overview was somewhat more extensive than needed for a simple statement of application intent, but it remained useful and accurate."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly treated the Civil Engineering diploma as potentially satisfying the construction-related credential component rather than guaranteeing admission. It accurately identified the GPA, experience, English, pre-entry assessment, recognition, and possible international evaluation conditions."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Accurately recorded LIBS 7001 as user-reported completed coursework while retaining Construction Management as the active program. It appropriately avoided claiming that the course had been institutionally verified or that it satisfied admission requirements."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The conversation state supplied the model with completed_courses=[LIBS7001], but raw answer E1 and final answer E2 never explained whether LIBS 7001 affects admission. They discussed only the diploma and other requirements, despite the user's immediately preceding course-completion statement."
+        },
+        "notes": "The listed pathway-A conditions are accurate and the answer properly preserves departmental confirmation rather than guaranteeing eligibility. However, it should have clarified that LIBS 7001 is a curriculum course and is not among the stored admission conditions, so the user still needs the separately listed English admission requirement. The instruction to submit the pre-entry assessment 'with' GPA and work-experience details is more procedurally specific than the frozen evidence establishes."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

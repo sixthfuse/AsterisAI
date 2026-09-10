@@ -1,0 +1,132 @@
+{
+  "scenario_id": "FLOW-10",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "7736108695ff3f374287449f570128510feb9d52955b9b161df6aff0b6ba59d6",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "6be64cb9dd726d47afe116af7ce87cf77bfa99a9c0eb8104731b03c6158567a8",
+  "packet_sha256": "462576b2d307d58b42ffca74ae207bc9e18763bf4b9eefad4506678f7941e6d0",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_05d7b01198addac2006aa10a2c9fc087d097377a58df5eac43",
+  "usage": {
+    "input_tokens": 25095,
+    "input_tokens_details": {
+      "cache_write_tokens": 23741,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1690,
+    "output_tokens_details": {
+      "reasoning_tokens": 930
+    },
+    "total_tokens": 26785
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly identified program 8800BTECH and gave certified details about its credential, delivery, campus, study modes, and curriculum. The response was slightly more detailed than needed for a simple statement. Context retention, frustration handling, necessary clarification, and next-step guidance were not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly and correctly explained that CMGT 8700 is followed by one of CMGT 8800 or CMGT 8810, not both, and accurately noted departmental approval. Necessary clarification, frustration handling, and next-step guidance were not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly retained the OR-group context and clearly stated that the student cannot skip both final-project alternatives. Repeating the alternatives was useful rather than excessive. Necessary clarification, frustration handling, and next-step guidance were not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 0,
+          "entity_resolution": 4,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 0,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 4,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 0
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "missed_clarification",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The conditional statement “If I complete CMGT 8810” was deterministically converted into reported completion of both CMGT 8810 and CMGT 8800. The trace shows no model or tool call, and the final state adds both courses as user-reported completed instead of answering that CMGT 8800 is not additionally required after satisfying the OR group with CMGT 8810."
+        },
+        "notes": "The program itself remained correctly resolved as 8800BTECH, but the answer invented completion of both courses, failed to answer the graduation-requirement question, and materially corrupted the student record. No clarification was required; frustration handling and next-step guidance were not applicable."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [
+    {
+      "turn": 4,
+      "pattern": "missed_clarification",
+      "dimension": "necessary_clarification_detection",
+      "score": null,
+      "review_required": true,
+      "note": "Primary label conflicts with numeric applicability/adequacy. Preserve scores and original label; review taxonomy separately."
+    }
+  ],
+  "attempt": 1
+}

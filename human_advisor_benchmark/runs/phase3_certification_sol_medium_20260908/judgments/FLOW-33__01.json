@@ -1,0 +1,130 @@
+{
+  "scenario_id": "FLOW-33",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "7899d2f68f8a32331312de1657771273d961cce064529e0af2e0bfd8524c91e1",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c41f07e45fc0134fce5c5cf1ad002cb9d4078d670faeeb814bc8c388259c7cd0",
+  "packet_sha256": "4d5206f46327596b3e968da21b9b55fb6308dafa2d7007a8628a0eceaf12e281",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_048479dc5d8d5982006aa10b6046c487d09aef5ff26ee51747",
+  "usage": {
+    "input_tokens": 58348,
+    "input_tokens_details": {
+      "cache_write_tokens": 56994,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2338,
+    "output_tokens_details": {
+      "reasoning_tokens": 1476
+    },
+    "total_tokens": 60686
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly describes the full-time Nursing BSN using certified program evidence, including duration, delivery, campus, curriculum, specialty credits, competitive admission, international availability, licensure, and intake status. Context retention is not applicable on the first turn."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly switches the application target from Nursing to the Applied Computing MSc and explains the alternate-entry route without assuming that the nursing background includes a completed bachelor's degree. Requirements and competitive-review boundaries match the certified evidence."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "background_as_topic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver and final conversation state changed program_id from the Applied Computing MSc (M600MSC) to the Civil Engineering Diploma (5410DIPLT), treating the newly mentioned credential as the application target. It consequently retrieved Civil Engineering program details. The prose nevertheless recovered the intended admission context and correctly explained the diploma's possible relevance to the MSc."
+        },
+        "notes": "The visible answer is academically correct: a two-year civil engineering diploma does not replace the MSc bachelor's-degree requirement, though its technical coursework may be considered when the program area assesses computing knowledge. The failure is confined primarily to entity state and retrieval; the answer itself retains the Applied Computing application context."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The system carried forward the erroneous Civil Engineering Diploma state (program_id 5410DIPLT), recorded the answered facet as 5410DIPLT:campus, and made no model call. The Burnaby address happens also to be a valid base location for Applied Computing, but the response was generated for the wrong program and omitted that Applied Computing may also use the Downtown Campus or field locations."
+        },
+        "notes": "The stated Burnaby Campus address is correct for the intended Applied Computing MSc, so the answer is not outright false. However, it reaches that answer through the wrong retained entity and presents Burnaby as the unqualified campus rather than noting the certified possible Downtown Campus or field locations."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

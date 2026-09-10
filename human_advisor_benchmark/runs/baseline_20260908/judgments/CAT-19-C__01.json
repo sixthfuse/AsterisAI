@@ -1,0 +1,112 @@
+{
+  "scenario_id": "CAT-19-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "42ff7e472b6898d0e4dbdbcb562f6aaa05b85582b78b9683db3fe14117db57be",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "0c482b9fec2f02f80b35a60b900c95c53ebffee6cc3d17bad4cacee4e30ba2ba",
+  "response_id": "resp_0c51a3564bc6ec81006aa07c4bb34087d0809ac937dc21cff3",
+  "usage": {
+    "input_tokens": 36731,
+    "input_tokens_details": {
+      "cache_write_tokens": 35377,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 788,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 37519
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": null,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": null
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "credential_ambiguity",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolver leaves program_id null and candidates [5430ACERT, 5430CERT] despite the explicit Certificate credential. The final asks 'Civil Technology; Civil Technology?' rather than introducing 5430CERT."
+        },
+        "notes": "The catalog distinguishes Certificate from Associate Certificate. The answer makes no substantive academic claims, so factual correctness and evidence discipline are not assessed. Context retention is inapplicable on turn 1; necessary clarification and frustration handling are inapplicable. No useful next step is needed for the requested introduction. The word limit passes, but duplicated indistinguishable options still impair repetition avoidance."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": 0,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "credential_ambiguity",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolution trace again retains both credential candidates with program_id null, and the final repeats the identical clarification instead of addressing the employment-guarantee question."
+        },
+        "notes": "The Civil Technology family persists, but the explicitly named Certificate remains unresolved despite complete supplied history. No guarantee or placement statistics are invented; however, the advisor neither states its inability to guarantee immediate employment nor supplies a practical next step. Factual correctness is null because there are no academic assertions. Evidence discipline loses credit for leaving the requested certainty boundary unaddressed, not for making a false guarantee. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": 0,
+          "next_step_guidance": null,
+          "evidence_discipline": null
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'Never mind, let's stop,' the trace still reports scope ambiguous and the response repeats 'Which program do you mean: Civil Technology; Civil Technology?' rather than acknowledging and stopping."
+        },
+        "notes": "Empty tools and the nine-word answer satisfy mechanical checks but do not satisfy stop intent. The active Certificate is still not preserved as program_id 5430CERT. The observed resolver/fallback behavior supports deterministic attribution without identifying a more specific stop-processing component. No academic assertions or source handling occur, so factual correctness and evidence discipline are null. Necessary clarification and next-step guidance are inapplicable; further guidance would be inappropriate."
+      }
+    ]
+  },
+  "attempt": 1
+}

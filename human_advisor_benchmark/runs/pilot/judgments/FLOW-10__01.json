@@ -1,0 +1,125 @@
+{
+  "scenario_id": "FLOW-10",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b85d90d122d5407689a7739782c835c70cc1cf53f67e9e234ea5d9ba56e720fa",
+  "response_id": "resp_076c74045fed2069006aa073c08bac87d09b2fc914b5954b75",
+  "usage": {
+    "input_tokens": 129497,
+    "input_tokens_details": {
+      "cache_write_tokens": 129494,
+      "cached_tokens": 0
+    },
+    "output_tokens": 960,
+    "output_tokens_details": {
+      "reasoning_tokens": 50
+    },
+    "total_tokens": 130457
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "unnecessary_clarification",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer responds to a simple program-identification statement with a full curriculum and elective-pool listing plus admissions information; finalization preserves that unsolicited catalog dump."
+        },
+        "notes": "Program identity and assessed academic claims match the frozen records, including the required final-project OR group and credit-based management electives. Factual score covers verifiable claims only: the supplied records do not establish the additional CMGT 8700 coursework, topic, and sponsor prerequisites asserted in prose; assertions in model instructions are not source verification. The Liberal Studies section gives the correct 12-credit total but omits the standard additional 3 elective credits despite listing the three core courses. Context is inapplicable on turn 1; no required clarification, frustration, or actionable next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly says one final project is required, not both, with CMGT 8700 first and department approval for the chosen project. State retains 8800BTECH. The available tool set lacks evaluate_program_curriculum, but get_program_details supplies the relevant structured completion rule. No required clarification, frustration, or next step applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Resolves 'both' to the two final-project alternatives and explicitly rejects skipping the required OR group. Repetition is warranted by the student's follow-up. Program state and prose are correct; no required clarification, frustration, or next step applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Before model generation, the request states 'Courses the student explicitly said they completed ... CMGT8800, CMGT8810', and tool context contains both as completed_courses. The student only asked 'If I complete CMGT 8810, is CMGT 8800 still required too?'"
+        },
+        "notes": "The completion-context extraction incorrectly converts a hypothetical question and a mentioned alternative into two completed courses. Program identity remains correct. The final answer does not propagate this false completion state: it accurately explains the alternative relationship without asserting actual completion or overall graduation eligibility. Unsupported-inference and evidence scores assess that sound prose; the hidden-context failure is reflected in context retention. No required clarification, frustration, or next step applies."
+      }
+    ]
+  },
+  "attempt": 1
+}

@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-35",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "5a9aa989152a98d300f6c58912150c4be8341f16185a31a97c823656c91da60c",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "818cd2b647c6818fa52b02fabf4cf9bb6b17dfab72435f600ea69f67332359b9",
+  "packet_sha256": "7bcc0dfaddaf5de3fbe3e6252c5d79d7d94793784ed878e28e83ecc56354280c",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_02fb606b54536271006aa10b912bb487d0b07a90fd675f91d8",
+  "usage": {
+    "input_tokens": 28322,
+    "input_tokens_details": {
+      "cache_write_tokens": 26968,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2313,
+    "output_tokens_details": {
+      "reasoning_tokens": 1552
+    },
+    "total_tokens": 30635
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer correctly covers the full 28-program Nursing family: 15 explicitly available Advanced Certificates, 12 conditionally available part-time online Specialty Nursing BSNs with the documented restrictions and approval requirement, and the unavailable full-time BSN. Context retention is null because this is turn 1."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "It retains the Nursing-family referent, directly rejects an admission guarantee, and appropriately distinguishes permission to apply from an admission decision."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "unsupported_inference",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "mixed",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The answer says the records do not verify additional approval for any program, but E5/E9 explicitly state that international students must receive program-head approval before applying to each of the 12 part-time online Specialty Nursing BSN programs. The turn-3 comparison tool omitted that previously retrieved status evidence, and the model converted the omission into a substantive retraction."
+        },
+        "notes": "The response preserves the correct Nursing-family scope and refers to the correct 12-program subgroup, but it materially reverses the supported policy instead of answering that all 12 require approval. Advising the student to confirm with the institution is cautious but generic and does not cure the false claim that the requirement is unverified."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": null,
+        "notes": "It retains the full Nursing-family scope and supplies correctly matched official program pages for all 28 programs. A minor limitation is that it does not identify the central international flexible-credential source supporting the Advanced Certificate availability classifications or point to the specific approval language on the 12 BSN pages, so the links are less directly tied to the claims being verified."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

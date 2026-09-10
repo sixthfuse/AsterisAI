@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-34",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "eebaa433b5609a999cabd14f45501e2c3a3a28f0c171c8b0422d2f64a78b161e",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "2216b28334c4cc4c7e5a261a0fb3edc8b73baf69e68a876fd5c5fc813788c8ac",
+  "packet_sha256": "1f635948eff7a39bcafd6926916f602715f8b3c2422ce9fc27f34bf639d02a6f",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0dae5a5680628e3c006aa083f2ad6887d0a4ab282648a07dd3",
+  "usage": {
+    "input_tokens": 40841,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 40838
+    },
+    "output_tokens": 963,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 41804
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 2,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "clarification_logic",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolution trace correctly retains candidates 7710DIPMA and 8800BTECH with ambiguous scope, but the fallback asks 'Construction Management; Construction Management?' without credential labels. The necessary clarification offers no distinguishable choices."
+        },
+        "notes": "No substantive academic claims to assess. Initial ambiguity and lack of a selected program are appropriate; the visible clarification fails to distinguish Diploma from BTech. Context retention is inapplicable on turn 1; no frustration or additional next-step guidance is required. Trace supports deterministic fallback attribution, not a specific internal formatting component."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'The BTech, please,' resolution still lists both candidates and program_id remains null instead of 8800BTECH. The fallback repeats the identical ambiguous question rather than accepting the credential selection."
+        },
+        "notes": "Both state and prose fail to resolve the selected credential, though the program family persists. No academic claims are made, so factual correctness is null rather than a correctness endorsement. Required-clarification detection, frustration handling, and next-step guidance are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The explicit correction 'the diploma, not the degree' does not change the resolver's two-candidate ambiguous state: program_id stays null rather than 7710DIPMA. The same clarification is returned again."
+        },
+        "notes": "The correction is sufficient in the full conversation and is ignored in both state and answer. This is an unproductive clarification loop, not an academically false credential claim. Factual correctness is null because no substantive academic claim is made. The correction alone is not explicit frustration; no separate next step is required."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the preceding diploma selection, the credential question receives the identical two-name clarification. The trace remains ambiguous and program_id is null instead of 7710DIPMA; the frozen catalog identifies that program's credential as Diploma."
+        },
+        "notes": "The answer never supplies the requested credential and fails to use the immediately preceding correction. No wrong credential is asserted, so factual correctness is null and severity is noncritical. No explicit frustration, necessary clarification, or additional next-step guidance applies."
+      }
+    ]
+  },
+  "attempt": 3
+}

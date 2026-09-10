@@ -1,0 +1,102 @@
+{
+  "scenario_id": "CAT-20-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "ea94abcf721255c815b92dbc4acf375fe00ba4d2e4ef9e2d4c40305a2ad836b3",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "9a51e1d08f0c6bf335ba2a9ae9c9d7a2862d21c777eae1b0f1814ffd16327d79",
+  "packet_sha256": "8089409d56d8bb0d7beef3ff332efd7de0403d4796f349a52900731d95ca9925",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08c40729f2142712006aa1099b93c087d0a572c41f9a0bc87a",
+  "usage": {
+    "input_tokens": 19386,
+    "input_tokens_details": {
+      "cache_write_tokens": 18032,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1344,
+    "output_tokens_details": {
+      "reasoning_tokens": 706
+    },
+    "total_tokens": 20730
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer correctly resolves program 2958CERT and accurately reports the certified program-level restriction that it is not available to international applicants. It does not convert that restriction into a broader personal eligibility judgment and provides appropriate official BCIT links. Context retention, necessary clarification detection, and frustration handling are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response directly rejects automatic admission, retains the correct program and international-applicant context, and accurately distinguishes program availability from admission. The first-qualified and space-remaining statements are supported by the certified admission record, and no admission guarantee is made. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "unsupported_inference",
+          "pattern": "unverified_claim_or_guarantee",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Although the source says the program is not available to international students, the raw and final model answer escalates that program-level availability restriction into the personal conclusion that “the published rules make you ineligible.” The expected boundary was to distinguish stored availability rules from individual eligibility and human admission decisions."
+        },
+        "notes": "The program identity, delivery details, 41-week duration, 23 required courses, named examples, admission requirements, and first-qualified process are supported. The confirmation suggestions are useful and proportional. However, the central claim of verified personal ineligibility is materially misleading: the evidence verifies international unavailability for this program, not a comprehensive individual eligibility determination. The trace shows that this overreach originated in the model answer and was preserved unchanged by finalization."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

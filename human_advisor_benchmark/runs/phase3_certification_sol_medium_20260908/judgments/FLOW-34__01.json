@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-34",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "3ab43a1de61af123161fc302bfc5afaaf1c8a476ee224527e57911211d058eaf",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c09e7c4b73f59d3d3d0ae8487a5430b507125eb19d0649fbb7526f7dbf311d43",
+  "packet_sha256": "b6708c0aa9f5f8e6071f76f39929cf7eb976dd76e191de4120d401e6dcaa5db1",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_00e406f5494221cf006aa10b890a7487d09b8883ee4fb69d8a",
+  "usage": {
+    "input_tokens": 51727,
+    "input_tokens_details": {
+      "cache_write_tokens": 50373,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1646,
+    "output_tokens_details": {
+      "reasoning_tokens": 915
+    },
+    "total_tokens": 53373
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 4,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The initial query was genuinely ambiguous, and the response correctly presented the diploma and BTech possibilities without silently selecting one. The phrasing is slightly stiff. Context retention, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 0,
+          "context_retention": 0,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "credential_ambiguity",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After the user explicitly selected “The BTech,” the resolution trace retained both candidates, left program_id null, and produced the exact same clarification with zero model calls. The structural assertion for program_id 8800BTECH failed."
+        },
+        "notes": "The two listed program options remain factually accurate, and the response stays within program-information scope, but it ignores the explicit BTech selection. The unnecessary repeated clarification is irrelevant and markedly inattentive. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The correction is properly applied to program 7710DIPMA. The overview accurately states the diploma's active status, 75-credit total, part-time blended delivery, 69 required credits, minimum 6 elective credits, example required courses, and continuation opportunity. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response retains the corrected diploma referent and directly gives the supported credential: Diploma in Construction Management. Repeating the credential is appropriate because the user explicitly requested it. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-12-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "712286ee36b5e1a78ccbbc6a5ccbeb789ec7b6a1c2b26c853f5ec3205d2a7fd5",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "a84daa7f1b7bd42d8ceae3a26516c357e1b83339ea59f3d4909d6ffba09babd4",
+  "response_id": "resp_036a32f4064d5cb0006aa079a1fbc887d08a8f06af707c8a5a",
+  "usage": {
+    "input_tokens": 62380,
+    "input_tokens_details": {
+      "cache_write_tokens": 61026,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 663,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 63043
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two sentences within the brevity limit. Delivery wording matches the frozen program record; 60 credits matches 21+3+24+12. Course examples and elective minimum are supported. Prose and state identify 810CBSN. Context retention is inapplicable on turn 1; no required clarification, frustration, or next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "background_as_topic",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The unchanged model answer offers only 'review the program details here' as its next step, rather than directing the student specifically to the outcomes report or to comparing current neonatal vacancies."
+        },
+        "notes": "Correctly refuses an immediate-employment guarantee without inventing statistics. Survey timing and clinical education match frozen evidence; employment factors are reasonable general caveats, not individualized eligibility claims. Topic and state persist correctly. The practical next step is relevant but generic, and 'stored program information' sounds slightly system-oriented. Required clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "background_as_topic",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it; tools_used is nonempty, failing the frozen stop assertion."
+        },
+        "notes": "The final 11-word response respectfully stops advising, and 810CBSN remains active. The failure is unnecessary forced retrieval, not the closing prose or entity state. No academic claims are made, so factual correctness is null; required clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

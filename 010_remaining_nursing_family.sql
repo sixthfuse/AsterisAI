@@ -1,0 +1,5 @@
+-- Data migration entry point for the 11 remaining independently audited Nursing BScN programs.
+-- The JSON audits are intentionally retained as the authoritative payload rather than
+-- duplicating large raw-text requirements in SQL. Run from the repository root:
+--   python import_nursing_family.py --audit-dir program_extractor_audit/nursing_batch --apply-db
+-- Schema prerequisites are created by 009_program6_nursing.sql.

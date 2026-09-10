@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-07",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "e93c3d29d411119f0df7e5ad48c00eb2fde42ee4625e4c5964de8995ddcbdfdf",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "888342f36319f3c3292c1f295ffc9bace487ad3a3779dc0d914b4041c919c914",
+  "packet_sha256": "62360dc7f3f5cb0db40f53d257d9c95f7d78c40f9e539944b2eea70dc2201311",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_09315104ef983631006aa08084c95c87d090ba47ef0630ecfd",
+  "usage": {
+    "input_tokens": 40709,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 40706
+    },
+    "output_tokens": 952,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 41661
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 2,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "clarification_logic",
+          "pattern": "awkward_or_impersonal",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolution trace correctly retains candidates 5430ACERT and 5430CERT without selecting one, but the fallback asks 'Civil Technology; Civil Technology?' without credential labels. The necessary clarification is not usable."
+        },
+        "notes": "Clarification is necessary here, not unnecessary. The candidate set and unresolved state are appropriate; the presentation fails to distinguish the credentials. No substantive academic claims to assess. Context retention is inapplicable on turn 1; no frustration or separate next step is expected."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'The associate certificate,' the resolver still retains both candidates and program_id=null rather than 5430ACERT. The FALLBACK repeats the identical indistinguishable program question instead of using the credential selection."
+        },
+        "notes": "The family is retained, but the student's disambiguation is ignored in both state and answer. No academic claims are made, so factual correctness is null rather than verified correct. Necessary clarification, frustration handling, and separate next-step guidance are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The explicit 'Now the Civil Technology certificate' should select 5430CERT, but the observed resolution remains ambiguous with program_id=null and both candidates. The final response repeats the same clarification a third time."
+        },
+        "notes": "The explicit credential switch is not reflected in either state or prose. This is failure to resolve and answer, not an academically false description of the certificate. No academic correctness observation, frustration, required clarification, or separate next step applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the preceding explicit certificate selection, program_id remains null and the resolver keeps both candidates. The answer repeats 'Which program do you mean: Civil Technology; Civil Technology?' rather than addressing the location question."
+        },
+        "notes": "The frozen certificate offering and E3 support Burnaby Campus and online delivery; no location is supplied. Even both candidate programs share that location. The omission is not a false academic claim, so factual correctness remains null. No frustration or separate next step is expected. Trace supports deterministic resolution/fallback failure, without identifying a narrower implementation defect."
+      }
+    ]
+  },
+  "attempt": 3
+}

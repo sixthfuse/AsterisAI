@@ -1,0 +1,102 @@
+{
+  "scenario_id": "CAT-10-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "b6747d9961d33319b3a525ecd059dabdbd681f6d82c513a14d9a461d89cf6caa",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "48be4cd64124a07d04f5cfe743dee245be1aa0c51ea056edb14e094f13fca1d9",
+  "packet_sha256": "282bb204f1e96ce9badb6f7e6ba7910bf8f72b06d61d0c36766e827961dc4ac6",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0094a2e3241db799006aa1086380c887d0a54afe979f9ca79e",
+  "usage": {
+    "input_tokens": 18724,
+    "input_tokens_details": {
+      "cache_write_tokens": 17370,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1618,
+    "output_tokens_details": {
+      "reasoning_tokens": 1002
+    },
+    "total_tokens": 20342
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly identifies A700GRCERT and distinguishes international availability, the study-permit requirement, mandatory work component, credential-evaluation possibility, and lack of PGWP eligibility. The official links provide a reasonable next step, though the guidance could more directly tell the applicant to confirm current intake availability and credential-specific requirements."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly and correctly explains that international availability is not admission. It retains the correct program and applicant context, states the supported admission requirements and first-qualified/space limitation, and leaves credential assessment and the admission decision to BCIT."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver changed academic_scope to admission even though the frozen turn scope is international. The raw answer then emphasized general program details, admission criteria, intake dates, and a full six-course list while omitting the central international facts it could verify: that the program is available to international applicants, requires a study permit, and is not PGWP eligible. The retrieved program details contained those international records, so both resolver state and model selection contributed."
+        },
+        "notes": "All stated academic facts are supported, and the verify-versus-confirm structure appropriately preserves BCIT's role in credential evaluation, equivalency, space, and admission decisions. However, the answer is materially incomplete for the requested international scope and includes an unnecessary curriculum list plus repeated admission material."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

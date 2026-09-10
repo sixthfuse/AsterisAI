@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-27",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "a22cfa9edc77ddd0528a82223447f665a0e59b3fb3e687ee19e61e8d876997ba",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "5cc67819982ca043851048622219c33cd917528d5cf03442b716682ecc968f4a",
+  "packet_sha256": "43d3ccb91d31f7d932c38f6d66a17083ba96c639a9d45b268c9bba8ee54b107b",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08b257bd7b761d5a006aa083557e5487d0971678a6ff9a2a1d",
+  "usage": {
+    "input_tokens": 14959,
+    "input_tokens_details": {
+      "cache_write_tokens": 13605,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1048,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 16007
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": null,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the explicit BTech credential, resolution returns candidates 7710DIPMA and 8800BTECH with program_id null and scope ambiguous. With no model calls, the final asks the student to choose between two identically named Construction Management options."
+        },
+        "notes": "No substantive academic claims to assess for factual correctness. Admission requirements are not answered; no admission/capstone conflation is asserted. Context is not applicable on turn 1. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution again retains the diploma/BTech candidate ambiguity rather than the BTech identified in the full history. The same duplicate-option clarification is emitted without model calls instead of answering whether a capstone is required for admission."
+        },
+        "notes": "No academic claims are made, so factual correctness is unassessable. The answer fails to explain the admission versus completion distinction but does not falsely claim a capstone is an admission requirement. No history was omitted. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 0,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "unnecessary_clarification",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The third response repeats 'Which program do you mean: Construction Management; Construction Management?' Resolution still has program_id null and scope ambiguous, with no model calls, despite the established BTech and explicit switch to graduation."
+        },
+        "notes": "No graduation claims are supplied, so factual correctness is null rather than a score for incorrect curriculum facts. Required curriculum, credits, and final-project alternatives are omitted entirely. Necessary clarification, frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver correctly identifies CMGT8700 but stores only course scope and course_id; final state still has program_id null rather than retaining 8800BTECH. The actual prose correctly answers about CMGT 8700 and does not name a wrong program."
+        },
+        "notes": "The answer substantially matches the frozen coursework exception, two-year experience, topic, and sponsor requirements. It correctly avoids treating the misleading structured CMGT8800 COURSE row as a prerequisite, consistent with its exception notes and the raw source. Minor precision gaps: experience/topic/sponsor are labeled corequisites in the source, and the topic should be approved. Departmental registration approval is not mentioned, though the raw course page includes it; the answer does not guarantee registration or personal eligibility. Admission experience counting toward the total is also not explained. These prose limitations are separate from the deterministic missing program state; raw and final answers are identical. Necessary clarification and frustration handling are not applicable; no individualized next step was requested."
+      }
+    ]
+  },
+  "attempt": 1
+}

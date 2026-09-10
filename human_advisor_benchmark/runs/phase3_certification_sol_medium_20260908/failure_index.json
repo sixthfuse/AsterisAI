@@ -1,0 +1,1542 @@
+[
+  {
+    "scenario_id": "CAT-01-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The frozen scope is international, but resolution retained academic_scope='admission'. Although get_program_details returned explicit international evidence, the answer omitted the central verifiable fact that M600MSC is available to international applicants, as well as the supported study-permit and intake-status facts. It instead devoted substantial space to an unrequested curriculum list.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-01-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but ends after saying it depends on the decision process and circumstances; it gives none of the explicitly expected practical next steps. The trace contains no model call, indicating the observed response was generated deterministically.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-02-B",
+    "turn": 3,
+    "root_cause": "unsupported_inference",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer states that “the program record does not include a configured course list,” but the frozen database contains curriculum components and numerous configured required, elective, and choice courses for 8800BTECH. The model turned the absence of curriculum data in its retrieved tool payload into a false claim about the underlying program record.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-02-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step, despite the frozen expectation requiring one. The phrase “applicable decision process” is also vague and unnatural for a question about employment.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-03-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly says employment cannot be guaranteed, but gives no practical next step, such as reviewing BCIT graduate outcomes or nursing career information. The trace contains no model call and returns the brief response directly.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-04-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver retained academic_scope='admission' although the frozen turn scope is international. The answer consequently omits the central verified fact that program 8660BENG is explicitly available to international applicants and devotes substantial space to later Level 5 and Level 7 progression rules. Raw and finalized answers are identical, so the mismatch involves both the resolved scope and model content selection.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-04-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment, but provides no actionable practical next step despite the frozen expectation requiring one. The observed trace contains no model call and returns a short template-like response.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-05-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "tool_or_transport_failure",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final model answer adds a detailed Level 4 elective list and other curriculum facts even though the question, in context, asks what international/admission facts are verifiable and what requires BCIT confirmation. These claims are accurate, but tangential and make the response less proportionate.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-05-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response correctly says employment cannot be guaranteed but ends with the vague phrase \"applicable decision process and your circumstances\" and provides no practical next step, despite the frozen expectation explicitly requiring one.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly says employment cannot be guaranteed, but ends with the vague statement that it depends on a decision process and circumstances and provides no actionable next step, despite next-step guidance being explicitly expected. The observed turn contains no model or tool call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The turn resolver retained academic_scope='admission' even though the question and frozen expectation were international in scope. The retrieved program details contained the explicit ACCEPTED_AVAILABLE international status, but the model's answer omitted that central verified fact and instead emphasized admission rules and an unrequested curriculum list. This materially understates what Asteris could verify about the applicant's core concern.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly refuses to guarantee employment but gives no practical next step, despite the frozen expectation requiring one. The phrase “applicable decision process” is also vague and bureaucratic. The trace shows no model or tool call for this response, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The frozen scope is international, but resolution retained academic_scope='admission' and the answer focused mainly on admission thresholds and unrelated curriculum examples. Despite having retrieved international evidence, it did not restate the verified international availability, study-permit condition, or optional-work-term restriction. The closing wording also imprecisely groups BCIT with IRCC for final PGWP decisions, although the source assigns final discretion to IRCC.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step, despite the frozen expectation explicitly requiring one. The phrase “applicable decision process and your circumstances” is also legalistic and less useful than directly referring to employers, job-search preparation, or the program’s optional work-term opportunity. No model call occurred on this turn, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The frozen turn scope is international, but the turn-3 resolver and stored conversation state label academic_scope as admission. The final answer still addresses both international availability and admission-verification boundaries, so the impact is limited.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step despite the frozen expectation. The wording “applicable decision process and your circumstances” is vague and templated rather than tailored to graduate employment. No model call appears in the observed trace for this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver changed academic_scope to admission even though the frozen turn scope is international. The raw answer then emphasized general program details, admission criteria, intake dates, and a full six-course list while omitting the central international facts it could verify: that the program is available to international applicants, requires a study permit, and is not PGWP eligible. The retrieved program details contained those international records, so both resolver state and model selection contributed.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly says employment cannot be guaranteed, but ends with the vague phrase “applicable decision process and your circumstances” and provides none of the explicitly expected practical guidance, such as evaluating career fit, gaining relevant experience, or using career support.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The user asked what could be verified and confirmed in the established international-applicant context, but the response shifted mainly to general admission, curriculum, electives, and clinical requirements. It omitted the central verified international conditions: completing the program outside Canada or holding a qualifying Canadian work permit, lack of study-permit eligibility, and lack of PGWP eligibility. The resolver labeled the turn as admission rather than international, while the retrieved program record still contained the omitted international evidence and the model did not use it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but supplies no practical next step, despite the frozen expectation requiring one. Its phrase “applicable decision process” is also vague and bureaucratic. The trace contains resolution only and no model call, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver changed the turn's academic scope to admission even though the frozen expected scope was international. The answer consequently emphasizes general entrance requirements and sample curriculum courses while omitting the most pertinent verified international rules: the outside-Canada/work-permit pathways and the study-permit and PGWP restrictions. The tool result contained the INTERNATIONAL rule set, so both routing state and model emphasis contributed.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly refuses to guarantee employment, but ends with the vague phrase “applicable decision process and your circumstances” and provides no actionable next step, despite the frozen expectation requiring one. The trace shows no model or tool call for this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment, but gives no practical next step despite the frozen expectation requiring one. The phrase “applicable decision process” is also vague and unnatural. The trace contains no model or tool call for this turn, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer says the program has “blended delivery,” but the authoritative program-page text in E4 says “Delivery: in person,” and the authoritative_raw delivery record says both full-time and part-time programs are delivered on campus in a face-to-face format. The tool output contained this page text alongside a conflicting structured delivery_method field, and the model asserted the conflicting field without qualification.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer appropriately refuses to guarantee employment but ends with the vague statement that it depends on the decision process and circumstances; it provides no practical next step, despite the frozen expectation explicitly requiring one. The trace contains no model or tool call for this response.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changed the model's clean phrase “thesis-based option” to the awkward “ECOR 9600 — Thesis-based option.” ECOR 9600 is the thesis course, so this is not academically false, but it makes the option label look malformed. The answer is also somewhat longer than the requested brief introduction and adds intake details.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer appropriately refuses to guarantee employment, but provides no practical next step despite the frozen expectation. Its phrase “applicable decision process” is also vague and robotic. The trace contains no model call, indicating deterministic response generation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response says the program “has the stored location,” which is accurate but database-like and less natural than directly saying it is offered at the Burnaby and Downtown campuses.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The frozen scope is international, but resolution changed academic_scope to admission. The resulting answer concentrates on general program, curriculum, and admission facts and does not explicitly recap the central verified international facts—international availability and PGWP eligibility—even though those facts were present in the retrieved evidence. The raw and final answers are identical, so finalization did not introduce the omission.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response appropriately says employment cannot be guaranteed, but provides no practical next step despite the frozen expectation requiring one. The phrase “applicable decision process and your circumstances” is also generic and awkward for an employment-outcomes question. The observed trace contains resolution only and no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "unnecessary_clarification",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The curriculum example about BLDT 2021 and ACED 1305 is accurate but tangential to the user's request to distinguish verified international/admission facts from matters requiring BCIT confirmation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response correctly refuses to guarantee employment but ends with the vague phrase “applicable decision process and your circumstances” and provides no actionable practical next step, despite the frozen expectation explicitly requiring one.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The resolver changed academic_scope to admission even though the frozen turn scope is international, and the answer then focused on delivery, curriculum, credits, and courses while omitting the decisive verified fact that the program is not available to international applicants. It also failed to distinguish that published restriction from unverified personal eligibility and current BCIT decisions.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer appropriately says employment cannot be guaranteed, but it ends with the vague phrase “applicable decision process and your circumstances” and provides none of the expected practical guidance, such as reviewing the program’s Graduating & Jobs information or planning a job search.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer accurately lists stored program facts and advises confirming whether international availability has changed, but it does not explicitly identify the user's personal eligibility, current intake/application status, prerequisite satisfaction, or BCIT's declaration/admission decision as matters that cannot be verified from the record and require human/current confirmation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-C",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer calls this a “60-credit” program, while the certified overview states that the certificate must contain a minimum of 60.0 credits. This is minor shorthand rather than a materially misleading error.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic, zero-model-call response appropriately refuses to guarantee employment but provides no practical next step, despite the frozen expectation requiring one. The phrase “applicable decision process” is also vague and legalistic.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-B",
+    "turn": 3,
+    "root_cause": "unsupported_inference",
+    "pattern": "unverified_claim_or_guarantee",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Although the source says the program is not available to international students, the raw and final model answer escalates that program-level availability restriction into the personal conclusion that “the published rules make you ineligible.” The expected boundary was to distinguish stored availability rules from individual eligibility and human admission decisions.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step, despite the frozen expectation explicitly requiring one. The phrase “applicable decision process” is also vague and awkward for a question about employment outcomes. The trace contains no model call for this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-03",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly switches to Downtown Campus and gives its verified address, but “Tell me about” receives only a one-line location rather than even the available brief campus description.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-04",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The wording “Applied Computing — Master of Science is in Applied Computing” is tautological and slightly awkward, though it correctly identifies the intended program.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The selected program and all stated pathway details match the frozen evidence, but the retrieved program-details result omitted frozen entrance/application records. Consequently, the final answer did not mention that a criminal record check is an entrance requirement or clearly state that applications go through UBC Science/UBC Admissions before eligible students apply for the specialization in June.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response and campus result correctly use program 9940BSC and report Burnaby Campus and UBC Vancouver, but both resolver and final conversation state retain academic_scope='admission' even though this turn's requested scope is campus.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-06",
+    "turn": 2,
+    "root_cause": "clarification_logic",
+    "pattern": "unnecessary_clarification",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The referent of “the other one” was not anchored, but the answer began with an unqualified “No,” implicitly selecting the diploma. The model had both comparison IDs and retrieved both credential records, so it should have asked which program the student meant. Although the following sentence correctly states both credentials and limits the harm, the opening answer could mislead if the student meant the BTech.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-07",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The resolver and tool correctly selected 5430CERT, and source E4 states that the Certificate must contain a minimum of 60.0 credits. The raw model/final answer instead says “Program total: 60 credits,” dropping the minimum qualifier and presenting the threshold as a fixed total.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-08",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The conversation state supplied the model with completed_courses=[LIBS7001], but raw answer E1 and final answer E2 never explained whether LIBS 7001 affects admission. They discussed only the diploma and other requirements, despite the user's immediately preceding course-completion statement.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-09",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missed_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer preserves the required coursework, two years of related experience, industry topic, and industry sponsor, but renders an additional conjunct merely as “Course prerequisite from official source” without naming or explaining it. The trace contains no model call for this turn, supporting a deterministic presentation failure.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-10",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "missed_clarification",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The conditional statement “If I complete CMGT 8810” was deterministically converted into reported completion of both CMGT 8810 and CMGT 8800. The trace shows no model or tool call, and the final state adds both courses as user-reported completed instead of answering that CMGT 8800 is not additionally required after satisfying the OR group with CMGT 8810.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-13",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the user corrected the grade to 50%, the response prose correctly used 50%, but the returned conversation state and tool context still recorded ENGL1177 with grade 49.0. The raw model answer and final answer were both correct, so the defect is confined to state updating.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-13",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly recalls the user's stated 50% and explains that only one OR alternative is required, but the returned conversation state and tool context continue to store the obsolete 49.0 grade.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 2,
+    "root_cause": "retrieval_routing",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver retained 8800BTECH only in prior_program_ids while leaving program_id null. The model then repeatedly searched for the already-known program, called get_program_progression_requirements with empty arguments, ignored a search result containing 8800BTECH, and exhausted the tool-round limit. The final response therefore failed to state that 1.5 years is 0.5 years below the two-year minimum.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly discusses CMGT 8700 in context, but the resulting conversation state has program_id null and fails the required 8800BTECH structural assertion, even though prior_program_ids still contains 8800BTECH.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 4,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The final answer correctly addresses the Construction Management graduation question, but conversation_state.program_id remains null and the structural assertion requiring 8800BTECH fails. The deterministic resolution also leaves the scope at course rather than restoring the current program.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-15",
+    "turn": 1,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The user asked about graduation, but the response said it would check “what courses you're eligible to take next,” and the resolver stored scope as “none.” It also asked only for the program, omitting the needed completion/coursework details. The trace contains no model call, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly explains admission requirements, but adds unrequested curriculum, Year 2 pathway, delivery, duration, and intake information. This makes the response broader and longer than needed for establishing the applicant's degree claim and admission position.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The final answer correctly uses the corrected fact that the student has only completed high school, but conversation_state.student_facts remains empty rather than replacing or recording the withdrawn bachelor's claim.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly remembers that the student has only a high-school credential, but the returned conversation_state still has an empty student_facts array and therefore does not structurally preserve that pertinent correction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The final answer is explicitly grounded in the student's corrected high-school-only background, but conversation_state.student_facts remains empty instead of persisting that fact.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-17",
+    "turn": 4,
+    "root_cause": "unsupported_inference",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer says, “The exact Year 3 forensic-elective selection rule isn’t specified in the stored curriculum.” Frozen curriculum requirement 20 explicitly specifies six credits—exactly two courses—from the five published FSCT electives. The raw model answer E2 already contained this false absence-of-evidence claim; finalization only changed the wording of the Bioethics reference.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-18",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the explicit correction, “That's not what I asked,” the deterministic response supplied the correct campus information but did not acknowledge or apologize for the prior mismatch. The trace contains no model call and directly returns E2.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-20",
+    "turn": 1,
+    "root_cause": "clarification_logic",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response correctly recognized that clarification was required, but asked only which “course” the user meant. No entity type had been established, so it could have been a program, and “available” also needed a dimension such as international eligibility or intake/application availability.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-21",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The prose correctly answers for both antecedents and comparison_program_ids still contains M600MSC and M500MENG, but the returned conversation state incorrectly sets unique_result_program_id to M600MSC, implying a unique Applied Computing result during a two-program comparison.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "unresolved",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response accurately compares all three programs by credential, study mode, delivery, and campus, but the frozen expectation also required their distinct requirements; no admission or entry requirements are provided.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The referent \"them\" was the three compared programs, all of which are degrees: a BSN, an MSc, and a BTech. The resolver instead preserved scope_query \"nursing programs,\" routed to a search for 28 nursing programs, and the answer listed 13 nursing BSN programs while omitting Applied Computing and Construction Management entirely.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-23",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Both the raw and finalized answers append a paragraph describing program courses and the thesis or project-and-internship curriculum after answering the admission-prerequisite question. That material is supported but outside the requested admission scope.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-24",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "tool_or_transport_failure",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For the user's broad opening, the answer immediately supplies a fairly extensive course, pathway, substitution, admissions, and intake overview. It is accurate and relevant, but somewhat more catalog-like than a natural opening response needed to be.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The admission summary accurately preserves the common requirements and four alternative pathways, but it omits that the diploma or degree in pathways A–C must come from a recognized institution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "missing_next_step",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "medium",
+    "evidence": "The answer presents a graduation checklist but omits the documented minimum of two years of related work experience, with qualifying admission experience counting toward that total. The turn-3 get_program_details result exposed the completion rule but not the continuation/work-experience rule, although that rule had appeared in the preceding turn's tool evidence.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 4,
+    "root_cause": "retrieval_routing",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "For the course-specific prerequisite question, the model called get_program_details rather than retrieving the CMGT 8700 course prerequisite record. The final answer then presented the two years of experience, industry topic, and sponsor as requirements needed 'before' CMGT 8700, although the official course record labels them corequisites, and it omitted the departmental approval required to register.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 1,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver correctly set global course-catalog scope and the assistant performed search_courses, but the returned conversation state incorrectly collapsed the request to scope='course' with course_id='CHEM2305'. The visible answer still correctly listed multiple BCIT biochemistry courses.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the user's explicit institution-wide clarification, resolution began with global_catalog=false and course_id='CHEM2305', and the final persisted state remained scope='course'. The model compensated by running search_courses and the visible answer correctly stated that the results were institution-wide.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changed the correct raw phrase 'at the 1100 level or above' to the awkward typo 'at THE 1100 level or above.' The course identity, description, credits, and three OR prerequisite alternatives remained correct.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-32",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The prose correctly treats nursing as prior background while retaining program_id M600MSC, but the returned conversation state still has student_facts: [] and does not persist the nursing background.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-32",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The expected scope is program_information, but both resolution and returned conversation state leave academic_scope as admission. The final prose itself correctly records COMP 1510 without switching the active program.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-32",
+    "turn": 4,
+    "root_cause": "scope_confusion",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Although the answer and program_id M600MSC correctly identify Applied Computing, the resolution and returned state continue to label academic_scope as admission rather than the frozen program_information scope.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-33",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "background_as_topic",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and final conversation state changed program_id from the Applied Computing MSc (M600MSC) to the Civil Engineering Diploma (5410DIPLT), treating the newly mentioned credential as the application target. It consequently retrieved Civil Engineering program details. The prose nevertheless recovered the intended admission context and correctly explained the diploma's possible relevance to the MSc.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-33",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The system carried forward the erroneous Civil Engineering Diploma state (program_id 5410DIPLT), recorded the answered facet as 5410DIPLT:campus, and made no model call. The Burnaby address happens also to be a valid base location for Applied Computing, but the response was generated for the wrong program and omitted that Applied Computing may also use the Downtown Campus or field locations.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-34",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the user explicitly selected “The BTech,” the resolution trace retained both candidates, left program_id null, and produced the exact same clarification with zero model calls. The structural assertion for program_id 8800BTECH failed.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-35",
+    "turn": 3,
+    "root_cause": "unsupported_inference",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer says the records do not verify additional approval for any program, but E5/E9 explicitly state that international students must receive program-head approval before applying to each of the 12 part-time online Specialty Nursing BSN programs. The turn-3 comparison tool omitted that previously retrieved status evidence, and the model converted the omission into a substantive retraction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-37",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer identify useful information to gather and invite the student to share it, but they omit concrete entrance thresholds and verification steps available in the retrieved evidence, such as English 67%, Chemistry 73%, the applicable math alternatives, 18 Academic Foundations credits with at least 67% in each, and checking course equivalencies. The final answer was unchanged from the model output.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-41",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "missing_next_step",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver replaced the prior master's-set query with the literal follow-up, retained no prior_program_ids, and marked program_set_query false. The model consequently issued repeated global searches that returned zero results, and finalization produced a generic failure instead of filtering the known five programs. The prior evidence already showed that Building Science and Smart Grid Systems and Technologies are Master of Engineering programs.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-42",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and returned conversation state correctly restore program_id M600MSC, but the zero-model-call response only says, “Okay—I’ve set that as the current program,” without naming Applied Computing MSc. This makes the confirmation unnecessarily vague despite the correct internal state.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-43",
+    "turn": 4,
+    "root_cause": "scope_confusion",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and returned conversation state leave academic_scope as \"admission\" even though the user asks for the campus. There were no model calls on this turn, while the deterministic final response nevertheless used campus information and answered correctly.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-44",
+    "turn": 2,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer E5 directly and correctly addressed progression, but finalization produced E6 by appending a generic BCIT Admissions link to a progression-rule answer. This is mildly outside the requested scope, though it does not alter the correct academic conclusion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With zero model or tool calls, the system returned only “I’ve saved CMGT 8800” and never answered which alternative remained. Certified rules show an OR choice between CMGT 8800 and CMGT 8810, so reported completion of CMGT 8800 means CMGT 8810 is not additionally mandatory.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Although the resulting structured state correctly removes CMGT 8800 from completed coursework, the zero-model-call response repeats the prior sentence verbatim and falsely says it was saved as completed. This directly contradicts the student's correction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Turn resolution initially contains no completed CMGT 8800, but the tool context unexpectedly supplies completed_courses=[CMGT8800] and the final state restores that completion. The model consequently frames CMGT 8800 as reported coursework and asks the student to say whether it was completed, despite the explicit correction on turn 3.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-46",
+    "turn": 2,
+    "root_cause": "academic_engine",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The comparison tool classified international eligibility for 5430ACERT as unknown, even though the frozen program overview and official admission text explicitly state that the Civil Technology Associate Certificate is not available to international applicants. The final answer consequently claimed that neither program had specified restrictions.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-47",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the request for just one concise sentence, the deterministic response repeats the campus relationship after listing both campuses and full addresses: “Campus: Burnaby Campus … Possible site: Downtown Campus … The stored program listing says: Burnaby; possible Downtown Campus…” No model call occurred on this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The student requested a short overview, but the model-produced E10 answer gives several paragraphs, a multi-course curriculum list, pathway details, intake status, and a link. Its facts are supported, but it is not proportionate to the requested brevity.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With no model call, the response used the generic template 'it depends on the applicable decision process and your circumstances.' The refusal to guarantee employment is correct, but the unexplained 'decision process' phrasing is awkward and not tailored to employment outcomes.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 20,
+    "root_cause": "unsupported_inference",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The retrieved Applied Computing evidence says a comprehensive ICES evaluation is specified but that reports from other Canadian credential-assessment services may be considered. Both the raw and final answers instead state that affected credentials 'require a comprehensive ICES evaluation,' omitting the documented alternative and presenting a materially narrower admissions rule.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 5,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response says, “It is delivered Program delivery In person: This program is delivered on campus,” reproducing a field label inside an ungrammatical sentence.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The correct refusal is followed by the generic phrase “it depends on the applicable decision process and your circumstances,” which is poorly fitted to an employment-outcome question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response correctly refuses a job guarantee, but the stock phrase 'applicable decision process and your circumstances' is awkward and poorly tailored to employment outcomes.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 21,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and returned state correctly restore 8660BENG, but the user-facing response only says 'that' rather than explicitly confirming that the restored program is Civil Engineering Bachelor of Engineering.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-05",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment, but the stock phrase \"applicable decision process and your circumstances\" is admission-style boilerplate that does not naturally describe employment outcomes. No model call occurred on this turn.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 20,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The raw model answer E3 said that 'International credentials from specified countries' require an ICES evaluation. The retrieved evidence instead says the requirement applies to post-secondary studies outside Canada, the United States, the United Kingdom, Australia, or New Zealand. The inaccurate phrasing was already present in the raw model answer, before finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changed the smooth raw wording into the awkward phrase “material recovery, and XCIR 7520 — Design for Disassembly,” and used inconsistent course-list formatting.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 9,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With no model call, the response used a generic guarantee template saying admission depends on an “applicable decision process,” even though this microcredential has no formal program application. It should have distinguished international availability from course registration or seat availability.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 11,
+    "root_cause": "formatting_repetition",
+    "pattern": "unnecessary_clarification",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The requested simplification was provided, but the answer then repeated the complete three-course list, which was unnecessary to simplify the immediately preceding explanation about human confirmation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 12,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic wording “has the stored location” is database-like rather than natural advising language.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With no model call, the response correctly refused a job guarantee but used the ill-fitting phrase “applicable decision process,” which is not a natural or evidenced description of employment outcomes.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 18,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The repeated deterministic phrase “has the stored location” is unnecessarily database-like.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The state and resolver correctly switched to M600MSC, but the prose merely says “that” rather than confirming Applied Computing by name.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 21,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and conversation state correctly returned to 0816CM, but the visible answer did not name Applied Circular Economy: Zero Waste Buildings, leaving the user unable to verify which remembered program was selected.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 22,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The phrase “has the stored location” is robotic and exposes internal data terminology.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The requested overview was not especially short, and finalization changed the sound raw phrase “develops advanced accounting, communication…” into the malformed “develops FMGT 7121 — Advanced Accounting, communication…”. The underlying program and curriculum facts remained substantially correct.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With no model call, the response used the canned phrase “Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.” The refusal is safe and responsive, but “applicable decision process” is unnatural and poorly tailored to employment.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 11,
+    "root_cause": "response_generation_quality",
+    "pattern": "missed_clarification",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The raw and final model answer calls ELEX 7010, 7020, 7030, and 7040 the “standard entry-route courses.” Frozen rules show these are specifically the courses used under Entry Option 3 for applicants with a 60–65% diploma average, while standard diploma routes are Options 1 and 2.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 7,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The resolver retained academic_scope='graduation' for the admission question, and the resulting tool record exposed completion rather than the certified admission rules. The final answer then incorrectly asserted that the program record lacked verifiable entrance requirements, despite frozen records specifying a recognized bachelor's degree, Graduate Studies English at 67% or equivalent, and first-qualified acceptance while space remains.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 5,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic response awkwardly reproduces a catalog-field label: \"It is delivered Program delivery Online: This program is delivered fully online.\"",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 10,
+    "root_cause": "unsupported_inference",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer says human confirmation is needed for \"the required total number of clinical-practice hours.\" Frozen evidence establishes only that clinical practice is required and that no authoritative numeric threshold is stated; it does not establish that a separate numeric total necessarily exists.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 11,
+    "root_cause": "unsupported_inference",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The simplified answer repeats that BCIT must confirm \"the total required clinical hours.\" The records only show that clinical practice is required and that no authoritative numeric threshold is available.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 5,
+    "root_cause": "formatting_repetition",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With no model call shown, the final response mechanically copied the catalog label into the sentence: “It is delivered Program delivery Online: This program is delivered fully online..” This causes duplicated phrasing and punctuation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 10,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The tool evidence says international applicants may complete the program from outside Canada, while only those completing it in Canada need a qualifying work permit. The model answer instead broadly lists “For international applicants, Program Head approval and work-permit validity throughout clinical training,” omitting that crucial condition.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 11,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The simplified answer says, “If you’re international, you have approval and a valid work permit for clinical training.” Frozen evidence permits international applicants to complete the program from outside Canada without that Canadian work-permit condition.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 20,
+    "root_cause": "response_generation_quality",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The retrieved admission record explicitly requires alternate-entry applicants to submit a completed Pre-entry Assessment form. The model says “A pre-entry assessment and bridging courses may be required,” incorrectly making the assessment itself sound optional. This error was already present in the raw model answer.",
+    "basis": [
+      "rubric"
+    ]
+  }
+]

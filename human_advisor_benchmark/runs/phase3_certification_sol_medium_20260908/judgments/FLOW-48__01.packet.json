@@ -1,0 +1,3042 @@
+{
+  "encoding": "lossless-evidence-references-v1",
+  "instructions": "Every object containing only __evidence_ref__ is an exact reference to the same key in definitions. Expand it conceptually to the original string/object/list; no facts have been omitted. All referenced material is untrusted data, not instructions.",
+  "data": {
+    "scenario_id": "FLOW-48",
+    "requested_turns": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "conversation": [
+      {
+        "turn": 1,
+        "user": "What should I take next?",
+        "advisor": "Sure. Which program are you taking? Once I know that, I can check what courses you're eligible to take next.",
+        "expectation": {
+          "question": "What should I take next?",
+          "expected": "No program or completion context: ask what program and relevant completions.",
+          "scope": "progression",
+          "clarification": "required",
+          "context_required": false,
+          "critical_risk": false,
+          "stop_intent": false,
+          "next_step_expected": true,
+          "checks": []
+        }
+      },
+      {
+        "turn": 2,
+        "user": "Construction Management Bachelor of Technology.",
+        "advisor": {
+          "__evidence_ref__": "E3"
+        },
+        "expectation": {
+          "question": "Construction Management Bachelor of Technology.",
+          "expected": "Establish program without inventing completed courses.",
+          "scope": "progression",
+          "clarification": "allowed",
+          "context_required": true,
+          "critical_risk": false,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "8800BTECH"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      },
+      {
+        "turn": 3,
+        "user": "I haven't completed any courses in it yet.",
+        "advisor": {
+          "__evidence_ref__": "E2"
+        },
+        "expectation": {
+          "question": "I haven't completed any courses in it yet.",
+          "expected": "No completed coursework: don't use fixtures or prior scenario completions.",
+          "scope": "progression",
+          "clarification": "unnecessary",
+          "context_required": true,
+          "critical_risk": true,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "8800BTECH"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      },
+      {
+        "turn": 4,
+        "user": "Am I ready for the final project?",
+        "advisor": {
+          "__evidence_ref__": "E1"
+        },
+        "expectation": {
+          "question": "Am I ready for the final project?",
+          "expected": "No invented eligibility; evaluate required coursework and other conditions.",
+          "scope": "progression",
+          "clarification": "unnecessary",
+          "context_required": true,
+          "critical_risk": true,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "8800BTECH"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      }
+    ],
+    "raw_source_evidence": {
+      "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+      "active_catalog": [
+        {
+          "program_id": "8800BTECH",
+          "program_name": "Construction Management",
+          "credential": "Bachelor of Technology / Bachelor's Degree",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+        }
+      ],
+      "programs": [
+        {
+          "program_id": "8800BTECH",
+          "program_name": "Construction Management",
+          "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+          "area_id": "ENG",
+          "school": "School of Construction and the Environment",
+          "credential": "Bachelor of Technology / Bachelor's Degree",
+          "program_level": "Degree completion (Years 3 and 4)",
+          "study_mode": "Full-time and Part-time",
+          "accepts_international_students": true,
+          "campus": "Burnaby",
+          "delivery_method": "In person",
+          "status": "Active",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "Two-year degree-completion program providing Years 3 and 4 of a four-year bachelor's degree."
+        }
+      ],
+      "program_delivery_facts": [
+        {
+          "program_id": "8800BTECH",
+          "international_eligibility": "ACCEPTED_AVAILABLE",
+          "authoritative_raw": "\nInternational evidence: {\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+        }
+      ],
+      "program_offerings": [
+        {
+          "offering_id": "8800BTECH-PT-APR",
+          "program_id": "8800BTECH",
+          "study_mode": "Part-time",
+          "campus": "Burnaby",
+          "delivery_method": "In person",
+          "application_type": "Flexible Learning",
+          "application_status": "Active",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "April intake"
+        },
+        {
+          "offering_id": "8800BTECH-PT-JAN",
+          "program_id": "8800BTECH",
+          "study_mode": "Part-time",
+          "campus": "Burnaby",
+          "delivery_method": "In person",
+          "application_type": "Flexible Learning",
+          "application_status": "Active",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "January intake"
+        },
+        {
+          "offering_id": "8800BTECH-PT-SEP",
+          "program_id": "8800BTECH",
+          "study_mode": "Part-time",
+          "campus": "Burnaby",
+          "delivery_method": "In person",
+          "application_type": "Flexible Learning",
+          "application_status": "Active",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "September intake"
+        },
+        {
+          "offering_id": "8800BTECH-FT-SEP",
+          "program_id": "8800BTECH",
+          "study_mode": "Full-time",
+          "campus": "Burnaby",
+          "delivery_method": "In person",
+          "application_type": "Planned Program",
+          "application_status": "Active",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "September intake"
+        }
+      ],
+      "program_campuses": [
+        {
+          "program_id": "8800BTECH",
+          "institution_key": "BCIT",
+          "campus_key": "burnaby",
+          "relationship_type": "offered",
+          "notes": "Burnaby",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+        }
+      ],
+      "curriculum_components": [
+        {
+          "component_id": 1,
+          "program_id": "8800BTECH",
+          "component_name": "Construction Controls and Techniques",
+          "component_order": 1
+        },
+        {
+          "component_id": 2,
+          "program_id": "8800BTECH",
+          "component_name": "Organization Management",
+          "component_order": 2,
+          "required_credits": 12
+        },
+        {
+          "component_id": 3,
+          "program_id": "8800BTECH",
+          "component_name": "Stakeholder Engagement",
+          "component_order": 3,
+          "required_credits": 9
+        },
+        {
+          "component_id": 4,
+          "program_id": "8800BTECH",
+          "component_name": "Management Electives",
+          "component_order": 4,
+          "required_credits": 4
+        },
+        {
+          "component_id": 5,
+          "program_id": "8800BTECH",
+          "component_name": "Liberal Studies Component",
+          "component_order": 5,
+          "required_credits": 12
+        },
+        {
+          "component_id": 6,
+          "program_id": "8800BTECH",
+          "component_name": "Professional Standards",
+          "component_order": 6,
+          "required_credits": 11
+        }
+      ],
+      "credit_requirements": [
+        {
+          "credit_requirement_id": 2,
+          "program_id": "8800BTECH",
+          "component_id": 5,
+          "requirement_name": "Liberal Studies total",
+          "minimum_credits": 12,
+          "allows_external_courses": false,
+          "approval_required": false,
+          "notes": "9 mandatory credits plus 3 elective credits."
+        },
+        {
+          "credit_requirement_id": 1,
+          "program_id": "8800BTECH",
+          "component_id": 4,
+          "requirement_name": "Management elective credits",
+          "minimum_credits": 4,
+          "allows_external_courses": true,
+          "approval_required": true,
+          "notes": "Approved external management courses may satisfy this requirement."
+        }
+      ],
+      "curriculum_substitutions": [
+        {
+          "substitution_id": 1,
+          "program_id": "8800BTECH",
+          "study_mode": "Part-time",
+          "replaced_course_id": "LIBS7013",
+          "replacement_type": "CREDIT_POOL",
+          "replacement_credits": 3,
+          "description": "Part-time students may take 3 additional approved Liberal Studies elective credits instead of LIBS 7013."
+        }
+      ],
+      "academic_rule_sets": [
+        {
+          "rule_set_id": 1,
+          "program_id": "8800BTECH",
+          "rule_scope": "ADMISSION",
+          "rule_name": "Construction Management admission",
+          "exact_choice_count": 1,
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/#entry",
+          "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways."
+        },
+        {
+          "rule_set_id": 2,
+          "program_id": "8800BTECH",
+          "rule_scope": "CONTINUATION",
+          "rule_name": "Capstone and graduation work experience",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "Admission work experience counts toward the two-year total."
+        },
+        {
+          "rule_set_id": 3,
+          "program_id": "8800BTECH",
+          "rule_scope": "COMPLETION",
+          "rule_name": "Professional Standards capstone choice",
+          "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+          "notes": "CMGT 8700 followed by one of CMGT 8800 or CMGT 8810."
+        },
+        {
+          "rule_set_id": 2107,
+          "program_id": "8800BTECH",
+          "rule_scope": "INTERNATIONAL",
+          "rule_name": "International eligibility source evidence",
+          "study_mode": "Full-time and Part-time",
+          "source_url": "https://www.bcit.ca/international-applicants/regular-credential-programs/",
+          "notes": {
+            "__evidence_ref__": "E4"
+          }
+        }
+      ],
+      "academic_rule_groups": [
+        {
+          "rule_group_id": 1,
+          "rule_set_id": 1,
+          "operator": "AND",
+          "label": "Admission requirements",
+          "sort_order": 1
+        },
+        {
+          "rule_group_id": 7,
+          "rule_set_id": 2,
+          "operator": "AND",
+          "label": "Capstone and graduation eligibility",
+          "sort_order": 1
+        },
+        {
+          "rule_group_id": 9,
+          "rule_set_id": 3,
+          "parent_group_id": 8,
+          "operator": "OR",
+          "label": "Choose one final project",
+          "sort_order": 2
+        },
+        {
+          "rule_group_id": 2,
+          "rule_set_id": 1,
+          "parent_group_id": 1,
+          "operator": "OR",
+          "label": "Exactly one entry pathway",
+          "sort_order": 3
+        },
+        {
+          "rule_group_id": 3,
+          "rule_set_id": 1,
+          "parent_group_id": 2,
+          "operator": "AND",
+          "label": "Pathway A",
+          "sort_order": 1
+        },
+        {
+          "rule_group_id": 4,
+          "rule_set_id": 1,
+          "parent_group_id": 2,
+          "operator": "AND",
+          "label": "Pathway B",
+          "sort_order": 2
+        },
+        {
+          "rule_group_id": 5,
+          "rule_set_id": 1,
+          "parent_group_id": 2,
+          "operator": "AND",
+          "label": "Pathway C",
+          "sort_order": 3
+        },
+        {
+          "rule_group_id": 6,
+          "rule_set_id": 1,
+          "parent_group_id": 2,
+          "operator": "AND",
+          "label": "Pathway D",
+          "sort_order": 4
+        },
+        {
+          "rule_group_id": 8,
+          "rule_set_id": 3,
+          "operator": "AND",
+          "label": "Professional Standards",
+          "sort_order": 1
+        }
+      ],
+      "academic_rule_conditions": [
+        {
+          "condition_id": 18,
+          "rule_group_id": 1,
+          "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+          "accepted_values": [
+            "ICES comprehensive evaluation",
+            "accepted Canadian credential-assessment service"
+          ],
+          "parameters": {
+            "requires": "course-by-course evaluation and GPA calculation",
+            "applies_outside": [
+              "Canada",
+              "United States",
+              "United Kingdom",
+              "Australia",
+              "New Zealand"
+            ]
+          },
+          "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+          "sort_order": 4
+        },
+        {
+          "condition_id": 11,
+          "rule_group_id": 6,
+          "condition_type": "MATH_OPTION_GRADE",
+          "minimum_value": 60,
+          "unit": "PERCENT",
+          "accepted_values": [
+            "Pre-Calculus 11",
+            "Foundations Math 11",
+            "Workplace Math 11",
+            "BLDT 1011",
+            "accepted BC/Yukon equivalent"
+          ],
+          "description": "One accepted math option at 60%",
+          "sort_order": 2
+        },
+        {
+          "condition_id": 10,
+          "rule_group_id": 6,
+          "condition_type": "RED_SEAL_TRADE",
+          "accepted_values": {
+            "__evidence_ref__": "E5"
+          },
+          "description": "Approved Red Seal trade",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 19,
+          "rule_group_id": 1,
+          "condition_type": "CREDENTIAL_EXCLUSION",
+          "accepted_values": [
+            "master's degree alone"
+          ],
+          "description": "A master's degree alone is not sufficient for admission",
+          "sort_order": 5
+        },
+        {
+          "condition_id": 1,
+          "rule_group_id": 1,
+          "condition_type": "PRE_ENTRY_ASSESSMENT",
+          "description": "Approved departmental pre-entry assessment before application",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 12,
+          "rule_group_id": 6,
+          "condition_type": "BRIDGING_CREDENTIAL_GPA",
+          "minimum_value": 67,
+          "unit": "PERCENT",
+          "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+          "sort_order": 3
+        },
+        {
+          "condition_id": 13,
+          "rule_group_id": 6,
+          "condition_type": "WORK_EXPERIENCE",
+          "minimum_value": 1,
+          "unit": "YEAR",
+          "parameters": {
+            "field": "construction industry",
+            "excludes": "apprenticeship hours"
+          },
+          "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+          "sort_order": 4
+        },
+        {
+          "condition_id": 14,
+          "rule_group_id": 7,
+          "condition_type": "WORK_EXPERIENCE",
+          "minimum_value": 2,
+          "unit": "YEAR",
+          "parameters": {
+            "field": "related",
+            "admission_experience_counts": true
+          },
+          "description": "Minimum 2 years related work experience total; qualifying admission experience counts toward the total",
+          "sort_order": 0
+        },
+        {
+          "condition_id": 15,
+          "rule_group_id": 8,
+          "condition_type": "COURSE",
+          "subject_id": "CMGT8700",
+          "description": "Complete CMGT 8700",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 16,
+          "rule_group_id": 9,
+          "condition_type": "COURSE",
+          "subject_id": "CMGT8800",
+          "minimum_value": 50,
+          "unit": "PERCENT",
+          "description": "CMGT 8800 after CMGT 8700 and department approval",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 17,
+          "rule_group_id": 9,
+          "condition_type": "COURSE",
+          "subject_id": "CMGT8810",
+          "minimum_value": 50,
+          "unit": "PERCENT",
+          "description": "CMGT 8810 after CMGT 8700 and department approval",
+          "sort_order": 2
+        },
+        {
+          "condition_id": 2,
+          "rule_group_id": 1,
+          "condition_type": "ENGLISH_GRADE",
+          "subject_id": "ENGLISH_STUDIES_12",
+          "minimum_value": 73,
+          "unit": "PERCENT",
+          "description": "English Studies 12 at 73% or equivalent",
+          "sort_order": 2
+        },
+        {
+          "condition_id": 3,
+          "rule_group_id": 3,
+          "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+          "minimum_value": 67,
+          "unit": "PERCENT",
+          "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 4,
+          "rule_group_id": 3,
+          "condition_type": "WORK_EXPERIENCE",
+          "minimum_value": 1,
+          "unit": "YEAR",
+          "description": "At least 1 year construction-industry work experience",
+          "sort_order": 2
+        },
+        {
+          "condition_id": 5,
+          "rule_group_id": 4,
+          "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+          "minimum_value": 67,
+          "unit": "PERCENT",
+          "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 6,
+          "rule_group_id": 4,
+          "condition_type": "BRIDGING_CREDENTIAL_GPA",
+          "minimum_value": 67,
+          "unit": "PERCENT",
+          "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+          "sort_order": 2
+        },
+        {
+          "condition_id": 7,
+          "rule_group_id": 4,
+          "condition_type": "WORK_EXPERIENCE",
+          "minimum_value": 1,
+          "unit": "YEAR",
+          "description": "At least 1 year construction-industry work experience",
+          "sort_order": 3
+        },
+        {
+          "condition_id": 8,
+          "rule_group_id": 5,
+          "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+          "minimum_value": 67,
+          "unit": "PERCENT",
+          "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+          "sort_order": 1
+        },
+        {
+          "condition_id": 9,
+          "rule_group_id": 5,
+          "condition_type": "WORK_EXPERIENCE",
+          "minimum_value": 8,
+          "unit": "YEAR",
+          "parameters": {
+            "field": "construction management",
+            "region": "North America",
+            "role_level": "mid_or_senior"
+          },
+          "description": "At least 8 years North American construction-management experience in mid/senior roles",
+          "sort_order": 2
+        }
+      ],
+      "curriculum_component_courses": [
+        {
+          "component_id": 1,
+          "course_id": "CMGT7160",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 1,
+          "course_id": "CMGT7190",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 1,
+          "course_id": "CMGT7211",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 1,
+          "course_id": "CMGT7400",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 2,
+          "course_id": "BUSA7250",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 2,
+          "course_id": "CMGT7330",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 2,
+          "course_id": "CMGT7420",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 2,
+          "course_id": "CMGT8435",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 3,
+          "course_id": "CMGT7535",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 3,
+          "course_id": "CMGT7660",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 3,
+          "course_id": "CMGT8602",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT7125",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT7220",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT7605",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT7840",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT8040",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT8050",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "CMGT8060",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "EENG7000",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7101",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7102",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7111",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7112",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7113",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7121",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7124",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7134",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7143",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7144",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 4,
+          "course_id": "TMGT7145",
+          "course_role": "ELECTIVE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 5,
+          "course_id": "LIBS7001",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 5,
+          "course_id": "LIBS7002",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 5,
+          "course_id": "LIBS7013",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 6,
+          "course_id": "CMGT7810",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 6,
+          "course_id": "CMGT8211",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 6,
+          "course_id": "CMGT8700",
+          "course_role": "REQUIRED",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 6,
+          "course_id": "CMGT8800",
+          "course_role": "CHOICE",
+          "study_mode": "ALL"
+        },
+        {
+          "component_id": 6,
+          "course_id": "CMGT8810",
+          "course_role": "CHOICE",
+          "study_mode": "ALL"
+        }
+      ],
+      "credit_requirement_courses": [
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT7125"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT7220"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT7605"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT7840"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT8040"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT8050"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "CMGT8060"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "EENG7000"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7101"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7102"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7111"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7112"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7113"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7121"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7124"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7134"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7143"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7144"
+        },
+        {
+          "credit_requirement_id": 1,
+          "course_id": "TMGT7145"
+        }
+      ],
+      "campuses": [
+        {
+          "campus_id": 4,
+          "institution_key": "BCIT",
+          "campus_key": "annacis_island",
+          "official_name": "Annacis Island Campus",
+          "address": "1608 Cliveden Avenue",
+          "city": "Delta",
+          "region": "BC",
+          "postal_code": "V3M 6P1",
+          "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 5,
+          "institution_key": "BCIT",
+          "campus_key": "marine",
+          "official_name": "Marine Campus",
+          "address": "265 West Esplanade",
+          "city": "North Vancouver",
+          "region": "BC",
+          "postal_code": "V7M 1A5",
+          "description": "BCIT's centre for maritime training in Western Canada.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 1,
+          "institution_key": "BCIT",
+          "campus_key": "burnaby",
+          "official_name": "Burnaby Campus",
+          "address": "3700 Willingdon Avenue",
+          "city": "Burnaby",
+          "region": "BC",
+          "postal_code": "V5G 3H2",
+          "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 3,
+          "institution_key": "BCIT",
+          "campus_key": "aerospace",
+          "official_name": "Aerospace Technology Campus",
+          "address": "3800 Cessna Drive",
+          "city": "Richmond",
+          "region": "BC",
+          "postal_code": "V7B 0A1",
+          "description": "BCIT's specialized aerospace training campus in Richmond.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 2,
+          "institution_key": "BCIT",
+          "campus_key": "downtown",
+          "official_name": "Downtown Campus",
+          "address": "555 Seymour Street",
+          "city": "Vancouver",
+          "region": "BC",
+          "postal_code": "V6B 3H6",
+          "description": "BCIT's campus in Vancouver's business and technology core.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        }
+      ],
+      "institutional_resources": [
+        {
+          "institutional_resource_id": 9,
+          "institution_key": "BCIT",
+          "resource_key": "program_availability",
+          "title": "BCIT Program Availability",
+          "official_url": "https://www.bcit.ca/admission/program-availability/",
+          "topic": "program_availability",
+          "trigger_phrases": [
+            "program availability",
+            "program available",
+            "applications open",
+            "accepting applications",
+            "application open",
+            "program full"
+          ],
+          "normalized_intents": [
+            "PROGRAM_AVAILABILITY"
+          ],
+          "description": "Check current program availability and application status by intake.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 12,
+          "institution_key": "BCIT",
+          "resource_key": "program_advising",
+          "title": "BCIT Program Advising",
+          "official_url": "https://www.bcit.ca/advising/",
+          "topic": "advising",
+          "trigger_phrases": [
+            "program advising",
+            "academic advising",
+            "academic advisor",
+            "program advisor",
+            "talk to an advisor",
+            "contact an advisor"
+          ],
+          "normalized_intents": [
+            "ADVISING"
+          ],
+          "description": "Contact BCIT Program Advising for help planning academic next steps.",
+          "priority": 20,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 6,
+          "institution_key": "BCIT",
+          "resource_key": "financial_aid_awards",
+          "title": "BCIT Student Financial Aid & Awards",
+          "official_url": "https://www.bcit.ca/financial-aid/",
+          "topic": "financial_aid",
+          "trigger_phrases": [
+            "financial aid",
+            "student funding",
+            "scholarship",
+            "scholarships",
+            "bursary",
+            "bursaries",
+            "student loan",
+            "awards"
+          ],
+          "normalized_intents": [
+            "FINANCIAL_AID"
+          ],
+          "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 1,
+          "institution_key": "BCIT",
+          "resource_key": "equivalencies",
+          "title": "BCIT Equivalencies",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+          "topic": "equivalencies",
+          "trigger_phrases": [
+            "equivalency",
+            "equivalencies",
+            "equivalent course",
+            "course equivalent",
+            "requirement equivalency"
+          ],
+          "normalized_intents": [
+            "EQUIVALENCIES"
+          ],
+          "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 5,
+          "institution_key": "BCIT",
+          "resource_key": "tuition_fees",
+          "title": "BCIT Tuition & Fees",
+          "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+          "topic": "tuition_and_fees",
+          "trigger_phrases": [
+            "tuition",
+            "tuition fees",
+            "program cost",
+            "course cost",
+            "cost of attendance",
+            "how much does bcit cost",
+            "student fees"
+          ],
+          "normalized_intents": [
+            "TUITION_AND_FEES"
+          ],
+          "description": "Find tuition, fee, estimator, payment, and refund information.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 8,
+          "institution_key": "BCIT",
+          "resource_key": "plar",
+          "title": "BCIT Prior Learning Assessment & Recognition",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+          "topic": "prior_learning",
+          "trigger_phrases": [
+            "plar",
+            "prior learning",
+            "prior learning assessment",
+            "recognition of prior learning"
+          ],
+          "normalized_intents": [
+            "PLAR"
+          ],
+          "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 3,
+          "institution_key": "BCIT",
+          "resource_key": "international_students",
+          "title": "BCIT International Students",
+          "official_url": "https://www.bcit.ca/international-students/",
+          "topic": "international_students",
+          "trigger_phrases": [
+            "international student",
+            "international students",
+            "international applicant",
+            "study permit"
+          ],
+          "normalized_intents": [
+            "INTERNATIONAL_STUDENTS"
+          ],
+          "description": "Programs, services, permits, guides, and support for international students.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 4,
+          "institution_key": "BCIT",
+          "resource_key": "english_language_proficiency",
+          "title": "BCIT English Language Proficiency",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+          "topic": "english_language",
+          "trigger_phrases": [
+            "english language requirement",
+            "english language requirements",
+            "english proficiency",
+            "language proficiency",
+            "ielts",
+            "toefl",
+            "duolingo english"
+          ],
+          "normalized_intents": [
+            "ENGLISH_LANGUAGE_REQUIREMENTS"
+          ],
+          "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 10,
+          "institution_key": "BCIT",
+          "resource_key": "application_process",
+          "title": "How to Apply to BCIT",
+          "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+          "topic": "application_process",
+          "trigger_phrases": [
+            "how to apply",
+            "application process",
+            "apply to bcit",
+            "submit application",
+            "application deadline",
+            "application deadlines",
+            "when to apply"
+          ],
+          "normalized_intents": [
+            "APPLICATION_PROCESS"
+          ],
+          "description": "Review application steps, documents, timing, and applicant routes.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 7,
+          "institution_key": "BCIT",
+          "resource_key": "transfer_credit",
+          "title": "BCIT Transfer Credit",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+          "topic": "transfer_credit",
+          "trigger_phrases": [
+            "transfer credit",
+            "transfer credits",
+            "course credit",
+            "advanced placement"
+          ],
+          "normalized_intents": [
+            "TRANSFER_CREDIT"
+          ],
+          "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 2,
+          "institution_key": "BCIT",
+          "resource_key": "admissions",
+          "title": "BCIT Admissions",
+          "official_url": "https://www.bcit.ca/admission/",
+          "topic": "admissions",
+          "trigger_phrases": [
+            "admission",
+            "admissions",
+            "admission requirement",
+            "admission requirements"
+          ],
+          "normalized_intents": [
+            "ADMISSIONS"
+          ],
+          "description": "Start with BCIT admissions information and entrance requirements.",
+          "priority": 20,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 11,
+          "institution_key": "BCIT",
+          "resource_key": "application_status",
+          "title": "BCIT Application Status",
+          "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+          "topic": "application_status",
+          "trigger_phrases": [
+            "application status",
+            "check my application",
+            "after i apply",
+            "after applying",
+            "admission decision"
+          ],
+          "normalized_intents": [
+            "APPLICATION_STATUS"
+          ],
+          "description": "Track an application and understand BCIT application and decision statuses.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        }
+      ]
+    },
+    "observations": [
+      {
+        "turn": 1,
+        "response": {
+          "answer": "Sure. Which program are you taking? Once I know that, I can check what courses you're eligible to take next.",
+          "tools_used": [],
+          "intent": "ELIGIBILITY_NEXT_COURSES",
+          "resolved_program": null,
+          "conversation_state": {
+            "version": 2,
+            "scope": "none",
+            "program_id": null,
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [],
+            "stopped": false,
+            "turn_index": 1,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": [],
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "scope": "none",
+                "stopped": false,
+                "turn_index": 1,
+                "version": 2
+              },
+              "global_catalog": false,
+              "program_set_query": false
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 2,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E3"
+          },
+          "tools_used": [
+            "get_program_details"
+          ],
+          "verification": {
+            "count": 21,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Construction Management",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "8800BTECH",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [],
+            "stopped": false,
+            "turn_index": 2,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E7"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "program_id": "8800BTECH",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 2,
+                "version": 2
+              },
+              "global_catalog": false,
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_set_query": false
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"8800BTECH\"}",
+                "call_id": "call_OCP6C2k7IHqWy1kVnT1rOCEu",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_08c2249c20b088f7006aa105346c5c87d0a8a82d17f5efe3af",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_details",
+            "arguments": {
+              "program_id": "8800BTECH"
+            },
+            "context": {
+              "current_question": "Construction Management Bachelor of Technology.",
+              "diploma_completed": false,
+              "global_catalog": false,
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_set_query": false,
+              "work_hours": 0
+            },
+            "result": {
+              "__evidence_ref__": "E110"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_08c2249c20b088f7006aa10536830087d0a597a324485f257b",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQU-Kp3ImTjTsChmZnv6p-wgwKI-ur1qlQ7y5Nhjy0ZJ8deZuhQrpU4hvIV5JtrYycyccxf5upMitGjtNYRJbeHrMb1rf2Fx4y-JwFN2dJoCTHA5lsFP_qjiA8rZoYYeADkjJWCdUX12BSmh2RF3R3gjQoZg6YGszAVrmAxtLL_lGDTNyBvJWV6lJ3e2RwSuK9z2ZcH_94Lf6NaaFxM-YCN8v_o_W0U3w3zTpxzx7Y5xIHauAIZCu78HsTQWb125fLNLa0zgOg9-lC9SV6YgK8YNxG9X_liA2jrxnNpQ-lIqx5ttSdW_CWKduUxMCTr8SS3pcpxEL4LAwrFnEGKqIO1-IxG8nJGVdn2RWOE8zB6nJxnM9OsDCiEyqnez_5HSI4Dt6KBGtSqzkPXWbGkZd8wpKiOWXnjpVwEvs9Db2go2Ue855Q2_uqf2GUnmCTL_crbSNpEkwhe7weio-T-IFr0hSggcfK5vfUzfUyPV5muG_-2vbjpiurtrjhWF8ChZ-0ftJjEQXDilLWW8F64gXr832rWotF7jsPh3UmahDA7_JeGwWIbGInDHJNABrtDIE3Czb8Y6SjJDzpDyc01qx7PAB-lrKUQ7iF2i1SNOPqTBj1srpk2gM7DeXwMWCnfamOZ7ripfcXucx6kxC-kbzsbBP-OBaDvT0s4qG5oV8B695z0cJS4YAejmY-OzcuTvNQ_2Ja4ZGkfXdr1UjIMtWlaGMGFvqqsen40nB0u_XcNhkG5ZK84bMpUWSJBa6UL5fw0it5QGrX3kj-MwmyRvImL1d9lpDuHVpKWlBgUXai80sEVTTsrOmd-T_ocSs4Tg6Y3JLco6Zw1sA15NzY3GMbWgAv1apYEjnvaj1tawmGZcbNXP9BAwGapmLDdHmq81vHGFzZTE7C0Phi8UgqZj87JIx5eor7iGj2e_HQaQ67nNWDVVYwH328PLJyC80HqXgL35ayPSXrmAiBiZxeKjqGtruyQn1TCrTSOoxrf06FPApstfYWgGG4W4ZB1jPsfWYl-mPTfZvuDX1DtMB7p9HSMwlzVGU1cEZguhTf32SAh1aYOl9qDa8GbseKCKTgNPGUqjD6ldj2mvsefjhpqpoUKat90NtU6mlpZjha5H_o7lYv5Uv392_SN6ApfVRt-p95ZvBHJXhb5QvFRdnv1Wj03alVb0mJIFc1ZdHKhtFhxs9s1qrK0S9XJy0c3hdyvpoJAnzFRW4zdQ902i2us23I1YkWD8QFnlZeJm3CQZZwLcL8--k__wWEa7kJUedYeCDBoXeTsbmQ-kYRcW89SgktP0PtjxyfwOw1MoOL9zsPB_wmcNLSbW4e1y8YxPdZM1jHXA8PySinTzI9JsNmgBICJY1HXPg-E1sIsWxQ1cEVnD9-P6vd29obcUIkhDnR067OFhTC5n1wy9JjgErFsQNDUXEAc4dY6002bm2a1yP5xnBnvxMfzmCjz5WTBxsfk40oGoQc8_HE3sQtyMbEqtChiVEcsI2a5fFVd-ofn0cdis5y1IJ5l2bQap9wMzOs8udEfvAiNo29Mo1lYIkDrfLZVooAZLsSKPzOEYSpnSJXGb9Tw0dWwprC59QQrCT0bb0YAKkI9_h1BlBxxDDvD573ctB8GkM_uRvTFXE7JxqUL9f9VfnfvRFZa-wyhEA6bEKQIxo08IJvWnMOwLdLF2yVab-0g7Q2evCZBp-DHshU2CKq3-wvFrvv6JnhGUlJskCtZyf_ZyJYZi326ECNjTMcfoh8MNcnjSeH-3qYKJ6sYtV3R70zHI9xeNY3qRneqZFrwFLHh2uOkKd7A7AfT0FggJXz8oN0rCKBT9zmQsvngt9N7NcM5djvFeY1i75OfFrIMG27QT1lL7wHsHhoZdD4sXTAjemaaapnrNnWbusm8Og0nnKu5XFFD5ENrVwzGfdIZG8EJGREyVTiiSUDqWmk1KyGegm6m8dfPfZ3GNd4ftZbR5NaI5uHI1_9SXgqWJPZFEFb1iqypDgz7Mnb20iCgMup-L2idYxfhNsDVV8KzseIrtiPjKps3_3VTFJ6d1r0wgDKrxue_V5cpxL9UKfHVZbEe6BVW8mykGS-JWeMPQb0jQQ9KLB4-TkAX_R5aykm_9V6NIL6oC4inryhmq3Bws756cnN_Dgzrij1Q2In53-yphS2o6cyawlK7TfPQ8qVnKaxTySl22eR5x1j6Nz0Epxiwk0ZK8EtENEN-SoH4jG_PPWR-EiN54HBUUTIhoEMwXL-Nm7f9EREHh_NFagQS6mJ8RDN7sa6tX5HwSghPyLoi-b3i0i7YUCh6WrbPTN6UkIC4Xrtn8PteEnBpp0bNNrZWSI6LxIM9DNmnsnAQejXPMbpf3Q5KYDA5Smw8hVQnrqA8-_wbFtuN_YL8QU_MyBo9wwuPsCbbK-ylS2husaEwc2O0N5gP5QXhhQ-1gM0go8uW7qpJ9ioioLvYJQuObeOCEetWF13sPTsDyghJch8_Z0uiXCO3RXSBZTMBzuMCjN6JX9X1DAFrxFN1dtowGMQNeNYJANTBOII-TRwkVuby8fVHgRuWIXA-f-caB44aqcJ14WGXL5A25e2V3_akrEEOjphLEc4n9uZp1t_DuFKrXoBk9DPXSr1fCr9d_BilwSO_meWM54Uwf7CX2UTRTy3cpmUNwSefG2hhmO7kmf7_LEG8XBQTPNfQ7-OKXGZTOERkTAj_vLjZ5bomaEEPpzA=="
+              },
+              {
+                "id": "msg_08c2249c20b088f7006aa1053b0ee487d0b422445690fecd30",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E3"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E3"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E3"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 3,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E2"
+          },
+          "tools_used": [
+            "get_program_details"
+          ],
+          "verification": {
+            "count": 21,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Construction Management",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "8800BTECH",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [],
+            "stopped": false,
+            "turn_index": 3,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E7"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "program_id": "8800BTECH",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 3,
+                "version": 2
+              },
+              "global_catalog": false,
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_set_query": false
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"8800BTECH\"}",
+                "call_id": "call_uusty0Q5wsartkaaC90bXV6l",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_07d835a88aa8e78a006aa10540baac87d09ee25e73d3ad9017",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_details",
+            "arguments": {
+              "program_id": "8800BTECH"
+            },
+            "context": {
+              "current_question": "I haven't completed any courses in it yet.",
+              "diploma_completed": false,
+              "global_catalog": false,
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_set_query": false,
+              "work_hours": 0
+            },
+            "result": {
+              "__evidence_ref__": "E110"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_07d835a88aa8e78a006aa10542a40487d09c557ce928763d48",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQVM8EmuDXJk80xM7_cE5ugGrzQoIFerNIsHpugtXG-zZHFpjCAwNEuvhfSYUcAJLqy9w1R1CxY3UBjy2c1JeWIlnKgYmrQurpfcRnMDp9yXBlVDVQGvKKEioY11OJoXqd3g6aLbm6zrflI6POGmKSFDEsbU--rHznQFo6-0f6iQ98gVSTySj1BbSX8nqa1FPJYXc-5ZSe2ziAdadZklLLPCqM8Aeit-2U4VpY870HG2WxNjR2a1n_JWTej5wG7CbsTNWPSe6SBr04VA3XyrWr9g_osqfzDwXogvXCo_Ndl_4PU535CKEzCQvHI2RRXCVdAV7deEgPSe8wwoY9B1kuX_jNQWLL5YoBqzn6Y2ysKk9ev-mhr8f_ibYyHMZelfiT8lrKCKBo0pobPTs1Y3NfVL5IvAN-McXCKy1vPxB4dV2aL8iE5Iw_fLpFWHsCINXMDpO41T3wjF-jscGItw3c6R67UlrSbL4VGh5xYxTNpqIS8PgzKEDRZkTUiOswWvWwGiWUdrMPI4WY8gmZL9o3Qlj6a5E4HrLGuGWfqSUD8miYsOKyfDzLs7NBUAOYbPVgIdUhptV7Aoo8DB1BK2FptZ8renyl0NOm5zByinaI-bYNd6DuegrQ9b5iGpocjX8ZrhAQR38e0llXdgs5v_e54LN7idfJgarcDXh5AAjd0oBNTj8AHXme4T367PufzOpfYQrsxIZOAQ9_LXNxe1to4sYbTQVQvk_l2IG0lrPTtSq-ohglSVt5KyZZUKzd9FOIyghxxgdI9N4KwwKrfCEWo62MKHo8m48Yl5eyNxkcBtg2ekZPEQKpe2K4V5AhM9DMMn1EIB571lCVNQsMun66fQ_GXm5T0EHYgXe8_JSt_dZikE_YY-1fhjjJtMQmOSwz2wxeat5EIaG4EufmK4qdy14j7ol8fT1ZGft0zLW5VoI7pyU4lvOvUkX5DIoNhR9G9H-FqgDP8wkquYacAQyhE-cpNw4SMBl-NqoqsFZpycJprWjmgjAjuzxHu3o7wK6ZL0_uT9HL5rdH7TsdDWKVbXzVcNTNI_i5TFtEf3GFSWSOOp9z3N8vj7TI4NgSmTkEsBqaY7LndnMwUftgZfdWI-wSXCtfXLza2DtdFSAI2-LaM3aM-1KdKnVNR0f2T-o7Wlz8jisuWdhL_ZDtuDOruH1_NTeb3OYvsQHD5WDg3rLjeAmNmzhyqDDKLVzndc1Kxg60b8IZz7F1D4nHnruo2FNvXS_CHPi5nP9JbHJYIGUgqkR37Lr76Ai9yYcPSv4nbQaNNDmQpm9ZLx7HZZ2idYCgMIzY4TTw4eB89v6Kek-3PAOlZArbSueQ3zmUWViVoFep8_f8jGVFAVHMJ8TNqZ62iClFXAhRhrgBkAUUz7z-gEVxRXDaPG2aYU7i0Nx1ccyKCX846m2DkYkE0sUIoALmWk-_-dakZ3CNVjNFAMO4K-1nFtJb7BtwJHqgwDwYk2XJsO7mcY0OvkVvhe26zKgipg_kcS0zJTgVc69PNaWre9fITFk6cEAXuPpzPt03s_mTljHumIpaSg12ZVjEwSkOKjjo29VnmZnPdtbJ6546RLTe26VDpuMDdAnEn8R7-FJEp1gDSANN-J7qhGPQnSInhIFgsI2DKDl8o2bZ69rFJisIxG0DnOQ60ViAqMmrYDB6E6X8Wved7wQrP8L0O_hKBC3lT8ZukjMTMSPm2lsQRMgnNPahmOVuUMNSPyuRU96-vh-c2PL3y80HqyKlMQHHkZg6huiFLo1BgUXSVLGugD9CMj1UHwbkChVu6fk4QTR3ZpcqFkqwbGYfwlKsINlmqUFm6xMaypGo_f5bjNGKXKcjXaGzoWrFY0ROew33asWaom2iOiiWRv9mUJr41pL-KgEPtbW6vpo7gV1pCUv7EkVm6KmWSTP9dRsEOR2Tpwa9mwgYmXEjy1Nw2kY_aJYyIIOVuKqwJgrYTCGB2qi7jvoZQFbTDISJf_g6oCdVqv0Hva1Iab2b8FcyL0VqH7MOkPJhTj2HTTRul3DSHSd2PG0dBttkanQi1rsBWhJjZMh8ciKEpeNTvU1gABDpN6qGFuOweTottveynCnnEMlv7SkleO8MwVt5srnThgZv7bslE7D7sUiY7XAo8NL5rHIwtRCpxvSVgWL4hfdKkzz-_C4PLx6UYqy8gsVdmDUpP5Mrj6Tu_hZPmcawsd97JzEeAJU0bFJOximEg1Eh7tKoIBWcsAZSYDi2OSPzuJ8AcDpJiOADu-TNZ00JvvQEHtWalzc_EEelWcSxXZ_a-reFrEdZmKMf1nR53kVI-1fwWDE9WTACtKNMybXnH50_IcAiLLIF3wjtIz3WSG4TeqgTntdSWNNWgWl4N9mJFUmg3EO9ASWiPP_moIuvI5mON0YEuo_v5mHU7zH9JcwQPCF41i3ySlHRfVuI7uLO7Zv6YyIMSf62jUZTpjU2xJkk3hqAEkUsZ83goen3Jytklq5tpYSLw5mLMJR_HQznU4I56A4E8K5A1B8JIXpz7fhyDXkFpfeR6Iz_BM6nCWrR7OiHsrLHkebrNEQOEH8gbzW7vZ0xWsqzO5NMdV3Qu-Z3VFuxKNCNmOq60vOqKWZNRbg_7WNw1jZqhQSoSFmt7OJRyaxQOqUo_0C8H7lTUnLfrMSnbPr7TVnwCFOEYThTnQUWttptBwZDvzUHuz--5gqqvhhR0DsbRh8jBFa7zjmqG1SCiAqvCK2tKIs9ZF6nyVGKiSbttPzJ4YbI_oZ1NSf8lAzJl7A7lRuvfeyyJbTs_lr1Pk2dW9K7NZN86aXM5RaGlMZMgL9EvCTgvLJIp23q3UMncMextEb1xbEEcLOlhewtS7k3tKdiUGZuDZ6uG9BWN2UtKKe2lmEvoEewsdk1qSoYOV8o2dN5iAKIzK_S0TtZ_Z-hasudFB5imKF9_dDlZy1RyXVWPdXe-gj02w3RexDxvVNQUqIU4VhGrS8UaPNSj66eLK27136JEQH3q_7Xe55ntfk7Ho0sO2EGyKAUhHytSq9Y4mssPg_szlggzIIClwFFyQKJ8Iudik6eQIkGE6ZK6_Yy_b3_1gOSO1IMSpUl6K3j5fgnoWgG75ggU7vApOR4Ls8Eef-jRmDLqhUPOWLUi_2_ho4u3253X1ZTVtw8kiiUHpkemoBnKI-BXN5zw_nmb-DW3wP3B4tWWInbyoMTdd2zkb_zvOBLsnJlyAel1BJB86K7HC57-n-7icJnK13BKHZVPzHfNJSys-CuDZrvf_eoBmGfOZG8ex8aK_ahb4nGjo-ZsMO08S_gdbSB3TDYGZ_M5jEeoeziC0oruy-SSlbDDfyE1IRGl36CsQilK6Qqa75sSw7h5H0LkWmtsaQzlATOrUoLvK7dAI-aVgAsv0T2Izwly-pHlj5E3-71U5fDUs5M5vE6eLMYKZgqQeVFnwClRLvdh2zTqmui2SUgJECE61WD6pwoIUsQ-lXJgfjHNFk76M_xBaMdY18HNu9LCf6JBKUdP8mCE6Lwm3xCvIPJbfgXZMPa-qF2fdPoNVerbV2I-y1QMFnNn-U-gjnVIaRFYM_slhxMY6lfeMPLWwTh0mxEuSwUrgLW3hRNBJyfW6Tp4N8ussE9NhgqDG9R6NCQydmgguo8ApHcYsPchg3dDWO0Ygnyur9qO5nLv7PG9S2Cz29tmfkqFsUDmjo0jxf19nlDm-mUutO31RKfx9TYsAaL2DIUWDH2r34TWM_wDGguiVKAIlcRs5QpKr53VpuXu9SMkXmUXvZILP3_8uAa59IH_5gvcb9BdL-vQrVmAKdr8qwt0PxB-7tpeyBxXRtZ7CYbNmKmeQv8_5WoS19YXATnGy2uh4goDWSoTkTFgzX4TqGjMa_6sPuMoGwtYlcZHf7z_oxh59Sf_JHKkKUdpOcvara7o3Dkh0dZcQG-lFLt9X4e6czOIprA4-QyZmXFmUI8A8d9hci_6u52HVcX-EiEfAvZOKOq4p"
+              },
+              {
+                "id": "msg_07d835a88aa8e78a006aa1054aac4887d09b0da7d073ba0889",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E2"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E2"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E2"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 4,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E1"
+          },
+          "tools_used": [
+            "get_program_progression_requirements",
+            "search_programs"
+          ],
+          "verification": {
+            "count": 13,
+            "kind": "requirement",
+            "exact_count_available": true
+          },
+          "intent": "PROGRESSION",
+          "resolved_program": "Construction Management",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "8800BTECH",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [],
+            "stopped": false,
+            "turn_index": 4,
+            "level": null,
+            "requirement_type": "final_project_options",
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E7"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "program_id": "8800BTECH",
+                "requirement_type": "final_project_options",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 4,
+                "version": 2
+              },
+              "global_catalog": false,
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_set_query": false,
+              "requirement_type": "final_project_options",
+              "subject_course_ids": [
+                "CMGT8800",
+                "CMGT8810"
+              ]
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_progression_requirements",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{}",
+                "call_id": "call_3FyRJQXaYuP6RypY7U8eP1Kx",
+                "name": "get_program_progression_requirements",
+                "type": "function_call",
+                "id": "fc_0577df317145dd92006aa1054e39d087d09cbcb0cc048f9574",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_progression_requirements",
+            "context": {
+              "__evidence_ref__": "E104"
+            },
+            "result": {
+              "program_name": "Construction Management",
+              "requirements": [
+                {
+                  "groups": {
+                    "__evidence_ref__": "E10"
+                  },
+                  "name": "Professional Standards capstone choice",
+                  "notes": "CMGT 8700 followed by one of CMGT 8800 or CMGT 8810.",
+                  "rule_set_id": 3,
+                  "scope": "COMPLETION",
+                  "type": "COMPLETION"
+                },
+                {
+                  "groups": {
+                    "__evidence_ref__": "E19"
+                  },
+                  "name": "Capstone and graduation work experience",
+                  "notes": "Admission work experience counts toward the two-year total.",
+                  "rule_set_id": 2,
+                  "scope": "CONTINUATION",
+                  "type": "CONTINUATION"
+                }
+              ],
+              "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_0577df317145dd92006aa105501d2487d0adc524b9463e6c0e",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQVRbht50txR3UV7_YVpKDzOyHcaTxBjVMSEojFdJkurlIcWTn44jLclKj39Xuu3hp3XwAZG6Nm4HqvP6Lpo6cmkmVQkuNPxKRCyuyq72kZawEU9m1_2AqamGu56lKwoDIaOlaX5DxgSDNlu6y3H4qCJ457jq7NCUHj1im4Tks6aWDLE3wOZ3Sx0_G7FSvq1wOodtoZejwGtw79ZYQmAo6qPnhbI976G4zxlDe0Ek8fysx9dV77aVEovYEkzjKTCP1cQ6OcIskQk68X463ttTNvNM_RnW4ZRtOgGOsUp_0hC7FFZOhK3OzQJa_j6ORvzQFjawLqzTKJfqsL_k2UonH-uy1WyRqY75d4zqtYBjD8DyB72VY0K8h6_M_HcH8WXJKnnfbryCyS21w3gsmR-ul8kUl913O4DIHRIngizPyUyvHZWrJXYz-OsQK7szNd6AH1ToA3glHdu9XXtPRMj2lusK9hfCRa-meG1qQpHr19jnNq8F9aI7miPaoYB0oaeZgzJdIJKbv3-5NpbxKU81Q588qpoJXAWEGENHGGk81FxyxWCMu-r96Wq6QzRs7h2jMH79qLKDBNn3IdFaHLxy0CixuXkBpF2cP9iyH58LFvFldvFO2tAsJAGPMGoxFjoT5sOTPlJpTI0-bSIxcd_5xLdxkj2HE5eD7VozAFjWzCoerFguh75vk4_ys-Mpq0xAWyd66nbN_RzihSVvX4Y3xR68J_CaSlocUoB3rTCP16eFGIz-_2LvYc4ZZg7ptc16ubVA9tIiiecKcdFO8bOsg7C3cJChFvuDxnrRjgR-m7irgJjBsX-n4zWxAWCycACiT3m_dSJSmvNrzzPbPzlKTPp5dLyGHImy-8PmSuFGb6fgNuyhH5TQ0WnRzyS2ltEnkwYg_iWSnJgEbrbnWp_WxkA-lYAQYo_P8LfHLxE7slITxEbjEddlNhvB_OjRZMTMmN1Obz4_lUJXQ_EvZ8-KursiwhZRBwp1vhn2QorNMcd9GaPrwDsL2o1rOKbyp1qYIpfHMPLH_akN3yivoqM35Lx6snH8R9bAdv9cMuOaOPB1fO_k2waWoaYCvtJ8bVH4vfk8oHaL8lWyxU48S_u_84kJyLs5PWY5hAMnwpOPEfKtbjyDQPrFVP66zY9ceaQjIOwdULvciWlhuEoqouZfD2upk5DhsMInrorJzQ1OYVS0kp0WkMPRFLvWnZ8pIZgKtoYTU3Wi_W8m7wjo9q8L40djfYkaUaeiHGtPWbrcSoszdBaFiomxl0wNRrqBsy13-CZkMKfrJ08KzDIBKKkfgYAlssSbGiK9r0nw1GC8FKxBqA5NWfyxgie7r5OnoT98AG_D_7lcYUirtPV_0GlJB0X1bGMOqsb-8_qBq5a8ld9jnWEUz1yeWERCXDiPzPbpxrgJHrbpJJLZUl8TceQ9FG9KF86t-IK5s-bT-Q2wSK6WpATGdCiy6QpmRs4KXfDes08VsJoBa7NA4R922ga7ZSlxDszgusdYTiwdCNgkTlvUtAhNZ_JlbR91PTtNx_r6xvw"
+              },
+              {
+                "arguments": "{\"query\":\"Construction Management Bachelor of Technology\"}",
+                "call_id": "call_Wzsww3x2ohk7e4thXEsEJsev",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_0577df317145dd92006aa10550f03487d089051990ab649584",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "search_programs",
+            "arguments": {
+              "query": "Construction Management Bachelor of Technology"
+            },
+            "context": {
+              "__evidence_ref__": "E104"
+            },
+            "result": {
+              "active_program_count": 8,
+              "distinct_credentials": [
+                "Bachelor of Technology",
+                "Bachelor of Technology / Bachelor's Degree"
+              ],
+              "programs": [
+                {
+                  "campus": "Burnaby",
+                  "credential": "Bachelor of Technology / Bachelor's Degree",
+                  "delivery_method": "In person",
+                  "program_id": "8800BTECH",
+                  "program_name": "Construction Management",
+                  "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+                  "study_mode": "Full-time and Part-time"
+                },
+                {
+                  "campus": "Burnaby",
+                  "credential": "Bachelor of Technology / Bachelor's Degree",
+                  "delivery_method": "In person",
+                  "program_id": "8900BTECH",
+                  "program_name": "Electronics",
+                  "source_url": "https://www.bcit.ca/programs/electronics-bachelor-of-technology-part-time-8900btech/",
+                  "study_mode": "Part-time / Flexible Learning"
+                },
+                {
+                  "campus": "Burnaby Campus",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "8120BTECH",
+                  "program_name": "Environmental Engineering",
+                  "source_url": "https://www.bcit.ca/programs/environmental-engineering-bachelor-of-technology-full-time-part-time-8120btech/",
+                  "study_mode": "Full-time/Part-time"
+                },
+                {
+                  "campus": "Downtown Campus / Burnaby Campus / Online",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "847ABTECH",
+                  "program_name": "Forensic Investigation (Crime and Intelligence Analysis Option)",
+                  "source_url": "https://www.bcit.ca/programs/forensic-investigation-crime-and-intelligence-analysis-option-bachelor-of-technology-part-time-847abtech/",
+                  "study_mode": "Part-time"
+                },
+                {
+                  "campus": "Downtown Campus / Burnaby Campus / Online",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "847CBTECH",
+                  "program_name": "Forensic Investigation (Digital Forensics and Cybersecurity Option)",
+                  "source_url": "https://www.bcit.ca/programs/forensic-investigation-digital-forensics-and-cybersecurity-option-bachelor-of-technology-full-time-part-time-847cbtech/",
+                  "study_mode": "Full-time/Part-time"
+                },
+                {
+                  "campus": "Downtown Campus / Burnaby Campus / Online",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "847BBTECH",
+                  "program_name": "Forensic Investigation (Forensic Science Option)",
+                  "source_url": "https://www.bcit.ca/programs/forensic-investigation-forensic-science-option-bachelor-of-technology-part-time-847bbtech/",
+                  "study_mode": "Part-time"
+                },
+                {
+                  "campus": "Burnaby Campus / online",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "8310BTECH",
+                  "program_name": "Geographic Information Systems",
+                  "source_url": "https://www.bcit.ca/programs/geographic-information-systems-bachelor-of-technology-full-time-part-time-8310btech/",
+                  "study_mode": "Full-time/Part-time"
+                },
+                {
+                  "campus": "Burnaby Campus / Online",
+                  "credential": "Bachelor of Technology",
+                  "delivery_method": "Blended",
+                  "program_id": "8350BTECH",
+                  "program_name": "Technology Management",
+                  "source_url": "https://www.bcit.ca/programs/technology-management-bachelor-of-technology-part-time-8350btech/",
+                  "study_mode": "Part-time"
+                }
+              ]
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_0577df317145dd92006aa10552aec087d09a018e7478c9aa7c",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQVaRjmIlXsIe6CSFlTS4iht5QEUAjKbW242mYUdkeWvMO5ZkTrXGADdE8qvCCNm3ONdk0c-qS1CGOwSH_l4BjfGWoFErpPYm3dqPuk_AO3s1PshOb13bt4mgSMjK2ViiAFj07Yb_iie-svSUQJt5q5X-TkUTCqgovKx7BaEDwDz0hY-UeCqO3g4tS2qRzfo4eOhAXg9eDidCeQ_L50TU4Gl-52W6XGz3SIDyBr5Qo8WBPYJulHnkfGVFd3MOJDNyWt0zPMpHqeABocHH6kavIIEJYgk7ZRuanzYrxT-z9iSGnyleSgTtzA8cNuCuKZsjo-k_ZSFnILxJLxxJ2WNJjH02Km34QwBzxill_PFq-hF8m273CUO9z7aq0D0g78PMfbmHchQ1f8KZ0uNI3AGPde2JG9YGfrxsKSMfHK0VMMEN1w5v9Km9VoRdFUQePNWlSMfrR85Vs_Y2Dr9IQoSvlC8xZeLh_rIK43my3v61PDH-t-0n9yByUajHnkQIvKqVu0RMsWFEt_cVzBK2eQnelqQypJH6149Tv3jRoAPiyqWgd6bHhivzD0A-UUqPzrUCPcLn3B8d-_iFoKhfMi8wtPVYwbApm6miZlTK3scHHmohI0RIBaKWcacVQMWyu-1-umg9lL6PuHFFZA5JbN131GAgpO75kHD6JEzFb5NVpz33sQUqUmpGv6GuwHoyiGmp5pAPeJDMSQ2nP-0Ehey9A4d2Kb0QVdnEt5Bkd_xX3ez8gMR7pVNEoXrosVfsyxYgRwKwFjoYvZBUvbW1glgXD9z_N6S8jalXYdf7fpn0OiXBLLRxKwM2DKCg-l5aSQmPE-iIu-XiPWOrvDUNPZ0cHda_EDntEmwW43r9Hn0mtgr52ykW4r8gxEr_4ChTiaQ5AULV-StYqIqNdJwXr6SjWa7mO77_ZTwM-Ldi-DeKIdmdF3WeerKhLJ8tApClGEM4jgO7526iplzGtdDtrvoSbT37bchBjUQ9Iq_Nc_6RmTuGy_6fgHz-26TM2yTbgYFR6iAneyy_0bRStcCMhEqRNAAl-gKOQyycFjKBeQHf6NqbE8CMNXAWujmimJuLY6Yc9ruhadkEZ97hY-g6M4r5X_GD3junK-Nh9J2ZdkfigDuhBw5ADoPvSH2NRvKRX9YYrb6EZx8s_LuM3LzneqzEC1buM_3eBFWVzrNcP7TqWhEiT5QQhef39P7kQX9s6jEhqw_bNMXlz4hJFSFagftDLSNwbJoR9JPtSJFD6JMq2F5-5OBw5n0FSSyV6nJ1TMLLABDnlPXJRe44KFyFY1CS4cafoAthvvf3CoNv4ZXOSeAhoGwi1L92Fq_haEoweKHWs9ZOaBc4C4JNqLZPRS8QA4XhT455tAoTsmXUcubCmJyvrKVp1fTTUZ7TTORwBN1ql27eXBEUPmh_kH0JCYVRa4efmy_qM2SmV3EMEnNqdDww_PhXZ5ZPCjuAe9wwXsN1349_mZvdLqoHnXDatHy5rk6u-DXXAWf-dxCjsR3aPOaFkCwe0orzzWYIncD9z1_LQk3DOARzqEqMVhVabdWwnUSY-MJ2F6wMDZF-t3_-OL3t6TQ3eUfAN0BmQcohmRxmEQeU2pQT9w353UHR968ZlEPixrsU0n1Ho5o6YHmhXI6ZnLw3iiKkaKiOXoGrZXmprXro7l5I5u543XOw9XwZL2o4ulBjraI4KSI375VaO9p0GlofQOWHV2WpQO077xM8em0-zGtI290xtUYdp007eE_LWoVuuVQF0oQSmyvAZ3IzuhfdZ_yK8A2xiJY_fuqSX995sacbhoAcLA01hObJ4lRGENdO9xzANDN7V1wkyHxn33hj1WOsHAMT1CPrpe265fUsEwNIZJPwkKq7kLOkCQESDKSmQLFT_MA86w-I47YsWJ_0V3YHKauv4tS2j0FgF_83AREe9XcyBt2Srj_C0Oq3fwEM_MC-tkCI5VVwVue0k6hp3NwRJ9p4Ij1n7zzQTpZNOzrrj1C4yEWBn2aqzDEu4do2YibXvWYa-l7kU2VStJBIEnlK_Xs_x_3il0_pUjLmysjcFVJ1KG237c9LMT3wEDOPi8CeBzjdTXS2fAvnZpPw1vcWhXK10FwfukUJ4Krhax0TYmU1KdjT_nqByzw8D6FjOanngBYvk8BrFxGhJPMmdO2h7jgOynxXrLM9uVFiexHWO7GUtQ3pGA0ltYnmVn_UT83LOo_FshFc2jUkMW3HVP5iw7rNbu3KlrW0AwTHYVamqlrOy677wdgk_hvLzRW9wsRwEb9OpcRJ4oYSmX_yISoyC5RqEhXTo0UPHEbEgsBUGlZZ1HVIbU0FzSyIrH3RNbxDgytSZF2P5rs4ySk1iWrLWVhgLIjp_REKrgI8u9RseQLRBXHB06-jn67G2uwtba3SRIzO3htq6Gwvi7DtD7AApRKHp2cW66Mv1Z6Ac0vFL2w-eiTa6b4E6feVT2cY8aBsgrZ41Yi9buLwa83oN4N6LpM24NLL2WzAvy3VkkvsOVB7-Qte1oSxr8v07mE42Ij8HeOqIbOyLBXXvgKQxIVQT4uqU6cxDrbFY7W7AYNFB5whuot0dv3XnqFfDet6HjIflQHViLrmvGpeaQauIOqQaMkv3ZlGesImFB8AY1C79sDlE9wSV2qFwjS0CUnEYNtzm8Hucw5z0xkaNKASb2i2tueBK5b1k2yRRyFdBcwPPtCcgi1RcFZPBovO2H7VNWONux9g-Sh8qzgqsIpqyO_XBfDeJ6asKzWesVWyabPgyD486zEDDSlRkCvjS4iEwOOT9sRWfu02Io5Ludk-F9RUpA20QzJdvmM11yePtwNytvKl67IioMPJ9bHsUSx3dKdSim94Y5nazFGyL3qkUR3afYx9FnuphE1ao3g-UlHdbXag8Zxqgvd1gkVi5v0LvLS6UKNZRHWq4Ng2YYBhq9zPyNXCKBJfN2BuRVf3sHuMlutoZYr7Mm74ouHlRcTzBknY1jI5gJwZ6t8M-nbBgpvWbIb4UUbmpW32dm7BRaYBwbwbYIGBrg9Wo3q-x0mRg9JufKYRT6eWO1E5cAkBb4uyvm8zgJ4OBeVKb0QZVVDo2m2rxs0drTKe30gbIHqmGdnCJWxQD_KpG8Zga7eElp4Y0LJIgEPpo1ULQuQt1noLCobUXDHTbX_CNEct_qdRswl-j5wofnZeAqtHtWLgCB_dB1eu-7mWMh7zqlknX9XUGBLtlyUZ8XpUhv4s4a3nSm7WUQ_32vw7O7fZZkIYskB_9hp7fNM9kBYX89li-2q-WGiJTeJF13L2HwYzdUKHUcMjYd_XhvyHPBZYXsFto3ci0MqLBqlzBBcIh2cVhvyNYlP0K4uk85XxHTUDk0oDsESuXiRx2XTB4NC2l-tKuVhrrfxMqo5k-Ae5HoveggihZ1CoxRIPlkXURI1G-n3MnqD3CDrGSDVWUspYsL3E3pRoV9ZoR83t-u25jooVxbuEz243C81d0945g1XXpelT3BbrAOGk2TicdAGVIXSNV80FYzNlUrlAqigrPlOqCY52_UjLg-J3x1eZrv-2nbE_rdPgv463_02U7Wqv8yM1KUrju1ar0vOu1MluX2Gf0UnDmHJFejxaM7IsgQ2qW4C4BTEVNsA_IUQpB1blREVNg1wLrYtQuDEFxas7FVBBaskK7alz5mBYhkJzDyX_PxagIqR_IDw8svHlym3kVkrNJOOMRV_Tn2E6Aeiu2Md5NVoyIH2RcCZFbGEkjQVnJdeBsepwfSw0XFBsk-XNalCMhvZ9MDs0xLqvVNVFLKneAq542M_CRFLmjtdTfZATilY8cUQJJs8G1pTxmVyjKj-le0pgx8TfuRWuqMab5BlkPq9Y_SE3f99qbkm8leHQcBWtJNXJGt10Lxsb6jA8Ueg9mC0jAfUmXsn_5zfXA5QQ7Bc5yMxJtrhyKLAkPhjirz_De_fQRoubHeIp-S4NPkYgXDry-5ANOXxobE-hDpIYlZTTuIVn8O8aE5-RvlHCVn_sELfMpJRKEkCbmzFQodd8XaMdG5LWlN7Vx3N5YOmU0jn4RYPlTB8oaIyrYyCWG_Zz34vY1GkdhyLYPYh1MjyVak1n_1KPccvEx0IE9TEhY5MHqD0153SqQqHghWMIME_4rMUh3c9Qsd_hV2csyPBjt41_HhWjNyXbq-mFx4UB1SljNJqlKotEbh196mq-4nTNuDd_yG_WZG8W79Dzu1_3pdIG4TtYXlzlGjncAvyEFyfd0Ox85R6qa0EAx1Zm0d06Y3AvAFHejr7YB40YS5ZKaoy9cwSeEWLgAt_0WK8eoMu1cmdbwlL2MZTdRLnL_2ZFrLmRjzei_ReCJO5K6C8FJli57Zr6kQX1vYVyTP3YNEPZSmfwEoeTSNXFzkQg6GFVeg-NcooQg6LdyIjcmUM232RSZTigZ8nRE06cpKB2_jEBc2RGCZZ2aD4bU3XwJTdIWb4cjsCsuAvvCFc3iUlZph7GwYdkjySh-ApqKg9ZS6jyUGNnR7-O9gvadxP0A=="
+              },
+              {
+                "id": "msg_0577df317145dd92006aa105592fc487d083b450d73b62253a",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E1"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E1"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E1"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      }
+    ]
+  },
+  "definitions": {
+    "E3": "Thanks—that’s the **Construction Management Bachelor of Technology**, an active degree-completion program offered in person at the Burnaby campus, full-time or part-time. Its curriculum covers construction controls, organization management, stakeholder engagement, management electives, Liberal Studies, and professional standards, including **CMGT 8700 – Industry Based Project Proposal** followed by a choice of final project.\n\nTo determine what you should take next, which courses have you completed?\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+    "E2": "Thanks. Since you haven’t completed any program courses, I can’t verify a specific “next” course because the curriculum record does not provide a starting sequence or prerequisite details.\n\nThe first curriculum area includes **CMGT 7160 – Statistics for Construction Management**, **CMGT 7190 – Construction Planning and Controls**, **CMGT 7211 – Heavy Equipment in Construction**, and **CMGT 7400 – Project Planning for Quality & Risk Management**. Confirm your initial schedule with the Construction Management department before registering.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+    "E1": "No—not yet. Since you haven’t completed any program courses, you must first:\n\n- Complete **CMGT 8700**\n- Have at least **two years of related work experience**; qualifying admission experience counts\n- Obtain department approval for your chosen final project: **CMGT 8800** or **CMGT 8810**\n\nYou choose **one** of those two final-project options.",
+    "E4": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+    "E5": [
+      "cabinetmaker",
+      "carpenter",
+      "electrician",
+      "industrial mechanic/millwright",
+      "metal fabricator",
+      "plumber",
+      "refrigeration & air conditioning mechanic",
+      "welder level A"
+    ],
+    "E7": [
+      {
+        "op": "state_in",
+        "field": "program_id",
+        "value": [
+          "8800BTECH"
+        ],
+        "dimension": "entity_resolution",
+        "root_cause": "entity_resolution",
+        "pass": true,
+        "actual": "8800BTECH"
+      }
+    ],
+    "E53": {
+      "condition_id": 3,
+      "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+      "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+      "minimum_value": "67",
+      "sort_order": 1,
+      "unit": "PERCENT"
+    },
+    "E54": {
+      "condition_id": 4,
+      "condition_type": "WORK_EXPERIENCE",
+      "description": "At least 1 year construction-industry work experience",
+      "minimum_value": "1",
+      "sort_order": 2,
+      "unit": "YEAR"
+    },
+    "E16": [
+      {
+        "__evidence_ref__": "E53"
+      },
+      {
+        "__evidence_ref__": "E54"
+      }
+    ],
+    "E63": {
+      "conditions": {
+        "__evidence_ref__": "E16"
+      },
+      "label": "Pathway A",
+      "operator": "AND",
+      "parent_group_id": 2,
+      "rule_group_id": 3,
+      "sort_order": 1
+    },
+    "E55": {
+      "condition_id": 5,
+      "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+      "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+      "minimum_value": "67",
+      "sort_order": 1,
+      "unit": "PERCENT"
+    },
+    "E56": {
+      "condition_id": 6,
+      "condition_type": "BRIDGING_CREDENTIAL_GPA",
+      "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+      "minimum_value": "67",
+      "sort_order": 2,
+      "unit": "PERCENT"
+    },
+    "E57": {
+      "condition_id": 7,
+      "condition_type": "WORK_EXPERIENCE",
+      "description": "At least 1 year construction-industry work experience",
+      "minimum_value": "1",
+      "sort_order": 3,
+      "unit": "YEAR"
+    },
+    "E17": [
+      {
+        "__evidence_ref__": "E55"
+      },
+      {
+        "__evidence_ref__": "E56"
+      },
+      {
+        "__evidence_ref__": "E57"
+      }
+    ],
+    "E64": {
+      "conditions": {
+        "__evidence_ref__": "E17"
+      },
+      "label": "Pathway B",
+      "operator": "AND",
+      "parent_group_id": 2,
+      "rule_group_id": 4,
+      "sort_order": 2
+    },
+    "E58": {
+      "condition_id": 8,
+      "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+      "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+      "minimum_value": "67",
+      "sort_order": 1,
+      "unit": "PERCENT"
+    },
+    "E59": {
+      "condition_id": 9,
+      "condition_type": "WORK_EXPERIENCE",
+      "description": "At least 8 years North American construction-management experience in mid/senior roles",
+      "minimum_value": "8",
+      "parameters": {
+        "field": "construction management",
+        "region": "North America",
+        "role_level": "mid_or_senior"
+      },
+      "sort_order": 2,
+      "unit": "YEAR"
+    },
+    "E18": [
+      {
+        "__evidence_ref__": "E58"
+      },
+      {
+        "__evidence_ref__": "E59"
+      }
+    ],
+    "E65": {
+      "conditions": {
+        "__evidence_ref__": "E18"
+      },
+      "label": "Pathway C",
+      "operator": "AND",
+      "parent_group_id": 2,
+      "rule_group_id": 5,
+      "sort_order": 3
+    },
+    "E33": {
+      "accepted_values": {
+        "__evidence_ref__": "E5"
+      },
+      "condition_id": 10,
+      "condition_type": "RED_SEAL_TRADE",
+      "description": "Approved Red Seal trade",
+      "sort_order": 1
+    },
+    "E32": {
+      "accepted_values": [
+        "Pre-Calculus 11",
+        "Foundations Math 11",
+        "Workplace Math 11",
+        "BLDT 1011",
+        "accepted BC/Yukon equivalent"
+      ],
+      "condition_id": 11,
+      "condition_type": "MATH_OPTION_GRADE",
+      "description": "One accepted math option at 60%",
+      "minimum_value": "60",
+      "sort_order": 2,
+      "unit": "PERCENT"
+    },
+    "E47": {
+      "condition_id": 12,
+      "condition_type": "BRIDGING_CREDENTIAL_GPA",
+      "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+      "minimum_value": "67",
+      "sort_order": 3,
+      "unit": "PERCENT"
+    },
+    "E48": {
+      "condition_id": 13,
+      "condition_type": "WORK_EXPERIENCE",
+      "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+      "minimum_value": "1",
+      "parameters": {
+        "excludes": "apprenticeship hours",
+        "field": "construction industry"
+      },
+      "sort_order": 4,
+      "unit": "YEAR"
+    },
+    "E6": [
+      {
+        "__evidence_ref__": "E33"
+      },
+      {
+        "__evidence_ref__": "E32"
+      },
+      {
+        "__evidence_ref__": "E47"
+      },
+      {
+        "__evidence_ref__": "E48"
+      }
+    ],
+    "E60": {
+      "conditions": {
+        "__evidence_ref__": "E6"
+      },
+      "label": "Pathway D",
+      "operator": "AND",
+      "parent_group_id": 2,
+      "rule_group_id": 6,
+      "sort_order": 4
+    },
+    "E21": [
+      {
+        "__evidence_ref__": "E63"
+      },
+      {
+        "__evidence_ref__": "E64"
+      },
+      {
+        "__evidence_ref__": "E65"
+      },
+      {
+        "__evidence_ref__": "E60"
+      }
+    ],
+    "E39": {
+      "children": {
+        "__evidence_ref__": "E21"
+      },
+      "label": "Exactly one entry pathway",
+      "operator": "OR",
+      "parent_group_id": 1,
+      "rule_group_id": 2,
+      "sort_order": 3
+    },
+    "E11": [
+      {
+        "__evidence_ref__": "E39"
+      }
+    ],
+    "E52": {
+      "condition_id": 2,
+      "condition_type": "ENGLISH_GRADE",
+      "description": "English Studies 12 at 73% or equivalent",
+      "minimum_value": "73",
+      "sort_order": 2,
+      "subject_id": "ENGLISH_STUDIES_12",
+      "unit": "PERCENT"
+    },
+    "E31": {
+      "accepted_values": [
+        "ICES comprehensive evaluation",
+        "accepted Canadian credential-assessment service"
+      ],
+      "condition_id": 18,
+      "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+      "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+      "parameters": {
+        "applies_outside": [
+          "Canada",
+          "United States",
+          "United Kingdom",
+          "Australia",
+          "New Zealand"
+        ],
+        "requires": "course-by-course evaluation and GPA calculation"
+      },
+      "sort_order": 4
+    },
+    "E34": {
+      "accepted_values": [
+        "master's degree alone"
+      ],
+      "condition_id": 19,
+      "condition_type": "CREDENTIAL_EXCLUSION",
+      "description": "A master's degree alone is not sufficient for admission",
+      "sort_order": 5
+    },
+    "E13": [
+      {
+        "condition_id": 1,
+        "condition_type": "PRE_ENTRY_ASSESSMENT",
+        "description": "Approved departmental pre-entry assessment before application",
+        "sort_order": 1
+      },
+      {
+        "__evidence_ref__": "E52"
+      },
+      {
+        "__evidence_ref__": "E31"
+      },
+      {
+        "__evidence_ref__": "E34"
+      }
+    ],
+    "E37": {
+      "children": {
+        "__evidence_ref__": "E11"
+      },
+      "conditions": {
+        "__evidence_ref__": "E13"
+      },
+      "label": "Admission requirements",
+      "operator": "AND",
+      "rule_group_id": 1,
+      "sort_order": 1
+    },
+    "E9": [
+      {
+        "__evidence_ref__": "E37"
+      }
+    ],
+    "E106": {
+      "exact_choice_count": 1,
+      "groups": {
+        "__evidence_ref__": "E9"
+      },
+      "name": "Construction Management admission",
+      "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways.",
+      "rule_set_id": 1,
+      "scope": "ADMISSION"
+    },
+    "E50": {
+      "condition_id": 16,
+      "condition_type": "COURSE",
+      "description": "CMGT 8800 after CMGT 8700 and department approval",
+      "minimum_value": "50",
+      "sort_order": 1,
+      "subject_id": "CMGT8800",
+      "unit": "PERCENT"
+    },
+    "E51": {
+      "condition_id": 17,
+      "condition_type": "COURSE",
+      "description": "CMGT 8810 after CMGT 8700 and department approval",
+      "minimum_value": "50",
+      "sort_order": 2,
+      "subject_id": "CMGT8810",
+      "unit": "PERCENT"
+    },
+    "E15": [
+      {
+        "__evidence_ref__": "E50"
+      },
+      {
+        "__evidence_ref__": "E51"
+      }
+    ],
+    "E62": {
+      "conditions": {
+        "__evidence_ref__": "E15"
+      },
+      "label": "Choose one final project",
+      "operator": "OR",
+      "parent_group_id": 8,
+      "rule_group_id": 9,
+      "sort_order": 2
+    },
+    "E20": [
+      {
+        "__evidence_ref__": "E62"
+      }
+    ],
+    "E38": {
+      "children": {
+        "__evidence_ref__": "E20"
+      },
+      "conditions": [
+        {
+          "condition_id": 15,
+          "condition_type": "COURSE",
+          "description": "Complete CMGT 8700",
+          "sort_order": 1,
+          "subject_id": "CMGT8700"
+        }
+      ],
+      "label": "Professional Standards",
+      "operator": "AND",
+      "rule_group_id": 8,
+      "sort_order": 1
+    },
+    "E10": [
+      {
+        "__evidence_ref__": "E38"
+      }
+    ],
+    "E107": {
+      "groups": {
+        "__evidence_ref__": "E10"
+      },
+      "name": "Professional Standards capstone choice",
+      "notes": "CMGT 8700 followed by one of CMGT 8800 or CMGT 8810.",
+      "rule_set_id": 3,
+      "scope": "COMPLETION"
+    },
+    "E49": {
+      "condition_id": 14,
+      "condition_type": "WORK_EXPERIENCE",
+      "description": "Minimum 2 years related work experience total; qualifying admission experience counts toward the total",
+      "minimum_value": "2",
+      "parameters": {
+        "admission_experience_counts": true,
+        "field": "related"
+      },
+      "sort_order": 0,
+      "unit": "YEAR"
+    },
+    "E14": [
+      {
+        "__evidence_ref__": "E49"
+      }
+    ],
+    "E61": {
+      "conditions": {
+        "__evidence_ref__": "E14"
+      },
+      "label": "Capstone and graduation eligibility",
+      "operator": "AND",
+      "rule_group_id": 7,
+      "sort_order": 1
+    },
+    "E19": [
+      {
+        "__evidence_ref__": "E61"
+      }
+    ],
+    "E108": {
+      "groups": {
+        "__evidence_ref__": "E19"
+      },
+      "name": "Capstone and graduation work experience",
+      "notes": "Admission work experience counts toward the two-year total.",
+      "rule_set_id": 2,
+      "scope": "CONTINUATION"
+    },
+    "E109": {
+      "name": "International eligibility source evidence",
+      "notes": {
+        "__evidence_ref__": "E4"
+      },
+      "rule_set_id": 2107,
+      "scope": "INTERNATIONAL",
+      "study_mode": "Full-time and Part-time"
+    },
+    "E29": [
+      {
+        "__evidence_ref__": "E106"
+      },
+      {
+        "__evidence_ref__": "E107"
+      },
+      {
+        "__evidence_ref__": "E108"
+      },
+      {
+        "__evidence_ref__": "E109"
+      }
+    ],
+    "E111": {
+      "program_id": "8800BTECH",
+      "rule_sets": {
+        "__evidence_ref__": "E29"
+      }
+    },
+    "E68": {
+      "course_id": "CMGT7160",
+      "course_name": "Statistics for Construction Management",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/statistics-for-construction-management-cmgt-7160/",
+      "study_mode": "ALL"
+    },
+    "E69": {
+      "course_id": "CMGT7190",
+      "course_name": "Construction Planning and Controls",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 7190",
+      "source_url": "https://www.bcit.ca/courses/construction-planning-and-controls-cmgt-7190/",
+      "study_mode": "ALL"
+    },
+    "E70": {
+      "course_id": "CMGT7211",
+      "course_name": "Heavy Equipment in Construction",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/heavy-equipment-in-construction-cmgt-7211/",
+      "study_mode": "ALL"
+    },
+    "E73": {
+      "course_id": "CMGT7400",
+      "course_name": "Project Planning for Quality & Risk Management",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/project-planning-for-quality-and-risk-management-cmgt-7400/",
+      "study_mode": "ALL"
+    },
+    "E24": [
+      {
+        "__evidence_ref__": "E68"
+      },
+      {
+        "__evidence_ref__": "E69"
+      },
+      {
+        "__evidence_ref__": "E70"
+      },
+      {
+        "__evidence_ref__": "E73"
+      }
+    ],
+    "E40": {
+      "component_id": 1,
+      "component_name": "Construction Controls and Techniques",
+      "component_order": 1,
+      "courses": {
+        "__evidence_ref__": "E24"
+      }
+    },
+    "E66": {
+      "course_id": "BUSA7250",
+      "course_name": "Management Skills and Applications",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "BUSA 7250",
+      "source_url": "https://www.bcit.ca/courses/management-skills-and-applications-busa-7250/",
+      "study_mode": "ALL"
+    },
+    "E72": {
+      "course_id": "CMGT7330",
+      "course_name": "Finance for Construction Managers",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 7330",
+      "source_url": "https://www.bcit.ca/courses/finance-for-construction-managers-cmgt-7330/",
+      "study_mode": "ALL"
+    },
+    "E74": {
+      "course_id": "CMGT7420",
+      "course_name": "Construction Law",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/construction-law-cmgt-7420/",
+      "study_mode": "ALL"
+    },
+    "E84": {
+      "course_id": "CMGT8435",
+      "course_name": "Construction Enterprise Management",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/construction-enterprise-management-cmgt-8435/",
+      "study_mode": "ALL"
+    },
+    "E22": [
+      {
+        "__evidence_ref__": "E66"
+      },
+      {
+        "__evidence_ref__": "E72"
+      },
+      {
+        "__evidence_ref__": "E74"
+      },
+      {
+        "__evidence_ref__": "E84"
+      }
+    ],
+    "E41": {
+      "component_id": 2,
+      "component_name": "Organization Management",
+      "component_order": 2,
+      "courses": {
+        "__evidence_ref__": "E22"
+      },
+      "required_credits": "12"
+    },
+    "E75": {
+      "course_id": "CMGT7535",
+      "course_name": "Leadership and Interpersonal Skills",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 7535",
+      "source_url": "https://www.bcit.ca/courses/leadership-and-interpersonal-skills-cmgt-7535/",
+      "study_mode": "ALL"
+    },
+    "E77": {
+      "course_id": "CMGT7660",
+      "course_name": "Environmental Considerations in Construction",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/environmental-considerations-in-construction-cmgt-7660/",
+      "study_mode": "ALL"
+    },
+    "E85": {
+      "course_id": "CMGT8602",
+      "course_name": "Engagement of Project Stakeholders",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/engagement-of-project-stakeholders-cmgt-8602/",
+      "study_mode": "ALL"
+    },
+    "E25": [
+      {
+        "__evidence_ref__": "E75"
+      },
+      {
+        "__evidence_ref__": "E77"
+      },
+      {
+        "__evidence_ref__": "E85"
+      }
+    ],
+    "E42": {
+      "component_id": 3,
+      "component_name": "Stakeholder Engagement",
+      "component_order": 3,
+      "courses": {
+        "__evidence_ref__": "E25"
+      },
+      "required_credits": "9"
+    },
+    "E67": {
+      "course_id": "CMGT7125",
+      "course_name": "Construction Schedule and Delay Analysis",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 7125",
+      "source_url": "https://www.bcit.ca/courses/construction-schedule-and-delay-analysis-cmgt-7125/",
+      "study_mode": "ALL"
+    },
+    "E71": {
+      "course_id": "CMGT7220",
+      "course_name": "Health and Safety in Construction",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/health-and-safety-in-construction-cmgt-7220/",
+      "study_mode": "ALL"
+    },
+    "E76": {
+      "course_id": "CMGT7605",
+      "course_name": "Industrial Relations",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/industrial-relations-cmgt-7605/",
+      "study_mode": "ALL"
+    },
+    "E79": {
+      "course_id": "CMGT7840",
+      "course_name": "Technical Presentations",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/technical-presentations-cmgt-7840/",
+      "study_mode": "ALL"
+    },
+    "E80": {
+      "course_id": "CMGT8040",
+      "course_name": "Building - Civil Services",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/building-civil-services-cmgt-8040/",
+      "study_mode": "ALL"
+    },
+    "E81": {
+      "course_id": "CMGT8050",
+      "course_name": "Budgeting/Conceptual Estimating",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/budgeting-conceptual-estimating-cmgt-8050/",
+      "study_mode": "ALL"
+    },
+    "E82": {
+      "course_id": "CMGT8060",
+      "course_name": "Risk Management in Design & Construction of Buildings",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/risk-management-in-design-and-construction-of-buildings-cmgt-8060/",
+      "study_mode": "ALL"
+    },
+    "E89": {
+      "course_id": "EENG7000",
+      "course_name": "Introduction to Climate Change, Ecology, and Systems Thinking",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "EENG 7000",
+      "source_url": "https://www.bcit.ca/courses/introduction-to-climate-change-ecology-and-systems-thinking-eeng-7000/",
+      "study_mode": "ALL"
+    },
+    "E93": {
+      "course_id": "TMGT7101",
+      "course_name": "Engineering, Technology and Management",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/engineering-technology-and-management-tmgt-7101/",
+      "study_mode": "ALL"
+    },
+    "E94": {
+      "course_id": "TMGT7102",
+      "course_name": "Project Management/Resource Utilization",
+      "course_role": "ELECTIVE",
+      "credits": "2.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7102",
+      "source_url": "https://www.bcit.ca/courses/project-management-resource-utilization-tmgt-7102/",
+      "study_mode": "ALL"
+    },
+    "E95": {
+      "course_id": "TMGT7111",
+      "course_name": "High Technology Marketing Strategies",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/high-technology-marketing-strategies-tmgt-7111/",
+      "study_mode": "ALL"
+    },
+    "E96": {
+      "course_id": "TMGT7112",
+      "course_name": "Marketing Research",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7112",
+      "source_url": "https://www.bcit.ca/courses/marketing-research-tmgt-7112/",
+      "study_mode": "ALL"
+    },
+    "E97": {
+      "course_id": "TMGT7113",
+      "course_name": "Marketing Programs and Plans",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7113",
+      "source_url": "https://www.bcit.ca/courses/marketing-programs-and-plans-tmgt-7113/",
+      "study_mode": "ALL"
+    },
+    "E98": {
+      "course_id": "TMGT7121",
+      "course_name": "Principles of Finance",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7121",
+      "source_url": "https://www.bcit.ca/courses/principles-of-finance-tmgt-7121/",
+      "study_mode": "ALL"
+    },
+    "E99": {
+      "course_id": "TMGT7124",
+      "course_name": "Technology and International Finance",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/technology-and-international-finance-tmgt-7124/",
+      "study_mode": "ALL"
+    },
+    "E100": {
+      "course_id": "TMGT7134",
+      "course_name": "Technology and International Trade and Competition",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7134",
+      "source_url": "https://www.bcit.ca/courses/technology-and-international-trade-and-competition-tmgt-7134/",
+      "study_mode": "ALL"
+    },
+    "E101": {
+      "course_id": "TMGT7143",
+      "course_name": "Problem Solving and Decision-Making",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7143",
+      "source_url": "https://www.bcit.ca/courses/problem-solving-and-decision-making-tmgt-7143/",
+      "study_mode": "ALL"
+    },
+    "E102": {
+      "course_id": "TMGT7144",
+      "course_name": "Human Resource Planning and Control",
+      "course_role": "ELECTIVE",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7144",
+      "source_url": "https://www.bcit.ca/courses/human-resource-planning-and-control-tmgt-7144/",
+      "study_mode": "ALL"
+    },
+    "E103": {
+      "course_id": "TMGT7145",
+      "course_name": "Leadership in a World of Change",
+      "course_role": "ELECTIVE",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "TMGT 7145",
+      "source_url": "https://www.bcit.ca/courses/leadership-in-a-world-of-change-tmgt-7145/",
+      "study_mode": "ALL"
+    },
+    "E23": [
+      {
+        "__evidence_ref__": "E67"
+      },
+      {
+        "__evidence_ref__": "E71"
+      },
+      {
+        "__evidence_ref__": "E76"
+      },
+      {
+        "__evidence_ref__": "E79"
+      },
+      {
+        "__evidence_ref__": "E80"
+      },
+      {
+        "__evidence_ref__": "E81"
+      },
+      {
+        "__evidence_ref__": "E82"
+      },
+      {
+        "__evidence_ref__": "E89"
+      },
+      {
+        "__evidence_ref__": "E93"
+      },
+      {
+        "__evidence_ref__": "E94"
+      },
+      {
+        "__evidence_ref__": "E95"
+      },
+      {
+        "__evidence_ref__": "E96"
+      },
+      {
+        "__evidence_ref__": "E97"
+      },
+      {
+        "__evidence_ref__": "E98"
+      },
+      {
+        "__evidence_ref__": "E99"
+      },
+      {
+        "__evidence_ref__": "E100"
+      },
+      {
+        "__evidence_ref__": "E101"
+      },
+      {
+        "__evidence_ref__": "E102"
+      },
+      {
+        "__evidence_ref__": "E103"
+      }
+    ],
+    "E43": {
+      "component_id": 4,
+      "component_name": "Management Electives",
+      "component_order": 4,
+      "courses": {
+        "__evidence_ref__": "E23"
+      },
+      "required_credits": "4"
+    },
+    "E90": {
+      "course_id": "LIBS7001",
+      "course_name": "Critical Reading and Writing",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "LIBS 7001",
+      "source_url": "https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/",
+      "study_mode": "ALL"
+    },
+    "E91": {
+      "course_id": "LIBS7002",
+      "course_name": "Applied Ethics",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "native_course_code": "LIBS 7002",
+      "source_url": "https://www.bcit.ca/courses/applied-ethics-libs-7002/",
+      "study_mode": "ALL"
+    },
+    "E92": {
+      "course_id": "LIBS7013",
+      "course_name": "Race, Class and Gender: Intersections",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/race-class-and-gender-intersections-libs-7013/",
+      "study_mode": "ALL"
+    },
+    "E27": [
+      {
+        "__evidence_ref__": "E90"
+      },
+      {
+        "__evidence_ref__": "E91"
+      },
+      {
+        "__evidence_ref__": "E92"
+      }
+    ],
+    "E44": {
+      "component_id": 5,
+      "component_name": "Liberal Studies Component",
+      "component_order": 5,
+      "courses": {
+        "__evidence_ref__": "E27"
+      },
+      "required_credits": "12"
+    },
+    "E87": {
+      "course_id": "CMGT8800",
+      "course_name": "Industry Based Project*",
+      "course_role": "CHOICE",
+      "credits": "6.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 8800",
+      "source_url": "https://www.bcit.ca/courses/industry-based-project-cmgt-8800/",
+      "study_mode": "ALL"
+    },
+    "E88": {
+      "course_id": "CMGT8810",
+      "course_name": "Industry Based Project*",
+      "course_role": "CHOICE",
+      "credits": "4.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 8810",
+      "source_url": "https://www.bcit.ca/courses/industry-based-project-cmgt-8810/",
+      "study_mode": "ALL"
+    },
+    "E78": {
+      "course_id": "CMGT7810",
+      "course_name": "Advanced Industry Communication",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/advanced-industry-communication-cmgt-7810/",
+      "study_mode": "ALL"
+    },
+    "E83": {
+      "course_id": "CMGT8211",
+      "course_name": "Industry Collaborations",
+      "course_role": "REQUIRED",
+      "credits": "3.00",
+      "institution_key": "BCIT",
+      "source_url": "https://www.bcit.ca/courses/industry-collaborations-cmgt-8211/",
+      "study_mode": "ALL"
+    },
+    "E86": {
+      "course_id": "CMGT8700",
+      "course_name": "Industry Based Project Proposal",
+      "course_role": "REQUIRED",
+      "credits": "1.00",
+      "institution_key": "BCIT",
+      "native_course_code": "CMGT 8700",
+      "source_url": "https://www.bcit.ca/courses/industry-based-project-proposal-cmgt-8700/",
+      "study_mode": "ALL"
+    },
+    "E26": [
+      {
+        "__evidence_ref__": "E87"
+      },
+      {
+        "__evidence_ref__": "E88"
+      },
+      {
+        "__evidence_ref__": "E78"
+      },
+      {
+        "__evidence_ref__": "E83"
+      },
+      {
+        "__evidence_ref__": "E86"
+      }
+    ],
+    "E45": {
+      "component_id": 6,
+      "component_name": "Professional Standards",
+      "component_order": 6,
+      "courses": {
+        "__evidence_ref__": "E26"
+      },
+      "required_credits": "11"
+    },
+    "E12": [
+      {
+        "__evidence_ref__": "E40"
+      },
+      {
+        "__evidence_ref__": "E41"
+      },
+      {
+        "__evidence_ref__": "E42"
+      },
+      {
+        "__evidence_ref__": "E43"
+      },
+      {
+        "__evidence_ref__": "E44"
+      },
+      {
+        "__evidence_ref__": "E45"
+      }
+    ],
+    "E35": {
+      "allows_external_courses": false,
+      "approval_required": false,
+      "minimum_credits": "12",
+      "notes": "9 mandatory credits plus 3 elective credits.",
+      "requirement_name": "Liberal Studies total",
+      "requirement_text": "Complete at least 12 credits for Liberal Studies total.",
+      "rule_type": "MINIMUM_CREDITS"
+    },
+    "E36": {
+      "allows_external_courses": true,
+      "approval_required": true,
+      "minimum_credits": "4",
+      "notes": "Approved external management courses may satisfy this requirement.",
+      "requirement_name": "Management elective credits",
+      "requirement_text": "Complete at least 4 credits from the approved management elective credits pool.",
+      "rule_type": "MINIMUM_CREDITS_FROM_POOL"
+    },
+    "E8": [
+      {
+        "__evidence_ref__": "E35"
+      },
+      {
+        "__evidence_ref__": "E36"
+      }
+    ],
+    "E105": {
+      "description": "Part-time students may take 3 additional approved Liberal Studies elective credits instead of LIBS 7013.",
+      "replaced_course_id": "LIBS7013",
+      "replacement_credits": "3",
+      "replacement_type": "CREDIT_POOL",
+      "study_mode": "Part-time"
+    },
+    "E28": [
+      {
+        "__evidence_ref__": "E105"
+      }
+    ],
+    "E46": {
+      "components": {
+        "__evidence_ref__": "E12"
+      },
+      "credit_requirements": {
+        "__evidence_ref__": "E8"
+      },
+      "program_id": "8800BTECH",
+      "substitutions": {
+        "__evidence_ref__": "E28"
+      }
+    },
+    "E30": {
+      "academic_rules": {
+        "__evidence_ref__": "E111"
+      },
+      "campus": "Burnaby",
+      "clinical_and_practice_requirements": {
+        "program_id": "8800BTECH"
+      },
+      "credential": "Bachelor of Technology / Bachelor's Degree",
+      "curriculum": {
+        "__evidence_ref__": "E46"
+      },
+      "delivery_method": "In person",
+      "program_id": "8800BTECH",
+      "program_name": "Construction Management",
+      "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+      "school": "School of Construction and the Environment",
+      "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+      "status": "Active",
+      "study_mode": "Full-time and Part-time"
+    },
+    "E110": {
+      "program": {
+        "__evidence_ref__": "E30"
+      }
+    },
+    "E104": {
+      "current_question": "Am I ready for the final project?",
+      "diploma_completed": false,
+      "global_catalog": false,
+      "program_id": "8800BTECH",
+      "program_name": "Construction Management",
+      "program_set_query": false,
+      "requirement_type": "final_project_options",
+      "subject_course_ids": [
+        "CMGT8800",
+        "CMGT8810"
+      ],
+      "work_hours": 0
+    }
+  }
+}

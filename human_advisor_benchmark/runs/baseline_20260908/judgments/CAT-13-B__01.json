@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-13-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "dcd243cccc60dfebd213148cb0ef2885f397fc3ecff4efe87bf0aef634e33bcc",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "f6c2437e1183ef754c213ccf86939de882bba8afe7f7a2dd507e9e5c58f5f3c3",
+  "response_id": "resp_0825c7d0b9a04435006aa079a5b6b087d0b47c162ad5437150",
+  "usage": {
+    "input_tokens": 69290,
+    "input_tokens_details": {
+      "cache_write_tokens": 67936,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1017,
+    "output_tokens_details": {
+      "reasoning_tokens": 45
+    },
+    "total_tokens": 70307
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "credential_ambiguity",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer says ICES evaluation 'may be required'. The source requires comprehensive credential evaluation for the specified countries, although other Canadian services may be considered. The wording leaves that distinction less clear."
+        },
+        "notes": "International availability and the full-time versus part-time restriction match the frozen evidence, as do the intake dates. Both state and prose identify M500MENG correctly. Finalization adds a supported international-students resource. Context retention is inapplicable on turn 1; no required clarification or frustration is present."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly separates international availability from competitive individual admission without claiming access to the student's decision. Committee review, acceptance offers, and application-status communication are supported. State and prose retain the intended program. The offered myBCIT guidance is actionable and sourced. No required clarification or frustration is present."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "credential_ambiguity",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Under verified alternate-entry rules, the raw model answer says 'A pre-entry assessment and possible bridging courses may apply.' The retrieved and frozen admission text explicitly says alternate-entry applicants 'must complete a Pre-entry Assessment form'. Finalization preserves the model's weakening of a mandatory application step."
+        },
+        "notes": "The answer otherwise usefully distinguishes stored program rules from personal eligibility, BCIT admission decisions, and IRCC approval. It honestly reports the study-permit discrepancy between source records. However, the unsolicited curriculum list and Term 4 discussion distract from the international-admission verification question. Term 4 alternatives and 33 credits are correct; the course list is labeled as record contents rather than explicitly requiring every listed course, so it is not treated as an all-courses requirement. The display-code caveat reflects omissions in the tool payload, although frozen course-identity records contain those codes. Specific confirmation topics and myBCIT are useful, but the available program assessment contact would make eligibility follow-up more actionable. State and prose remain on M500MENG. No required clarification or explicit frustration is present."
+      }
+    ]
+  },
+  "attempt": 1
+}

@@ -1,0 +1,43 @@
+{
+  "report_version": "1.2",
+  "review_date": "2026-09-06",
+  "canonical_project": "C:\\Users\\rdubo\\Asteris",
+  "baseline": {"active_programs": 19, "courses": 1233},
+  "constraints": {"new_program_imported": false, "files_deleted": false, "production_code_changed": true},
+  "scaling_phase": {
+    "contract_version": "1.0",
+    "contract_module": "program_import_contract.py",
+    "adapters": ["electronics", "m600msc", "specialty_nursing", "main_bsn"],
+    "audit_first_validation": true,
+    "deterministic_payload_hash": true,
+    "idempotency_key": true,
+    "governance_migrations": ["012_program_import_governance.sql", "013_program_import_hardening.sql"],
+    "governance_migration_applied": true,
+    "postgresql_operational_authority_preserved": true
+  },
+  "pipeline_stages": ["extract", "normalize", "validate", "dry_run_diff", "review_and_approve_exact_hash", "import", "activate_revision", "regression_checks"],
+  "blocking_stop_conditions": ["uncertain_program_identity_or_source", "missing_required_metadata_or_curriculum", "unvalidated_course_reference", "unexplained_credit_or_integrity_failure", "unsupported_executable_rule", "undisposed_blocking_review_flag", "approved_audit_hash_mismatch", "failed_program_contract_test", "failed_full_regression"],
+  "new_green": ["deterministic_row_level_dry_run_diff", "exact_normalized_hash_approval_enforcement", "append_only_revision_lifecycle_and_activation_pointer", "explicit_previous_known_good_rollback", "database_managed_applied_computing_and_main_bsn_aliases", "database_managed_independent_nursing_family_relationships"],
+  "remaining_yellow": ["migrate_all_bespoke_writers_to_shared_declarative_writer", "effective_dated_contract_and_rule_bindings", "database_manage_remaining_credential_civil_and_project_aliases", "workbook_reconciliation_retirement", "broader_per_field_provenance", "materialized_data_restore_from_historical_revision_payload"],
+  "production_red": ["authenticated_role_based_approval_and_publish_workflow", "institutional_review_queue_and_submission_ui", "production_security_backup_monitoring_and_governance_review"],
+  "recommended_stress_test_types": ["coop_with_work_terms", "apprenticeship_with_external_hours", "laddered_multi_exit_credential", "nested_and_external_elective_pools", "clinical_residency_with_variable_placements"],
+  "institutional_resource_layer": {
+    "migration": "017_institutional_resources.sql",
+    "institution_scoped": true,
+    "database_managed_topics_and_intents": true,
+    "runtime_web_search": false,
+    "maximum_appended_links": 2,
+    "campus_layer_started": true
+  },
+  "campus_information_layer": {
+    "migration": "018_campus_information.sql",
+    "institution_scoped": true,
+    "seeded_campus_keys": ["burnaby", "downtown", "aerospace", "annacis_island", "marine"],
+    "program_relationships_normalized": true,
+    "legacy_program_campus_text_preserved": true,
+    "main_phone_general_only": true,
+    "runtime_web_search": false,
+    "maps_directions_transit_parking_navigation": false
+  },
+  "regression": {"command": "python -m unittest discover -v", "status": "passed", "baseline_tests": 209, "tests_run": 220, "passed": 220, "failures": 0, "errors": 0, "duration_seconds": 36.338}
+}

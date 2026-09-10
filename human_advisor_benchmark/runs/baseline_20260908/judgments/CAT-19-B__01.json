@@ -1,0 +1,112 @@
+{
+  "scenario_id": "CAT-19-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "8e8b56661b3f9b1c01714fa5718c177ec8da8bb7f292e3ac39ce71bb4923a6cb",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "1119aaca82aba0c0a33d7dc8d1f78ff5816f80a8a25ec9a094fd764249c47be0",
+  "response_id": "resp_0f5a9e468966932f006aa07c38d2a487d089ed33abd32e06c2",
+  "usage": {
+    "input_tokens": 98123,
+    "input_tokens_details": {
+      "cache_write_tokens": 96769,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 759,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 98882
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "missing_next_step",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The model fetched get_program_details for 5430CERT and accurately named and described the Certificate, but returned conversation_state.program_id is null and scope is program_family."
+        },
+        "notes": "All substantive prose claims match the frozen overview, admission text and delivery records; the international resource link is also supported. Accurate prose coexists with incorrect persisted entity state. Context retention is not applicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "missing_next_step",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolver retains program_family with no program_id and forces search_programs for the admission follow-up. The final answer correctly denies automatic admission but appends two offerings and does not reconnect to the Certificate's established international restriction."
+        },
+        "notes": "The admission distinction and listed credentials are correct; the conditional reference to international availability does not explicitly assert this Certificate is available. Personal admission is appropriately left to BCIT. Guidance to rely on an official decision is safe but generic. No required clarification or explicit frustration; no admission guarantee."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 1,
+          "context_retention": 1,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "missing_next_step",
+          "layer": "mixed",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Persisted program_family state again forces catalog search. The raw and final answer then say international acceptance and review status cannot be verified from available data, undermining the earlier answer despite turn 1's explicit 5430CERT evidence of international exclusion and curriculum review."
+        },
+        "notes": "Fails to separate stored rules from live confirmation and personal decisions. The two offerings are supported, and refusing to verify individual admission is appropriate. However, the claim of 164 active programs overall reflects a certificate-filtered tool result, not the much broader frozen active catalog. Confirmation guidance names supported BCIT services but unnecessarily sends established stored facts back for verification without reporting them. Finalization did not alter the raw answer. No required clarification or explicit frustration; model input visibility beyond the observed trace is not fully established."
+      }
+    ]
+  },
+  "attempt": 1
+}

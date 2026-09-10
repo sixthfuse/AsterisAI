@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-05",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "52adf4b6ddd0edb5f2c9dbfd57b83548e3c388df048867e748a0390430b94930",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "d9b0d218d9e0cd6191cddf7118d5de90b6f7d2699e745934d9240b736e78ef39",
+  "packet_sha256": "44b0b1d071b1c47a7a04c085b029e83ad005fa538262cc02df554b159fc50cfe",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_07fc59c04a09b471006aa08029d3c887d0bed08354858c469a",
+  "usage": {
+    "input_tokens": 98544,
+    "input_tokens_details": {
+      "cache_write_tokens": 97190,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1192,
+    "output_tokens_details": {
+      "reasoning_tokens": 73
+    },
+    "total_tokens": 99736
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 3,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "credential_ambiguity",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E1 presents a long list of database credential labels, including overlapping Bachelor's Degree and Master's Degree variants, rather than a student-oriented overview with program examples. It also calls the BCIT catalog programs 'Asteris' offerings."
+        },
+        "notes": "The 374 count and credential categories are supported by the catalog evidence; no single program is incorrectly selected in state. The institutional branding is imprecise rather than a different curriculum claim. Context is inapplicable on turn 1; no necessary clarification, frustration, or required next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "credential_ambiguity",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E2 correctly identifies the unique Combined Honours program but again says 'Asteris offers' while the retrieved catalog and linked institutional source are BCIT."
+        },
+        "notes": "Program name, BSc credential, full-time mode, campuses, and in-person delivery match frozen records. Family state appropriately stores unique_result_program_id=9940BSC without prematurely selecting a program. The branding imprecision does not constitute a wrong program resolution. Necessary clarification, frustration, and next-step dimensions are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 2,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "credential_ambiguity",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Finalization changes the clean E3 admission answer into E4: 'CHEM 121 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141' and '3.0 credits of UBC-MATH-100 — UBC-MATH-102 — UBC-MATH-104 — Differential Calculus'. These inserted identifier chains obscure course alternatives and readability."
+        },
+        "notes": "The substantive admission pathways, 76% minimum, September 2026 70% exception, transfer subjects, criminal-check timing uncertainty, and UBC application workflow match records. Chemistry still explicitly retains the OR alternatives; the calculus chain is awkward rather than an explicit requirement to take all three. No graduation-only requirements are promoted to admission. Separately, resolver/tool/prose use 9940BSC correctly, but returned state keeps program_id=null and scope=program_family, failing the frozen state expectation; unique_result_program_id remains correct. This is a deterministic state-persistence defect, not a wrong-program answer. Institutional confirmation guidance is appropriate, though the appended generic BCIT Admissions link is less useful than the stated UBC workflow. No frustration or necessary clarification applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 3,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "credential_ambiguity",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution E80 and get_program_details use 9940BSC, but returned conversation_state E57 still has program_id=null and scope=program_family rather than persisting the uniquely referenced program."
+        },
+        "notes": "The student-facing answer accurately gives Burnaby Campus and UBC Vancouver with in-person instruction, matching program and offering records. Raw and final answers are identical, and the correct program link preserves the referent. The failure is confined to structured state; it does not make the campus answer academically wrong. Necessary clarification, frustration, and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

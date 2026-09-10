@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-14",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "8bcd1a216292a43bb92703e9a2c4f081f675b18e263ec94f5547e21c9349b610",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c96889a439d5cdfc87007ec747e549e1ce765c5f6bd6fde7ba8741967b174804",
+  "packet_sha256": "67753e400d181ab1dfdb9f5fbe0b9fbf4909b7023a7d55b3eab0c5f1df987c16",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0b8ad4a31897ca45006aa081e75c0c87d0b30b7de90ad6c759",
+  "usage": {
+    "input_tokens": 33518,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 33515
+    },
+    "output_tokens": 1433,
+    "output_tokens_details": {
+      "reasoning_tokens": 40
+    },
+    "total_tokens": 34951
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer responds to a simple program identification with a lengthy curriculum list and stored requirements. Repeated 'Display course code not provided' placeholders remain in the final answer."
+        },
+        "notes": "The program is correct in both prose and state. Academic information matches the supplied program and course records, including the OR final-project choice and minimum elective credits. Finalization adds some course codes but does not originate the excessive list. Context retention is inapplicable on turn 1; no clarification, frustration handling, or actionable next step was needed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "list_dump_or_repetition",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution drops program_id 8800BTECH when switching to CMGT8700. The progression tool then returns 'Please name the program'. The model does not recover through course details or use the two-year rule already present in the conversation, instead saying it cannot verify the threshold."
+        },
+        "notes": "The prose correctly remembers the program and 1.5-year figure, but structured state loses the program. The answer makes no substantive academic threshold claim, so factual correctness is null rather than verified correct. It fails to supply the available two-year minimum and 0.5-year shortfall. The lookup failure is honestly described, but the broader claim that the threshold cannot be verified overlooks existing evidence. Department confirmation is a legitimate suggestion, not an unnecessary question to identify the program. No frustration or required clarification applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "list_dump_or_repetition",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver and final state retain CMGT8700 but leave program_id null despite the established Construction Management program. The answer nevertheless correctly applies the retrieved two-year course threshold."
+        },
+        "notes": "The answer incorporates the correction and confines its affirmative conclusion to the experience requirement rather than guaranteeing all prerequisites. Arithmetic is correct. 'You meet that specific experience requirement' would be better qualified as meeting the numeric minimum based on reported related experience, subject to acceptance of that experience. 'Stored minimum' and '0 years remaining' are slightly mechanical. The additional requirements are relevant, not an unwanted curriculum dump. No required clarification, frustration handling, or next step applies."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 3,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "list_dump_or_repetition",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The graduation question remains resolved as course scope with program_id null and intent COURSE_INFO. Forced initial retrieval targets CMGT8700; subsequent requests for CMGT8800 and CMGT8810 also return CMGT8700 data."
+        },
+        "notes": "Despite incorrect state and misdirected retrieval, the final prose correctly separates meeting an experience threshold from graduation and preserves the chosen final-project alternative. It does not invent student course completions or guarantee graduation. Numeric experience eligibility could be more explicitly conditional on acceptance of the reported experience. A specific suggestion to have the department review completed courses and accepted experience would improve the unresolved graduation assessment. The repeated course requirements are brief and relevant here, not a list-dump failure. No required clarification or frustration applies."
+      }
+    ]
+  },
+  "attempt": 3
+}

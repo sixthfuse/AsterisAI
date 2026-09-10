@@ -1,0 +1,128 @@
+{
+  "scenario_id": "FLOW-18",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "d567744ba5951c943030f0cee8a248afd088a8d4e1a309afd0d151555194b2d9",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "feb300a3c73eee17331d16f34aa9c30cffbb790fa512ec17bcfb114d8ab9512c",
+  "packet_sha256": "265b9c67ee6a85320eb2f2d00cfa11d3f77ca54a78756a85921cf7f678f7d967",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_01dbf4e7886ce756006aa0823d3f6487d09cc31be60ad6c1b9",
+  "usage": {
+    "input_tokens": 21809,
+    "input_tokens_details": {
+      "cache_write_tokens": 20416,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 849,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 22658
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer E1, unchanged at finalization, supplies the complete course-by-course curriculum after already summarizing the first-year subjects and second-year paths. This is disproportionate to a general program introduction."
+        },
+        "notes": "Academic claims match the frozen overview, rules, course records, and offerings; entry and pathway alternatives remain OR. Prose and state both identify M600MSC correctly. No clarification was asked or needed. Context retention is inapplicable on turn 1; frustration, necessary clarification, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "E2 directly and briefly gives Burnaby Campus and its verified address, preserving the possible Downtown/field-location qualification. The subsequent student's complaint does not establish a failure in this actual answer: no course list appears here. State retains M600MSC. Necessary clarification, explicit frustration handling, and next-step guidance are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E4 answers with a dense 'Campus: ...; Possible site: ... The stored program listing says ...' string, without acknowledging the student's correction. The trace contains no model calls, supporting deterministic output attribution but not identification of a specific subcomponent."
+        },
+        "notes": "Campus relationships and both addresses match frozen records, and Downtown remains explicitly possible rather than guaranteed. The advisor answers the concrete campus question instead of stopping or repeating curriculum, but omits a brief acknowledgment and unnecessarily repeats the location qualification. M600MSC persists in state. Necessary clarification and next-step guidance are not applicable."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 4,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The five-word acknowledgment respects the stop intent with no tools or further academic content. Although resolved_program is null in this response envelope, conversation_state retains M600MSC, so the subject is preserved. Factual correctness is null because no academic claims are made; necessary clarification and next-step guidance are not applicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

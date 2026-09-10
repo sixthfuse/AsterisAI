@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-43",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "a0b28b789926db8039800f642ebd0d41c01ccb670892b9f4f84861f4e246df9f",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "10e4b4593f0684f130f4b923c6f807b35c900e25473689f40163b7995e1fa52c",
+  "packet_sha256": "8b10dd30f9ba280cc539e69a401e67b8deaf61ee79ec56a9679d5d09aed6cfd7",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0d297e2cf9cd0f87006aa10bf3ba3c87d0812c3de804a37425",
+  "usage": {
+    "input_tokens": 26418,
+    "input_tokens_details": {
+      "cache_write_tokens": 25064,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1981,
+    "output_tokens_details": {
+      "reasoning_tokens": 1256
+    },
+    "total_tokens": 28399
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response correctly identifies M600MSC and gives an accurate, proportionate overview of its format, curriculum paths, location, outcomes, and intake status. No clarification was needed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "It correctly retains Applied Computing MSc as the referent and directly confirms international availability. The study-permit, credential-evaluation, and intake statements match the frozen evidence and preserve institutional-confirmation boundaries."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer remains on M600MSC and accurately distinguishes the two alternative entry routes, including their GPA thresholds, English requirement, questionnaire, references, competitive review, and the need for program-area review of alternate-entry preparation. It appropriately avoids deciding the user's eligibility without degree and GPA details."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver and returned conversation state leave academic_scope as \"admission\" even though the user asks for the campus. There were no model calls on this turn, while the deterministic final response nevertheless used campus information and answered correctly."
+        },
+        "notes": "The final answer accurately gives Burnaby Campus as the offered location and Downtown Campus as only a possible site, with correct addresses. The stale hidden scope does not make the academic answer wrong, but it is a noncritical state-tracking defect. The compressed one-line presentation and phrase \"stored program listing\" are slightly less natural than a direct campus answer."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

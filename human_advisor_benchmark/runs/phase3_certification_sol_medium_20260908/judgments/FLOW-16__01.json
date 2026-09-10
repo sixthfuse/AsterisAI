@@ -1,0 +1,144 @@
+{
+  "scenario_id": "FLOW-16",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "78f61eaa6a8912b9af8a0b5e2e68fcc61d90f3b9a1b8dae22bc11f045d361d39",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "2389f20af3272ad8b85ffa431fe50efe4f368bab0df0dbc9522abe9982616eba",
+  "packet_sha256": "fec8f23e4463243c6fe411d47fd907a280dfa68e59bfede092a24c50f006ad69",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0eb3d99ab7ff01bc006aa10a6f548087d086d9c7a50bb408c7",
+  "usage": {
+    "input_tokens": 27524,
+    "input_tokens_details": {
+      "cache_write_tokens": 26170,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2354,
+    "output_tokens_details": {
+      "reasoning_tokens": 1392
+    },
+    "total_tokens": 29878
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "scope_mismatch",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The answer correctly explains admission requirements, but adds unrequested curriculum, Year 2 pathway, delivery, duration, and intake information. This makes the response broader and longer than needed for establishing the applicant's degree claim and admission position."
+        },
+        "notes": "The program is correctly resolved as M600MSC, and all stated admission thresholds and program facts match the frozen evidence. The response appropriately avoids guaranteeing eligibility. The persisted student_facts state is empty, so the bachelor's claim was not recorded structurally, although context retention is not scored on turn 1."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The final answer correctly uses the corrected fact that the student has only completed high school, but conversation_state.student_facts remains empty rather than replacing or recording the withdrawn bachelor's claim."
+        },
+        "notes": "The substantive answer is academically correct: both entry routes require a bachelor's degree, so high school alone does not meet the MSc entrance requirements. The course and delivery examples are accurate but unnecessary for this correction, causing minor scope and relevance dilution."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The answer correctly remembers that the student has only a high-school credential, but the returned conversation_state still has an empty student_facts array and therefore does not structurally preserve that pertinent correction."
+        },
+        "notes": "The answer directly and correctly says eligibility is not automatic and that the student does not currently satisfy either bachelor's-based entry route. It does not reuse the withdrawn bachelor's claim or promise admission. The suggested bachelor's-degree next step is supported by the admission rules."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The final answer is explicitly grounded in the student's corrected high-school-only background, but conversation_state.student_facts remains empty instead of persisting that fact."
+        },
+        "notes": "The response gives specific, useful questions about suitable bachelor's programs, high-school entrance requirements, upgrading, application logistics, and undergraduate preparation. It accurately restates the MSc's two bachelor's-based entry routes, clearly labels the undergraduate route as absent from the available program record, and appropriately directs the student to official admissions information. Finalization only added the verified BCIT Admissions link and did not degrade the raw answer."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

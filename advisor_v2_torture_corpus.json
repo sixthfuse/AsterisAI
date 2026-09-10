@@ -1,0 +1,33 @@
+{
+  "description": "One deterministic 28-turn manual conversation spanning context, resolution, retrieval, and rule boundaries.",
+  "turns": [
+    {"turn": 1, "question": "Tell me about Technology Management", "expect": {"kind": "program", "program_id": "8350BTECH", "context_action": "none"}},
+    {"turn": 2, "question": "Tell me more", "expect": {"kind": "program", "program_id": "8350BTECH", "context_action": "inherited"}},
+    {"turn": 3, "question": "What are its admission requirements?", "expect": {"program_id": "8350BTECH", "context_action": "inherited", "response_path": "admission_rule_summary"}},
+    {"turn": 4, "question": "Am I eligible for it?", "student_profile": {"gpa": 75, "credentials": ["diploma"]}, "expect": {"program_id": "8350BTECH", "evaluation_status": "missing_student_information"}},
+    {"turn": 5, "question": "I have 3 years of work experience", "expect": {"program_id": "8350BTECH", "context_action": "inherited", "evaluation_status": "met"}},
+    {"turn": 6, "question": "Tell me about Applied Computing", "expect": {"program_id": "M600MSC", "context_action": "reset"}},
+    {"turn": 7, "question": "How about admissions?", "expect": {"program_id": "M600MSC", "context_action": "inherited", "response_path": "admission_rule_summary"}},
+    {"turn": 8, "question": "What computing programs are there?", "expect": {"kind": "discovery", "context_action": "reset"}},
+    {"turn": 9, "question": "Which one is best for it?", "expect": {"kind": "discovery", "context_action": "preserved_ambiguous", "response_path": "ambiguous_context_clarification"}},
+    {"turn": 10, "question": "Applied Computing", "expect": {"program_id": "M600MSC", "context_action": "reset"}},
+    {"turn": 11, "question": "Tell me about COMP 1511", "expect": {"kind": "course", "context_action": "reset"}},
+    {"turn": 12, "question": "How many credits does it have?", "expect": {"kind": "course", "context_action": "inherited", "response_path": "course_facts"}},
+    {"turn": 13, "question": "Tell me about Lunar Gardening", "expect": {"kind": "none", "retrieval_status": "not_found", "context_action": "reset"}},
+    {"turn": 14, "question": "Tell me more", "expect": {"kind": "none", "response_path": "missing_context_clarification"}},
+    {"turn": 15, "question": "Tell me about database failure", "expect": {"retrieval_status": "data_unavailable", "response_path": "program_resolution_failure"}},
+    {"turn": 16, "question": "Tell me about Civil Technology", "expect": {"kind": "ambiguous"}},
+    {"turn": 17, "question": "What about it?", "expect": {"kind": "ambiguous", "context_action": "preserved_ambiguous"}},
+    {"turn": 18, "question": "technology", "expect": {"kind": "discovery", "context_action": "reset"}},
+    {"turn": 19, "question": "Tell me about Technlogy Managment", "expect": {"program_id": "8350BTECH", "context_action": "reset"}},
+    {"turn": 20, "question": "Will BCIT accept me to it?", "expect": {"program_id": "8350BTECH", "context_action": "inherited", "evaluation_status": "human_review_required", "response_path": "institutional_decision_boundary"}},
+    {"turn": 21, "question": "What is the weather tomorrow?", "expect": {"kind": "none", "context_action": "reset"}},
+    {"turn": 22, "question": "And admissions?", "expect": {"kind": "none", "response_path": "missing_context_clarification"}},
+    {"turn": 23, "question": "Tell me about Technology Management", "expect": {"program_id": "8350BTECH", "context_action": "reset"}},
+    {"turn": 24, "question": "Am I eligible for it?", "student_profile": {"gpa": 75, "credentials": ["diploma"], "work_experience_years": 3}, "expect": {"evaluation_status": "met"}},
+    {"turn": 25, "question": "Actually my GPA is 65%", "expect": {"program_id": "8350BTECH", "evaluation_status": "unmet", "profile_conflict": true}},
+    {"turn": 26, "question": "What is COMP 1511?", "expect": {"kind": "course", "context_action": "reset"}},
+    {"turn": 27, "question": "What about the course?", "expect": {"kind": "course", "context_action": "inherited"}},
+    {"turn": 28, "question": "computing", "expect": {"kind": "discovery", "context_action": "reset"}}
+  ]
+}

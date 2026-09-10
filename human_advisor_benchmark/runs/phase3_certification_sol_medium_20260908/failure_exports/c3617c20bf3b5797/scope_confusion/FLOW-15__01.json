@@ -1,0 +1,116 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-15",
+    "turn": 1,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The user asked about graduation, but the response said it would check “what courses you're eligible to take next,” and the resolver stored scope as “none.” It also asked only for the program, omitting the needed completion/coursework details. The trace contains no model call, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Can I graduate now?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Can I graduate now?",
+        "expected": "Ask which program and what requirements/coursework the student has completed; do not invent a record.",
+        "scope": "graduation",
+        "clarification": "required",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Sure. Which program are you taking? Once I know that, I can check what courses you're eligible to take next.",
+        "tools_used": [],
+        "intent": "PROGRAM_PROGRESS",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "none",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.687,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "none",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

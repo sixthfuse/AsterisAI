@@ -1,0 +1,97 @@
+{
+  "scenario_id": "CAT-04-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "a6c1fe606d84aff64834d3795d2a37c7109a7e10c2fc729d5fd45a0dc6ae71e7",
+  "response_id": "resp_00aebd205d929cfc006aa07450d54087d0bf2287b8a3788383",
+  "usage": {
+    "input_tokens": 69853,
+    "input_tokens_details": {
+      "cache_write_tokens": 69850,
+      "cached_tokens": 0
+    },
+    "output_tokens": 711,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 70564
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correct program in state and prose. International availability and admission requirements match the snapshot; intake and permit caveats avoid guarantees. The full admission checklist is more detail than this availability question needs, and the internal status code is somewhat technical. Finalization adds a supported international-student resource. The closed September 2026 offering does not negate general international eligibility or establish status for an unspecified intended intake. Context retention is inapplicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly and correctly separates international availability from individual admission, supported by the competitive admission rules and human departmental decision boundary. State retains 8660BENG and the answer preserves the prior context without claiming personal eligibility. No clarification, frustration handling, or additional actionable next step is needed."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The raw model answer, unchanged in finalization, says successful completion of the first two years leads to a diploma 'subject to the program’s continuation requirements.' The retrieved overview explicitly awards the diploma on successful completion of those two years and applies continuation requirements to entering the final two years. Frozen progression records likewise place those requirements at Level 5, not diploma award."
+        },
+        "notes": "Otherwise accurately distinguishes stored international/admission rules and PGWP eligibility-to-apply from unverified personal equivalencies, intake availability, permits, and institutional decisions, with useful confirmation questions. Program state and named entity remain correct. The added diploma statement materially conflates credential completion and progression while labeling it verified. Some duplication between unknowns and confirmation questions and peripheral program structure detail reduce concision. The snapshot contains one closed September 2026 offering, but no intended intake was specified and that offering was not retrieved; the answer does not falsely say all intakes are open. No required clarification or explicit frustration."
+      }
+    ]
+  },
+  "attempt": 3
+}

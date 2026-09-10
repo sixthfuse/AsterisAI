@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-17",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "3b5be2185b9ba48a6c8b212683892851cb7caa04b8222618e9a92e31a46676f3",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "105632f864705d08f16668ee80574aa439fcc9c1441ff792cbb4b1131b022833",
+  "packet_sha256": "d3b387a51ade2877d2e8963b2ab53541e89b08687636a697b330228fe353655c",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_00a37cff8d747586006aa10a78d0f487d089dd04234e68c45c",
+  "usage": {
+    "input_tokens": 67447,
+    "input_tokens_details": {
+      "cache_write_tokens": 66093,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1978,
+    "output_tokens_details": {
+      "reasoning_tokens": 1237
+    },
+    "total_tokens": 69425
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly identified the unique catalog result, program 9940BSC, and accurately summarized its credential, format, and locations. Context retention is not applicable on the first turn."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly retained program 9940BSC and gave the certified location. The phrase “has the stored location” is slightly database-like and less natural than simply saying the program is offered at those locations."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly interpreted the typo as an admissions follow-up for program 9940BSC, preserved the two pathways as alternatives, stated the documented requirements, and appropriately avoided deciding the student's eligibility without an academic history."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "unsupported_inference",
+          "pattern": "unknown_or_human_boundary",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The answer says, “The exact Year 3 forensic-elective selection rule isn’t specified in the stored curriculum.” Frozen curriculum requirement 20 explicitly specifies six credits—exactly two courses—from the five published FSCT electives. The raw model answer E2 already contained this false absence-of-evidence claim; finalization only changed the wording of the Bioethics reference."
+        },
+        "notes": "The program, graduation scope, 132-credit total, yearly credit arithmetic, and highlighted OR choices are correct. However, the answer materially misstates the Year 3 elective rule and is incomplete as a graduation-requirements summary: it omits documented graduation-only English, physics, and elective requirements, among others. The direct contradiction of certified evidence makes the academic error critical."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

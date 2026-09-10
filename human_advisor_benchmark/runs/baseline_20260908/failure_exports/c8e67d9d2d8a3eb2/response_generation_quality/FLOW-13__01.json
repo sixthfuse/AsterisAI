@@ -1,0 +1,127 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-13",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "or_and_elective_confusion",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+      "ai_advisor.py:1768"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "What are the prerequisites for LIBS 7001?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "What are the prerequisites for LIBS 7001?",
+        "expected": "One OR alternative is ENGL 1177 with minimum 50; alternatives include 6 BCIT communication credits or 3 first-year social science/humanities credits.",
+        "scope": "prerequisites",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "course_id",
+            "value": [
+              "LIBS7001"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "LIBS 7001 — Critical Reading and Writing\n\nPrerequisites: ENGL 1177 (minimum grade: 50); None; None",
+        "tools_used": [
+          "get_course_details"
+        ],
+        "verification": {
+          "count": 4,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "course",
+          "program_id": null,
+          "course_id": "LIBS7001",
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 1.093,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": "LIBS7001",
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "course",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": "LIBS7001",
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "course_id",
+          "value": [
+            "LIBS7001"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "LIBS7001"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

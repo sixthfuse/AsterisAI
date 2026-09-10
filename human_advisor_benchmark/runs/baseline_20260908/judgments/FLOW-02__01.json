@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-02",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "224444fb0f74a1d4f330506230d5900529f93550e7d83c0effe472156bb9ac76",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "74c71cecb834cb2681da7426e0a6c4433fe12936f4bba189909e9b7c75537bf1",
+  "packet_sha256": "84d79aadd113ee1c647edd984db6886af163ce7397f9f2a1b5faf08f3d340768",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_08721534fa53d587006aa0800d930c87d0bf6985e93d4a550d",
+  "usage": {
+    "input_tokens": 66129,
+    "input_tokens_details": {
+      "cache_write_tokens": 64736,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1455,
+    "output_tokens_details": {
+      "reasoning_tokens": 61
+    },
+    "total_tokens": 67584
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "unknown_or_human_boundary",
+          "layer": "mixed",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "search_programs returns only 13 BSN records for 'nursing programs', and the answer presents these as the available nursing programs, all leading to a BSN. The frozen active catalog also contains nursing advanced certificates, including Critical Care Nursing Specialty (680XADCERT) and Neonatal Nursing Specialty (680FASCERT). The retrieval is narrower than the question, and the prose does not disclose that limitation."
+        },
+        "notes": "The 13 listed BSN identities and their reported delivery modes match the retrieved evidence. State correctly represents program_family rather than a selected program; the substantive problem is incomplete family coverage and misleading credential coverage. The requested program list is not an unwanted dump. Context retention is inapplicable on turn 1; no clarification, frustration response, or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "In response to 'I'm interested in the full-time Nursing BSN', the raw model answer provides all nine terms and the entire 15-course specialty pool before admission highlights. Finalization preserves this unsolicited curriculum dump."
+        },
+        "notes": "Both state and prose correctly identify 8875BSN. Duration, location, intakes, application dates, admission highlights, international restriction, and licensure distinction are supported by the frozen records. 'At least' 3 and 6 specialty credits is a minor imprecision relative to the source's specified 3.0 and 6.0 credits; elective-pool status and the one-specialty restriction remain intact. The mathematics summary preserves the alternative structure without inventing a threshold. No clarification or frustration handling applies, and a next step was not required for this expression of interest."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 2,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "unknown_or_human_boundary",
+          "layer": "mixed",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The repeated family search again returns only the 13 BSNs, and the answer says '13 active nursing programs, all leading to a Bachelor of Science in Nursing'. Frozen catalog records include additional nursing advanced certificates, so this is not a complete answer to 'all the nursing programs'."
+        },
+        "notes": "State correctly returns from 8875BSN to program_family, and prose does not remain stuck on the full-time BSN. Repeating the list is explicitly requested and should not be penalized as repetition. Separately, 'Asteris has' incorrectly attributes BCIT's programs to the advisor; this wording originates in the model answer. Listed BSN names and delivery information match retrieval. No clarification, frustration response, or next step is required."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Interprets 'those' as the 13 previously listed programs and retains family state. The comparison supplies E15 for every specialty member and explicit unavailability for the full-time BSN. The answer preserves the outside-Canada OR valid-work-permit alternatives, program-head approval, and study-permit/PGWP restrictions without claiming personal eligibility. No unknown classification appears among these retrieved members. Specialty international claims are supported by the supplied per-member comparison evidence, although separate raw specialty rule tables are not included. The confirmation step appropriately respects the human approval boundary. Necessary clarification and frustration handling are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

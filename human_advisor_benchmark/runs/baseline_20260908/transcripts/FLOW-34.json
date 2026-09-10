@@ -1,0 +1,501 @@
+{
+  "id": "FLOW-34",
+  "category": "credential_disambiguation",
+  "tags": [
+    "credential_disambiguation",
+    "credential_fragments",
+    "self_correction"
+  ],
+  "status": "complete",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Construction Management.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Construction Management.",
+        "expected": "Present/clarify Diploma vs BTech; do not silently choose.",
+        "scope": "program_information",
+        "clarification": "required",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Construction Management; Construction Management?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.546,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "7710DIPMA",
+                "8800BTECH"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "The BTech, please.",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Construction Management."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "The BTech, please.",
+        "expected": "Resolve credential fragment from context.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Construction Management; Construction Management?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.375,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "7710DIPMA",
+                "8800BTECH"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "request": {
+        "question": "Actually the diploma, not the degree.",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Construction Management."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          },
+          {
+            "role": "user",
+            "content": "The BTech, please."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "Actually the diploma, not the degree.",
+        "expected": "Correction explicitly selects diploma.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "7710DIPMA"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Construction Management; Construction Management?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.672,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "7710DIPMA",
+                "8800BTECH"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "7710DIPMA"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 4,
+      "request": {
+        "question": "What's the credential for this one?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Construction Management."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          },
+          {
+            "role": "user",
+            "content": "The BTech, please."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          },
+          {
+            "role": "user",
+            "content": "Actually the diploma, not the degree."
+          },
+          {
+            "role": "assistant",
+            "content": "Which program do you mean: Construction Management; Construction Management?"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "What's the credential for this one?",
+        "expected": "Diploma.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "7710DIPMA"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Construction Management; Construction Management?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "7710DIPMA",
+            "8800BTECH"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.39,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "7710DIPMA",
+                "8800BTECH"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "7710DIPMA"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

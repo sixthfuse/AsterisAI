@@ -1,0 +1,104 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-07",
+    "turn": 1,
+    "root_cause": "clarification_logic",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Asking which credential is appropriate, but the choices are rendered as 'Civil Technology; Civil Technology?' without credential labels. The response is generated before any model call. This prevents a useful initial clarification.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "ai_advisor.py:2336",
+      "transcripts/FLOW-07.json"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Civil Technology.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Civil Technology.",
+        "expected": "Ask which credential or present both certificate and associate certificate without committing to one.",
+        "scope": "program_information",
+        "clarification": "required",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which program do you mean: Civil Technology; Civil Technology?",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "ambiguous",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [
+            "5430ACERT",
+            "5430CERT"
+          ],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 0.859,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [
+                "5430ACERT",
+                "5430CERT"
+              ],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "ambiguous",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

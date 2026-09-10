@@ -1,0 +1,2827 @@
+{
+  "scenario_id": "FLOW-18",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Tell me about Applied Computing MSc.",
+      "advisor": "The **Applied Computing Master of Science** is a full-time, two-year, in-person program based mainly at Burnaby Campus. It combines advanced computing with practical, interdisciplinary problem-solving and can support either technical leadership roles or further academic study.\n\n- **First year:** Core study includes **COMP 9060 Applied Algorithm Analysis**, **COMP 9170 Data Science**, **COMP 9200 Applied Research Methods**, **COMP 9040 Human-centered Computing**, **COMP 9130 Applied Artificial Intelligence**, and **COMP 9150 Cyber Security for Applied Computing**.\n- **Second year:** Students choose one path:\n  - **Thesis:** **COMP 9600 M.Sc. Thesis**\n  - **Project and internship:** **COMP 9290 Special Topics in Applied Computing**, **COMP 9400 Industry Internship**, and **COMP 9500 M.Sc. Research Project**\n- Students must maintain at least a **70% program average** before starting the thesis or research project.\n\nThe September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[Applied Computing MSc program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)",
+      "expectation": {
+        "question": "Tell me about Applied Computing MSc.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "M600MSC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Just tell me where it is, please.",
+      "advisor": "It’s at **BCIT’s Burnaby Campus, 3700 Willingdon Avenue, Burnaby, BC**. Some activities may also occur at the Downtown Campus or appropriate field locations: [program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/).",
+      "expectation": {
+        "question": "Just tell me where it is, please.",
+        "expected": "Answer location directly and briefly.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "M600MSC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "That's not what I asked. I want the campus, not a course list.",
+      "advisor": "Campus: **Burnaby Campus** — 3700 Willingdon Avenue, Burnaby, BC V5G 3H2; Possible site: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6 The stored program listing says: Burnaby; possible Downtown Campus or field locations.",
+      "expectation": {
+        "question": "That's not what I asked. I want the campus, not a course list.",
+        "expected": "Acknowledge correction and give campus directly; don't stop the discussion or repeat curriculum.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "M600MSC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "user": "I give up.",
+      "advisor": "Okay, we can stop here.",
+      "expectation": {
+        "question": "I give up.",
+        "expected": "Acknowledge stop without more academic detail; preserve subject.",
+        "scope": "stop",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": true,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "tools_empty",
+            "dimension": "frustration_handling",
+            "root_cause": "conversation_state"
+          },
+          {
+            "op": "max_words",
+            "value": 35,
+            "dimension": "frustration_handling",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "M600MSC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "M600MSC",
+        "program_name": "Applied Computing",
+        "credential": "Master of Science / Master's Degree",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "M600MSC",
+        "program_name": "Applied Computing",
+        "program_overview": "The Master of Science Degree in Applied Computing gives you in-depth computing knowledge to solve complex real-world problems across industries and sectors. Through an interdisciplinary and rigorous full-time curriculum, you’ll be equipped to provide technical leadership in a professional setting or pursue further academic study. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: in person. See details . BCIT Master of Science in Applied Computing About the program Applied computing integrates information technology, computer science, and industry. You’ll take courses in core computing, and you will have the opportunity to work in an application area in another discipline. You’ll develop a deep understanding of how advanced computing, tools, and computational methods can be applied in practice to overcome challenges and create efficiencies. The program employs a cohort model, with the same group in all courses. This allows you to work through the program together, sharing your experience and expertise and building industry connections that will last long after you graduate 1 intake: September 4 15-week terms, normally completed over two academic years full time First year with two terms , delivered in-person, including: Algorithm analysis Human-centered Computing Machine Learning (ML) & Artificial Intelligence (AI) Data Science Cybersecurity Research methods Second year on thesis path or internship & project path Based on BCIT Burnaby Campus, and possibly the Downtown Campus or field locations where appropriate. You’ll be uniquely qualified to apply your knowledge and skills in various areas, such as: computational science rehabilitation engineering building science biotechnology autonomous vehicles sustainability smart micro-grids social impacts of technology network security an approved project area of your choosing based on your professional background See the Program Details to learn more. Who it’s for This degree might be for you if you: Are inspired to maximize the societal benefit of computing by solving real-world issues Would like to apply your skills in industry after graduation, but might also consider applying for a PhD Are looking for a cohort-based program where you’ll work with other students to share problem-solving skills and approaches, as you would in a work setting Have an applied problem you believe could be improved through computing Would like to study with computing faculty, application experts outside of computing, and industry partners Students will also have the opportunity to undertake directed studies with a supervisor in a different department to gain additional knowledge in a specific application area. Please review the Entrance Requirements to learn more. What grads can do Provide technical leadership for software/system development teams Demonstrate deep, critical knowledge and understanding of advanced topics in computing science Analyze how computing systems and software can be used in practical applications and interdisciplinary fields Design, develop, and implement innovative solutions to industry problems with consideration to relevant ethical, social and environmental issues Explain and advocate for applied computing solutions to specialist and non-specialist audiences in both business and academic settings See the Graduating & Jobs page to learn more. Next up Entrance Requirements",
+        "area_id": "COMP",
+        "school": "School of Computing and Academic Studies",
+        "credential": "Master of Science / Master's Degree",
+        "program_level": "Graduate",
+        "study_mode": "Full-time",
+        "accepts_international_students": true,
+        "campus": "Burnaby; possible Downtown Campus or field locations",
+        "delivery_method": "In person",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "This degree focuses on Applied Computing, which is fundamentally related to applying computing technology and computational methods to derive solutions to complex practical problems. Course work will emphasize current issues in industry, case studies, and applied research projects. This program offers you a chance to work with an interdisciplinary and diverse team of academic supervisors that may include faculty from Computing, faculty from an application domain, as well as industry practitioners. You’ll also have the opportunity to undertake directed studies with a supervisor in a different department to explore a specific application area. For more information about faculty, visit the Faculty, Advisors & Staff page. Applied research is fundamental to the program. Two paths are offered, diverging in second year: Thesis Path – Path 1: complete a thesis project and defend it in your second year. You’ll need to demonstrate originality in the application of your knowledge, either through new publishable research, or a novel solution to an existing practical problem. This is the best path if you’re interested in possibly pursuing a future Ph.D. Project & Internship Path – Path 2: a one-semester research project with a one-semester internship, which may be paid or unpaid. The internship will involve an external company or a BCIT lab where you can learn how advanced computing techniques are applied to solve interdisciplinary problems. The research project may be done in collaboration with the sponsor from the internship, providing added value in terms of practical utility. Students will also complete a 3-credit special topics course, covering emerging areas in Applied Computing, such as Quantum Computing, Generative AI, or Deep Learning. Both paths will require students to: examine literature in a related discipline, recognize gaps and limitations in existing technologies and processes, organize and plan their approach, and demonstrate competence in applying advanced techniques to solve problems. In both paths, students will present a written argument that addresses a complex problem in applied computing. Did you miss our Info Session? Please see the recording from October 2024: BCIT Master of Science in Applied Computing | Info Session Program length Two years, full-time. The maximum time to complete this program is five years. Grading Students will be required to maintain a minimum average of 70% across all courses in the program before starting their thesis or research project. Student progress through the program will be monitored by the supervisor, in consultation with the Program Head. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Go back Courses Next up Graduating & Jobs"
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "M600MSC",
+        "duration_years": 2,
+        "terms_per_year": 2,
+        "total_credits": 30,
+        "intake_months": [
+          "September"
+        ],
+        "international_eligibility": "Available to international applicants",
+        "authoritative_raw": "The Master of Science Degree in Applied Computing gives you in-depth computing knowledge to solve complex real-world problems across industries and sectors. Through an interdisciplinary and rigorous full-time curriculum, you’ll be equipped to provide technical leadership in a professional setting or pursue further academic study. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: in person. See details . BCIT Master of Science in Applied Computing About the program Applied computing integrates information technology, computer science, and industry. You’ll take courses in core computing, and you will have the opportunity to work in an application area in another discipline. You’ll develop a deep understanding of how advanced computing, tools, and computational methods can be applied in practice to overcome challenges and create efficiencies. The program employs a cohort model, with the same group in all courses. This allows you to work through the program together, sharing your experience and expertise and building industry connections that will last long after you graduate 1 intake: September 4 15-week terms, normally completed over two academic years full time First year with two terms , delivered in-person, including: Algorithm analysis Human-centered Computing Machine Learning (ML) & Artificial Intelligence (AI) Data Science Cybersecurity Research methods Second year on thesis path or internship & project path Based on BCIT Burnaby Campus, and possibly the Downtown Campus or field locations where appropriate. You’ll be uniquely qualified to apply your knowledge and skills in various areas, such as: computational science rehabilitation engineering building science biotechnology autonomous vehicles sustainability smart micro-grids social impacts of technology network security an approved project area of your choosing based on your professional background See the Program Details to learn more. Who it’s for This degree might be for you if you: Are inspired to maximize the societal benefit of computing by solving real-world issues Would like to apply your skills in industry after graduation, but might also consider applying for a PhD Are looking for a cohort-based program where you’ll work with other students to share problem-solving skills and approaches, as you would in a work setting Have an applied problem you believe could be improved through computing Would like to study with computing faculty, application experts outside of computing, and industry partners Students will also have the opportunity to undertake directed studies with a supervisor in a different department to gain additional knowledge in a specific application area. Please review the Entrance Requirements to learn more. What grads can do Provide technical leadership for software/system development teams Demonstrate deep, critical knowledge and understanding of advanced topics in computing science Analyze how computing systems and software can be used in practical applications and interdisciplinary fields Design, develop, and implement innovative solutions to industry problems with consideration to relevant ethical, social and environmental issues Explain and advocate for applied computing solutions to specialist and non-specialist audiences in both business and academic settings See the Graduating & Jobs page to learn more. Next up Entrance Requirements",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "M600MSC-2026-09",
+        "program_id": "M600MSC",
+        "start_date": "2026-09-01",
+        "study_mode": "Full-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Competitive",
+        "application_status": "Closed to new applications",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026."
+      },
+      {
+        "offering_id": "M600MSC-2027-09",
+        "program_id": "M600MSC",
+        "start_date": "2027-09-01",
+        "study_mode": "Full-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Competitive",
+        "application_status": "Opens 2026-10-01",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026."
+      }
+    ],
+    "program_campuses": [
+      {
+        "program_id": "M600MSC",
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "relationship_type": "offered",
+        "notes": "Burnaby; possible Downtown Campus or field locations",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/"
+      },
+      {
+        "program_id": "M600MSC",
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "relationship_type": "possible",
+        "notes": "Burnaby; possible Downtown Campus or field locations",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/"
+      }
+    ],
+    "program_courses": [
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9040",
+        "level": 2,
+        "term": "2",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 2 (15 weeks – January to April)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9060",
+        "level": 1,
+        "term": "1",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 1 (15 weeks – September to December)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9080",
+        "level": 2,
+        "term": "2",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 2 (15 weeks – January to April)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9130",
+        "level": 2,
+        "term": "2",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 2 (15 weeks – January to April)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9150",
+        "level": 2,
+        "term": "2",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 2 (15 weeks – January to April)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9170",
+        "level": 1,
+        "term": "1",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 1 (15 weeks – September to December)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9190",
+        "level": 5,
+        "term": "5",
+        "course_type": "SUBSTITUTION_OPTION",
+        "required": false,
+        "notes": "Approved directed-studies substitution"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9200",
+        "level": 1,
+        "term": "1",
+        "course_type": "Core",
+        "required": true,
+        "notes": "Level 1 (15 weeks – September to December)"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9290",
+        "level": 4,
+        "term": "4",
+        "course_type": "ALTERNATIVE_PATH",
+        "required": false,
+        "notes": "Project & Internship Path"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9400",
+        "level": 4,
+        "term": "4",
+        "course_type": "ALTERNATIVE_PATH",
+        "required": false,
+        "notes": "Project & Internship Path"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9500",
+        "level": 4,
+        "term": "4",
+        "course_type": "ALTERNATIVE_PATH",
+        "required": false,
+        "notes": "Project & Internship Path"
+      },
+      {
+        "program_id": "M600MSC",
+        "course_id": "COMP9600",
+        "level": 3,
+        "term": "3",
+        "course_type": "ALTERNATIVE_PATH",
+        "required": false,
+        "notes": "Thesis Path (30 weeks – September to April)"
+      }
+    ],
+    "progression_requirements": [
+      {
+        "progression_requirement_id": 9,
+        "program_id": "M600MSC",
+        "from_level": 2,
+        "to_level": 3,
+        "requirement_type": "PROGRAM_AVERAGE",
+        "requirement_value": "70%",
+        "description": "Maintain a minimum 70% average across all program courses before starting the thesis or research project",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Students must maintain a minimum 70% average across all program courses before starting their thesis or research project. Progress is monitored by the supervisor in consultation with the Program Head."
+      },
+      {
+        "progression_requirement_id": 10,
+        "program_id": "M600MSC",
+        "from_level": 2,
+        "to_level": 3,
+        "requirement_type": "SUPERVISORY_REVIEW",
+        "requirement_value": "required",
+        "description": "Progress is monitored by the supervisor in consultation with the Program Head",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Students must maintain a minimum 70% average across all program courses before starting their thesis or research project. Progress is monitored by the supervisor in consultation with the Program Head."
+      }
+    ],
+    "curriculum_components": [
+      {
+        "component_id": 228,
+        "program_id": "M600MSC",
+        "component_name": "Level 1 (15 weeks – September to December)",
+        "component_order": 1,
+        "notes": "Level 1 (15 weeks – September to December)"
+      },
+      {
+        "component_id": 229,
+        "program_id": "M600MSC",
+        "component_name": "Level 2 (15 weeks – January to April)",
+        "component_order": 2,
+        "notes": "Level 2 (15 weeks – January to April)"
+      },
+      {
+        "component_id": 230,
+        "program_id": "M600MSC",
+        "component_name": "Thesis Path (30 weeks – September to April)",
+        "component_order": 3,
+        "notes": "Thesis Path (30 weeks – September to April)"
+      },
+      {
+        "component_id": 231,
+        "program_id": "M600MSC",
+        "component_name": "Project & Internship Path",
+        "component_order": 4,
+        "notes": "Project & Internship Path"
+      },
+      {
+        "component_id": 232,
+        "program_id": "M600MSC",
+        "component_name": "Approved directed-studies substitution",
+        "component_order": 5,
+        "notes": "COMP 9190 may substitute for COMP 9130, COMP 9150, or COMP 9170."
+      }
+    ],
+    "curriculum_substitutions": [
+      {
+        "substitution_id": 5,
+        "program_id": "M600MSC",
+        "study_mode": "ALL",
+        "replaced_course_id": "COMP9130",
+        "replacement_type": "SPECIFIC_COURSE",
+        "replacement_credits": 3,
+        "description": "COMP 9190 may substitute for COMP 9130"
+      },
+      {
+        "substitution_id": 6,
+        "program_id": "M600MSC",
+        "study_mode": "ALL",
+        "replaced_course_id": "COMP9150",
+        "replacement_type": "SPECIFIC_COURSE",
+        "replacement_credits": 3,
+        "description": "COMP 9190 may substitute for COMP 9150"
+      },
+      {
+        "substitution_id": 7,
+        "program_id": "M600MSC",
+        "study_mode": "ALL",
+        "replaced_course_id": "COMP9170",
+        "replacement_type": "SPECIFIC_COURSE",
+        "replacement_credits": 3,
+        "description": "COMP 9190 may substitute for COMP 9170"
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 214,
+        "program_id": "M600MSC",
+        "rule_scope": "ADMISSION",
+        "rule_name": "Applied Computing MSc competitive admission",
+        "study_mode": "ALL",
+        "exact_choice_count": 1,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Applicants currently in the final term of their degree program must be on track to graduate by July prior to the start of the intake and may be conditionally accepted based on successful completion of their degree. Scheduled intakes September each year. Application processing Applications are accepted: First round: October 1st* to January 31st* Second round: February 1st* to March 31st* Third round: April 1st* to June 15th* International applicants must hold a valid BCIT study permit to apply to the third round. *or next business day Indigenous applicants: Read about Indigenous student support available for BCIT Computing programs. Entrance requirements Competitive entry: Two-step process Admission to the program is competitive, with preference given to applicants with a combination of: Academic grades above the minimum Relevant industry experience Step 1: Meet the following entrance requirements: English language proficiency: Graduate Studies – English Studies 12 (67%) or equivalent One of the following entry requirements: Option 1: standard entry Post-secondary education: A bachelor’s degree in computer science or equivalent, such as BCIT’s Bachelor of Science in Applied Computer Science , with a minimum GPA of 2.8 out of 4.0 (70%) based on the final 30 credits of undergraduate study at BCIT or equivalent (e.g., one year of full-time studies). Option 2: alternate entry Alternate entry is for applicants who don’t have a bachelor's degree in computer science and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 3.0 out of 4.0 (73%) in another discipline based on the final 30 credits of undergraduate study, with significant knowledge of computing through formal education and/or work experience. Completed Pre-entry Assessment form [PDF] : submit the form to CompMSc@bcit.ca . The program area will review your pre-entry assessment and bridging courses may be required before applying to the program. Bridging courses will be recommended from existing COMP courses at BCIT, although transferable course work from other recognized Canadian post-secondary institutions may also be used. Applicants may be requested to send additional documents or meet with the program area. Complete the following form for submission with your online application: Mandatory Applicant Questionnaire [PDF] : This form will be used with other entrance requirements in the competitive selection for the program. Please note that two references are required on the form, and that the people listed as references must directly email their reference form to the M.Sc. admissions committee up to one week after the application deadline. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Step 2: Department Review All complete applications will be reviewed by the Graduate Program Committee and ranked competitively, and applicants will be offered admission accordingly. Only complete applications with all the required supporting documentation will be evaluated for admission consideration to the program. Recommended for success Applicants with a sufficient knowledge base in computer science will be best positioned for success in this program. This may include students who have studied information and communications technology (ICT), engineering, physics, mathematics, applied sciences, or other areas where they have been exposed to computing, information technology, and programming concepts. International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. Students enrolled in the Project & Internship Path of this program must complete the mandatory work component to qualify for graduation. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply Go back Overview Next up Costs & Supplies"
+      },
+      {
+        "rule_set_id": 215,
+        "program_id": "M600MSC",
+        "rule_scope": "PATHWAY",
+        "rule_name": "Year 2 alternative pathway",
+        "study_mode": "ALL",
+        "exact_choice_count": 1,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "This degree focuses on Applied Computing, which is fundamentally related to applying computing technology and computational methods to derive solutions to complex practical problems. Course work will emphasize current issues in industry, case studies, and applied research projects. This program offers you a chance to work with an interdisciplinary and diverse team of academic supervisors that may include faculty from Computing, faculty from an application domain, as well as industry practitioners. You’ll also have the opportunity to undertake directed studies with a supervisor in a different department to explore a specific application area. For more information about faculty, visit the Faculty, Advisors & Staff page. Applied research is fundamental to the program. Two paths are offered, diverging in second year: Thesis Path – Path 1: complete a thesis project and defend it in your second year. You’ll need to demonstrate originality in the application of your knowledge, either through new publishable research, or a novel solution to an existing practical problem. This is the best path if you’re interested in possibly pursuing a future Ph.D. Project & Internship Path – Path 2: a one-semester research project with a one-semester internship, which may be paid or unpaid. The internship will involve an external company or a BCIT lab where you can learn how advanced computing techniques are applied to solve interdisciplinary problems. The research project may be done in collaboration with the sponsor from the internship, providing added value in terms of practical utility. Students will also complete a 3-credit special topics course, covering emerging areas in Applied Computing, such as Quantum Computing, Generative AI, or Deep Learning. Both paths will require students to: examine literature in a related discipline, recognize gaps and limitations in existing technologies and processes, organize and plan their approach, and demonstrate competence in applying advanced techniques to solve problems. In both paths, students will present a written argument that addresses a complex problem in applied computing. Did you miss our Info Session? Please see the recording from October 2024: BCIT Master of Science in Applied Computing | Info Session Program length Two years, full-time. The maximum time to complete this program is five years. Grading Students will be required to maintain a minimum average of 70% across all courses in the program before starting their thesis or research project. Student progress through the program will be monitored by the supervisor, in consultation with the Program Head. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Go back Courses Next up Graduating & Jobs"
+      },
+      {
+        "rule_set_id": 217,
+        "program_id": "M600MSC",
+        "rule_scope": "COMPLETION",
+        "rule_name": "MSc completion requirements",
+        "study_mode": "ALL",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Complete one Year 2 path: thesis and defence, or the internship, special-topics course, and research project. The maximum time to complete the program is five years."
+      },
+      {
+        "rule_set_id": 216,
+        "program_id": "M600MSC",
+        "rule_scope": "CONTINUATION",
+        "rule_name": "Graduate continuation and sequencing",
+        "study_mode": "ALL",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "Students must maintain a minimum 70% average across all program courses before starting their thesis or research project. Progress is monitored by the supervisor in consultation with the Program Head."
+      },
+      {
+        "rule_set_id": 2123,
+        "program_id": "M600MSC",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "International eligibility source evidence",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"25b3dbe8761d6e7beb1e287ef9f535910acf8a8230e5080743cb4c9a692126a7\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"exact_program_page\",\"source_sha256\":\"8ce1369e1ed8a0f11f9752525a942cae2b79b28fe20da8ce9cbf823831d73446\",\"url\":\"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"REQUIRED\"}"
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 80,
+        "rule_set_id": 215,
+        "operator": "OR",
+        "label": "Choose exactly one Year 2 path",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 79,
+        "rule_set_id": 214,
+        "parent_group_id": 78,
+        "operator": "OR",
+        "label": "One entry route",
+        "sort_order": 2
+      },
+      {
+        "rule_group_id": 82,
+        "rule_set_id": 215,
+        "parent_group_id": 80,
+        "operator": "AND",
+        "label": "Project & Internship Path",
+        "sort_order": 2
+      },
+      {
+        "rule_group_id": 78,
+        "rule_set_id": 214,
+        "operator": "AND",
+        "label": "Step 1 requirements and Step 2 department review",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 81,
+        "rule_set_id": 215,
+        "parent_group_id": 80,
+        "operator": "AND",
+        "label": "Thesis Path",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 333,
+        "rule_group_id": 78,
+        "condition_type": "ENGLISH_GRADE",
+        "subject_id": "ENGLISH_STUDIES_12",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "parameters": {
+          "executable": true,
+          "equivalency_requires_confirmation": true
+        },
+        "description": "Graduate Studies English requirement: English Studies 12 (67%) or equivalent",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 334,
+        "rule_group_id": 79,
+        "condition_type": "STANDARD_ENTRY",
+        "minimum_value": 2.8,
+        "unit": "GPA_4",
+        "parameters": {
+          "executable": true,
+          "verification": "structured",
+          "final_credits": 30,
+          "percentage_equivalent": 70
+        },
+        "description": "Bachelor’s degree in computer science or equivalent; minimum 2.8/4.0 (70%) over final 30 undergraduate credits",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 335,
+        "rule_group_id": 79,
+        "condition_type": "ALTERNATE_ENTRY",
+        "minimum_value": 3,
+        "unit": "GPA_4",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation",
+          "final_credits": 30,
+          "percentage_equivalent": 73
+        },
+        "description": "Bachelor’s degree in another discipline; minimum 3.0/4.0 (73%) over final 30 credits, plus significant computing knowledge and program-area review",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 336,
+        "rule_group_id": 78,
+        "condition_type": "APPLICANT_QUESTIONNAIRE",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Mandatory Applicant Questionnaire",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 337,
+        "rule_group_id": 78,
+        "condition_type": "REFERENCES",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Two references submitted directly to the admissions committee",
+        "sort_order": 4
+      },
+      {
+        "condition_id": 338,
+        "rule_group_id": 78,
+        "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Comprehensive ICES evaluation for specified international credentials; other Canadian services may be considered",
+        "sort_order": 5
+      },
+      {
+        "condition_id": 339,
+        "rule_group_id": 78,
+        "condition_type": "COMPETITIVE_DEPARTMENT_REVIEW",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Graduate Program Committee ranks complete applications competitively",
+        "sort_order": 6
+      },
+      {
+        "condition_id": 340,
+        "rule_group_id": 78,
+        "condition_type": "RELEVANT_INDUSTRY_EXPERIENCE",
+        "parameters": {
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Relevant industry experience is preferred, not a minimum threshold",
+        "sort_order": 7
+      },
+      {
+        "condition_id": 341,
+        "rule_group_id": 81,
+        "condition_type": "COURSE",
+        "subject_id": "COMP9600",
+        "parameters": {
+          "pathway": "Thesis Path"
+        },
+        "description": "Complete COMP 9600",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 342,
+        "rule_group_id": 82,
+        "condition_type": "COURSE",
+        "subject_id": "COMP9290",
+        "parameters": {
+          "pathway": "Project & Internship Path"
+        },
+        "description": "Complete COMP 9290",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 343,
+        "rule_group_id": 82,
+        "condition_type": "COURSE",
+        "subject_id": "COMP9400",
+        "parameters": {
+          "pathway": "Project & Internship Path"
+        },
+        "description": "Complete COMP 9400",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 344,
+        "rule_group_id": 82,
+        "condition_type": "COURSE",
+        "subject_id": "COMP9500",
+        "parameters": {
+          "pathway": "Project & Internship Path"
+        },
+        "description": "Complete COMP 9500",
+        "sort_order": 3
+      }
+    ],
+    "curriculum_component_courses": [
+      {
+        "component_id": 228,
+        "course_id": "COMP9060",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 228,
+        "course_id": "COMP9170",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 228,
+        "course_id": "COMP9200",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 229,
+        "course_id": "COMP9040",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 229,
+        "course_id": "COMP9080",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 229,
+        "course_id": "COMP9130",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 229,
+        "course_id": "COMP9150",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 230,
+        "course_id": "COMP9600",
+        "course_role": "PATH_REQUIRED",
+        "study_mode": "Thesis Path (30 weeks – September to April)"
+      },
+      {
+        "component_id": 231,
+        "course_id": "COMP9290",
+        "course_role": "PATH_REQUIRED",
+        "study_mode": "Project & Internship Path"
+      },
+      {
+        "component_id": 231,
+        "course_id": "COMP9400",
+        "course_role": "PATH_REQUIRED",
+        "study_mode": "Project & Internship Path"
+      },
+      {
+        "component_id": 231,
+        "course_id": "COMP9500",
+        "course_role": "PATH_REQUIRED",
+        "study_mode": "Project & Internship Path"
+      },
+      {
+        "component_id": 232,
+        "course_id": "COMP9190",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      }
+    ],
+    "course_identity": [
+      {
+        "course_id": "COMP9040",
+        "course_name": "Human-centered Computing",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9040"
+      },
+      {
+        "course_id": "COMP9060",
+        "course_name": "Applied Algorithm Analysis",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9060"
+      },
+      {
+        "course_id": "COMP9080",
+        "course_name": "Research Proposal",
+        "credits": 0.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9080"
+      },
+      {
+        "course_id": "COMP9130",
+        "course_name": "Applied Artificial Intelligence",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9130"
+      },
+      {
+        "course_id": "COMP9150",
+        "course_name": "Cyber Security for Applied Computing",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9150"
+      },
+      {
+        "course_id": "COMP9170",
+        "course_name": "Data Science",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9170"
+      },
+      {
+        "course_id": "COMP9190",
+        "course_name": "Application Area Directed Studies",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/application-area-directed-studies-comp-9190/",
+        "display_course_code": "COMP 9190"
+      },
+      {
+        "course_id": "COMP9200",
+        "course_name": "Applied Research Methods",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9200"
+      },
+      {
+        "course_id": "COMP9290",
+        "course_name": "Special Topics in Applied Computing",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9290"
+      },
+      {
+        "course_id": "COMP9400",
+        "course_name": "Industry Internship",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9400"
+      },
+      {
+        "course_id": "COMP9500",
+        "course_name": "M.Sc. Research Project",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9500"
+      },
+      {
+        "course_id": "COMP9600",
+        "course_name": "M.Sc. Thesis",
+        "credits": 12.0,
+        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+        "display_course_code": "COMP 9600"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "The **Applied Computing Master of Science** is a full-time, two-year, in-person program based mainly at Burnaby Campus. It combines advanced computing with practical, interdisciplinary problem-solving and can support either technical leadership roles or further academic study.\n\n- **First year:** Core study includes **COMP 9060 Applied Algorithm Analysis**, **COMP 9170 Data Science**, **COMP 9200 Applied Research Methods**, **COMP 9040 Human-centered Computing**, **COMP 9130 Applied Artificial Intelligence**, and **COMP 9150 Cyber Security for Applied Computing**.\n- **Second year:** Students choose one path:\n  - **Thesis:** **COMP 9600 M.Sc. Thesis**\n  - **Project and internship:** **COMP 9290 Special Topics in Applied Computing**, **COMP 9400 Industry Internship**, and **COMP 9500 M.Sc. Research Project**\n- Students must maintain at least a **70% program average** before starting the thesis or research project.\n\nThe September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[Applied Computing MSc program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 14,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Computing",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "M600MSC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "M600MSC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "M600MSC"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "M600MSC",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "M600MSC",
+            "program_name": "Applied Computing",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"M600MSC\"}",
+              "call_id": "call_KwiPxRwqsQtLPdbcRAgMSfFE",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_02819cac3376e572006aa1036f3c3487d09e9eded19cee1b68",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "M600MSC"
+          },
+          "context": {
+            "current_question": "Tell me about Applied Computing MSc.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "M600MSC",
+            "program_name": "Applied Computing",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "M600MSC",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 334,
+                                "condition_type": "STANDARD_ENTRY",
+                                "description": "Bachelor’s degree in computer science or equivalent; minimum 2.8/4.0 (70%) over final 30 undergraduate credits",
+                                "minimum_value": "2.8",
+                                "parameters": {
+                                  "executable": true,
+                                  "final_credits": 30,
+                                  "percentage_equivalent": 70,
+                                  "verification": "structured"
+                                },
+                                "sort_order": 1,
+                                "unit": "GPA_4"
+                              },
+                              {
+                                "condition_id": 335,
+                                "condition_type": "ALTERNATE_ENTRY",
+                                "description": "Bachelor’s degree in another discipline; minimum 3.0/4.0 (73%) over final 30 credits, plus significant computing knowledge and program-area review",
+                                "minimum_value": "3",
+                                "parameters": {
+                                  "executable": false,
+                                  "final_credits": 30,
+                                  "percentage_equivalent": 73,
+                                  "verification": "human_confirmation"
+                                },
+                                "sort_order": 2,
+                                "unit": "GPA_4"
+                              }
+                            ],
+                            "label": "One entry route",
+                            "operator": "OR",
+                            "parent_group_id": 78,
+                            "rule_group_id": 79,
+                            "sort_order": 2
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "condition_id": 333,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "Graduate Studies English requirement: English Studies 12 (67%) or equivalent",
+                            "minimum_value": "67",
+                            "parameters": {
+                              "equivalency_requires_confirmation": true,
+                              "executable": true
+                            },
+                            "sort_order": 1,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 336,
+                            "condition_type": "APPLICANT_QUESTIONNAIRE",
+                            "description": "Mandatory Applicant Questionnaire",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 3
+                          },
+                          {
+                            "condition_id": 337,
+                            "condition_type": "REFERENCES",
+                            "description": "Two references submitted directly to the admissions committee",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 4
+                          },
+                          {
+                            "condition_id": 338,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Comprehensive ICES evaluation for specified international credentials; other Canadian services may be considered",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 5
+                          },
+                          {
+                            "condition_id": 339,
+                            "condition_type": "COMPETITIVE_DEPARTMENT_REVIEW",
+                            "description": "Graduate Program Committee ranks complete applications competitively",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 6
+                          },
+                          {
+                            "condition_id": 340,
+                            "condition_type": "RELEVANT_INDUSTRY_EXPERIENCE",
+                            "description": "Relevant industry experience is preferred, not a minimum threshold",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 7
+                          }
+                        ],
+                        "label": "Step 1 requirements and Step 2 department review",
+                        "operator": "AND",
+                        "rule_group_id": 78,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Applied Computing MSc competitive admission",
+                    "notes": "Applicants currently in the final term of their degree program must be on track to graduate by July prior to the start of the intake and may be conditionally accepted based on successful completion of their degree. Scheduled intakes September each year. Application processing Applications are accepted: First round: October 1st* to January 31st* Second round: February 1st* to March 31st* Third round: April 1st* to June 15th* International applicants must hold a valid BCIT study permit to apply to the third round. *or next business day Indigenous applicants: Read about Indigenous student support available for BCIT Computing programs. Entrance requirements Competitive entry: Two-step process Admission to the program is competitive, with preference given to applicants with a combination of: Academic grades above the minimum Relevant industry experience Step 1: Meet the following entrance requirements: English language proficiency: Graduate Studies – English Studies 12 (67%) or equivalent One of the following entry requirements: Option 1: standard entry Post-secondary education: A bachelor’s degree in computer science or equivalent, such as BCIT’s Bachelor of Science in Applied Computer Science , with a minimum GPA of 2.8 out of 4.0 (70%) based on the final 30 credits of undergraduate study at BCIT or equivalent (e.g., one year of full-time studies). Option 2: alternate entry Alternate entry is for applicants who don’t have a bachelor's degree in computer science and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 3.0 out of 4.0 (73%) in another discipline based on the final 30 credits of undergraduate study, with significant knowledge of computing through formal education and/or work experience. Completed Pre-entry Assessment form [PDF] : submit the form to CompMSc@bcit.ca . The program area will review your pre-entry assessment and bridging courses may be required before applying to the program. Bridging courses will be recommended from existing COMP courses at BCIT, although transferable course work from other recognized Canadian post-secondary institutions may also be used. Applicants may be requested to send additional documents or meet with the program area. Complete the following form for submission with your online application: Mandatory Applicant Questionnaire [PDF] : This form will be used with other entrance requirements in the competitive selection for the program. Please note that two references are required on the form, and that the people listed as references must directly email their reference form to the M.Sc. admissions committee up to one week after the application deadline. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Step 2: Department Review All complete applications will be reviewed by the Graduate Program Committee and ranked competitively, and applicants will be offered admission accordingly. Only complete applications with all the required supporting documentation will be evaluated for admission consideration to the program. Recommended for success Applicants with a sufficient knowledge base in computer science will be best positioned for success in this program. This may include students who have studied information and communications technology (ICT), engineering, physics, mathematics, applied sciences, or other areas where they have been exposed to computing, information technology, and programming concepts. International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. Students enrolled in the Project & Internship Path of this program must complete the mandatory work component to qualify for graduation. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 214,
+                    "scope": "ADMISSION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "MSc completion requirements",
+                    "notes": "Complete one Year 2 path: thesis and defence, or the internship, special-topics course, and research project. The maximum time to complete the program is five years.",
+                    "rule_set_id": 217,
+                    "scope": "COMPLETION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "Graduate continuation and sequencing",
+                    "notes": "Students must maintain a minimum 70% average across all program courses before starting their thesis or research project. Progress is monitored by the supervisor in consultation with the Program Head.",
+                    "rule_set_id": 216,
+                    "scope": "CONTINUATION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"25b3dbe8761d6e7beb1e287ef9f535910acf8a8230e5080743cb4c9a692126a7\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"exact_program_page\",\"source_sha256\":\"8ce1369e1ed8a0f11f9752525a942cae2b79b28fe20da8ce9cbf823831d73446\",\"url\":\"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"REQUIRED\"}",
+                    "rule_set_id": 2123,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time"
+                  },
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 341,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9600",
+                                "parameters": {
+                                  "pathway": "Thesis Path"
+                                },
+                                "sort_order": 1,
+                                "subject_id": "COMP9600"
+                              }
+                            ],
+                            "label": "Thesis Path",
+                            "operator": "AND",
+                            "parent_group_id": 80,
+                            "rule_group_id": 81,
+                            "sort_order": 1
+                          },
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 342,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9290",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 1,
+                                "subject_id": "COMP9290"
+                              },
+                              {
+                                "condition_id": 343,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9400",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 2,
+                                "subject_id": "COMP9400"
+                              },
+                              {
+                                "condition_id": 344,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9500",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 3,
+                                "subject_id": "COMP9500"
+                              }
+                            ],
+                            "label": "Project & Internship Path",
+                            "operator": "AND",
+                            "parent_group_id": 80,
+                            "rule_group_id": 82,
+                            "sort_order": 2
+                          }
+                        ],
+                        "label": "Choose exactly one Year 2 path",
+                        "operator": "OR",
+                        "rule_group_id": 80,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Year 2 alternative pathway",
+                    "notes": "This degree focuses on Applied Computing, which is fundamentally related to applying computing technology and computational methods to derive solutions to complex practical problems. Course work will emphasize current issues in industry, case studies, and applied research projects. This program offers you a chance to work with an interdisciplinary and diverse team of academic supervisors that may include faculty from Computing, faculty from an application domain, as well as industry practitioners. You’ll also have the opportunity to undertake directed studies with a supervisor in a different department to explore a specific application area. For more information about faculty, visit the Faculty, Advisors & Staff page. Applied research is fundamental to the program. Two paths are offered, diverging in second year: Thesis Path – Path 1: complete a thesis project and defend it in your second year. You’ll need to demonstrate originality in the application of your knowledge, either through new publishable research, or a novel solution to an existing practical problem. This is the best path if you’re interested in possibly pursuing a future Ph.D. Project & Internship Path – Path 2: a one-semester research project with a one-semester internship, which may be paid or unpaid. The internship will involve an external company or a BCIT lab where you can learn how advanced computing techniques are applied to solve interdisciplinary problems. The research project may be done in collaboration with the sponsor from the internship, providing added value in terms of practical utility. Students will also complete a 3-credit special topics course, covering emerging areas in Applied Computing, such as Quantum Computing, Generative AI, or Deep Learning. Both paths will require students to: examine literature in a related discipline, recognize gaps and limitations in existing technologies and processes, organize and plan their approach, and demonstrate competence in applying advanced techniques to solve problems. In both paths, students will present a written argument that addresses a complex problem in applied computing. Did you miss our Info Session? Please see the recording from October 2024: BCIT Master of Science in Applied Computing | Info Session Program length Two years, full-time. The maximum time to complete this program is five years. Grading Students will be required to maintain a minimum average of 70% across all courses in the program before starting their thesis or research project. Student progress through the program will be monitored by the supervisor, in consultation with the Program Head. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Go back Courses Next up Graduating & Jobs",
+                    "rule_set_id": 215,
+                    "scope": "PATHWAY",
+                    "study_mode": "ALL"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Maintain a minimum 70% average across all program courses before starting the thesis or research project",
+                    "from_level": 2,
+                    "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                    "to_level": 3,
+                    "type": "PROGRAM_AVERAGE",
+                    "value": "70%"
+                  },
+                  {
+                    "description": "Progress is monitored by the supervisor in consultation with the Program Head",
+                    "from_level": 2,
+                    "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                    "to_level": 3,
+                    "type": "SUPERVISORY_REVIEW",
+                    "value": "required"
+                  }
+                ]
+              },
+              "campus": "Burnaby; possible Downtown Campus or field locations",
+              "clinical_and_practice_requirements": {
+                "program_id": "M600MSC"
+              },
+              "courses": [
+                {
+                  "course_id": "COMP9060",
+                  "course_name": "Applied Algorithm Analysis",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9170",
+                  "course_name": "Data Science",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9200",
+                  "course_name": "Applied Research Methods",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9040",
+                  "course_name": "Human-centered Computing",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9080",
+                  "course_name": "Research Proposal",
+                  "course_type": "Core",
+                  "credits": "0.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9130",
+                  "course_name": "Applied Artificial Intelligence",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9150",
+                  "course_name": "Cyber Security for Applied Computing",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9600",
+                  "course_name": "M.Sc. Thesis",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "12.00",
+                  "level": 3,
+                  "notes": "Thesis Path (30 weeks – September to April)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "3"
+                },
+                {
+                  "course_id": "COMP9290",
+                  "course_name": "Special Topics in Applied Computing",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "3.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9400",
+                  "course_name": "Industry Internship",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "6.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9500",
+                  "course_name": "M.Sc. Research Project",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "3.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9190",
+                  "course_name": "Application Area Directed Studies",
+                  "course_type": "SUBSTITUTION_OPTION",
+                  "credits": "3.00",
+                  "level": 5,
+                  "notes": "Approved directed-studies substitution",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/application-area-directed-studies-comp-9190/",
+                  "term": "5"
+                }
+              ],
+              "credential": "Master of Science / Master's Degree",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 228,
+                    "component_name": "Level 1 (15 weeks – September to December)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "COMP9060",
+                        "course_name": "Applied Algorithm Analysis",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9060",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9170",
+                        "course_name": "Data Science",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9170",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9200",
+                        "course_name": "Applied Research Methods",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9200",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Level 1 (15 weeks – September to December)"
+                  },
+                  {
+                    "component_id": 229,
+                    "component_name": "Level 2 (15 weeks – January to April)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "COMP9040",
+                        "course_name": "Human-centered Computing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9040",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9080",
+                        "course_name": "Research Proposal",
+                        "course_role": "REQUIRED",
+                        "credits": "0.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9080",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9130",
+                        "course_name": "Applied Artificial Intelligence",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9130",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9150",
+                        "course_name": "Cyber Security for Applied Computing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9150",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Level 2 (15 weeks – January to April)"
+                  },
+                  {
+                    "component_id": 230,
+                    "component_name": "Thesis Path (30 weeks – September to April)",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "COMP9600",
+                        "course_name": "M.Sc. Thesis",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "12.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9600",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Thesis Path (30 weeks – September to April)"
+                      }
+                    ],
+                    "notes": "Thesis Path (30 weeks – September to April)"
+                  },
+                  {
+                    "component_id": 231,
+                    "component_name": "Project & Internship Path",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "COMP9290",
+                        "course_name": "Special Topics in Applied Computing",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9290",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      },
+                      {
+                        "course_id": "COMP9400",
+                        "course_name": "Industry Internship",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9400",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      },
+                      {
+                        "course_id": "COMP9500",
+                        "course_name": "M.Sc. Research Project",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9500",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      }
+                    ],
+                    "notes": "Project & Internship Path"
+                  },
+                  {
+                    "component_id": 232,
+                    "component_name": "Approved directed-studies substitution",
+                    "component_order": 5,
+                    "courses": [
+                      {
+                        "course_id": "COMP9190",
+                        "course_name": "Application Area Directed Studies",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9190",
+                        "source_url": "https://www.bcit.ca/courses/application-area-directed-studies-comp-9190/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "COMP 9190 may substitute for COMP 9130, COMP 9150, or COMP 9170."
+                  }
+                ],
+                "program_id": "M600MSC",
+                "substitutions": [
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9130",
+                    "replaced_course_id": "COMP9130",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9150",
+                    "replaced_course_id": "COMP9150",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9170",
+                    "replaced_course_id": "COMP9170",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  }
+                ]
+              },
+              "delivery_method": "In person",
+              "program_id": "M600MSC",
+              "program_name": "Applied Computing",
+              "program_overview": "The Master of Science Degree in Applied Computing gives you in-depth computing knowledge to solve complex real-world problems across industries and sectors. Through an interdisciplinary and rigorous full-time curriculum, you’ll be equipped to provide technical leadership in a professional setting or pursue further academic study. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: in person. See details . BCIT Master of Science in Applied Computing About the program Applied computing integrates information technology, computer science, and industry. You’ll take courses in core computing, and you will have the opportunity to work in an application area in another discipline. You’ll develop a deep understanding of how advanced computing, tools, and computational methods can be applied in practice to overcome challenges and create efficiencies. The program employs a cohort model, with the same group in all courses. This allows you to work through the program together, sharing your experience and expertise and building industry connections that will last long after you graduate 1 intake: September 4 15-week terms, normally completed over two academic years full time First year with two terms , delivered in-person, including: Algorithm analysis Human-centered Computing Machine Learning (ML) & Artificial Intelligence (AI) Data Science Cybersecurity Research methods Second year on thesis path or internship & project path Based on BCIT Burnaby Campus, and possibly the Downtown Campus or field locations where appropriate. You’ll be uniquely qualified to apply your knowledge and skills in various areas, such as: computational science rehabilitation engineering building science biotechnology autonomous vehicles sustainability smart micro-grids social impacts of technology network security an approved project area of your choosing based on your professional background See the Program Details to learn more. Who it’s for This degree might be for you if you: Are inspired to maximize the societal benefit of computing by solving real-world issues Would like to apply your skills in industry after graduation, but might also consider applying for a PhD Are looking for a cohort-based program where you’ll work with other students to share problem-solving skills and approaches, as you would in a work setting Have an applied problem you believe could be improved through computing Would like to study with computing faculty, application experts outside of computing, and industry partners Students will also have the opportunity to undertake directed studies with a supervisor in a different department to gain additional knowledge in a specific application area. Please review the Entrance Requirements to learn more. What grads can do Provide technical leadership for software/system development teams Demonstrate deep, critical knowledge and understanding of advanced topics in computing science Analyze how computing systems and software can be used in practical applications and interdisciplinary fields Design, develop, and implement innovative solutions to industry problems with consideration to relevant ethical, social and environmental issues Explain and advocate for applied computing solutions to specialist and non-specialist audiences in both business and academic settings See the Graduating & Jobs page to learn more. Next up Entrance Requirements",
+              "school": "School of Computing and Academic Studies",
+              "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_02819cac3376e572006aa10370de2487d0859070b0488e3ce7",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQN4MSOv_4yRRpYb8Bqb5nPq1ePf0_B3_a32EVVwOSeiD55V4OAEITB2hqQLeL9Tkk5GHoyU4SaKhY8K6aGJGLO6fuNosHgbv85NqRTlgoFVaeAUgCOHz-TVyjaNLzqmrwfdqXheabbAAE7kmQVj6UXY8DEWLUDp0jHJcmYZD5tHLNeB_36I5qZm7QE3EGDu_S7eIfveGI3qsUaTQtEA8sLBU6si6e6rYMUvSMyKti_cJWgAd7f4v5QZt1j1uBEI-vx6fttHlpEin3GN6Ce7H6JWpw6aSUYqvBD55OLZ_dQRxIJe9njIaR0akbybAy0eYHVM16zM3WJMV4piSQUvyjyxdGj55U-6t2PDE9vp_D8RtC-C7jRtbx4ZSNk5JaI-vxoEd1xnPoDoCKgOMU2rntnJXucik6UAR9ewpxTd9t-UMSVzTYufNgRqXAaJinvcnCSy6wcTdP1GJ8qO-hXvEztbYgns6igT75ubP71kPdfg7Nt7kFzPFp_bJw0pbVujO7KJzL-Kr9CFe-EjysLRrCmYYmIEIQWimqaVa315n9zVvnkZBtZZx-KkvJ-5UlQFgyvP6BB9RxVaA1WDxrUyqxUvIgmbCjdwrnstfrtCkSgolyv5CHqP62FUAjjzlrkGWXXpEJVjHvSopOcJJ3QeRt0l1AD1kN5OfNsctXiCRHJMzQQ7OaACMK7Oi5SkkcphLn-xSL7qHjZTeHlId4Igs_V37bVlTr5Ble0OM3hv2g11_n52qANljRv-5PwozbC3ObGVSuC--TgASoFB_HvUvGP_0o_EMDnXhjWkctFVQos5DRCBm1iXej5YGztqwzwAKQhDVvNILI2indUdAFblagSk7Q-cqgxYEUPexpWFe07w0AXmIdLWKHLZ7E-J9VsSN5JU--pn1pqWEG7bdgVRsYoR78S5InbJB7LDYMODmfPSqCqIqciZIQLpX2Xl5kQ1hOQvtfTJ7nzNoui_9TyeE7qSKElCdOEq4LG_kMQMKyC7lYHf975O7vRFwXKldHeYO3hTOU19W8IYBDFz_H3gB1kLNDlfeogMMsosRPS6qIzcWYXv8NHFdDwSRwLzLBg0XJtFM2g8sOP0cXskzEH_c8G9vT5lOnKHSjJ425qRDQfvqettNINsqO9z9cYk2ktyYmafZmdvxOiqv6NJI3DDP1h4n-j5Ddty9T8pQmzod4GicPCr-vyemTueX86QFOUPMuEG_luc9BdNWm1kv6ntgq9lgafPTDr_REL-3tfbZjwLW0vYhInIVfqZGDjVhCtj2-sQYSvn60a2GM9vTVFnPux3w7lW1lGIl0do-IM0UakepFQeA-pKAZ2baY-6jFTDbWWI1krplu1qQc3QjdNibdQ--c2qs1jpXYb0B0x7RE4TW_vButtpg7a_nGENzhM9AOAChYvClfZ6A5DslF4rHHXI1YEv-uC8hfdYYQV6WUcCRWHawuyyppIJce8U4LzQTJQlWG6HxgIz6OTAyM8B1ouyA4Xr4Qq18qguFHSv9hXGuVl__PNcybiR9hZ7Wkyss0ExBU6Ha0D5PnjwIHulMbNjTIPY72Es7bzLWwxIVNL38Sp4GIQUN0bPLj7WvdkiaHW-qyoPtJyU_btv6lgtyNlXv3lUKkgmM7EOjxPd63vDv8-slmUxLzswGVo1IOIhpIHJ8TcuNRehkuMCr4gy-V5UUWnneEAuNyeCRRT_iFlZqUlLhYS5TR6WelSKyUZsahTjHFeZ7COwDDy9VJ7afezxiLBp0YBVPkUoayBxaG0UT-jJWAH29WEqHSdXetnDGsFjlGRN7fOGJort7b-rm65Um47fAGhMNamJA-xfd-59-nh11JJ9cdNAzXe_fB96m9w3va1t2rAbRZqJfK0iD8iBOxgHj2191ObB9bTAGdRX9vgNNuPQ6pWmOIjkil1EQVPSkB1zsDUx_FFILtaRt4yVkn2yJM_4B3RgdpRw8SdhNEwvhNnX2E5dnAStweqXw8HFzUd7QY5Ug6JSr9UQWT872_kW8XX9Ou9lMes0XCyj29AiVTZanPUnJYMRzQ3QR0z8kM_4fBloFviPmNjh4KvfHAlCIgKeIHCEev04LOAAsckDtMCBn4ZzX_Zt0_wVKHRLEY9ce3J4SyMTq4nK7SsxjWJpG_tiPZguPvr5Ny1_Cf05x9w9FmkA-h5O7D4nOEop5zJMnKZoWF3bXQLftdaN8g0OQ0SUw0-YrXROqOdBc46Z8kal5mxhJjIOtfag_GR9QtgAFwJOdQF6WKySGCyJiOMvG-ejDvPODqJsaFFDlAtFAip18S_u4VQq4IP4Y-NL-IsNKwFVhSaFX-7iTOL_INkovfYfkeewwyGvvUJIO6i0b_dKZ5X9PBgSnXpSwvgLzlwpFEddF0U97jAnZ3u3aizIUJCgS20VZnH5Wa5nKcv4YRJ9BzcYMpiz9csZywJh1oBB_f_ukYDUSbrHPDLmI7-xqHQUdWZD-JqiQhgWhMqoe5fpBadvjvDKzMV3vuvusmgiLaM1_SLALL1gcX0WmA=="
+            },
+            {
+              "id": "msg_02819cac3376e572006aa10374eee487d0a1b6e44ca122d9c0",
+              "content": [
+                {
+                  "text": "The **Applied Computing Master of Science** is a full-time, two-year, in-person program based mainly at Burnaby Campus. It combines advanced computing with practical, interdisciplinary problem-solving and can support either technical leadership roles or further academic study.\n\n- **First year:** Core study includes **COMP 9060 Applied Algorithm Analysis**, **COMP 9170 Data Science**, **COMP 9200 Applied Research Methods**, **COMP 9040 Human-centered Computing**, **COMP 9130 Applied Artificial Intelligence**, and **COMP 9150 Cyber Security for Applied Computing**.\n- **Second year:** Students choose one path:\n  - **Thesis:** **COMP 9600 M.Sc. Thesis**\n  - **Project and internship:** **COMP 9290 Special Topics in Applied Computing**, **COMP 9400 Industry Internship**, and **COMP 9500 M.Sc. Research Project**\n- Students must maintain at least a **70% program average** before starting the thesis or research project.\n\nThe September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[Applied Computing MSc program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The **Applied Computing Master of Science** is a full-time, two-year, in-person program based mainly at Burnaby Campus. It combines advanced computing with practical, interdisciplinary problem-solving and can support either technical leadership roles or further academic study.\n\n- **First year:** Core study includes **COMP 9060 Applied Algorithm Analysis**, **COMP 9170 Data Science**, **COMP 9200 Applied Research Methods**, **COMP 9040 Human-centered Computing**, **COMP 9130 Applied Artificial Intelligence**, and **COMP 9150 Cyber Security for Applied Computing**.\n- **Second year:** Students choose one path:\n  - **Thesis:** **COMP 9600 M.Sc. Thesis**\n  - **Project and internship:** **COMP 9290 Special Topics in Applied Computing**, **COMP 9400 Industry Internship**, and **COMP 9500 M.Sc. Research Project**\n- Students must maintain at least a **70% program average** before starting the thesis or research project.\n\nThe September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[Applied Computing MSc program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)",
+          "final_answer": "The **Applied Computing Master of Science** is a full-time, two-year, in-person program based mainly at Burnaby Campus. It combines advanced computing with practical, interdisciplinary problem-solving and can support either technical leadership roles or further academic study.\n\n- **First year:** Core study includes **COMP 9060 Applied Algorithm Analysis**, **COMP 9170 Data Science**, **COMP 9200 Applied Research Methods**, **COMP 9040 Human-centered Computing**, **COMP 9130 Applied Artificial Intelligence**, and **COMP 9150 Cyber Security for Applied Computing**.\n- **Second year:** Students choose one path:\n  - **Thesis:** **COMP 9600 M.Sc. Thesis**\n  - **Project and internship:** **COMP 9290 Special Topics in Applied Computing**, **COMP 9400 Industry Internship**, and **COMP 9500 M.Sc. Research Project**\n- Students must maintain at least a **70% program average** before starting the thesis or research project.\n\nThe September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[Applied Computing MSc program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "It’s at **BCIT’s Burnaby Campus, 3700 Willingdon Avenue, Burnaby, BC**. Some activities may also occur at the Downtown Campus or appropriate field locations: [program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/).",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 14,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Computing",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "M600MSC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "M600MSC:campus"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "M600MSC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "M600MSC"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "M600MSC",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "M600MSC",
+            "program_name": "Applied Computing",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"M600MSC\"}",
+              "call_id": "call_2p3xl0kfeNgWJzI3qQBPS1qw",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_09101a7d26087965006aa1037c20b887d0830fe4c713ae7216",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "M600MSC"
+          },
+          "context": {
+            "current_question": "Just tell me where it is, please.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "M600MSC",
+            "program_name": "Applied Computing",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "M600MSC",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 334,
+                                "condition_type": "STANDARD_ENTRY",
+                                "description": "Bachelor’s degree in computer science or equivalent; minimum 2.8/4.0 (70%) over final 30 undergraduate credits",
+                                "minimum_value": "2.8",
+                                "parameters": {
+                                  "executable": true,
+                                  "final_credits": 30,
+                                  "percentage_equivalent": 70,
+                                  "verification": "structured"
+                                },
+                                "sort_order": 1,
+                                "unit": "GPA_4"
+                              },
+                              {
+                                "condition_id": 335,
+                                "condition_type": "ALTERNATE_ENTRY",
+                                "description": "Bachelor’s degree in another discipline; minimum 3.0/4.0 (73%) over final 30 credits, plus significant computing knowledge and program-area review",
+                                "minimum_value": "3",
+                                "parameters": {
+                                  "executable": false,
+                                  "final_credits": 30,
+                                  "percentage_equivalent": 73,
+                                  "verification": "human_confirmation"
+                                },
+                                "sort_order": 2,
+                                "unit": "GPA_4"
+                              }
+                            ],
+                            "label": "One entry route",
+                            "operator": "OR",
+                            "parent_group_id": 78,
+                            "rule_group_id": 79,
+                            "sort_order": 2
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "condition_id": 333,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "Graduate Studies English requirement: English Studies 12 (67%) or equivalent",
+                            "minimum_value": "67",
+                            "parameters": {
+                              "equivalency_requires_confirmation": true,
+                              "executable": true
+                            },
+                            "sort_order": 1,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "condition_id": 336,
+                            "condition_type": "APPLICANT_QUESTIONNAIRE",
+                            "description": "Mandatory Applicant Questionnaire",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 3
+                          },
+                          {
+                            "condition_id": 337,
+                            "condition_type": "REFERENCES",
+                            "description": "Two references submitted directly to the admissions committee",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 4
+                          },
+                          {
+                            "condition_id": 338,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Comprehensive ICES evaluation for specified international credentials; other Canadian services may be considered",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 5
+                          },
+                          {
+                            "condition_id": 339,
+                            "condition_type": "COMPETITIVE_DEPARTMENT_REVIEW",
+                            "description": "Graduate Program Committee ranks complete applications competitively",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 6
+                          },
+                          {
+                            "condition_id": 340,
+                            "condition_type": "RELEVANT_INDUSTRY_EXPERIENCE",
+                            "description": "Relevant industry experience is preferred, not a minimum threshold",
+                            "parameters": {
+                              "executable": false,
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 7
+                          }
+                        ],
+                        "label": "Step 1 requirements and Step 2 department review",
+                        "operator": "AND",
+                        "rule_group_id": 78,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Applied Computing MSc competitive admission",
+                    "notes": "Applicants currently in the final term of their degree program must be on track to graduate by July prior to the start of the intake and may be conditionally accepted based on successful completion of their degree. Scheduled intakes September each year. Application processing Applications are accepted: First round: October 1st* to January 31st* Second round: February 1st* to March 31st* Third round: April 1st* to June 15th* International applicants must hold a valid BCIT study permit to apply to the third round. *or next business day Indigenous applicants: Read about Indigenous student support available for BCIT Computing programs. Entrance requirements Competitive entry: Two-step process Admission to the program is competitive, with preference given to applicants with a combination of: Academic grades above the minimum Relevant industry experience Step 1: Meet the following entrance requirements: English language proficiency: Graduate Studies – English Studies 12 (67%) or equivalent One of the following entry requirements: Option 1: standard entry Post-secondary education: A bachelor’s degree in computer science or equivalent, such as BCIT’s Bachelor of Science in Applied Computer Science , with a minimum GPA of 2.8 out of 4.0 (70%) based on the final 30 credits of undergraduate study at BCIT or equivalent (e.g., one year of full-time studies). Option 2: alternate entry Alternate entry is for applicants who don’t have a bachelor's degree in computer science and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 3.0 out of 4.0 (73%) in another discipline based on the final 30 credits of undergraduate study, with significant knowledge of computing through formal education and/or work experience. Completed Pre-entry Assessment form [PDF] : submit the form to CompMSc@bcit.ca . The program area will review your pre-entry assessment and bridging courses may be required before applying to the program. Bridging courses will be recommended from existing COMP courses at BCIT, although transferable course work from other recognized Canadian post-secondary institutions may also be used. Applicants may be requested to send additional documents or meet with the program area. Complete the following form for submission with your online application: Mandatory Applicant Questionnaire [PDF] : This form will be used with other entrance requirements in the competitive selection for the program. Please note that two references are required on the form, and that the people listed as references must directly email their reference form to the M.Sc. admissions committee up to one week after the application deadline. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Step 2: Department Review All complete applications will be reviewed by the Graduate Program Committee and ranked competitively, and applicants will be offered admission accordingly. Only complete applications with all the required supporting documentation will be evaluated for admission consideration to the program. Recommended for success Applicants with a sufficient knowledge base in computer science will be best positioned for success in this program. This may include students who have studied information and communications technology (ICT), engineering, physics, mathematics, applied sciences, or other areas where they have been exposed to computing, information technology, and programming concepts. International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. Students enrolled in the Project & Internship Path of this program must complete the mandatory work component to qualify for graduation. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 214,
+                    "scope": "ADMISSION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "MSc completion requirements",
+                    "notes": "Complete one Year 2 path: thesis and defence, or the internship, special-topics course, and research project. The maximum time to complete the program is five years.",
+                    "rule_set_id": 217,
+                    "scope": "COMPLETION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "Graduate continuation and sequencing",
+                    "notes": "Students must maintain a minimum 70% average across all program courses before starting their thesis or research project. Progress is monitored by the supervisor in consultation with the Program Head.",
+                    "rule_set_id": 216,
+                    "scope": "CONTINUATION",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"25b3dbe8761d6e7beb1e287ef9f535910acf8a8230e5080743cb4c9a692126a7\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T19:47:36.571812+00:00\",\"evidence_type\":\"exact_program_page\",\"source_sha256\":\"8ce1369e1ed8a0f11f9752525a942cae2b79b28fe20da8ce9cbf823831d73446\",\"url\":\"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"REQUIRED\"}",
+                    "rule_set_id": 2123,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time"
+                  },
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 341,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9600",
+                                "parameters": {
+                                  "pathway": "Thesis Path"
+                                },
+                                "sort_order": 1,
+                                "subject_id": "COMP9600"
+                              }
+                            ],
+                            "label": "Thesis Path",
+                            "operator": "AND",
+                            "parent_group_id": 80,
+                            "rule_group_id": 81,
+                            "sort_order": 1
+                          },
+                          {
+                            "conditions": [
+                              {
+                                "condition_id": 342,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9290",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 1,
+                                "subject_id": "COMP9290"
+                              },
+                              {
+                                "condition_id": 343,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9400",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 2,
+                                "subject_id": "COMP9400"
+                              },
+                              {
+                                "condition_id": 344,
+                                "condition_type": "COURSE",
+                                "description": "Complete COMP 9500",
+                                "parameters": {
+                                  "pathway": "Project & Internship Path"
+                                },
+                                "sort_order": 3,
+                                "subject_id": "COMP9500"
+                              }
+                            ],
+                            "label": "Project & Internship Path",
+                            "operator": "AND",
+                            "parent_group_id": 80,
+                            "rule_group_id": 82,
+                            "sort_order": 2
+                          }
+                        ],
+                        "label": "Choose exactly one Year 2 path",
+                        "operator": "OR",
+                        "rule_group_id": 80,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Year 2 alternative pathway",
+                    "notes": "This degree focuses on Applied Computing, which is fundamentally related to applying computing technology and computational methods to derive solutions to complex practical problems. Course work will emphasize current issues in industry, case studies, and applied research projects. This program offers you a chance to work with an interdisciplinary and diverse team of academic supervisors that may include faculty from Computing, faculty from an application domain, as well as industry practitioners. You’ll also have the opportunity to undertake directed studies with a supervisor in a different department to explore a specific application area. For more information about faculty, visit the Faculty, Advisors & Staff page. Applied research is fundamental to the program. Two paths are offered, diverging in second year: Thesis Path – Path 1: complete a thesis project and defend it in your second year. You’ll need to demonstrate originality in the application of your knowledge, either through new publishable research, or a novel solution to an existing practical problem. This is the best path if you’re interested in possibly pursuing a future Ph.D. Project & Internship Path – Path 2: a one-semester research project with a one-semester internship, which may be paid or unpaid. The internship will involve an external company or a BCIT lab where you can learn how advanced computing techniques are applied to solve interdisciplinary problems. The research project may be done in collaboration with the sponsor from the internship, providing added value in terms of practical utility. Students will also complete a 3-credit special topics course, covering emerging areas in Applied Computing, such as Quantum Computing, Generative AI, or Deep Learning. Both paths will require students to: examine literature in a related discipline, recognize gaps and limitations in existing technologies and processes, organize and plan their approach, and demonstrate competence in applying advanced techniques to solve problems. In both paths, students will present a written argument that addresses a complex problem in applied computing. Did you miss our Info Session? Please see the recording from October 2024: BCIT Master of Science in Applied Computing | Info Session Program length Two years, full-time. The maximum time to complete this program is five years. Grading Students will be required to maintain a minimum average of 70% across all courses in the program before starting their thesis or research project. Student progress through the program will be monitored by the supervisor, in consultation with the Program Head. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Go back Courses Next up Graduating & Jobs",
+                    "rule_set_id": 215,
+                    "scope": "PATHWAY",
+                    "study_mode": "ALL"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Maintain a minimum 70% average across all program courses before starting the thesis or research project",
+                    "from_level": 2,
+                    "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                    "to_level": 3,
+                    "type": "PROGRAM_AVERAGE",
+                    "value": "70%"
+                  },
+                  {
+                    "description": "Progress is monitored by the supervisor in consultation with the Program Head",
+                    "from_level": 2,
+                    "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                    "to_level": 3,
+                    "type": "SUPERVISORY_REVIEW",
+                    "value": "required"
+                  }
+                ]
+              },
+              "campus": "Burnaby; possible Downtown Campus or field locations",
+              "clinical_and_practice_requirements": {
+                "program_id": "M600MSC"
+              },
+              "courses": [
+                {
+                  "course_id": "COMP9060",
+                  "course_name": "Applied Algorithm Analysis",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9170",
+                  "course_name": "Data Science",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9200",
+                  "course_name": "Applied Research Methods",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": "Level 1 (15 weeks – September to December)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "1"
+                },
+                {
+                  "course_id": "COMP9040",
+                  "course_name": "Human-centered Computing",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9080",
+                  "course_name": "Research Proposal",
+                  "course_type": "Core",
+                  "credits": "0.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9130",
+                  "course_name": "Applied Artificial Intelligence",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9150",
+                  "course_name": "Cyber Security for Applied Computing",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 2,
+                  "notes": "Level 2 (15 weeks – January to April)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "2"
+                },
+                {
+                  "course_id": "COMP9600",
+                  "course_name": "M.Sc. Thesis",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "12.00",
+                  "level": 3,
+                  "notes": "Thesis Path (30 weeks – September to April)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "3"
+                },
+                {
+                  "course_id": "COMP9290",
+                  "course_name": "Special Topics in Applied Computing",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "3.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9400",
+                  "course_name": "Industry Internship",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "6.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9500",
+                  "course_name": "M.Sc. Research Project",
+                  "course_type": "ALTERNATIVE_PATH",
+                  "credits": "3.00",
+                  "level": 4,
+                  "notes": "Project & Internship Path",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                  "term": "4"
+                },
+                {
+                  "course_id": "COMP9190",
+                  "course_name": "Application Area Directed Studies",
+                  "course_type": "SUBSTITUTION_OPTION",
+                  "credits": "3.00",
+                  "level": 5,
+                  "notes": "Approved directed-studies substitution",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/application-area-directed-studies-comp-9190/",
+                  "term": "5"
+                }
+              ],
+              "credential": "Master of Science / Master's Degree",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 228,
+                    "component_name": "Level 1 (15 weeks – September to December)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "COMP9060",
+                        "course_name": "Applied Algorithm Analysis",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9060",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9170",
+                        "course_name": "Data Science",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9170",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9200",
+                        "course_name": "Applied Research Methods",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9200",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Level 1 (15 weeks – September to December)"
+                  },
+                  {
+                    "component_id": 229,
+                    "component_name": "Level 2 (15 weeks – January to April)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "COMP9040",
+                        "course_name": "Human-centered Computing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9040",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9080",
+                        "course_name": "Research Proposal",
+                        "course_role": "REQUIRED",
+                        "credits": "0.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9080",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9130",
+                        "course_name": "Applied Artificial Intelligence",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9130",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMP9150",
+                        "course_name": "Cyber Security for Applied Computing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9150",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Level 2 (15 weeks – January to April)"
+                  },
+                  {
+                    "component_id": 230,
+                    "component_name": "Thesis Path (30 weeks – September to April)",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "COMP9600",
+                        "course_name": "M.Sc. Thesis",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "12.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9600",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Thesis Path (30 weeks – September to April)"
+                      }
+                    ],
+                    "notes": "Thesis Path (30 weeks – September to April)"
+                  },
+                  {
+                    "component_id": 231,
+                    "component_name": "Project & Internship Path",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "COMP9290",
+                        "course_name": "Special Topics in Applied Computing",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9290",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      },
+                      {
+                        "course_id": "COMP9400",
+                        "course_name": "Industry Internship",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9400",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      },
+                      {
+                        "course_id": "COMP9500",
+                        "course_name": "M.Sc. Research Project",
+                        "course_role": "PATH_REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9500",
+                        "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                        "study_mode": "Project & Internship Path"
+                      }
+                    ],
+                    "notes": "Project & Internship Path"
+                  },
+                  {
+                    "component_id": 232,
+                    "component_name": "Approved directed-studies substitution",
+                    "component_order": 5,
+                    "courses": [
+                      {
+                        "course_id": "COMP9190",
+                        "course_name": "Application Area Directed Studies",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "COMP 9190",
+                        "source_url": "https://www.bcit.ca/courses/application-area-directed-studies-comp-9190/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "COMP 9190 may substitute for COMP 9130, COMP 9150, or COMP 9170."
+                  }
+                ],
+                "program_id": "M600MSC",
+                "substitutions": [
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9130",
+                    "replaced_course_id": "COMP9130",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9150",
+                    "replaced_course_id": "COMP9150",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  },
+                  {
+                    "description": "COMP 9190 may substitute for COMP 9170",
+                    "replaced_course_id": "COMP9170",
+                    "replacement_credits": "3",
+                    "replacement_type": "SPECIFIC_COURSE",
+                    "study_mode": "ALL"
+                  }
+                ]
+              },
+              "delivery_method": "In person",
+              "program_id": "M600MSC",
+              "program_name": "Applied Computing",
+              "program_overview": "The Master of Science Degree in Applied Computing gives you in-depth computing knowledge to solve complex real-world problems across industries and sectors. Through an interdisciplinary and rigorous full-time curriculum, you’ll be equipped to provide technical leadership in a professional setting or pursue further academic study. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: in person. See details . BCIT Master of Science in Applied Computing About the program Applied computing integrates information technology, computer science, and industry. You’ll take courses in core computing, and you will have the opportunity to work in an application area in another discipline. You’ll develop a deep understanding of how advanced computing, tools, and computational methods can be applied in practice to overcome challenges and create efficiencies. The program employs a cohort model, with the same group in all courses. This allows you to work through the program together, sharing your experience and expertise and building industry connections that will last long after you graduate 1 intake: September 4 15-week terms, normally completed over two academic years full time First year with two terms , delivered in-person, including: Algorithm analysis Human-centered Computing Machine Learning (ML) & Artificial Intelligence (AI) Data Science Cybersecurity Research methods Second year on thesis path or internship & project path Based on BCIT Burnaby Campus, and possibly the Downtown Campus or field locations where appropriate. You’ll be uniquely qualified to apply your knowledge and skills in various areas, such as: computational science rehabilitation engineering building science biotechnology autonomous vehicles sustainability smart micro-grids social impacts of technology network security an approved project area of your choosing based on your professional background See the Program Details to learn more. Who it’s for This degree might be for you if you: Are inspired to maximize the societal benefit of computing by solving real-world issues Would like to apply your skills in industry after graduation, but might also consider applying for a PhD Are looking for a cohort-based program where you’ll work with other students to share problem-solving skills and approaches, as you would in a work setting Have an applied problem you believe could be improved through computing Would like to study with computing faculty, application experts outside of computing, and industry partners Students will also have the opportunity to undertake directed studies with a supervisor in a different department to gain additional knowledge in a specific application area. Please review the Entrance Requirements to learn more. What grads can do Provide technical leadership for software/system development teams Demonstrate deep, critical knowledge and understanding of advanced topics in computing science Analyze how computing systems and software can be used in practical applications and interdisciplinary fields Design, develop, and implement innovative solutions to industry problems with consideration to relevant ethical, social and environmental issues Explain and advocate for applied computing solutions to specialist and non-specialist audiences in both business and academic settings See the Graduating & Jobs page to learn more. Next up Entrance Requirements",
+              "school": "School of Computing and Academic Studies",
+              "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "msg_09101a7d26087965006aa1037ddf6087d0a502e68fefea53f9",
+              "content": [
+                {
+                  "text": "It’s at **BCIT’s Burnaby Campus, 3700 Willingdon Avenue, Burnaby, BC**. Some activities may also occur at the Downtown Campus or appropriate field locations: [program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/).",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "It’s at **BCIT’s Burnaby Campus, 3700 Willingdon Avenue, Burnaby, BC**. Some activities may also occur at the Downtown Campus or appropriate field locations: [program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/).",
+          "final_answer": "It’s at **BCIT’s Burnaby Campus, 3700 Willingdon Avenue, Burnaby, BC**. Some activities may also occur at the Downtown Campus or appropriate field locations: [program page](https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/)."
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "Campus: **Burnaby Campus** — 3700 Willingdon Avenue, Burnaby, BC V5G 3H2; Possible site: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6 The stored program listing says: Burnaby; possible Downtown Campus or field locations.",
+        "tools_used": [
+          "campus_information"
+        ],
+        "verification": {
+          "count": 2,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Computing",
+        "campuses": [
+          {
+            "campus_key": "burnaby",
+            "official_name": "Burnaby Campus",
+            "address": "3700 Willingdon Avenue",
+            "city": "Burnaby",
+            "region": "BC",
+            "postal_code": "V5G 3H2",
+            "relationship_type": "offered",
+            "notes": "Burnaby; possible Downtown Campus or field locations"
+          },
+          {
+            "campus_key": "downtown",
+            "official_name": "Downtown Campus",
+            "address": "555 Seymour Street",
+            "city": "Vancouver",
+            "region": "BC",
+            "postal_code": "V6B 3H6",
+            "relationship_type": "possible",
+            "notes": "Burnaby; possible Downtown Campus or field locations"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "M600MSC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "M600MSC:campus"
+          ],
+          "stopped": false,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "M600MSC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "M600MSC"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "answered_facets": [
+                "M600MSC:campus"
+              ],
+              "program_id": "M600MSC",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 3,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "M600MSC",
+            "program_name": "Applied Computing",
+            "program_set_query": false
+          }
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 4,
+      "response": {
+        "answer": "Okay, we can stop here.",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "M600MSC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "M600MSC:campus"
+          ],
+          "stopped": true,
+          "turn_index": 4,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "tools_empty",
+          "dimension": "frustration_handling",
+          "root_cause": "conversation_state",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "op": "max_words",
+          "value": 35,
+          "dimension": "frustration_handling",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 5
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "M600MSC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "M600MSC"
+        }
+      ],
+      "observed_trace": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

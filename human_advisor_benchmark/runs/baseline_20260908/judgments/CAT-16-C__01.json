@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-16-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "de57acdf2c5655330cab8d72bf19746442cc0e45620993c0beabad44846013c8",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "41d3bf551618eda54ea214a3080c154c5309d1f48e0eee2b503c026037851384",
+  "response_id": "resp_01545254c2e32817006aa07a307f4887d080d73321c29b36bc",
+  "usage": {
+    "input_tokens": 117293,
+    "input_tokens_details": {
+      "cache_write_tokens": 117290,
+      "cached_tokens": 0
+    },
+    "output_tokens": 659,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 117952
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two concise sentences accurately summarize the frozen overview and offering. Prose and state both identify 5500DIPMA. Context retention is inapplicable on turn 1; no required clarification, frustration, or next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer correctly refuses to guarantee employment but ends with a generic 'Program details' link rather than a practical employment-related next step; finalization preserves it unchanged."
+        },
+        "notes": "The quoted 'excellent job placement rate upon graduation' is present in the frozen overview and is attributed rather than converted into a statistic or guarantee. Projects and competitive-entry co-op are supported. The active program is retained in both prose and state. Missing actionable guidance is the only substantive omission against the frozen expectation. Required clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "tool_or_transport_failure",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite the explicit stop, the trace forces tool_choice=get_program_details and executes that retrieval; tools_used is nonempty and intent remains PROGRAM_INFO. The subsequent raw and final answer correctly say only 'Understood. I’ll stop here.'"
+        },
+        "notes": "The visible response fully respects stopping and preserves the active topic in state (5500DIPMA), but unnecessary forced retrieval violates the frozen no-tools expectation. This is not a language-level refusal to stop. No academic claims are made, so factual correctness is null; required clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-29",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "31352b2ee06a755fddd9b16e298db44fbd6847a218d6e66f3e4f9f71d98e154f",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "655b27df9040cac7b6a09b112899b52d8963f016b43417151eb65d510aab4831",
+  "packet_sha256": "c20ec2369f996e99e384448937718e66f7358e2880008dbf0483a360058f88f9",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0019322734107d78006aa0837efacc87d09b7b9fc38d1bddca",
+  "usage": {
+    "input_tokens": 37249,
+    "input_tokens_details": {
+      "cache_write_tokens": 35856,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1083,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 38332
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "scope_mismatch",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution correctly starts with global course catalog scope and search_courses('biochemistry'), but the returned state E8 selects CHEM2305 and scope='course' without a student selection. The final prose correctly lists multiple courses."
+        },
+        "notes": "Catalog discovery and the answer are appropriate; the hidden state incorrectly narrows the subject. CHEM2305 is corroborated by frozen raw records; BIOT claims match observed detail results, though independent raw BIOT rows are not supplied. Context retention is inapplicable on turn 1; no required clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "scope_mismatch",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'across BCIT, not within one program,' resolution retains CHEM2305 with global_catalog=false and forces get_course_details. Returned state remains course-specific. Prose partially recovers by listing all three previously identified courses, but adds a CHEM2305-only overview."
+        },
+        "notes": "The answer itself maintains broadly global discovery scope and makes supported claims; it must not be treated as a single-course answer solely because state is wrong. Repeating the short list is largely justified by the correction, but the singled-out overview is unnecessary. BIOT details are supported by prior tool evidence, not independently supplied raw rows. No explicit frustration, required clarification, or needed next step."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer copies the lengthy catalog overview verbatim rather than summarizing it conversationally. Finalization additionally changes 'the 1100 level' to 'THE 1100 level,' adding awkward capitalization without changing meaning."
+        },
+        "notes": "Explicit LIBS7001 correctly overrides biochemistry in both state and prose. Credits, description, and all three OR prerequisite routes match frozen records; full prerequisite notes compensate for the truncated clean field and incomplete structured tool entries. The overview is relevant to the broad request and is not an unwanted list dump. No required clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 1,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The deterministic answer renders prerequisites as 'ENGL 1177 (minimum grade: 50); None; None'. Frozen rules require OR alternatives: 50% in ENGL1177 or equivalent, 6 BCIT Communication credits at 1100-level or above, or 3 first-year university/college social science or humanities credits. No model call is observed."
+        },
+        "notes": "Course identity and referent retention are correct; the lost subjects are prerequisite alternatives, not the target course. The answer replaces two substantive conditions with 'None', omits equivalency and OR logic, and materially misleads despite the previous accurate answer. Trace supports deterministic attribution but does not identify the exact rendering subcomponent. No required clarification, frustration, or necessary next step; the task needed the actual prerequisite rules."
+      }
+    ]
+  },
+  "attempt": 2
+}

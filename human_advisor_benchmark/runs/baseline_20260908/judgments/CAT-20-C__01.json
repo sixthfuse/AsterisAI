@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-20-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "91a63732231e7d9cfb7bb5de244d57ce7c87f9d54ab4f49a1ba2fe3339b26c7f",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "6c46d6dfcc292ccacaa21fbc03fb028502b20b1dd12d0bb6ed3cb166be4d5f67",
+  "response_id": "resp_082ada564df04fab006aa07c985e4487d09174894a3adba948",
+  "usage": {
+    "input_tokens": 57560,
+    "input_tokens_details": {
+      "cache_write_tokens": 56206,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 723,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 58283
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Accurate two-sentence introduction under 100 words. Duration, credits, delivery, campus, Gas B training and conditional apprenticeship credit match frozen records; course credits sum to 84.5. Prose and state identify 2958CERT correctly. Sentences are somewhat dense but meet the requested brevity. Context retention is inapplicable on turn 1; no necessary clarification, frustration or next step applies."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Raw and final answers appropriately decline an employment guarantee but offer only 'View the program details' rather than a practical employment-focused next step; they repeat the prior apprenticeship-credit explanation."
+        },
+        "notes": "The demand and conditional technical-training credit claims match the frozen overview. Refusing a personal employment guarantee is appropriate and does not invent placement statistics; the source does not explicitly document a no-guarantee policy, so that wording is read as a limit on promised outcomes rather than verification of a separate institutional policy. Topic and state remain correct. The generic link provides limited actionable guidance compared with the frozen expectation. Necessary clarification and frustration handling do not apply."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "tool_or_transport_failure",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; response intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation, although the final answer stops respectfully."
+        },
+        "notes": "The user-facing acknowledgment is brief and appropriate, with no continued advising or academic claims. Active program 2958CERT is preserved. The unnecessary retrieval is attributable to the forced tool route, not a freely chosen model tool call; finalization leaves the good raw acknowledgment unchanged. Factual correctness is null because there are no academic claims. Necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

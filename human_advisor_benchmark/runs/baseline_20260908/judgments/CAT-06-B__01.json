@@ -1,0 +1,98 @@
+{
+  "scenario_id": "CAT-06-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "da49dedae09b38307882f704d71e209123f1d082bc21a8fe9ad7870e09338448",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "842e933f8454699d5ee8b63ff70aac69ae880258c7c3a061d7554b52ff344928",
+  "response_id": "resp_0fcc7e97f5204b5b006aa07895389487d09ebd0ef071527819",
+  "usage": {
+    "input_tokens": 98049,
+    "input_tokens_details": {
+      "cache_write_tokens": 96695,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 718,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 98767
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "International availability, PGWP application status, unknown study-permit status, delivery facts and GPA exception match the frozen records. Program state and prose both identify 9940BSC. Slightly database-oriented wording, but useful confirmation guidance. Context retention is inapplicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly denies automatic admission, preserves the program, and directs the student to official admissions confirmation without claiming a personal decision. The workflow matches the records. Competition is not explicitly discussed, but the distinction between minimum eligibility and an offer is clear. Next-step guidance assessed because official confirmation is needed; required clarification and frustration are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 2,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "source_or_evidence_gap",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "Finalization changes the correct raw 'CHEM 123 — Principles of Chemistry 2' into 'CHEM 123 — UBC-CHEM-123 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141 — Principles of Chemistry 2'. These are distinct courses, with 111/121/141 alternatives, not aliases of CHEM 123. It also expands 'differential calculus' into an unlabeled chain of three MATH codes in the transfer pathway."
+        },
+        "notes": "Program resolver state remains correctly 9940BSC; the entity loss is in finalized course identities, not the program. Most substantive stored facts and the separation of personal eligibility, permit approval and institutional decisions are sound. However, finalization introduces misleading course identities and obscures alternatives under a verified heading. Independently, the raw model already drifts from the international/admission verification question into an unsolicited curriculum list and Year 4 options, reducing relevance and proportionality. Confirmation guidance is specific and appropriately cautious. No required clarification or explicit frustration applies."
+      }
+    ]
+  },
+  "attempt": 1
+}

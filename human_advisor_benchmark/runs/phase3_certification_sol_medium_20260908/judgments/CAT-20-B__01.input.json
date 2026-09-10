@@ -1,0 +1,2343 @@
+{
+  "scenario_id": "CAT-20-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I am an international applicant interested in the Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate. Is it available to international applicants?",
+      "advisor": "No. The Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate is **not available to international applicants**.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/) for current details and other available programs.\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+      "expectation": {
+        "question": "I am an international applicant interested in the Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate. Is it available to international applicants?",
+        "expected": "Use this program's INTERNATIONAL evidence. Distinguish available, restricted, not accepted, and unknown; never infer ineligibility from silence.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "So does that automatically mean I'm admitted?",
+      "advisor": "No. Program availability or meeting entrance requirements does **not** mean automatic admission. Applicants are accepted on a first-qualified basis while space remains; however, this program is not available to international applicants.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+      "expectation": {
+        "question": "So does that automatically mean I'm admitted?",
+        "expected": "No. Separate international availability from individual admission, competition, and human verification. Do not guarantee admission.",
+        "scope": "admission",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "What can you actually verify, and what should I confirm with BCIT?",
+      "advisor": "**What I can verify**\n\n- This is an active, full-time, in-person certificate at BCIT’s Burnaby Campus. The 41-week, non-co-op curriculum covers refrigeration, HVAC design, installation, servicing, controls, and electrical fundamentals.\n- The curriculum contains 23 required courses, including **HVAC 1114 – Apply Fundamentals of Refrigeration**, **HVAC 2110 – Design Refrigeration Systems**, and **HVAC 3102 – Design HVAC Distribution Systems**.\n- Admission requirements include specified English and mathematics options plus the BCIT Mechanical Reasoning Trades Entry Assessment. Admission is first-qualified while space remains.\n- Based on your stated international-applicant status, this program’s published rules make you ineligible because it is unavailable to international students.\n\n**What to confirm with BCIT**\n\n- Whether another HVAC-related program is currently open to international applicants.\n- Whether your specific academic credentials meet BCIT equivalency standards.\n- Current intake dates and space availability, since scheduled intakes can change.\n\n[BCIT program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+      "expectation": {
+        "question": "What can you actually verify, and what should I confirm with BCIT?",
+        "expected": "Clearly distinguish stored rules from unverified personal eligibility and current/human decisions; provide useful confirmation guidance.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "2958CERT",
+        "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "credential": "Certificate",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "2958CERT",
+        "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "program_overview": "The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it’s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements",
+        "area_id": "ENG",
+        "school": "School of Energy",
+        "credential": "Certificate",
+        "program_level": "Certificate",
+        "study_mode": "Full-time",
+        "campus": "Burnaby Campus",
+        "delivery_method": "In person",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "notes": "Program length 41 weeks, full-time Grading The course passing grade is 64 per cent. In order to successfully complete each level, a minimum grade point average (GPA) of 70 per cent is required. An overall GPA of 70 per cent is required to successfully complete the program. Accreditation Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning apprenticeship. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Industry training authority BCIT transfers the student's name, contact information, Personal Education Number (PEN), and the name and date of the completed Foundation program to SkilledTradesBC. This information is used for the purposes of tracking successful completions in order to grant credit towards apprenticeship where applicable, and communicating with trainees to promote continuation in an apprenticeship program. Go back Courses Next up Graduating & Jobs"
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "2958CERT",
+        "total_credits": 84.5,
+        "international_eligibility": "Refer to official program page",
+        "authoritative_raw": "Program length 41 weeks, full-time Grading The course passing grade is 64 per cent. In order to successfully complete each level, a minimum grade point average (GPA) of 70 per cent is required. An overall GPA of 70 per cent is required to successfully complete the program. Accreditation Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning apprenticeship. Program delivery In person: This program is delivered on campus. Program location Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Industry training authority BCIT transfers the student's name, contact information, Personal Education Number (PEN), and the name and date of the completed Foundation program to SkilledTradesBC. This information is used for the purposes of tracking successful completions in order to grant credit towards apprenticeship where applicable, and communicating with trainees to promote continuation in an apprenticeship program. Go back Courses Next up Graduating & Jobs",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "2958CERT-CURRENT",
+        "program_id": "2958CERT",
+        "study_mode": "Full-time",
+        "campus": "Burnaby Campus",
+        "delivery_method": "In person",
+        "application_status": "Refer to official BCIT program page",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "notes": "Current published offering; consult source for intake availability."
+      }
+    ],
+    "program_courses": [
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1095",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1100",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1102",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1103",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1111",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1114",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1115",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1116",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1117",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1118",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC1119",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2110",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2111",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2112",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2113",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2114",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2115",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC2116",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC3100",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC3102",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC3103",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC3104",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "2958CERT",
+        "course_id": "HVAC3112",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Required Courses"
+      }
+    ],
+    "curriculum_components": [
+      {
+        "component_id": 779,
+        "program_id": "2958CERT",
+        "component_name": "Required Courses",
+        "component_order": 1,
+        "notes": "Required Courses: Total Credits: 84.5"
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 995,
+        "program_id": "2958CERT",
+        "rule_scope": "ADMISSION",
+        "rule_name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "notes": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies"
+      },
+      {
+        "rule_set_id": 996,
+        "program_id": "2958CERT",
+        "rule_scope": "COMPLETION",
+        "rule_name": "COMPONENT_1",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "notes": "Required Courses: Total Credits: 84.5"
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 855,
+        "rule_set_id": 996,
+        "operator": "AND",
+        "label": "COMPONENT_1",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 854,
+        "rule_set_id": 995,
+        "operator": "AND",
+        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 1139,
+        "rule_group_id": 854,
+        "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false
+        },
+        "description": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 1140,
+        "rule_group_id": 855,
+        "condition_type": "COMPONENT_1",
+        "parameters": {
+          "semantic": "all",
+          "course_ids": [
+            "HVAC1095",
+            "HVAC1100",
+            "HVAC1102",
+            "HVAC1103",
+            "HVAC1111",
+            "HVAC1114",
+            "HVAC1115",
+            "HVAC1116",
+            "HVAC1117",
+            "HVAC1118",
+            "HVAC1119",
+            "HVAC2110",
+            "HVAC2111",
+            "HVAC2112",
+            "HVAC2113",
+            "HVAC2114",
+            "HVAC2115",
+            "HVAC2116",
+            "HVAC3100",
+            "HVAC3102",
+            "HVAC3103",
+            "HVAC3104",
+            "HVAC3112"
+          ],
+          "executable": true
+        },
+        "description": "Required Courses: Total Credits: 84.5",
+        "sort_order": 1
+      }
+    ],
+    "curriculum_component_courses": [
+      {
+        "component_id": 779,
+        "course_id": "HVAC1095",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1100",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1102",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1103",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1111",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1114",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1115",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1116",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1117",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1118",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC1119",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2110",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2111",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2112",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2113",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2114",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2115",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC2116",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC3100",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC3102",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC3103",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC3104",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 779,
+        "course_id": "HVAC3112",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      }
+    ],
+    "course_identity": [
+      {
+        "course_id": "HVAC1095",
+        "course_name": "Apply Effective Learning Techniques",
+        "credits": 0.5,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1095"
+      },
+      {
+        "course_id": "HVAC1100",
+        "course_name": "Apply Trade Safety Practices",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1100"
+      },
+      {
+        "course_id": "HVAC1102",
+        "course_name": "Process Technical Information",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1102"
+      },
+      {
+        "course_id": "HVAC1103",
+        "course_name": "Apply Trade Tools and Fasteners",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1103"
+      },
+      {
+        "course_id": "HVAC1111",
+        "course_name": "Install Refrigeration Project",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1111"
+      },
+      {
+        "course_id": "HVAC1114",
+        "course_name": "Apply Fundamentals of Refrigeration",
+        "credits": 11.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1114"
+      },
+      {
+        "course_id": "HVAC1115",
+        "course_name": "Proper Service Procedures",
+        "credits": 8.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1115"
+      },
+      {
+        "course_id": "HVAC1116",
+        "course_name": "Apply Electrical Fundamentals",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1116"
+      },
+      {
+        "course_id": "HVAC1117",
+        "course_name": "Interpret Electrical Diagrams",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1117"
+      },
+      {
+        "course_id": "HVAC1118",
+        "course_name": "Apply Electrical Test Equipment",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1118"
+      },
+      {
+        "course_id": "HVAC1119",
+        "course_name": "Install Electrical/Mechanical Devices",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 1119"
+      },
+      {
+        "course_id": "HVAC2110",
+        "course_name": "Design Refrigeration Systems",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2110"
+      },
+      {
+        "course_id": "HVAC2111",
+        "course_name": "Ammonia Systems/Water Treatment",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2111"
+      },
+      {
+        "course_id": "HVAC2112",
+        "course_name": "Describe Basic HVAC Systems",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2112"
+      },
+      {
+        "course_id": "HVAC2113",
+        "course_name": "Air Distribution Arrangement for HVAC",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2113"
+      },
+      {
+        "course_id": "HVAC2114",
+        "course_name": "Air Properties and Measurements",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2114"
+      },
+      {
+        "course_id": "HVAC2115",
+        "course_name": "Explain HVAC Control Loops",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2115"
+      },
+      {
+        "course_id": "HVAC2116",
+        "course_name": "Maintain Heat Pump Systems",
+        "credits": 8.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 2116"
+      },
+      {
+        "course_id": "HVAC3100",
+        "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 3100"
+      },
+      {
+        "course_id": "HVAC3102",
+        "course_name": "Design HVAC Distribution Systems",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 3102"
+      },
+      {
+        "course_id": "HVAC3103",
+        "course_name": "Maintain Computer Environmental Systems",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 3103"
+      },
+      {
+        "course_id": "HVAC3104",
+        "course_name": "Explain Heat Recovery/Energy Management",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 3104"
+      },
+      {
+        "course_id": "HVAC3112",
+        "course_name": "Prepare for Employment",
+        "credits": 0.5,
+        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+        "display_course_code": "HVAC 3112"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "No. The Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate is **not available to international applicants**.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/) for current details and other available programs.\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:international"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "international"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "international",
+            "conversation_state": {
+              "academic_scope": "international",
+              "program_id": "2958CERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"2958CERT\"}",
+              "call_id": "call_tIgkao050G02bARltpZG9Ck8",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_08c338ce2f33f4c0006aa1026ebaa487d0aafc8df9204681d1",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "2958CERT"
+          },
+          "context": {
+            "academic_scope": "international",
+            "current_question": "I am an international applicant interested in the Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate. Is it available to international applicants?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "2958CERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1139,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "rule_group_id": 854,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 995,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "program_id": "2958CERT"
+              },
+              "courses": [
+                {
+                  "course_id": "HVAC1095",
+                  "course_name": "Apply Effective Learning Techniques",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1100",
+                  "course_name": "Apply Trade Safety Practices",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1102",
+                  "course_name": "Process Technical Information",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1103",
+                  "course_name": "Apply Trade Tools and Fasteners",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1111",
+                  "course_name": "Install Refrigeration Project",
+                  "course_type": "REQUIRED",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1114",
+                  "course_name": "Apply Fundamentals of Refrigeration",
+                  "course_type": "REQUIRED",
+                  "credits": "11.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1115",
+                  "course_name": "Proper Service Procedures",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1116",
+                  "course_name": "Apply Electrical Fundamentals",
+                  "course_type": "REQUIRED",
+                  "credits": "6.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1117",
+                  "course_name": "Interpret Electrical Diagrams",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1118",
+                  "course_name": "Apply Electrical Test Equipment",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1119",
+                  "course_name": "Install Electrical/Mechanical Devices",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2110",
+                  "course_name": "Design Refrigeration Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2111",
+                  "course_name": "Ammonia Systems/Water Treatment",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2112",
+                  "course_name": "Describe Basic HVAC Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2113",
+                  "course_name": "Air Distribution Arrangement for HVAC",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2114",
+                  "course_name": "Air Properties and Measurements",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2115",
+                  "course_name": "Explain HVAC Control Loops",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2116",
+                  "course_name": "Maintain Heat Pump Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3100",
+                  "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3102",
+                  "course_name": "Design HVAC Distribution Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3103",
+                  "course_name": "Maintain Computer Environmental Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3104",
+                  "course_name": "Explain Heat Recovery/Energy Management",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3112",
+                  "course_name": "Prepare for Employment",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                }
+              ],
+              "credential": "Certificate",
+              "delivery_method": "In person",
+              "program_id": "2958CERT",
+              "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+              "program_overview": "The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it’s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements",
+              "school": "School of Energy",
+              "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "msg_08c338ce2f33f4c0006aa10273042887d0afbec7d8ee8966c7",
+              "content": [
+                {
+                  "text": "No. The Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate is **not available to international applicants**.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/) for current details and other available programs.",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "No. The Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate is **not available to international applicants**.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/) for current details and other available programs.",
+          "final_answer": "No. The Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate is **not available to international applicants**.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/) for current details and other available programs.\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "No. Program availability or meeting entrance requirements does **not** mean automatic admission. Applicants are accepted on a first-qualified basis while space remains; however, this program is not available to international applicants.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:international"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "admission"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "admission",
+            "conversation_state": {
+              "academic_scope": "admission",
+              "answered_facets": [
+                "2958CERT:international"
+              ],
+              "program_id": "2958CERT",
+              "scope": "program",
+              "stopped": false,
+              "student_facts": [
+                {
+                  "key": "applicant_status",
+                  "source": "user_reported",
+                  "value": "international"
+                }
+              ],
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"2958CERT\"}",
+              "call_id": "call_42t36BskMU8QvRcISTPNMrnC",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_00ebfed626c83c56006aa102770bcc87d0b17d9ff04549ecd1",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "2958CERT"
+          },
+          "context": {
+            "academic_scope": "admission",
+            "current_question": "So does that automatically mean I'm admitted?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "2958CERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1139,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "rule_group_id": 854,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 995,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "program_id": "2958CERT"
+              },
+              "courses": [
+                {
+                  "course_id": "HVAC1095",
+                  "course_name": "Apply Effective Learning Techniques",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1100",
+                  "course_name": "Apply Trade Safety Practices",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1102",
+                  "course_name": "Process Technical Information",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1103",
+                  "course_name": "Apply Trade Tools and Fasteners",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1111",
+                  "course_name": "Install Refrigeration Project",
+                  "course_type": "REQUIRED",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1114",
+                  "course_name": "Apply Fundamentals of Refrigeration",
+                  "course_type": "REQUIRED",
+                  "credits": "11.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1115",
+                  "course_name": "Proper Service Procedures",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1116",
+                  "course_name": "Apply Electrical Fundamentals",
+                  "course_type": "REQUIRED",
+                  "credits": "6.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1117",
+                  "course_name": "Interpret Electrical Diagrams",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1118",
+                  "course_name": "Apply Electrical Test Equipment",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1119",
+                  "course_name": "Install Electrical/Mechanical Devices",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2110",
+                  "course_name": "Design Refrigeration Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2111",
+                  "course_name": "Ammonia Systems/Water Treatment",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2112",
+                  "course_name": "Describe Basic HVAC Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2113",
+                  "course_name": "Air Distribution Arrangement for HVAC",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2114",
+                  "course_name": "Air Properties and Measurements",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2115",
+                  "course_name": "Explain HVAC Control Loops",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2116",
+                  "course_name": "Maintain Heat Pump Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3100",
+                  "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3102",
+                  "course_name": "Design HVAC Distribution Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3103",
+                  "course_name": "Maintain Computer Environmental Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3104",
+                  "course_name": "Explain Heat Recovery/Energy Management",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3112",
+                  "course_name": "Prepare for Employment",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                }
+              ],
+              "credential": "Certificate",
+              "delivery_method": "In person",
+              "program_id": "2958CERT",
+              "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+              "program_overview": "The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it’s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements",
+              "school": "School of Energy",
+              "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "msg_00ebfed626c83c56006aa10278d13087d0ae0b363743c815a9",
+              "content": [
+                {
+                  "text": "No. Program availability or meeting entrance requirements does **not** mean automatic admission. Applicants are accepted on a first-qualified basis while space remains; however, this program is not available to international applicants.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "No. Program availability or meeting entrance requirements does **not** mean automatic admission. Applicants are accepted on a first-qualified basis while space remains; however, this program is not available to international applicants.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+          "final_answer": "No. Program availability or meeting entrance requirements does **not** mean automatic admission. Applicants are accepted on a first-qualified basis while space remains; however, this program is not available to international applicants.\n\n[View the program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "**What I can verify**\n\n- This is an active, full-time, in-person certificate at BCIT’s Burnaby Campus. The 41-week, non-co-op curriculum covers refrigeration, HVAC design, installation, servicing, controls, and electrical fundamentals.\n- The curriculum contains 23 required courses, including **HVAC 1114 – Apply Fundamentals of Refrigeration**, **HVAC 2110 – Design Refrigeration Systems**, and **HVAC 3102 – Design HVAC Distribution Systems**.\n- Admission requirements include specified English and mathematics options plus the BCIT Mechanical Reasoning Trades Entry Assessment. Admission is first-qualified while space remains.\n- Based on your stated international-applicant status, this program’s published rules make you ineligible because it is unavailable to international students.\n\n**What to confirm with BCIT**\n\n- Whether another HVAC-related program is currently open to international applicants.\n- Whether your specific academic credentials meet BCIT equivalency standards.\n- Current intake dates and space availability, since scheduled intakes can change.\n\n[BCIT program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:international"
+          ],
+          "stopped": false,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "admission"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "admission",
+            "conversation_state": {
+              "academic_scope": "admission",
+              "answered_facets": [
+                "2958CERT:international"
+              ],
+              "program_id": "2958CERT",
+              "scope": "program",
+              "stopped": false,
+              "student_facts": [
+                {
+                  "key": "applicant_status",
+                  "source": "user_reported",
+                  "value": "international"
+                }
+              ],
+              "turn_index": 3,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"2958CERT\"}",
+              "call_id": "call_ZgJuPnuOzJUynbCZMmSztsEz",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_0cd80b0f978398be006aa1027c34d887d093e152fab7981ac0",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "2958CERT"
+          },
+          "context": {
+            "academic_scope": "admission",
+            "current_question": "What can you actually verify, and what should I confirm with BCIT?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "2958CERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1139,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "rule_group_id": 854,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 995,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "program_id": "2958CERT"
+              },
+              "courses": [
+                {
+                  "course_id": "HVAC1095",
+                  "course_name": "Apply Effective Learning Techniques",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1100",
+                  "course_name": "Apply Trade Safety Practices",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1102",
+                  "course_name": "Process Technical Information",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1103",
+                  "course_name": "Apply Trade Tools and Fasteners",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1111",
+                  "course_name": "Install Refrigeration Project",
+                  "course_type": "REQUIRED",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1114",
+                  "course_name": "Apply Fundamentals of Refrigeration",
+                  "course_type": "REQUIRED",
+                  "credits": "11.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1115",
+                  "course_name": "Proper Service Procedures",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1116",
+                  "course_name": "Apply Electrical Fundamentals",
+                  "course_type": "REQUIRED",
+                  "credits": "6.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1117",
+                  "course_name": "Interpret Electrical Diagrams",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1118",
+                  "course_name": "Apply Electrical Test Equipment",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC1119",
+                  "course_name": "Install Electrical/Mechanical Devices",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2110",
+                  "course_name": "Design Refrigeration Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2111",
+                  "course_name": "Ammonia Systems/Water Treatment",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2112",
+                  "course_name": "Describe Basic HVAC Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2113",
+                  "course_name": "Air Distribution Arrangement for HVAC",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2114",
+                  "course_name": "Air Properties and Measurements",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2115",
+                  "course_name": "Explain HVAC Control Loops",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC2116",
+                  "course_name": "Maintain Heat Pump Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3100",
+                  "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3102",
+                  "course_name": "Design HVAC Distribution Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3103",
+                  "course_name": "Maintain Computer Environmental Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3104",
+                  "course_name": "Explain Heat Recovery/Energy Management",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                },
+                {
+                  "course_id": "HVAC3112",
+                  "course_name": "Prepare for Employment",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/"
+                }
+              ],
+              "credential": "Certificate",
+              "delivery_method": "In person",
+              "program_id": "2958CERT",
+              "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+              "program_overview": "The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it’s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements",
+              "school": "School of Energy",
+              "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_0cd80b0f978398be006aa1027eced487d0bb15323d10c9d9d7",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQKMy8JiMB2TmX3n4KOlfxF0eG7P-XjMjfyZeXkuW8dvczU6RYHgiYY8qkBCQOFYhYTYWeuqWV-YxIXCfWryIK4g1-qhIfGVNgnelPTvitx9AgxUaPGyLt2fd5Db9Vz8vcOFJFkjToutKVQY-FCAImA-1bLVqUuAmXGLWbMCOsboiy7Xeep3J8iHLOsVTAB265M5wEe6yn-X5imBBtlVrMaq7SzO0kum0u-_qlgiCi_-wPmEV2wHVbQMjrm2I6jcjUMVuahjx61cSoGbfbEttatX6FUyYTYP0dSeOu_V72p10MQLiJZl1pI125SpVjQOgz9PZ789CW1aWSOW_vcncZaLfOuK8g-KDdSfBWxJlZQpFhRgJGSKDCE9fkA7Ej-VHzgHvU703m08HylHmYSpuOtnsL-6FxQXz0uyfbhreoZ9LVqATFC_NvXVreVturAezGXbYH-q_bRwGaBJ61H72jfW7J9uZS1qYD5UF_tVElnWptvxlPD9ok5clMTBt0f8tjYyquov6FNNhUbdko11D83u2G3am80-Ab7ZnWc9JoEyplx_xigCdSR5_yPwL_ur6j0pPOXTZphsCvjxxpwiJDBlDS-IcXrFRqAZpweqiK-nTrGKRGI5HnPFY3nEhfz6gYz-rE0wQiYcIaeEAoRVsxClP7ncC_MVdJiXe3B5bj9-wOW0PX87HXHm73GxHxYMVE09KQLlSdmnKjT8cbbC75sJLey83t8QZOw2ea02dzR4BHgJHv4lImARJZfqKhHyat1dfJNqJGTq2POimcqh_a_jwqKPz5163V860jF9ywKF7tMiBA9e4FmRw_SHjvkUXSaGuVL4pbcIWeEBmBQ87Oy6FL-Osi-KIpJKQTVQHV7AiyBr3X4ktcr6Y-S7ogultBP01tb47RDeIciEHTAiZoLFdGsfcG4IOoE6MakybU471ygVny7LE0XNqSfZ6T-Di1MVHbqJK0-YzKzl_YvMmK0AmCbOu_zotmkO-XkNxA1Eh5F1PmgoItI_cOp34CRwuYdPrhOphQ3ZYpKTPWi4Mi3lrmc5yyL7AsL-wKLI9HqX-OrqkReTOPXDdv1-JocV9c7PAt2iF2BoPrIL65EN1rj481NGjrfgbOSj7u0foyVCSE3_yAkbvVP8_XAamL_QO0FL_3qGFCHRiODoP0bhEW7VpdwDw81DOWw8KCK48ljt3-Ye-QGD8z99vX7A2gRSZmWToBGg5SGS7D5a8QIZXBoN6l48FX61rsxfic2JwIQSfYZgHipxtVs8T16mHLyPJ__m37UrEO2X1dbmxGbdGmgHXAMvIiOFK9mYdHmhU7vIqmUq3X89-Pc2koEnd35IXkHeTClGr2E7qXous4dazmbgBGuCChwYGejxQ3XW3UmSUpwkmkiGh1d_E4wo254kePwi7pXzdx3z2yZO0iapiglEDqY8sOp11z67woKlJGnWhfb1zIkeUGnw93dplgsr9J8NlLYrtH4WMIWo4IyLEfbfuVawsi9zlmqTXjIIaY28xHeiBR6Y8f3K6-WgHdX2dah12BQfKmFAqNBcK704sgp2yKvVwvb-u2uBF20JHkERY0R7fvJ9c3eICPAc2eNxtnm4ofdLpYzWfL-5O6H7xnpYZyt-xSZhjI0thUxkFb-Bx4IjJOhFgloa45n2KhisMTd0OurLDm-axYhAhPSP5c1GGJTe_6cnAES6gvwdt42pwZf9jSW0TUTIoSglW57oo-g_RnKuxBldfs9GpEHld8dKYPuLahAJ5sFET-bLffbciWmX7dXTcg2zOYGfaSvrx4LET3GvxuHin7iXmOc-MAGTfOR0VJpZjAdjOPUq7vTuGeVi_3EODA4vTM9fwpBvCfM5_YWPZa1kyVN1YC-CdfuDHNcCghlnwlKNdQssLvLC_VNVhs0TvO2-S8kD96YIPSfA8IvpQTnjJRcLZNRpD_IjFf95hZd9Gztk4Ks3tGtKulSB4wQ1bExwLA-SB0oegiTHIQ55acd8oxUdXFfMZtVu7uh9b1EQa0_fnBQpL9RUcvS80B5pqs-JH6n0-P-3s_yAHhmxQKhIwRgNUm5YZoGe36C1HdgirQLUwrCu0uXvSTGgyx4pPmMQQ2mxq9jlQ7Rbo0_mvnzYrJojRUSKuUVTfvJ_hGf1qp09NSbQud5lNpLiuN36nMmKxIqMVZkCty8uDlPq7GrT8Vhei95gAsK3Mr2GRuvZgejGfmwn7hnqaoz4KvIp-cGSmDnYbUpC2QJULcS-jhkFtLIGg3d0lSiq4anrry4RsfxyJ9kAxnK-hdunWmtQ2DmeMDquUByFcXhYYSebYoICxs8oOI2-fpXehy91gBicQYGAmiE_A34--fLh8zJx6-O4LE-pzSgisEMmVYC03cK3RudeADcoohXvlvySDM63E_16UwrAzObMqBRqEoyduQzrdpTDaYOIPzkRQTr5-euqvqutMOisOtrp0NKHyahQe-OHoHczOJvOab7cuZrLAu3DKgs8UsQ95PNbWAwhRqpt29aJyJvFq0jtfexflQTj8iCM3X6_kGigsic8_m6k3X8LLNlYKoecSvN_YFgz68iorGs_Dg0en1r_UDbTPzDHgkC3n9VWcjWr5q_IEm_GsDWB8Tudl8vKG4VMoVr1lR_bvxrSQZR6Yw0ibr9K3e-uQlxkD1FqqeOxd9o8uDH55MWIade5pTA6-PUyeSvmNqk4TzsMuxzBjw1hFQbi_K-TbLolDgZS8tPB-48KPLQiCKvMyXEzr8XIYNmeHp_Vc_rrdR0SeAmrKVCmJ34R2rj8L21fzR3GoSGxG5RUIZbgCq5dNV1YzmXI7oZdI38-cvJMWUYXy6hfiVIbezQTKWMXHBHERVCcQJslJtgTWW_ne9NSUJHsbIESYaSkYOe8qKqNsaFj5XNj3mM74AkEswACyMIruDIfBG52aSaKFOwp6d_c9VD-syBuwEJoOz28VNEE8dnFgDLnBdKGvSgpZenbu07PdNPo6tRrmLgyh-T00HZEHEvZCNiGyivrel_TiE-fUc-uHS2SrVpgG8gRhpa7kS9B6zcUI1ORrBcMXMjlVkwqM92a2n6EKngrM01FaSJSnoexUbdUsIHoP_nYhEWmxTbOWhUsbHtZj9Q4b5nhKjktaAhdb1w5I6BCwgdxY-j_nPuEOdKKsk-y-uMdMZYUpXmo0BJAuBtWgg17G3DUwPlOh-Fop4uIK4YmMgEGz97DRhLi7SU16-shTuwjj5Hibv0EnEpOQi4GoxY3VzrKJeG_oCYX8YORgBOcMJODxdly8woVtXXDQTgNgZkVbUSMCTIABof9dQhRU7y2-Z4yWddmq8K4ftd4h_4Xhr52dJvwO4j-aUuoxzteqpYX1D5-lkJFjUxs1V-M2cHmje7xmc5lLFIB2Ol7cdfnaR9bYlOyq1wVOxScpQI-haVV-eTsD6j-qb7nwhDImLv-H8LWsYV1grDYiDenBVSgTmBUHd_tu25uPyVN0RBFP-FYEo6EMmC6GPJFYJMvRq5P16i6IZLUjb3GGyg7V0wxv8zyAwS92ZwzQtibu0mSrwiFnj8QAwtk7vUldH-sTFjz32he7fG2tJZ-IkBLsfsmOBo9rgdMEDx_P4yuQ3f1QoG1CLQujb1cZCFD1usrvT2rPSEWEw0qvb3PSWos9mZfhjN6GCOz1e6R80D2-n2qF75FG-bYnJ3V8OXpOModC2JwaCgCYg1fosD8kZ508OjobNoDCMGFRhJMKWET-KzkPRwqDPbzrbnxQ5qFwWcgJ0fJYJdBJCc4hR8L_Ixst_rHnXMP2kfWSM_qVK8PH2Cdx4t5n5SETN9W7AIYN-UruVkO9WN8BBoV7UJjlCGHABchRZ5R_xKpRPSxBvwhAZ0GuUw6JtoExMH_qQTc8RzWms9OOTvt6_6y6kVSv3_s8Lt91fGcrgjTrI6ieNSXYOoluxVU7Rm4DATZxyiWscFWrTtjR00hIfVO2Wi6VtAxW2Y3_DRVn5uluWbj8eQ2WfAGUe94NfZRvxifs9d9fn0g29894WQpLAMWXKnBaxLqA4NXGypWraP8jdrg3T0W4rHUTqVdeY1ZQY165LjHpS6c-s-8ciMWbMmJNi4Du7p1ui7iaIdJTZ68ydmfFQqSp4j1DfA9hQHDkpZpBvDaC1GmfY4hUTjkRSSzVMUDyiBLpqXeTQ4vGASbeuwmPdwGmstJLczv720ZkdCwX4u_p4lSsENJeCzJHDYEwMyFiZAqWbqtKBwROdRZGOJya7rXIZ9x0TsO8662QqPU6fCqqz8q9zitNF_bf3XvJs6eEW_BqnTGn3b6j43xO5Yuf0rK1KUF5EMx2farCZ80uroXViXL32SW4kefgNmcwk8uCfgHrax6JDe-X24QIWR-j7vFpvhHzUk10Go_r1xvN9ydykI_LmgbkGdr8gpBNTT4Whhem-bDIfyF3O2Y8DsZJEMU89DwGeqffkkZX4rndCrKhtqhwcDzsi5TXTmeC5SPcHQiJ39MSsDZwy6dpVdVlAcAje-F2K6KiMTO348yMcz-yKsCKAbLmdIu0oLqPvFyEreKuS_sH17r6pnQ5owq6jeKIR4zOA1kIqwqvdg9tB68so5aUKS5-OrZ_N8EAX9AovWaD3tZidU7Qbhtb_Gk_yG6qr7DqbegDdb3FNbR8zA43eoDh9RGOqSAtEmXQC3H79U14p1x"
+            },
+            {
+              "id": "msg_0cd80b0f978398be006aa1028816bc87d0afb86a0a5624d3c1",
+              "content": [
+                {
+                  "text": "**What I can verify**\n\n- This is an active, full-time, in-person certificate at BCIT’s Burnaby Campus. The 41-week, non-co-op curriculum covers refrigeration, HVAC design, installation, servicing, controls, and electrical fundamentals.\n- The curriculum contains 23 required courses, including **HVAC 1114 – Apply Fundamentals of Refrigeration**, **HVAC 2110 – Design Refrigeration Systems**, and **HVAC 3102 – Design HVAC Distribution Systems**.\n- Admission requirements include specified English and mathematics options plus the BCIT Mechanical Reasoning Trades Entry Assessment. Admission is first-qualified while space remains.\n- Based on your stated international-applicant status, this program’s published rules make you ineligible because it is unavailable to international students.\n\n**What to confirm with BCIT**\n\n- Whether another HVAC-related program is currently open to international applicants.\n- Whether your specific academic credentials meet BCIT equivalency standards.\n- Current intake dates and space availability, since scheduled intakes can change.\n\n[BCIT program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "**What I can verify**\n\n- This is an active, full-time, in-person certificate at BCIT’s Burnaby Campus. The 41-week, non-co-op curriculum covers refrigeration, HVAC design, installation, servicing, controls, and electrical fundamentals.\n- The curriculum contains 23 required courses, including **HVAC 1114 – Apply Fundamentals of Refrigeration**, **HVAC 2110 – Design Refrigeration Systems**, and **HVAC 3102 – Design HVAC Distribution Systems**.\n- Admission requirements include specified English and mathematics options plus the BCIT Mechanical Reasoning Trades Entry Assessment. Admission is first-qualified while space remains.\n- Based on your stated international-applicant status, this program’s published rules make you ineligible because it is unavailable to international students.\n\n**What to confirm with BCIT**\n\n- Whether another HVAC-related program is currently open to international applicants.\n- Whether your specific academic credentials meet BCIT equivalency standards.\n- Current intake dates and space availability, since scheduled intakes can change.\n\n[BCIT program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)",
+          "final_answer": "**What I can verify**\n\n- This is an active, full-time, in-person certificate at BCIT’s Burnaby Campus. The 41-week, non-co-op curriculum covers refrigeration, HVAC design, installation, servicing, controls, and electrical fundamentals.\n- The curriculum contains 23 required courses, including **HVAC 1114 – Apply Fundamentals of Refrigeration**, **HVAC 2110 – Design Refrigeration Systems**, and **HVAC 3102 – Design HVAC Distribution Systems**.\n- Admission requirements include specified English and mathematics options plus the BCIT Mechanical Reasoning Trades Entry Assessment. Admission is first-qualified while space remains.\n- Based on your stated international-applicant status, this program’s published rules make you ineligible because it is unavailable to international students.\n\n**What to confirm with BCIT**\n\n- Whether another HVAC-related program is currently open to international applicants.\n- Whether your specific academic credentials meet BCIT equivalency standards.\n- Current intake dates and space availability, since scheduled intakes can change.\n\n[BCIT program page](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

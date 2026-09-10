@@ -1,0 +1,995 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-46",
+    "turn": 2,
+    "root_cause": "academic_engine",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The comparison tool classified international eligibility for 5430ACERT as unknown, even though the frozen program overview and official admission text explicitly state that the Civil Technology Associate Certificate is not available to international applicants. The final answer consequently claimed that neither program had specified restrictions.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Compare Civil Technology certificate and associate certificate.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Compare Civil Technology certificate and associate certificate.",
+        "expected": "Discuss both credentials distinctly.",
+        "scope": "comparison",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)",
+        "tools_used": [
+          "compare_programs"
+        ],
+        "verification": {
+          "count": 2,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare civil technology certificate and associate certificate programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "5430ACERT",
+            "5430CERT"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 8.797,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "5430ACERT",
+              "5430CERT"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "5430ACERT",
+                "5430CERT"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "compare civil technology certificate and associate certificate programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare civil technology certificate and associate certificate programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Compare Civil Technology certificate and associate certificate.\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"compare civil technology certificate and associate certificate programs\",\"comparison_program_ids\":[\"5430ACERT\",\"5430CERT\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: compare civil technology certificate and associate certificate programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0b534ede0b599344006aa10514619c87d08a06d384ed8930a6",
+            "created_at": 1788937492.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"Compare all Civil Technology certificate and associate certificate programs, including every matching member. Return shared and differing supported program attributes, credentials, configured curriculum facts, and source URLs; include unknown results.\"}",
+                "call_id": "call_Gf2qRlvzej4rVqnzufPF6Eg3",
+                "name": "compare_programs",
+                "type": "function_call",
+                "id": "fc_0b534ede0b599344006aa1051513ac87d0b68636f7606e086a",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937494.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1813,
+              "input_tokens_details": {
+                "cache_write_tokens": 183,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 55,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1868
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "compare_programs",
+          "arguments": {
+            "query": "Compare all Civil Technology certificate and associate certificate programs, including every matching member. Return shared and differing supported program attributes, credentials, configured curriculum facts, and source URLs; include unknown results."
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "5430ACERT",
+              "5430CERT"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Compare Civil Technology certificate and associate certificate.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare civil technology certificate and associate certificate programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "comparison": "applicant_requirement",
+            "matching_programs": [],
+            "program_count": 2,
+            "programs": [
+              {
+                "campus": "Burnaby Campus / Online",
+                "classification": "verified program record",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "evidence": [
+                  "Associate Certificate",
+                  "Part-time",
+                  "Blended",
+                  "Burnaby Campus / Online"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "5430ACERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "classification": "verified program record",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "evidence": [
+                  "Certificate",
+                  "Part-time",
+                  "Blended",
+                  "Burnaby Campus / Online"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "5430CERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+                "study_mode": "Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_Gf2qRlvzej4rVqnzufPF6Eg3",
+                "output": "{\"comparison\": \"applicant_requirement\", \"program_count\": 2, \"programs\": [{\"program_id\": \"5430ACERT\", \"program_name\": \"Civil Technology\", \"credential\": \"Associate Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Burnaby Campus / Online\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/\", \"classification\": \"verified program record\", \"evidence\": [\"Associate Certificate\", \"Part-time\", \"Blended\", \"Burnaby Campus / Online\"], \"human_confirmation_required\": false}, {\"program_id\": \"5430CERT\", \"program_name\": \"Civil Technology\", \"credential\": \"Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Burnaby Campus / Online\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/\", \"classification\": \"verified program record\", \"evidence\": [\"Certificate\", \"Part-time\", \"Blended\", \"Burnaby Campus / Online\"], \"human_confirmation_required\": false}], \"matching_programs\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0b534ede0b599344006aa10514619c87d08a06d384ed8930a6"
+          },
+          "response": {
+            "id": "resp_0b534ede0b599344006aa10516f5c087d0a907572a0ba92b96",
+            "created_at": 1788937495.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0b534ede0b599344006aa1051895c487d0b01aee770da178af",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQUcyNr1OZfN13HX7aiuoIxNe_lM8bS2AIzwUl1Q-B4iSZgfZmaOKS6b5qVxWF_3sv0EdqovazOvovH5WmEjc1ZAJITD3luRrnTcLcsRTuFimHryoaV_Ssl84CXEmibmqA18yxjWR-zwXnoA4BR9XpfZsIY0rIRYuFlyb2X0Yhm1yk5_2L99R-bEwKqW7y4A0QcnT3Cb5Vrt23-L7MMKPUJBfou_p6MRbL-ko-2nn9Ja7u-yjiuG2nr39mFbx9CjaHcQ7wIz6MM7JlHereLSqf74iJxVj2d5YxbJQm2rmOh6bkLHMYEWeZ8xIclrn4R9ZZNxAN-qk7UiqIuFmoYy8qEIMNAp4pgrJTGMkxboaE2smYyL9WmAN06dEaH2j-SitMmeYOSFqIAhSDyNRFnvXx9iFbgVFIU5ezWTpdNZm8Oy5l0Z5bPyr7vWjjxEgdE8yb3JZzX4FUrW3vXWTc5vf_19DWUNYAhsOoIBEQHsWCOxTYN_-B4rOxydyZj5l91jcQCZ9zuxARu09uDHRu8xctTSNpd8HS9miAAOvheszl0p4TJudJTBhnfxXkdxH-v-C6Fx9Y1UcO1ClwjwytSElDl5ddd69WoWkNy719y8LTXqBcORiR3HuTUbszZlwmzf3oHkJceF-50Z_1D6uyDCS14N3VruMb-mQHnHT9xRmgQcpL6FM3JABulpD60K6UUGRLn3i6WD71gZWX3eY7ijd3f_fsve9760SU7Josdx7e7IkAgZLQWItT5dAltLZO9QLC5I1If1pdPu2NZKqssqxsDS-myivTs6pcMWAJcIRTN1PUuhYN4v72miCxteZfAlpOn_x388sFs0EApbohq8CUdovANcEHRABaqDpzhRZfScwau2nXcGN20QjYZ2e5-chvzIP-O8qmLun2E6AWVoG632x8p55CcRN-rLhgutOxxjuKWIVDTNpQls44MhQGPlNAsWBWetFBsV-OxWVB5jccBPKjxko7fAuOFHh25Q6iWTbLTpHNjshlIltXzWOSwSkHVknNxl-8PKAWhTpb6tNhKxi7B28riW7LUtKOxUetYumUW8WRXoMZhGFxOjI3Lg8FAt2zs3MB5z1mLWXvdkU1K7m_eLRtqPBjLyj_Q061Lt3RryEb_Y_tn0bveQYr2UvYR4UG0DOyyrOKhd0Gwx1fKxJO8W1WnDB0Hd7GR9HnscUTttpWfsxOx-Y8j5_egjIuG4nYQlyRIB0uVBnTrKlD6VOiWsspCK1tuhZWjmHcF5JYpxRNjwUxaPD8RdMgQgovpNOechttI3Xw-gRmsew5S8aPjiO_MT0CFSDg2eyi7gAhoNrTlcMhe4b_Dw0ZYKrntASqHHGrhqTEX-V1BGasgMfdTNg_jXUN5XlVRSLqfOLpSBX1r3Ltg3MA4Hptb2YXR4pd5VgXK7bCDqxSJy9B9YqpohBqwRAzfVsVa2RiaK0yEIPCilGqq8GzlC1ELoXT5_PnfDFN5Usro3sfqdnZuDH1yuP8ER0JN6tPcT8WFv7hplVsZMuwwOmggAQpNiLM5zC7oQdbRat3obeeaTChgjUJwUrW0KhchdgIo0zGOLdDnF2nzTpjjCA67kgRTXYZWJGwX9xsk3wKEN436NzRL14OZHZDbmIKkc-_byX2BKDmXYxcCNTzbodYEdXyvZgk2uNWr4uke72Tvs39d9CKOIRQPVBIykZ4DeKmIZr9FVjRk5-Prrb9biQF-OEDwaB82xVOAKdBzj51jEkKgo3DPMGVIYz0bL6GqCZaN4pIvRrwvVwoGdLE2wDvatCdViP109",
+                "status": null
+              },
+              {
+                "id": "rs_0b534ede0b599344006aa1051a1f2c87d0933f742822b62ed7",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQUcpeXzOz0uP1B2O12a0ZPvK3s_I-c-gj9FY_Ff4c-B_sgQUjKWbrV6lhssT5YD3Dc0yoMcfVGQrHGq36NAzYKOk2yOYcEMsS0G0LmMP8HOTQI5KlisRAtm56SQC0h7tzL338wgf4RqLluSmlUUIVqVS3Gc2aLJR5yJtgnWuxLzkS3RVlRUmPeTljIfQdA0iYSOBF0OMI_7osx2n3IL96O5uWKKSii8BhbaFG_Kuhn-iNHGhOvlzqubIni9F2fMHt9IxesyDc8_fZtEDDtbnYrBtHPU-WvWNvMUyFYI3Iz9EFd5TjBoC5PpMO2zpn83aFmp_J04HOr0IX-GXkMYrswT4FaSxG-IxmOA-snofXRaY_XIwzX3ggc11cUiT2IOx5n7uho17ALtaAcmxPsZKDsi0fsWwouyy19jveLJ6-Xr-Ugv0iliAKKxgR93yCg8i4ZIQMhbjJDPOu33SSM5DhRHBxFkm157FQfVUBbL8Y6s1EVne0CeuK-dKiHE0ph7IOly0zwx4bxy8haigsd8oiFfL6CpWuaMNh8yNLQSjjDhY1DuK14d_GQ9hiXvQmG74ysdoOIzvXisPFyAnyuuqf9bsuxA5OuLQugFIRl2Pgn89jxUOC54liaXfEyRMJYwxu5kepHVh8k7BLp6aIcn_K3qultJqmU1dCHX_OGQoVCI1cSHc7GbQ4nNLf37ClodEc_7C2aEUuHRbZurnlOD1D11AENJpgbDXNny_6E72TfhT1RI3JNPSjcWd02Kq2n_ni0Ft5H74NJbg-NPDWeRe27VkeehaEwr8ncP037QHn7ufkIaQJ-ZTEQ9veDQzVQHhk8jAqhCtd1e5Wyg-w4quu4AA7tRN927wyaLKgjQAmk8D3_163C7DLtsQFWn52FLGiL6eogZU7RL4KJB-3TpSOm_oihQ7BY05hqq0SS4CayIGPfTVfWHJJLhMqlb6NhPXzw_Bwy3QBUtGt4raDB_uQHb0Cxb_3O0cyM4JZDVJwQxwsEU6HC5KfG7v5JRITGDhdUCbjah9tcWDqkHKBD6X7nYsuurV7rWy5O5X9IruHCyeL_h72Y2uYHFXvvzgsUH_tv8SMiKmcdeXu9aZGeHjx8fP7XCOEWQ1CamiBRB5-K5RERMX-w7Nbs6XMGVF-9p6DgNKWy7ty0ccVfdiRBLtBGIvKrX4E_JrMZY4vghqiDzwRgPsY-jQr7XCemdyE-HuV4L",
+                "status": null
+              },
+              {
+                "id": "msg_0b534ede0b599344006aa1051a503087d0b6993d2913ea4688",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937500.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0b534ede0b599344006aa10514619c87d08a06d384ed8930a6",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2060,
+              "input_tokens_details": {
+                "cache_write_tokens": 508,
+                "cached_tokens": 1549
+              },
+              "output_tokens": 254,
+              "output_tokens_details": {
+                "reasoning_tokens": 92
+              },
+              "total_tokens": 2314
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)",
+          "final_answer": "The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)"
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Does it accept international students?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Compare Civil Technology certificate and associate certificate."
+          },
+          {
+            "role": "assistant",
+            "content": "The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare civil technology certificate and associate certificate programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "5430ACERT",
+            "5430CERT"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Does it accept international students?",
+        "expected": "Two live candidates with no unique selection: clarify the referent or answer both with labels.",
+        "scope": "international",
+        "clarification": "allowed",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "International-student eligibility is **not specified for either program**, so acceptance requires confirmation with BCIT:\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)\n\nThe records do not identify any international-specific availability or restrictions for either credential.\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+        "tools_used": [
+          "compare_programs"
+        ],
+        "verification": {
+          "count": 2,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "compare civil technology certificate and associate certificate programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "5430ACERT",
+            "5430CERT"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "compare civil technology certificate and associate certificate programs:international"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 8.406,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "5430ACERT",
+              "5430CERT"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "5430ACERT",
+                "5430CERT"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "compare civil technology certificate and associate certificate programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare civil technology certificate and associate certificate programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Does it accept international students?\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"compare civil technology certificate and associate certificate programs\",\"comparison_program_ids\":[\"5430ACERT\",\"5430CERT\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nRecent conversation:\nUser: Compare Civil Technology certificate and associate certificate.\nAssistant: The matching Civil Technology programs are:\n\n| Program | Credential | Study mode | Delivery | Campus |\n|---|---|---|---|---|\n| Civil Technology | Associate Certificate | Part-time | Blended | Burnaby Campus / Online |\n| Civil Technology | Certificate | Part-time | Blended | Burnaby Campus / Online |\n\nThe practical difference is the **credential awarded**: Associate Certificate versus Certificate. The verified study mode, delivery method, and campus options are otherwise the same.\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: compare civil technology certificate and associate certificate programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_04d750710d56f9ae006aa1051d5f2487d09812a01cd99d9984",
+            "created_at": 1788937501.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"Compare international student acceptance, availability, restrictions, and verification requirements for every program in the Civil Technology certificate and associate certificate family, specifically program codes 5430ACERT and 5430CERT. Return every family member, including unknown results.\"}",
+                "call_id": "call_WeJo8Zu5EGR7npuUM608g8XH",
+                "name": "compare_programs",
+                "type": "function_call",
+                "id": "fc_04d750710d56f9ae006aa1051e3cb087d0a09fb91653cee084",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937503.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1982,
+              "input_tokens_details": {
+                "cache_write_tokens": 352,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 66,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2048
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "compare_programs",
+          "arguments": {
+            "query": "Compare international student acceptance, availability, restrictions, and verification requirements for every program in the Civil Technology certificate and associate certificate family, specifically program codes 5430ACERT and 5430CERT. Return every family member, including unknown results."
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "5430ACERT",
+              "5430CERT"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Does it accept international students?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "compare civil technology certificate and associate certificate programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "comparison": "international_eligibility",
+            "matching_programs": [],
+            "program_count": 2,
+            "programs": [
+              {
+                "campus": "Burnaby Campus / Online",
+                "classification": "unknown",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "evidence": [],
+                "human_confirmation_required": true,
+                "program_id": "5430ACERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "classification": "unknown",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "evidence": [],
+                "human_confirmation_required": true,
+                "program_id": "5430CERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+                "study_mode": "Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_WeJo8Zu5EGR7npuUM608g8XH",
+                "output": "{\"comparison\": \"international_eligibility\", \"program_count\": 2, \"programs\": [{\"program_id\": \"5430ACERT\", \"program_name\": \"Civil Technology\", \"credential\": \"Associate Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Burnaby Campus / Online\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/\", \"classification\": \"unknown\", \"evidence\": [], \"human_confirmation_required\": true}, {\"program_id\": \"5430CERT\", \"program_name\": \"Civil Technology\", \"credential\": \"Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Burnaby Campus / Online\", \"delivery_method\": \"Blended\", \"source_url\": \"https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/\", \"classification\": \"unknown\", \"evidence\": [], \"human_confirmation_required\": true}], \"matching_programs\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_04d750710d56f9ae006aa1051d5f2487d09812a01cd99d9984"
+          },
+          "response": {
+            "id": "resp_04d750710d56f9ae006aa105201dac87d08f8dc43c711126ef",
+            "created_at": 1788937504.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_04d750710d56f9ae006aa105218f6087d080991c89e1402a3b",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQUkXL9p9YH7D6otzrgfMwb9yW99_9Ew94QsPoaSg6kGDyImxL4T4-baacabfzH6WHvP7wK5Fp2a_i0LDG0LcuoPQvdEmswdM6BR_4hQ41dY7LdXylxMJSbgrZA1J1NHrxP0s5MQ9z_Rx6yENFKXjhNHLZfoj3gP7aHeI1393pA39QWrrHSYUMDi8PW4ReKv7EhAw69kdbrUdW_UX0lHZogoAtAEolvJ46bp0KhiU63G2ti4v1_J1VWqbJewsjH3KJi-oHVK4bTmRB2EfcmkkDX3PXYCSUqccxtmdzr5MJXs0F-Pt7ZLVA8EUa36GBmxdcZxkcokhhuL4zERM_yEgNOBgw8QtOmzAoFa2N1W-GRthtHuyCzDEzlAgF92c7a5Vf2Wt3E2YJS4ABtw_-iFjnvgS98Lh3ZeJ0ZLOPJWFOTHYoOhdgUvA9j1E5WBNhwXBCCEMzgyccEteipyDCzVzTlo6ol25WtQQciJik-rBN_0bWbmNqM3TKsj-hJecK-Kshg5H3RZzZ1Try5YlzrlwlBz6ZvT0S7h5qTaQmS8hHGp0OiHUD3bQ8M69F4i0MehmYDNldttH7_4I-Px8OhUIDW4sU76ykc86VunG99f3oYVCqjcoT6SFhORo8yxZJLcLR6VQZYA5baVODKix2HI2GnTIFQmtwaTclL0S43ODteHNzoQtpPotN7nNIc1WQiluut--Ypx8oqvqcJEHjW_70aeMYABhwMpp7wczivaMckW5giACm8IkkmGhvHaoVgPleB6EkcdiKubQD34IHtdYua17rKMf6EgIbOoiwfTm4SbLIIwKjbcdNF42utvZn1w6i2f7OEt6AR6M7zEpP-Zqu7SqpSojV_6rfcjvVFJxS7w3ThZQZEx-FVfYA0b7j25t14a7-BSurKpQtb2byCxPEVnJIf1OpXmOXjmK289X3902mKwWIT_LIrI79DFIkwPrhvqRBX5c4vessWUE5ejx4ch96RI18LnVFGvu9S0OHb8NFShr8tNsx4u_TumSWqbz4onhj4pD4jXdsh5OeNZp68PLAtFwGuoxcp6jVS2VSm1YmyHHbEN8oxYa4xqya4RfQCLso24Rl1em4hkq1L95ymFDNCMbcK1NvFlpDXmDP_GXwsb1PqPMxUhNXdcPuZB0Bq9rwe6wWvdExGySUw2TR0KQQlGSWJRrA8c7wHH6vrNOYbLg7N10o9SI19vzKVU4GvUIhO6U5SorbYiNTjW0POaQkwC1NLlKMhmzJR5r8SKJLECrVvL5HDmXAIMToMIRVrCSw492uh28mM-9UV1LicMspexYB9CykZXUXy-qOq1e7rRjSX-4B44xlwSqtK-OLP9uosOx7i7n6XMFQHwOTbzoz_bJ951ZxKS5C6qp_X3ultUOsVftd9hVK-ha1kbYw4JQjruIxjb8xOleJom4LjpIWBWlptQYEIjpoIonVJKAXVImuAEsED6Dz3zS882IAjFgb7fHWt6Epx2Mm_R8-oO_c54vPObAQ6_zX4-mn8YjSUFRksnOpXSElKP9RgdWeHva02TMbNTs2oUyqV_K38fXlDgSonZ9SOfig1nb0Xz81xTwzk3-8QLX6v0eRQ6PCa1oIxpV5TmEnJjB83SYmZxUQsb1A5jTl8o5jDBPU8XVhS-jeC34RoSulzoWGFstGRcO4HCtEaofTGGAHO_Sbq9o21o-6PeixTKmHfQDSQhL02GBSLvVcZXWBi-delEvNddVPNVeVIKsyRZ4Znyzx9zfxj2-Djde8vlIsQ7MTBHi30kyMrOaSj0HhpyGx_tTJjVcu9yTOpjo9Aya60QZ8EJOtqvlX2kZXz_fo2F725Eypc=",
+                "status": null
+              },
+              {
+                "id": "msg_04d750710d56f9ae006aa105236dcc87d081d398d86c0af462",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "International-student eligibility is **not specified for either program**, so acceptance requires confirmation with BCIT:\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)\n\nThe records do not identify any international-specific availability or restrictions for either credential.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937508.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_04d750710d56f9ae006aa1051d5f2487d09812a01cd99d9984",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2202,
+              "input_tokens_details": {
+                "cache_write_tokens": 650,
+                "cached_tokens": 1549
+              },
+              "output_tokens": 188,
+              "output_tokens_details": {
+                "reasoning_tokens": 88
+              },
+              "total_tokens": 2390
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "International-student eligibility is **not specified for either program**, so acceptance requires confirmation with BCIT:\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)\n\nThe records do not identify any international-specific availability or restrictions for either credential.",
+          "final_answer": "International-student eligibility is **not specified for either program**, so acceptance requires confirmation with BCIT:\n\n- [Civil Technology Associate Certificate](https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/)\n- [Civil Technology Certificate](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)\n\nThe records do not identify any international-specific availability or restrictions for either credential.\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "scenario_id": "FLOW-14",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "7b79b32e264fcb21b008ed257b5b4aae3d5d462892393e82049b2557db8efbb9",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "2889f25d258ebc56ef1c33358fe15406c8ff6dfea8eaea7eabfada211572cd69",
+  "packet_sha256": "d70f5a0c1ea3a5609e4bdc47009c0d0531ea9d9b41bb1317fa22174e835bb7e2",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_06f5982a30d56905006aa10a4e296087d08d5f2c919948ce1f",
+  "usage": {
+    "input_tokens": 31643,
+    "input_tokens_details": {
+      "cache_write_tokens": 30289,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2152,
+    "output_tokens_details": {
+      "reasoning_tokens": 1215
+    },
+    "total_tokens": 33795
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response correctly identifies program 8800BTECH and accurately summarizes its credential, campus, delivery modes, curriculum examples, electives, Liberal Studies, and final-project component. Context retention is not applicable on the first turn."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 0,
+          "context_retention": 1,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 4,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver retained 8800BTECH only in prior_program_ids while leaving program_id null. The model then repeatedly searched for the already-known program, called get_program_progression_requirements with empty arguments, ignored a search result containing 8800BTECH, and exhausted the tool-round limit. The final response therefore failed to state that 1.5 years is 0.5 years below the two-year minimum."
+        },
+        "notes": "There are no checkable academic claims in the generic failure response, so factual correctness is not assessable. The refusal avoids inventing an eligibility result and is honest about lookup failure, but the question was already sufficiently specific and did not need narrowing. The generic suggestion to contact an advisor does not compensate for the missing answer."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The response correctly discusses CMGT 8700 in context, but the resulting conversation state has program_id null and fails the required 8800BTECH structural assertion, even though prior_program_ids still contains 8800BTECH."
+        },
+        "notes": "The prose is academically correct: two years exactly meets the related-work-experience minimum, and it appropriately notes the remaining coursework, industry-topic, and industry-sponsor requirements rather than guaranteeing full eligibility. The defect is confined to unresolved program state and does not materially harm this answer."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "entity_resolution",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The final answer correctly addresses the Construction Management graduation question, but conversation_state.program_id remains null and the structural assertion requiring 8800BTECH fails. The deterministic resolution also leaves the scope at course rather than restoring the current program."
+        },
+        "notes": "The answer correctly separates satisfying the two-year CMGT 8700 work-experience requirement from overall graduation eligibility and avoids claiming that the student can graduate based on that one condition. Despite the incorrect hidden program state and course-oriented intent, the final prose retains the relevant context and answers the graduation scope directly."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

@@ -1,0 +1,1812 @@
+{
+  "scenario_id": "CAT-10-A",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+      "advisor": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+      "expectation": {
+        "question": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Where is it taught?",
+      "advisor": "Campus: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6.",
+      "expectation": {
+        "question": "Where is it taught?",
+        "expected": "Give the stored location for this program; don't confuse delivery mode or the institution's headquarters.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "And the official page for that one?",
+      "advisor": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+      "expectation": {
+        "question": "And the official page for that one?",
+        "expected": "Provide this program's exact stored official source URL.",
+        "scope": "source",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "contains_any",
+            "value": [
+              "https://www\\.bcit\\.ca/"
+            ],
+            "dimension": "evidence_discipline",
+            "root_cause": "unknown_human_confirmation"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "A700GRCERT",
+        "program_name": "Business Administration",
+        "credential": "Graduate Certificate",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "A700GRCERT",
+        "program_name": "Business Administration",
+        "program_overview": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master’s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master’s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master’s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements",
+        "area_id": "BUS",
+        "school": "School of Business + Media",
+        "credential": "Graduate Certificate",
+        "program_level": "Graduate Certificate",
+        "study_mode": "Full-time",
+        "accepts_international_students": true,
+        "campus": "Downtown Campus, Vancouver",
+        "delivery_method": "Blended (on campus and online)",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Program length One academic year (nine months), full-time. Grading Students will be graded on a percentage scale. Courses must be passed with a 60% mark. Program delivery Blended: This program is delivered partly on campus and partly online. This program will be delivered in a hybrid/blended format with a combination of synchronous in-class and asynchronous online delivery. All courses will take place in classrooms at the BCIT Downtown Campus. Program location Downtown Campus 555 Seymour Street Vancouver, BC Online Learning Continue your education BCIT is currently working towards academic and transfer credit agreements with other educational institutions so that students can complete an MBA. When these are complete, a description of the academic credits available at each institution will be posted. It is expected that the first of these will be completed shortly. Go back Courses Next up Graduating & Jobs"
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "A700GRCERT",
+        "duration_years": 0.75,
+        "terms_per_year": 2,
+        "total_credits": 19.0,
+        "intake_months": [
+          "September"
+        ],
+        "international_eligibility": "Available; study permit required; not PGWP eligible (CIP 52.0201)",
+        "authoritative_raw": "Program length One academic year (nine months), full-time. Grading Students will be graded on a percentage scale. Courses must be passed with a 60% mark. Program delivery Blended: This program is delivered partly on campus and partly online. This program will be delivered in a hybrid/blended format with a combination of synchronous in-class and asynchronous online delivery. All courses will take place in classrooms at the BCIT Downtown Campus. Program location Downtown Campus 555 Seymour Street Vancouver, BC Online Learning Continue your education BCIT is currently working towards academic and transfer credit agreements with other educational institutions so that students can complete an MBA. When these are complete, a description of the academic credits available at each institution will be posted. It is expected that the first of these will be completed shortly. Go back Courses Next up Graduating & Jobs",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "A700GRCERT-SEP",
+        "program_id": "A700GRCERT",
+        "study_mode": "Full-time",
+        "campus": "Downtown Campus, Vancouver",
+        "delivery_method": "Blended (on campus and online)",
+        "application_status": "September 2026 closed; September 2027 opens 2026-10-01",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Annual September intake"
+      }
+    ],
+    "program_campuses": [
+      {
+        "program_id": "A700GRCERT",
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "relationship_type": "offered",
+        "notes": "Downtown Campus, Vancouver",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+      }
+    ],
+    "program_courses": [
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "ECON9100",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 1 (15 weeks)"
+      },
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "FMGT9152",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 1 (15 weeks)"
+      },
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "FMGT9260",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 2 (20 weeks)"
+      },
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "GLBL9200",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 2 (20 weeks)"
+      },
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "MKTG9120",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 1 (15 weeks)"
+      },
+      {
+        "program_id": "A700GRCERT",
+        "course_id": "OPMT9170",
+        "course_type": "REQUIRED",
+        "required": true,
+        "notes": "Term 2 (20 weeks)"
+      }
+    ],
+    "progression_requirements": [
+      {
+        "progression_requirement_id": 11,
+        "program_id": "A700GRCERT",
+        "from_level": 1,
+        "to_level": 2,
+        "requirement_type": "PROGRAM_COURSE_GRADE",
+        "requirement_value": "60",
+        "description": "Every course must be passed with a 60% mark.",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Executable threshold; cohort sequencing remains human-confirmed."
+      }
+    ],
+    "curriculum_components": [
+      {
+        "component_id": 272,
+        "program_id": "A700GRCERT",
+        "component_name": "Term 1 (15 weeks)",
+        "component_order": 1,
+        "notes": "Term 1 (15 weeks)"
+      },
+      {
+        "component_id": 273,
+        "program_id": "A700GRCERT",
+        "component_name": "Term 2 (20 weeks)",
+        "component_order": 2,
+        "notes": "Term 2 (20 weeks) Total Credits: 19.0"
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 303,
+        "program_id": "A700GRCERT",
+        "rule_scope": "ADMISSION",
+        "rule_name": "RECOGNIZED_BACHELOR",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "A recognized bachelor’s degree in any field."
+      },
+      {
+        "rule_set_id": 311,
+        "program_id": "A700GRCERT",
+        "rule_scope": "COMPLETION",
+        "rule_name": "ALL_SIX_COURSES_19_CREDITS",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher."
+      },
+      {
+        "rule_set_id": 309,
+        "program_id": "A700GRCERT",
+        "rule_scope": "PROGRESSION",
+        "rule_name": "COURSE_PASS",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Every course must be passed with a 60% mark."
+      },
+      {
+        "rule_set_id": 305,
+        "program_id": "A700GRCERT",
+        "rule_scope": "ADMISSION",
+        "rule_name": "FIRST_QUALIFIED",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "First-qualified acceptance while space remains."
+      },
+      {
+        "rule_set_id": 310,
+        "program_id": "A700GRCERT",
+        "rule_scope": "PROGRESSION",
+        "rule_name": "COHORT_SEQUENCE",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Full-time cohort sequence: Term 1 precedes Term 2."
+      },
+      {
+        "rule_set_id": 304,
+        "program_id": "A700GRCERT",
+        "rule_scope": "ADMISSION",
+        "rule_name": "GRADUATE_ENGLISH",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Graduate Studies English proficiency: English Studies 12 (67%) or equivalent."
+      },
+      {
+        "rule_set_id": 306,
+        "program_id": "A700GRCERT",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "INTERNATIONAL_ELIGIBLE",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. Students enrolled in this program must complete the mandatory work component to qualify for graduation. Post-graduation Work Permit (PGWP) eligibility : This program does not meet the eligible field of study requirement (CIP) and is therefore not eligible for students to apply for a PGWP. ( CIPC : 52.0201)"
+      },
+      {
+        "rule_set_id": 312,
+        "program_id": "A700GRCERT",
+        "rule_scope": "PATHWAY",
+        "rule_name": "MBA_ADVANCED_PLACEMENT",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "MBA pathways and advanced placement are external/in-development; partner-specific grades and decisions apply."
+      },
+      {
+        "rule_set_id": 307,
+        "program_id": "A700GRCERT",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "CREDENTIAL_EVALUATION",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "Specified international credentials require course-by-course evaluation and GPA calculations."
+      },
+      {
+        "rule_set_id": 308,
+        "program_id": "A700GRCERT",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "PGWP_NOT_ELIGIBLE",
+        "study_mode": "Full-time",
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "notes": "The program is not PGWP eligible under the stated field-of-study requirement (CIP 52.0201)."
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 176,
+        "rule_set_id": 311,
+        "operator": "AND",
+        "label": "ALL_SIX_COURSES_19_CREDITS",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 175,
+        "rule_set_id": 310,
+        "operator": "AND",
+        "label": "COHORT_SEQUENCE",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 174,
+        "rule_set_id": 309,
+        "operator": "AND",
+        "label": "COURSE_PASS",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 172,
+        "rule_set_id": 307,
+        "operator": "AND",
+        "label": "CREDENTIAL_EVALUATION",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 170,
+        "rule_set_id": 305,
+        "operator": "AND",
+        "label": "FIRST_QUALIFIED",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 169,
+        "rule_set_id": 304,
+        "operator": "AND",
+        "label": "GRADUATE_ENGLISH",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 171,
+        "rule_set_id": 306,
+        "operator": "AND",
+        "label": "INTERNATIONAL_ELIGIBLE",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 177,
+        "rule_set_id": 312,
+        "operator": "AND",
+        "label": "MBA_ADVANCED_PLACEMENT",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 173,
+        "rule_set_id": 308,
+        "operator": "AND",
+        "label": "PGWP_NOT_ELIGIBLE",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 168,
+        "rule_set_id": 303,
+        "operator": "AND",
+        "label": "RECOGNIZED_BACHELOR",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 445,
+        "rule_group_id": 168,
+        "condition_type": "PRIOR_DEGREE",
+        "parameters": {
+          "semantic": "all",
+          "executable": true,
+          "verification": "self_reported"
+        },
+        "description": "A recognized bachelor’s degree in any field.",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 446,
+        "rule_group_id": 169,
+        "condition_type": "ENGLISH_GRADE",
+        "subject_id": "ENGLISH_STUDIES_12",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true,
+          "verification": "self_reported"
+        },
+        "description": "Graduate Studies English proficiency: English Studies 12 (67%) or equivalent.",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 447,
+        "rule_group_id": 170,
+        "condition_type": "FIRST_QUALIFIED",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "First-qualified acceptance while space remains.",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 448,
+        "rule_group_id": 171,
+        "condition_type": "INTERNATIONAL_ELIGIBLE",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. Students enrolled in this program must complete the mandatory work component to qualify for graduation. Post-graduation Work Permit (PGWP) eligibility : This program does not meet the eligible field of study requirement (CIP) and is therefore not eligible for students to apply for a PGWP. ( CIPC : 52.0201)",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 449,
+        "rule_group_id": 172,
+        "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Specified international credentials require course-by-course evaluation and GPA calculations.",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 450,
+        "rule_group_id": 173,
+        "condition_type": "PGWP_NOT_ELIGIBLE",
+        "parameters": {
+          "semantic": "raw_policy",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "The program is not PGWP eligible under the stated field-of-study requirement (CIP 52.0201).",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 451,
+        "rule_group_id": 174,
+        "condition_type": "PROGRAM_COURSE_GRADE",
+        "minimum_value": 60,
+        "unit": "PERCENT",
+        "parameters": {
+          "semantic": "threshold",
+          "executable": true,
+          "verification": "self_reported"
+        },
+        "description": "Every course must be passed with a 60% mark.",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 452,
+        "rule_group_id": 175,
+        "condition_type": "COHORT_SEQUENCE",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Full-time cohort sequence: Term 1 precedes Term 2.",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 453,
+        "rule_group_id": 176,
+        "condition_type": "ALL_SIX_COURSES_19_CREDITS",
+        "parameters": {
+          "semantic": "all",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 454,
+        "rule_group_id": 177,
+        "condition_type": "MBA_ADVANCED_PLACEMENT",
+        "parameters": {
+          "semantic": "raw_policy",
+          "executable": false,
+          "verification": "human_confirmation"
+        },
+        "description": "MBA pathways and advanced placement are external/in-development; partner-specific grades and decisions apply.",
+        "sort_order": 1
+      }
+    ],
+    "curriculum_component_courses": [
+      {
+        "component_id": 272,
+        "course_id": "ECON9100",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 272,
+        "course_id": "FMGT9152",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 272,
+        "course_id": "MKTG9120",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 273,
+        "course_id": "FMGT9260",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 273,
+        "course_id": "GLBL9200",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 273,
+        "course_id": "OPMT9170",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      }
+    ],
+    "course_identity": [
+      {
+        "course_id": "ECON9100",
+        "course_name": "Managerial Economics",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "ECON 9100"
+      },
+      {
+        "course_id": "FMGT9152",
+        "course_name": "Accounting for Managers",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "FMGT 9152"
+      },
+      {
+        "course_id": "FMGT9260",
+        "course_name": "Business Finance",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "FMGT 9260"
+      },
+      {
+        "course_id": "GLBL9200",
+        "course_name": "Business Capstone Project",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "GLBL 9200"
+      },
+      {
+        "course_id": "MKTG9120",
+        "course_name": "Marketing Management",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "MKTG 9120"
+      },
+      {
+        "course_id": "OPMT9170",
+        "course_name": "Systems and Operations Management",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "display_course_code": "OPMT 9170"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "program_id": "A700GRCERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"A700GRCERT\"}",
+              "call_id": "call_146Xw2h9EnqDVHMkE12tlC8U",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_0e5a18c67c7203e0006aa10144a3f887d094a3fb2b9b610e0d",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "A700GRCERT"
+          },
+          "context": {
+            "academic_scope": "graduation",
+            "current_question": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "A700GRCERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 453,
+                            "condition_type": "ALL_SIX_COURSES_19_CREDITS",
+                            "description": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "all",
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "ALL_SIX_COURSES_19_CREDITS",
+                        "operator": "AND",
+                        "rule_group_id": 176,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "ALL_SIX_COURSES_19_CREDITS",
+                    "notes": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                    "rule_set_id": 311,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Every course must be passed with a 60% mark.",
+                    "from_level": 1,
+                    "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                    "to_level": 2,
+                    "type": "PROGRAM_COURSE_GRADE",
+                    "value": "60"
+                  }
+                ]
+              },
+              "campus": "Downtown Campus, Vancouver",
+              "clinical_and_practice_requirements": {
+                "program_id": "A700GRCERT"
+              },
+              "courses": [
+                {
+                  "course_id": "ECON9100",
+                  "course_name": "Managerial Economics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "FMGT9152",
+                  "course_name": "Accounting for Managers",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "FMGT9260",
+                  "course_name": "Business Finance",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "GLBL9200",
+                  "course_name": "Business Capstone Project",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "MKTG9120",
+                  "course_name": "Marketing Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "OPMT9170",
+                  "course_name": "Systems and Operations Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                }
+              ],
+              "credential": "Graduate Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 272,
+                    "component_name": "Term 1 (15 weeks)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "ECON9100",
+                        "course_name": "Managerial Economics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "ECON 9100",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT9152",
+                        "course_name": "Accounting for Managers",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9152",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MKTG9120",
+                        "course_name": "Marketing Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MKTG 9120",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 1 (15 weeks)"
+                  },
+                  {
+                    "component_id": 273,
+                    "component_name": "Term 2 (20 weeks)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "FMGT9260",
+                        "course_name": "Business Finance",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9260",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "GLBL9200",
+                        "course_name": "Business Capstone Project",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "GLBL 9200",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "OPMT9170",
+                        "course_name": "Systems and Operations Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "OPMT 9170",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 2 (20 weeks) Total Credits: 19.0"
+                  }
+                ],
+                "program_id": "A700GRCERT"
+              },
+              "delivery_method": "Blended (on campus and online)",
+              "program_id": "A700GRCERT",
+              "program_name": "Business Administration",
+              "program_overview": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master’s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master’s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master’s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements",
+              "school": "School of Business + Media",
+              "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_0e5a18c67c7203e0006aa1014624f087d08511670ac25711e4",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQFKmosyLJRX9NgAvLe0cjfbCvL-hUbX4Gj3kCa8LAvi4IK8T3NgEn-0c9wFkQTg8ZDtJBF0bCrEruUILHCF6NLOFZ7YanhB8k1L6NnwPX8jEdkat1BcG1IiaGbDtfONWGX7GMOoxZLGV1sKqW6vHltbryWkKLSR4xmqRjIfahjhLXitDbAovU4_sv1EKTHLN44xoClM2iCxVUrzof0TAnNzBGTwiYpXm9mxG_o5BRuDmrecHryG2Gm4CsPTU29clb0pFUH8px6fk2yjYhqkZl2KCzGhTs_bs1A2zTz0FH7NAFbvarPeC8iqXsFGUtEQKQXvsjjLAcxCagOAqZ15Qgh4iX_0iFMjAz51jtNHIxKtuUH3S7dkHHhMkOJIY4G0Z767HiRxwehS5M8qpVZsNSEUCjLwWAWeLVWNhpTeu1XoewgQvOq5RrJMqRSxzXPJNzFBfqIjEZH1_VC7KTpoJKt-EB9H-JPCLDldIGXCFDSpulxoZjGbY6YJ5ILvrftcDn7UsEa4oy6kGfB1p7HLUjV4OEs5M0jbVZYc-8E1gkaf12pjyZidh5RRzBc0eo1W4vPq8kfMI34lhTsI-zvLEMSC3Sn4HMk5sTqoTLRzvPPJHcaPpYEMP-l4ONB9iDSZEJAChmyJGQ-scFkAULV3VYHWxvmOimUN5ilGxLc3tduSLoYdLuoxa19pItodPlqrroINuMgXBE1_LyhUjOtRvWD63f3vt6_J6C9h7vx2lUed0BRgi-eogsgvyhnjZ3752P9-8PJiZlKPxZ96wlFKNBkxodF1K8_2FYxgrQoQ6e8ov1ahOfq3KfYXOuVHc0QqG68dIQxg-IxOsByq1RXfOQs--JcqzYAYj0QvRZYYSwyZD6J555iiM6fP8F7ROBD79ivKLl1rpdMTCxevwNqMlx3hf0sl7tcP7oaW2HpDyV-TfqA0EOe-ci6loXSsQYF8DnW-5GDJzLF86vgSQjSjIl6iBiOXNda19kjZ68Y80d8oeKjWOfzYrcLqUOQCOAqUAljvVI8bcAqT-lFSvGuRLIOjsmeE8Rd-OpfZwja4p08mKjOwR3MLf8YR9x6s1phR4wm4qziMUc8i0hcc7H8hfAP62Nbt238q1-pZR_YMjUuBOdXfNHgAxZ72zKuc1K64otLDXjNaz2_-Sd-VGmizntmw0vtrd_aDehtvCw1lmUvgrChIxDRscw7t2XkarbaY1vBYDktIF468hiOrzC_f6iGH9NK7sQDdqE-TBC7u0DsaNhqomMQXSI_3re_rViue-8DauClD81HSiWEQoT65rwJvZtun_TrNQ-Iff2kk73uZybU6ZL7Hq67WS8DYHD5kNP-pyTmsNmJi796DLinjxklVeAIgfRcbttK3Anc71Cl9Ug4-MzZqA0IvcARUjBHUBX8g-i1-EDwjV1IMzG2G0DhRIA-jwFsEEB1OAjY-rRxxXDH1cs3HAWTjAbhcaqGc-WXmxJAhbSgOIpV15TCYIy27hh10cbX_0YRaqxCjBqVvUH3lYwiBZgwc3ye3RghnzjSMJ481x_nEwg9OQgzcqH_p2JAumNJ64EGrHW9KsYf4c9uE1OXTO-hvOH_j7QUof-PwS1rZfR2VLXK5TBiqNGVYOCmH2gRJH8-5NmKWk_OQzOESUdoir615s14ijSO5fe83i0U65TFmj68kiLbiZFNaywOtIuknfmXhCqF3U6Zpe7cNG7FQU0shUK7LWlrWYKb5wW8zepV2OKD5ejk_57m1OaQZ-gafy_4UUEjLP-fHLb6_6WbiTQgVQcFc8CoNH5DdE20tJQwKVf7z7mSNVBR3sjP67hr18seweE3xV1ISgxHrCOfXa3LV8Y7zxrNEMhWzZnewFR21-NGOZ-iEbusaHw=="
+            },
+            {
+              "id": "msg_0e5a18c67c7203e0006aa1014826c887d08bcf78731d89f1cf",
+              "content": [
+                {
+                  "text": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+          "final_answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "Campus: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6.",
+        "tools_used": [
+          "campus_information"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "campuses": [
+          {
+            "campus_key": "downtown",
+            "official_name": "Downtown Campus",
+            "address": "555 Seymour Street",
+            "city": "Vancouver",
+            "region": "BC",
+            "postal_code": "V6B 3H6",
+            "relationship_type": "offered",
+            "notes": "Downtown Campus, Vancouver"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview",
+            "A700GRCERT:campus"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "answered_facets": [
+                "A700GRCERT:overview"
+              ],
+              "program_id": "A700GRCERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false
+          }
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview",
+            "A700GRCERT:campus"
+          ],
+          "stopped": false,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "contains_any",
+          "value": [
+            "https://www\\.bcit\\.ca/"
+          ],
+          "dimension": "evidence_discipline",
+          "root_cause": "unknown_human_confirmation",
+          "pass": true,
+          "actual": null
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "answered_facets": [
+                "A700GRCERT:overview",
+                "A700GRCERT:campus"
+              ],
+              "program_id": "A700GRCERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 3,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"A700GRCERT\"}",
+              "call_id": "call_1hOLsXjhReYsMwUkF3bsNPmL",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_0742e5dd46f3ca0e006aa1014cfa4c87d083f923274e24ef92",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "A700GRCERT"
+          },
+          "context": {
+            "academic_scope": "graduation",
+            "current_question": "And the official page for that one?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "A700GRCERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 453,
+                            "condition_type": "ALL_SIX_COURSES_19_CREDITS",
+                            "description": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "all",
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "ALL_SIX_COURSES_19_CREDITS",
+                        "operator": "AND",
+                        "rule_group_id": 176,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "ALL_SIX_COURSES_19_CREDITS",
+                    "notes": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                    "rule_set_id": 311,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Every course must be passed with a 60% mark.",
+                    "from_level": 1,
+                    "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                    "to_level": 2,
+                    "type": "PROGRAM_COURSE_GRADE",
+                    "value": "60"
+                  }
+                ]
+              },
+              "campus": "Downtown Campus, Vancouver",
+              "clinical_and_practice_requirements": {
+                "program_id": "A700GRCERT"
+              },
+              "courses": [
+                {
+                  "course_id": "ECON9100",
+                  "course_name": "Managerial Economics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "FMGT9152",
+                  "course_name": "Accounting for Managers",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "FMGT9260",
+                  "course_name": "Business Finance",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "GLBL9200",
+                  "course_name": "Business Capstone Project",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "MKTG9120",
+                  "course_name": "Marketing Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                },
+                {
+                  "course_id": "OPMT9170",
+                  "course_name": "Systems and Operations Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+                }
+              ],
+              "credential": "Graduate Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 272,
+                    "component_name": "Term 1 (15 weeks)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "ECON9100",
+                        "course_name": "Managerial Economics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "ECON 9100",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT9152",
+                        "course_name": "Accounting for Managers",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9152",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MKTG9120",
+                        "course_name": "Marketing Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MKTG 9120",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 1 (15 weeks)"
+                  },
+                  {
+                    "component_id": 273,
+                    "component_name": "Term 2 (20 weeks)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "FMGT9260",
+                        "course_name": "Business Finance",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9260",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "GLBL9200",
+                        "course_name": "Business Capstone Project",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "GLBL 9200",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "OPMT9170",
+                        "course_name": "Systems and Operations Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "OPMT 9170",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 2 (20 weeks) Total Credits: 19.0"
+                  }
+                ],
+                "program_id": "A700GRCERT"
+              },
+              "delivery_method": "Blended (on campus and online)",
+              "program_id": "A700GRCERT",
+              "program_name": "Business Administration",
+              "program_overview": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master’s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master’s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master’s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements",
+              "school": "School of Business + Media",
+              "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "msg_0742e5dd46f3ca0e006aa1014ee90c87d08e85ef950a298c75",
+              "content": [
+                {
+                  "text": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+          "final_answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

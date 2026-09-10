@@ -1,0 +1,104 @@
+{
+  "scenario_id": "CAT-01-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "eb19a60efed07006f7c32c69c17f08ac24ac740d9edc8aac60c29e3bacf0064c",
+  "response_id": "resp_05affeca5fe73f78006aa07421d06887d0b4d902bcac38a145",
+  "usage": {
+    "input_tokens": 61085,
+    "input_tokens_details": {
+      "cache_write_tokens": 59692,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 731,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 61816
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer packs seven core courses and four pathway courses into its second sentence despite the request for a brief two-sentence introduction. The observed word check reports 106 against a 100-word maximum; finalization leaves the answer unchanged."
+        },
+        "notes": "Program identity and M600MSC state are correct. Delivery, duration, cohort model, course names, and OR pathway structure match frozen records. The issue is excessive curriculum detail rather than clarification or academic error. Context is not applicable on turn 1; no necessary clarification, frustration, or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly declines an employment guarantee without inventing placement statistics. Technical-leadership preparation and potentially paid or unpaid internships are supported by frozen evidence. The program link and named Graduating & Jobs section provide a relevant next step. M600MSC persists correctly; generic PROGRAM_INFO metadata does not change the outcomes-focused prose. 'Asteris data does not guarantee' is slightly impersonal but honestly states the limit. Necessary clarification and frustration handling are not applicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that tool, failing the frozen tools_empty check. The final answer nevertheless acknowledges stopping in 12 words and gives no further advice."
+        },
+        "notes": "The user-facing stop response is respectful and proportionate, and the active M600MSC topic remains intact. The failure is unnecessary forced retrieval, not continued advising in prose; the trace supports deterministic routing attribution without identifying a narrower implementation component. No academic claims appear, so factual correctness is null. Necessary clarification and next-step guidance are not applicable; the verification count is not treated as evidence for the acknowledgment."
+      }
+    ]
+  },
+  "attempt": 2
+}

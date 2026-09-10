@@ -1,0 +1,1875 @@
+{
+  "id": "CAT-07-B",
+  "category": "international",
+  "tags": [
+    "international",
+    "international_status",
+    "human_confirmation",
+    "unsupported_inference"
+  ],
+  "status": "complete",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?",
+        "expected": "Use this program's INTERNATIONAL evidence. Distinguish available, restricted, not accepted, and unknown; never infer ineligibility from silence.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "0816CM"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Circular Economy: Zero Waste Buildings",
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "0816CM",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 7.062,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": "0816CM",
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?\nRouted intent: PROGRAM_INFO\nRequired response language from current turn: English\nResolved internal program for tool use: 0816CM. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"program\", \"program_id\": \"0816CM\", \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_0045c1b4ebfa0c1d006aa07390048887d0a931d021b6bef23e",
+            "created_at": 1788900240.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"0816CM\"}",
+                "call_id": "call_nd6BAAbqmyFFk0GDuCyMYPJG",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0045c1b4ebfa0c1d006aa073906e4487d0a84e8d5f2777766e",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900240.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1510,
+              "input_tokens_details": {
+                "cache_write_tokens": 166,
+                "cached_tokens": 1214
+              },
+              "output_tokens": 22,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1532
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "0816CM"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "0816CM",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 514,
+                            "condition_type": "NO_FORMAL_APPLICATION_REQUIRED",
+                            "description": "Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "recommended_background_is_not_required": true,
+                              "semantic": "no_program_specific_admission_requirements"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "No program-specific admission gate",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 237,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "NO_FORMAL_PROGRAM_APPLICATION",
+                    "notes": "Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.",
+                    "rule_set_id": 372,
+                    "scope": "ADMISSION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"UNKNOWN_NOT_PUBLISHED\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 1880,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Part-time"
+                  }
+                ]
+              },
+              "campus": "Distance and Online Learning",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "0816CM"
+              },
+              "courses": [
+                {
+                  "course_id": "XCIR7510",
+                  "course_name": "Deconstruction Management",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7520",
+                  "course_name": "Design for Disassembly",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7530",
+                  "course_name": "Construction Material Flows",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                }
+              ],
+              "credential": "Microcredential",
+              "curriculum": {
+                "components": [],
+                "credit_requirements": [],
+                "program_id": "0816CM",
+                "substitutions": []
+              },
+              "delivery_method": "Online",
+              "program_id": "0816CM",
+              "program_name": "Applied Circular Economy: Zero Waste Buildings",
+              "program_overview": "The green building sector is the largest employer in Vancouver’s ‘green economy’ and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada’s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada’s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and “design for disassembly” (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+              "status": "Active",
+              "study_mode": "Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_nd6BAAbqmyFFk0GDuCyMYPJG",
+                "output": "{\"program\": {\"program_id\": \"0816CM\", \"program_name\": \"Applied Circular Economy: Zero Waste Buildings\", \"program_overview\": \"The green building sector is the largest employer in Vancouver\\u2019s \\u2018green economy\\u2019 and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada\\u2019s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada\\u2019s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and \\u201cdesign for disassembly\\u201d (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).\", \"school\": \"School of Construction and the Environment\", \"credential\": \"Microcredential\", \"study_mode\": \"Part-time\", \"campus\": \"Distance and Online Learning\", \"delivery_method\": \"Online\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"courses\": [{\"course_id\": \"XCIR7510\", \"course_name\": \"Deconstruction Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7520\", \"course_name\": \"Design for Disassembly\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7530\", \"course_name\": \"Construction Material Flows\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}], \"curriculum\": {\"program_id\": \"0816CM\", \"components\": [], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"0816CM\", \"rule_sets\": [{\"rule_set_id\": 372, \"scope\": \"ADMISSION\", \"name\": \"NO_FORMAL_PROGRAM_APPLICATION\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.\", \"groups\": [{\"rule_group_id\": 237, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"No program-specific admission gate\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 514, \"condition_type\": \"NO_FORMAL_APPLICATION_REQUIRED\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"no_program_specific_admission_requirements\", \"executable\": true, \"recommended_background_is_not_required\": true}, \"description\": \"Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 1880, \"scope\": \"INTERNATIONAL\", \"name\": \"International eligibility source evidence\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"{\\\"evidence\\\":[{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\\\"}],\\\"offering_scope\\\":\\\"Any Domestic Only offering remains mode/intake-specific.\\\",\\\"pgwp\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\",\\\"status\\\":\\\"ACCEPTED_AVAILABLE\\\",\\\"study_permit\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\"}\", \"groups\": []}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"0816CM\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "resp_0045c1b4ebfa0c1d006aa07390048887d0a931d021b6bef23e"
+          },
+          "response": {
+            "id": "resp_0045c1b4ebfa0c1d006aa073925b6087d0af6822e4e03fd812",
+            "created_at": 1788900242.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0045c1b4ebfa0c1d006aa07392be3087d0b2878a985b62f1b0",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHOVD7Rr2f4HiPc32zdxLvbJ2fleZtiUgYBGx8K0o5Uw8BKqyBjtPmMcUbhnjZ7IoemIAkKjLzvUR0lHyrXWr2cv9qd1SCCnBo55GVsTazRnX9CcnCgHiKozAimVMbEBQi97b1ThGYCRRT2t7TgsNnrhlEAd1aizLr8IcAmO_MDx3jmaLbZgM-Kc1zVJ8uZCsOQWhF1Ltbj5b-KZcwx938ghC9tTn-s9U9WExuoSsAytXPoTDKth0xppygtLpKw69SBijwSGwBcYBlCYzPadfQa8eyi60pw03Ig1uGzf18Ib31hrKa96nxot5n2_47plSoxlMYdiJyoffcEpNGh_96fGPSZd3fg09motfZbJVBPCAi0mUCAWUK-qbQ87RPXxhcH_cI1plSq8cqZgkylToGPdkDDuUgT4wurK8WQ4BLfUvj0B4ek2QVkLbD6XwU5uiddHQBh9fXWvSGUtaLc-icGVJ987OKPJWjmLd4omP9qPCpW1LvpJdXm5SMTmFzTC8hUPoQQjMFThnomSX74cYTF39cYfYCdZ-Qy1mpZLz8ShU0YZMDFBBPoBxukdhei1knvF_V9u0lEqP3PwjdoE7DVC1Tx2ThGiD6I_BU1n4Qx8LD-38eSQSLfmm6SYjHAG4VXDzFqtmCGc16lqW5FoUjJsIAwiMbZVRT9_8kR7FdLj_N_nJCwRTnBoP3wxqWtpx8rKicYRf13jEz_8tDUhQ2Lmv3PJRzYMQfD7hohc_AdN-IiV5AwQF1ilMNKGX6c9KREA3wAIelpFDf4ph23-NJ_QnhKtuBazqJG-Arozr3CFFfvMJET98v8ubn1coix-oMrROCk1YlpTQcVKn92BbOzew_8sc2bRR2GfSxG7R-fFNz_13P25yzJrGsTKs0JgdrJoz619Al1nOm0r6qHKGOIIgRZ4O-ajHh6twNjZqAC7lKBjgUmAI1nI0bx8N0MUOW6cHogAgBY8J_HjAiRxaHKNcCYoKIZHDBECHX3dKW_y9X0DD0PvKdkEuIrSje5h7Et0sT3EUoUEtRgwrNcb7nI7sxg8S7r4TjKCLeUWnPhz2ZktRA_a72Wn6azvduXMfwOvIYeOO7E4DinPETIdFLGpNEfgePhivwg8YpDFyN8hyduBDB-0RLaPO9DOeX3ltauaHmh1ZL6OlqqbrQVf67mGRr02w5ca8-Coqj3CraSvodGX8FhRsUHTz42NuJ1dqgWgUGhJzfYWo-29_ptrPRhbV8I23qb9AlxOk4bWWH2JACucU4kRJOsefNT9_Siur-hTz5DJAUrEPtRY-Y1_TKol9SWPjjcGTt7sRBI57y5pqU0oTyB1EyAmeL5p1dM8SriLaZXhqTQCbCvGpS5y0glEtH4nST1W_R6_vtjxAxhEb3LLdrbGdo2YNBscrIQib92EJbqWJcLSGimL6wDP5X4i78qn5J-uO0THR6_Vvxa5_wEwTlrTrE01Zh4UJXzcleW_WLOX7-7LGFzn8OCLDMgAzwmO5zs5Q3FAwhA8ZXHYT1xHbkl2g7eJCb0fsqKfjPX_yaT9j5qsLfOAHnl_nGobnCP2VFL4nIiFiYvsRKQqFOAtAnsfJrDqGM6nQvfpYhv4EZUBfqnk3t88punmKfE7Ebka7Z80bUOUKe2p9b5KnEQ9jSO2gbZjSz79I4R98Agyvs1WNV8GKHHpI1neTdnJpkA_MwmzBuTzFgi99svwumhmzx-ElgZJltieOVnw0EQsVVuTs16hux-V_nStG1zHzS2tSTRJCQnnoVDkaK3q0ZZzDqVhiyJzW67gU4FllDF6h7CAmja9HfnZpfA95sYKs4IUILJZfCb9nHxR1hLhotRKT_wpf-C64xNw7hqwvoxEXk0iCq9H9ktngqnNGqb5uz7D_WR_e8wvuc43WWQxJHe1Y28UUgmYIiozIOLgRzqoTofu-7CxlaWz2UIoqASXqusXOKSkomMhr4f4BpPyPWuAmZJd0QQYGXgvpZ9umB2bhWn3bL7gpNlqsp1a9dWTOFZp11icj0N-lINf5B6B3kfNUpOQbMU8DD2axmkwaCVCbBJag_XNcasklvTcV9gdzOGiMvrmA720ZfMkCZuwJA3Lry4g60O_6MIDiw3NHWYLvU4ZAc0MJJOzcfs05vsqBGMYjSbc03SIq32gydo_6_RGMPk1BZB7VeQIPx5bOs5gwHpAsn3ew_gwVl34VCbzmeY6prKvHfWYtOv6solHu9YPBfisfW1jdk9fMx3AgHmz",
+                "status": null
+              },
+              {
+                "id": "msg_0045c1b4ebfa0c1d006aa073943f9c87d0ab948d8bc9fead86",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900245.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0045c1b4ebfa0c1d006aa07390048887d0a931d021b6bef23e",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2722,
+              "input_tokens_details": {
+                "cache_write_tokens": 1212,
+                "cached_tokens": 1507
+              },
+              "output_tokens": 269,
+              "output_tokens_details": {
+                "reasoning_tokens": 143
+              },
+              "total_tokens": 2991
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+          "final_answer": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "0816CM"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "0816CM"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "So does that automatically mean I'm admitted?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?"
+          },
+          {
+            "role": "assistant",
+            "content": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "0816CM",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "So does that automatically mean I'm admitted?",
+        "expected": "No. Separate international availability from individual admission, competition, and human verification. Do not guarantee admission.",
+        "scope": "admission",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "0816CM"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR 7510 — Deconstruction Management**\n- **XCIR 7520 — Design for Disassembly**\n- **XCIR 7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Circular Economy: Zero Waste Buildings",
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "0816CM",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 4.937,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": "0816CM",
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: So does that automatically mean I'm admitted?\nRouted intent: PROGRAM_INFO\nRequired response language from current turn: English\nResolved internal program for tool use: 0816CM. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"program\", \"program_id\": \"0816CM\", \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}\nRecent conversation:\nUser: I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?\nAssistant: Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_07960967756944c9006aa07396c01487d083d2fae54c69d7e8",
+            "created_at": 1788900246.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"0816CM\"}",
+                "call_id": "call_COM0SHSERBXchJoaFbZh4g3H",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_07960967756944c9006aa0739734f487d09b2538788b80eed8",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900247.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1666,
+              "input_tokens_details": {
+                "cache_write_tokens": 322,
+                "cached_tokens": 1214
+              },
+              "output_tokens": 22,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1688
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "0816CM"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "So does that automatically mean I'm admitted?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "0816CM",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 514,
+                            "condition_type": "NO_FORMAL_APPLICATION_REQUIRED",
+                            "description": "Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "recommended_background_is_not_required": true,
+                              "semantic": "no_program_specific_admission_requirements"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "No program-specific admission gate",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 237,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "NO_FORMAL_PROGRAM_APPLICATION",
+                    "notes": "Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.",
+                    "rule_set_id": 372,
+                    "scope": "ADMISSION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"UNKNOWN_NOT_PUBLISHED\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 1880,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Part-time"
+                  }
+                ]
+              },
+              "campus": "Distance and Online Learning",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "0816CM"
+              },
+              "courses": [
+                {
+                  "course_id": "XCIR7510",
+                  "course_name": "Deconstruction Management",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7520",
+                  "course_name": "Design for Disassembly",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7530",
+                  "course_name": "Construction Material Flows",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                }
+              ],
+              "credential": "Microcredential",
+              "curriculum": {
+                "components": [],
+                "credit_requirements": [],
+                "program_id": "0816CM",
+                "substitutions": []
+              },
+              "delivery_method": "Online",
+              "program_id": "0816CM",
+              "program_name": "Applied Circular Economy: Zero Waste Buildings",
+              "program_overview": "The green building sector is the largest employer in Vancouver’s ‘green economy’ and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada’s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada’s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and “design for disassembly” (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+              "status": "Active",
+              "study_mode": "Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_COM0SHSERBXchJoaFbZh4g3H",
+                "output": "{\"program\": {\"program_id\": \"0816CM\", \"program_name\": \"Applied Circular Economy: Zero Waste Buildings\", \"program_overview\": \"The green building sector is the largest employer in Vancouver\\u2019s \\u2018green economy\\u2019 and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada\\u2019s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada\\u2019s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and \\u201cdesign for disassembly\\u201d (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).\", \"school\": \"School of Construction and the Environment\", \"credential\": \"Microcredential\", \"study_mode\": \"Part-time\", \"campus\": \"Distance and Online Learning\", \"delivery_method\": \"Online\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"courses\": [{\"course_id\": \"XCIR7510\", \"course_name\": \"Deconstruction Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7520\", \"course_name\": \"Design for Disassembly\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7530\", \"course_name\": \"Construction Material Flows\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}], \"curriculum\": {\"program_id\": \"0816CM\", \"components\": [], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"0816CM\", \"rule_sets\": [{\"rule_set_id\": 372, \"scope\": \"ADMISSION\", \"name\": \"NO_FORMAL_PROGRAM_APPLICATION\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.\", \"groups\": [{\"rule_group_id\": 237, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"No program-specific admission gate\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 514, \"condition_type\": \"NO_FORMAL_APPLICATION_REQUIRED\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"no_program_specific_admission_requirements\", \"executable\": true, \"recommended_background_is_not_required\": true}, \"description\": \"Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 1880, \"scope\": \"INTERNATIONAL\", \"name\": \"International eligibility source evidence\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"{\\\"evidence\\\":[{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\\\"}],\\\"offering_scope\\\":\\\"Any Domestic Only offering remains mode/intake-specific.\\\",\\\"pgwp\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\",\\\"status\\\":\\\"ACCEPTED_AVAILABLE\\\",\\\"study_permit\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\"}\", \"groups\": []}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"0816CM\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "resp_07960967756944c9006aa07396c01487d083d2fae54c69d7e8"
+          },
+          "response": {
+            "id": "resp_07960967756944c9006aa073982a3487d0b9657911f1c626ec",
+            "created_at": 1788900248.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "msg_07960967756944c9006aa07398a6f487d088907ce7756eb089",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR7510 — Deconstruction Management**\n- **XCIR7520 — Design for Disassembly**\n- **XCIR7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900250.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_07960967756944c9006aa07396c01487d083d2fae54c69d7e8",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2878,
+              "input_tokens_details": {
+                "cache_write_tokens": 1212,
+                "cached_tokens": 1663
+              },
+              "output_tokens": 165,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 3043
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR7510 — Deconstruction Management**\n- **XCIR7520 — Design for Disassembly**\n- **XCIR7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+          "final_answer": "No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR 7510 — Deconstruction Management**\n- **XCIR 7520 — Design for Disassembly**\n- **XCIR 7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/"
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "0816CM"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "0816CM"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "request": {
+        "question": "What can you actually verify, and what should I confirm with BCIT?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?"
+          },
+          {
+            "role": "assistant",
+            "content": "Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+          },
+          {
+            "role": "user",
+            "content": "So does that automatically mean I'm admitted?"
+          },
+          {
+            "role": "assistant",
+            "content": "No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR 7510 — Deconstruction Management**\n- **XCIR 7520 — Design for Disassembly**\n- **XCIR 7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "0816CM",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "What can you actually verify, and what should I confirm with BCIT?",
+        "expected": "Clearly distinguish stored rules from unverified personal eligibility and current/human decisions; provide useful confirmation guidance.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "0816CM"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Here is what the available BCIT program data verifies:\n\n### Verified\n\n- **Applied Circular Economy: Zero Waste Buildings** is an **active microcredential**.\n- It is **part-time** and delivered **online through Distance and Online Learning**.\n- The program consists of three required courses:\n  - **XCIR 7510 — Deconstruction Management**\n  - **XCIR 7520 — Design for Disassembly**\n  - **XCIR 7530 — Construction Material Flows**\n- A **formal program application is not required**; the recorded process is to **register course by course**.\n- Construction, building-design, environmental-engineering, or related experience is **recommended for success but is not required for admission**.\n- The available international-applicant evidence records the offering as **available to international applicants**.\n\n### Confirm directly with BCIT\n\nThe available data does **not** verify:\n\n- Whether you are personally registered or accepted into any course.\n- The exact course-registration steps, deadlines, fees, or seat availability.\n- Whether the program supports a **study permit**.\n- Whether it qualifies for a **post-graduation work permit (PGWP)**.\n- Whether the international-applicant status applies to your specific circumstances or intake.\n\nBecause no formal program application is required, “available to international applicants” does **not** by itself confirm that you are admitted or registered. Please confirm your registration status and immigration-related eligibility with BCIT.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Applied Circular Economy: Zero Waste Buildings",
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "0816CM",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 9.938,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": "0816CM",
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: What can you actually verify, and what should I confirm with BCIT?\nRouted intent: PROGRAM_INFO\nRequired response language from current turn: English\nResolved internal program for tool use: 0816CM. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"program\", \"program_id\": \"0816CM\", \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}\nRecent conversation:\nUser: I am an international applicant interested in the Applied Circular Economy: Zero Waste Buildings. Is it available to international applicants?\nAssistant: Yes. **Applied Circular Economy: Zero Waste Buildings** is listed as **available to international applicants**.\n\n- It is a **part-time, online microcredential**.\n- A formal program application is **not required**; students register course by course.\n- The available data does not confirm whether it supports a **study permit** or **post-graduation work permit (PGWP)**. Please confirm those points with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.\nUser: So does that automatically mean I'm admitted?\nAssistant: No. The program record says that **a formal program application is not required**; students **register for the courses individually**. That does not automatically mean you have been admitted or registered—you would still need to complete the course-registration process.\n\nThe program is a **part-time, online microcredential**. Its three courses are:\n\n- **XCIR 7510 — Deconstruction Management**\n- **XCIR 7520 — Design for Disassembly**\n- **XCIR 7530 — Construction Material Flows**\n\nThe available data does not specify an admission or registration confirmation process beyond course-by-course registration. Please confirm your status directly with the institution.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_0202669709661281006aa0739bbce087d0b8f8f342e11f18dd",
+            "created_at": 1788900251.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"0816CM\"}",
+                "call_id": "call_M6IWc8aADfx5KlKXID6IuA5M",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0202669709661281006aa0739c1c6887d0bf6f239ff59322bd",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900252.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1849,
+              "input_tokens_details": {
+                "cache_write_tokens": 505,
+                "cached_tokens": 1214
+              },
+              "output_tokens": 22,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1871
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "0816CM"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "What can you actually verify, and what should I confirm with BCIT?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "0816CM",
+            "program_name": "Applied Circular Economy: Zero Waste Buildings",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "0816CM",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 514,
+                            "condition_type": "NO_FORMAL_APPLICATION_REQUIRED",
+                            "description": "Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "recommended_background_is_not_required": true,
+                              "semantic": "no_program_specific_admission_requirements"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "No program-specific admission gate",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 237,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "NO_FORMAL_PROGRAM_APPLICATION",
+                    "notes": "Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.",
+                    "rule_set_id": 372,
+                    "scope": "ADMISSION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"UNKNOWN_NOT_PUBLISHED\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 1880,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Part-time"
+                  }
+                ]
+              },
+              "campus": "Distance and Online Learning",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "0816CM"
+              },
+              "courses": [
+                {
+                  "course_id": "XCIR7510",
+                  "course_name": "Deconstruction Management",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7520",
+                  "course_name": "Design for Disassembly",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                },
+                {
+                  "course_id": "XCIR7530",
+                  "course_name": "Construction Material Flows",
+                  "course_type": "Core",
+                  "credits": "3.00",
+                  "level": 1,
+                  "notes": null,
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                  "term": "Part-time"
+                }
+              ],
+              "credential": "Microcredential",
+              "curriculum": {
+                "components": [],
+                "credit_requirements": [],
+                "program_id": "0816CM",
+                "substitutions": []
+              },
+              "delivery_method": "Online",
+              "program_id": "0816CM",
+              "program_name": "Applied Circular Economy: Zero Waste Buildings",
+              "program_overview": "The green building sector is the largest employer in Vancouver’s ‘green economy’ and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada’s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada’s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and “design for disassembly” (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+              "status": "Active",
+              "study_mode": "Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_M6IWc8aADfx5KlKXID6IuA5M",
+                "output": "{\"program\": {\"program_id\": \"0816CM\", \"program_name\": \"Applied Circular Economy: Zero Waste Buildings\", \"program_overview\": \"The green building sector is the largest employer in Vancouver\\u2019s \\u2018green economy\\u2019 and with $16B in construction delivered in BC annually and the trend towards low-impact building, this share will only increase. Approximately 50% of Canada\\u2019s carbon emissions are derived from the operation and construction of buildings. Deep decarbonization strategies, in line with Canada\\u2019s 2050 net-zero target, require that carbon emissions reach net-zero, this requires both zero-waste construction and \\u201cdesign for disassembly\\u201d (DfD). This knowledge will address the economic loss and carbon emissions associated with the current practice of creating construction and demolition waste, where the cost of unutilized new materials and unrecovered demolition materials represents approximately $100 of unnecessary expense for every square meter of newly constructed space, with almost a tonne of CO2e emitted in the production of every tonne of building material that goes to waste. Applied Circular Economy: Zero Waste Buildings will train professionals who can deliver the low-impact buildings needed to achieve net-zero targets. The microcredential will consist of three courses: Deconstruction (material recovery and working with salvage); Design for Disassembly (the principles of DfD and Cradle to Cradle (C2C); and Construction Material Flow Analysis (understanding the industry and the path of materials through it).\", \"school\": \"School of Construction and the Environment\", \"credential\": \"Microcredential\", \"study_mode\": \"Part-time\", \"campus\": \"Distance and Online Learning\", \"delivery_method\": \"Online\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"courses\": [{\"course_id\": \"XCIR7510\", \"course_name\": \"Deconstruction Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7520\", \"course_name\": \"Design for Disassembly\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}, {\"course_id\": \"XCIR7530\", \"course_name\": \"Construction Material Flows\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/\", \"level\": 1, \"term\": \"Part-time\", \"course_type\": \"Core\", \"required\": true, \"notes\": null}], \"curriculum\": {\"program_id\": \"0816CM\", \"components\": [], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"0816CM\", \"rule_sets\": [{\"rule_set_id\": 372, \"scope\": \"ADMISSION\", \"name\": \"NO_FORMAL_PROGRAM_APPLICATION\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"Formal application to the microcredential is not required. Students register course-by-course. Construction, building-design, environmental-engineering, or related experience is recommended for success, not required for admission.\", \"groups\": [{\"rule_group_id\": 237, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"No program-specific admission gate\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 514, \"condition_type\": \"NO_FORMAL_APPLICATION_REQUIRED\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"no_program_specific_admission_requirements\", \"executable\": true, \"recommended_background_is_not_required\": true}, \"description\": \"Formal application is not required; register in the courses directly. Listed industry or educational background is recommended for success only.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 1880, \"scope\": \"INTERNATIONAL\", \"name\": \"International eligibility source evidence\", \"study_mode\": \"Part-time\", \"exact_choice_count\": null, \"notes\": \"{\\\"evidence\\\":[{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\\\"}],\\\"offering_scope\\\":\\\"Any Domestic Only offering remains mode/intake-specific.\\\",\\\"pgwp\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\",\\\"status\\\":\\\"ACCEPTED_AVAILABLE\\\",\\\"study_permit\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\"}\", \"groups\": []}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"0816CM\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "resp_0202669709661281006aa0739bbce087d0b8f8f342e11f18dd"
+          },
+          "response": {
+            "id": "resp_0202669709661281006aa0739d85d887d08d859884744dbef9",
+            "created_at": 1788900253.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0202669709661281006aa0739dfaa887d080089c86550a4233",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHOkWdQj3_gJjgwrpr5NgDAdKd3m42-3ayQi0l8Xbd8vBaREhWNNokYuE8z3s-PeTwoqcSNCdvFbfEbqHrUzdCk29amzneGNs9hlrH7vhZuqj4W-7BmCjVbk5XXsspb1Hz6GxT1bVQcGzriYhpgE1tM1QTvguo20vzOAE78kDwyZyf6V7CmROPF6ExQidBB38UnV0pnPGETh1gx6sVrhPHH9lceD8t8H4wbDA516fDMWVxnSgX81jx9semx2PPgJ96BzulEuyx8105jwA3jCkS0kln4gvyqvZgGDTMKv5d0nRRpO7Cu_oCk08JmgxpyEOEGcRWj2Un1IfCusRu-Cy0ar4aV5YzgRTlmvYrW0mQCCEEXBb4-8TIdOXGhg8qOAxfRbVonlBV7DmOd0Gp0pBqoS3Lrq94JwDvEhQ1DFMFcysYNOQLlJIZQYLP6p6htiRvEeRZpBDv_TI2rQ5QbZQXT6qM-TAXCgJSn_T4h4ASJsah49f4L_6Xs0qv03V3m6O7-5MP5uVVGxVED-RiXB0BBRnVE2lDxAdpn3Y_LDEMv0ggYqZSMbZw35eCbP2Pi-3uegHl3CqHHFpd2COzJ4qvncgIPJLwo-4-agLDIfDYKIum4MK3te09AHx6zOY3yt5u0_eNkuVxhbAvH4nbJxnPVnWwC_teoMEWO8ovUXyvvi4-Pw-Q5hi9nD4Exd-5fv_UyNv0HULuUMG4TTqz8e6DFJaOJzQGf6Rm7thC6kueldcf7woW4wvWQ9nJh3fnOIq8S1TmrOaVUKI5XG9qlCY6K5rHzB745kFNzdfqWjO_QNgdRjSOLXJoIzXE6M-MN_1Y6qq6CHQLt1rGPCJgX57bc8N3gu8-T1Kfo33aOl2Jrw1Kq7K_hWWybpBtc8O83d-2oaewIsBw0UzQdIqMMx40cVvqv1g7fGPcnMKb7yYKk8uC7THTDj2wKHhTv75J44kAIfZ-UN4Ji3zWke4dztFMMqsN57VZLdBXq_6TQAbW9SPskCpajQ8ruReA0jvktzMRIX7HMqpp19pwvI1JpriAWZe2SGWF7jWYrMHUEWPJdoNl9mhnQjNDy02utPQjUpZVS-xLg7zDhXW4vqvHihWLOF6eCM3ay5SW7BE3g-GQXdg-913fyGuHdyqSDmhLT667yxu3pD8PL-1XrCb194aaPCwUFtCDDdamh-4eJP6boZoJdPUAmWb1QJ__EMdRGlPAQES3GJLRHTqpVY0qsLTLtANdt0kbOo2PMiPbwUMKnI8S90NJZtBL2b6_g3dJraCGtDK0P1viWGLq5CZIAk0LfOPMbGP_czTwxi8uF9WkzXMLNdRavfIwHmEsTHjfnO2YS1-QCL2xGZZlQ6SMd10DWCY8scCF4xasCi0U2TfQx043-Y2rjNcrBJ5xLI3hoZVS9UUCfbd2UznH0mmVU2rqL2bmsFD5lbrrk0GV4IWr3arWDvy6W_kO7IPKbaQRkD3bZMJqXZ27svXRQwM23FQnvHaOH1Qei8jvTJqXEqp7A9-EW0ga__jF2I2jkfYv5xACjcuozMUzsEoRRegy6CIEeyADMi9ernZg8PxoNjNpTsftbbucfWvAlvn9R8aT0fBmtKw1GoBzk599_VGTbFkv0Geh_0UT4Ilx26bgjFg-lIgVC3ks0Ce8FuFMPbzqMvw7iRJ2iyMrTOfYw6OqNKP7dkuSABNAoK36KRH-bijV1iI1nZLu56yTTU-KRZLOdygyo0W7fNwHfPa6PMUvDLQsnR7FyFIRt4g3U5cQJh_pAZYRQydEuE5iAyVQkq7wTmeyakRFVaC-7OfD4VVnoRR14RWhFjjIglqbAyfZ-SWLVk_LdwYrGkF7cC7pVZeiK5PKjWT5SO0AwEN4quZRDbdXr_2JUjDe1c1Da3xcoAf641uevqyyknT3mq375XrLBIhtt5ZVm6QPgmUBXVGs3T0wNhBHVFpdJ6Y7Mo2oDE1aGzdH0W9itiGrAhDjykZjrf4IMCfuyMHhEOWB5uRR2WfpMtuENjnnz_oAAYE9M4m8-6noEsXQR8toG19J_axxUWyuRIckTXEk4lT2hRfKvkTNfcvNNthK6Nzz8iXljyiGdACwSEpHlzN-3nXoXNPnpUT7Q9WVzy-6YIBE7REo1vh37pCjnIwcqdeJqT6ehkr6ljAzPEBY3KgW7BmdlIjQmZxNO8gSlryyQYnftQY896cJZfd2UtwcSyN10hufJ7kIjSfxkiPrAzadV7FBwZmkmRcW9i4zDH9Qjp0HQpr7ARYmmu00crLasdNGIIbXNOvMzeMe88oGEzhbp5txxGC5AJeUViPF0b_4Rr_Ndfk9uokmvyZYGIRSB04SefHEEwHlUXxBtMXYM-byGsNB21xiicQHxPtPvZbk6U4nNogPxtpjZGTPMcOjnO9Ho8Vq02QYdxq8-5TYZ8jpWlXEKZo1Fpg2h_jhAl8ItdDcVV6qpSw-Rt5uLdeRQhJZSWQy58fflfGQ3MymYlCa6T6dbQfod-SBp-hz2WuIj5-Zf8i2MJ6kTRVP1e4tEsNr1NGKyT-bgRS0YNIonEDJvrYCi47ABp33gt23PUgNpkyqA6ttE-mbyMl2qKVA3wIhIw7DTuTLs-NMwkfvNWgPRSlEH9JbFjyj5CkaWP0by8cli7krbLkE1KLvp7ZFjzchpY_vU2CGaxjJcQ-fhiYzyQRu_FSKU2JO0EUQ28P2pzmO88BSKGVyKDS86jUtja5UHxh8sv0b9RH9dRgfi7roLP-GmuGj6sfeGDqhZ3kmbHX8dLyIPvzE1QtbiUZ2UEwN5wMLiS4nTPvBrdb0Ye0rU1UGv-Iz5gH22JngRkMX5qCkgG-hlE-Fsv7KD3LXxKNhnR-yCu6iQIk8I2apkL_4YOpjBBnwJu2RJ5LhV2Yq8Stu7K8WeFBUcjmifEIbLSCP2i7Ys4k_XstzWryKTSOeJQ3XzW5imRR1wbj2-12phm5IE9lGfd3uVSJDeYmRMJ4T1p9EAf24rN74Qy-xOVwDSXliPTxFcohUpC6oxeMiblPIu8BJqY324GDLda-p5VrKMQGSbk_KR1co69k6TBKCxCtQgSQ82MSxs8abmkcmLrd_s1z2GXAEYTot63Jr7hoCcY6TMVVgysYJY0R5kBqASEOfkoPbeLB2bVn8fgv1H3crynbs_Unj7qsg==",
+                "status": null
+              },
+              {
+                "id": "msg_0202669709661281006aa073a10dbc87d0a73aeab436a3d94e",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Here is what the available BCIT program data verifies:\n\n### Verified\n\n- **Applied Circular Economy: Zero Waste Buildings** is an **active microcredential**.\n- It is **part-time** and delivered **online through Distance and Online Learning**.\n- The program consists of three required courses:\n  - **XCIR 7510 — Deconstruction Management**\n  - **XCIR 7520 — Design for Disassembly**\n  - **XCIR 7530 — Construction Material Flows**\n- A **formal program application is not required**; the recorded process is to **register course by course**.\n- Construction, building-design, environmental-engineering, or related experience is **recommended for success but is not required for admission**.\n- The available international-applicant evidence records the offering as **available to international applicants**.\n\n### Confirm directly with BCIT\n\nThe available data does **not** verify:\n\n- Whether you are personally registered or accepted into any course.\n- The exact course-registration steps, deadlines, fees, or seat availability.\n- Whether the program supports a **study permit**.\n- Whether it qualifies for a **post-graduation work permit (PGWP)**.\n- Whether the international-applicant status applies to your specific circumstances or intake.\n\nBecause no formal program application is required, “available to international applicants” does **not** by itself confirm that you are admitted or registered. Please confirm your registration status and immigration-related eligibility with BCIT.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900260.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0202669709661281006aa0739bbce087d0b8f8f342e11f18dd",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 3061,
+              "input_tokens_details": {
+                "cache_write_tokens": 1212,
+                "cached_tokens": 1846
+              },
+              "output_tokens": 613,
+              "output_tokens_details": {
+                "reasoning_tokens": 279
+              },
+              "total_tokens": 3674
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Here is what the available BCIT program data verifies:\n\n### Verified\n\n- **Applied Circular Economy: Zero Waste Buildings** is an **active microcredential**.\n- It is **part-time** and delivered **online through Distance and Online Learning**.\n- The program consists of three required courses:\n  - **XCIR 7510 — Deconstruction Management**\n  - **XCIR 7520 — Design for Disassembly**\n  - **XCIR 7530 — Construction Material Flows**\n- A **formal program application is not required**; the recorded process is to **register course by course**.\n- Construction, building-design, environmental-engineering, or related experience is **recommended for success but is not required for admission**.\n- The available international-applicant evidence records the offering as **available to international applicants**.\n\n### Confirm directly with BCIT\n\nThe available data does **not** verify:\n\n- Whether you are personally registered or accepted into any course.\n- The exact course-registration steps, deadlines, fees, or seat availability.\n- Whether the program supports a **study permit**.\n- Whether it qualifies for a **post-graduation work permit (PGWP)**.\n- Whether the international-applicant status applies to your specific circumstances or intake.\n\nBecause no formal program application is required, “available to international applicants” does **not** by itself confirm that you are admitted or registered. Please confirm your registration status and immigration-related eligibility with BCIT.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/",
+          "final_answer": "Here is what the available BCIT program data verifies:\n\n### Verified\n\n- **Applied Circular Economy: Zero Waste Buildings** is an **active microcredential**.\n- It is **part-time** and delivered **online through Distance and Online Learning**.\n- The program consists of three required courses:\n  - **XCIR 7510 — Deconstruction Management**\n  - **XCIR 7520 — Design for Disassembly**\n  - **XCIR 7530 — Construction Material Flows**\n- A **formal program application is not required**; the recorded process is to **register course by course**.\n- Construction, building-design, environmental-engineering, or related experience is **recommended for success but is not required for admission**.\n- The available international-applicant evidence records the offering as **available to international applicants**.\n\n### Confirm directly with BCIT\n\nThe available data does **not** verify:\n\n- Whether you are personally registered or accepted into any course.\n- The exact course-registration steps, deadlines, fees, or seat availability.\n- Whether the program supports a **study permit**.\n- Whether it qualifies for a **post-graduation work permit (PGWP)**.\n- Whether the international-applicant status applies to your specific circumstances or intake.\n\nBecause no formal program application is required, “available to international applicants” does **not** by itself confirm that you are admitted or registered. Please confirm your registration status and immigration-related eligibility with BCIT.\n\nProgram details: https://www.bcit.ca/programs/applied-circular-economy-zero-waste-buildings-microcredential-part-time-0816cm/"
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "0816CM"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "0816CM"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

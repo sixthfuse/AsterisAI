@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-16",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "40e5eb4c4dc5fb25b60eef794edbb54c677dbad6753861ea528da21aa2f55059",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "f0a1adb19df160a332ceb220340f577b5075a0ba45e7c2713c01efe485e9c97d",
+  "packet_sha256": "15ae6a87a08b5949247fc010b96edfd86080ed0e6108da209329da4da0a4b66a",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_038e54860df598d7006aa08212e4b887d0a612b29ef8e35dfe",
+  "usage": {
+    "input_tokens": 28296,
+    "input_tokens_details": {
+      "cache_write_tokens": 26903,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1033,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 29329
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final E1 answer adds seven core courses and both Year 2 course lists to an admission-focused opening. Correct admission evidence was available; the unsolicited curriculum list distracts from establishing the applicant's background."
+        },
+        "notes": "Program identity is correct in prose and state (M600MSC). Academic details match the snapshot, with minor imprecision: alternate-entry pre-entry assessment is described as something the program 'may require', whereas E2 requires the completed assessment form. Bridging courses are correctly conditional. No eligibility guarantee is made. Context is inapplicable on turn 1; necessary clarification and frustration handling do not apply, and no next step is required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E8 calls the routes 'stored admission route[s]', exposing database-oriented wording in an otherwise attentive response; this wording appears in both raw and final output."
+        },
+        "notes": "The corrected high-school-only background replaces the withdrawn bachelor's claim in the response. Both documented routes require a bachelor's degree, so the conclusion is grounded in affirmative requirements, not missing evidence. The alternate GPA's final-30-credit basis is abbreviated but was established in the preceding answer. Resolver state remains correct; the exposed state has no education field, so persistence there cannot be assessed independently. No frustration or required clarification is present; a separate actionable next step is not necessary."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly answers no, explicitly retains high-school-only education, preserves OR entry routes, and distinguishes minimum eligibility from competitive selection. The degree requirement supports the direct-admission conclusion. Prose and resolver state identify M600MSC correctly. Repeating the short entry requirements is relevant to this follow-up, not an unwanted catalog dump. No clarification, frustration handling, or additional next-step guidance is required."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E4/E5 provides eight questions, including post-secondary ICES evaluations, references, application rounds, and payment logistics, despite the corrected high-school-only background. These lower-priority application details and repeated requirements dilute the useful first three pathway-planning questions."
+        },
+        "notes": "The requested questions begin with the corrected education history and suitable undergraduate preparation, and do not assert that an undocumented exception exists. All checkable policy and intake claims are supported by E2 and the snapshot. The list is requested, but its premature application logistics make guidance less proportional; 'stored requirements' and 'stored schedule' also sound impersonal. State and prose retain the correct program. Finalization only appends the verified BCIT Admissions URL, a helpful deterministic addition rather than the cause of the excess detail. Necessary clarification and frustration handling do not apply."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-20",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "021bd5023e076714786ed6ad3c68434a8dc13c10b347c9aa4d48077bda8674c7",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "5d1be20eef1dcd631c4c7a8d322d222590d606ad49ea71067b47231bd8cf7250",
+  "packet_sha256": "488a759f16de15d71d28645bc6ea9e1087c9f09ae100c15d8ef60a7a57844823",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0c668d3c1c334494006aa082649f6887d0bb292d896846ef17",
+  "usage": {
+    "input_tokens": 46503,
+    "input_tokens_details": {
+      "cache_write_tokens": 45110,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 897,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 47400
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 4,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Appropriately requests the missing referent without guessing. No academic claims to verify; context retention is inapplicable on turn 1. No frustration or separate next-step requirement."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer correctly confirms international availability but adds a detailed admission list and Year 2 course paths to a simple availability question. Those course paths are not needed to answer this scope."
+        },
+        "notes": "State and prose correctly identify M600MSC. Eligibility, GPA alternatives, credential-evaluation rule, delivery, intake dates, and qualified PGWP statement match frozen evidence. Finalization adds a verified institutional international-student link without changing academic meaning. Guidance to the official application page is actionable. No required clarification or frustration."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "With international scope established, the answer spends substantial space on progression averages, Year 2 course paths, and maximum completion time, but omits the stored restriction that international applicants need a valid BCIT study permit to apply in the third round. E1 was present in the tool result."
+        },
+        "notes": "All stated academic claims are supported, and alternatives remain OR. The international credential-evaluation condition is also omitted here, though it was explained in turn 2. Program and international context persist in prose; hidden state remains M600MSC with generic program scope. The omission is a coverage failure rather than an explicit false eligibility ruling. No clarification, frustration, or necessary next step."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final answer include the unrelated COMP 9190 source and the database-facing sentence 'All stored source URLs are available; none are missing' alongside the two relevant source links."
+        },
+        "notes": "Provides the correct official program page and international-applicants list, both supported by frozen records. COMP 9190's source and title are also verified but irrelevant to the international restrictions topic. State correctly retains M600MSC. No required clarification, frustration, or additional next-step need."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-17-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "7eba7116d144795c4ef330813ae94c26497124d940f417185b7b7971df0ee31d",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "3343abf1b043c0d924bd75c08e295db532c5daed836548498ce4ceb819aad5b2",
+  "response_id": "resp_00b4c86691a7c33a006aa07a2372e487d0bf31cde1c8ba6ef1",
+  "usage": {
+    "input_tokens": 62497,
+    "input_tokens_details": {
+      "cache_write_tokens": 61143,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 710,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 63207
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two-sentence introduction matches the offering, overview, published 75-credit total and continuation pathway. State and prose identify 7710DIPMA correctly. Individual course-credit records are inconsistent with the published component total, but the answer uses the explicitly published program total rather than claiming a course sum. Context retention is inapplicable on turn 1; no clarification, frustration handling or actionable next step is required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer correctly refuses an employment guarantee but ends with only 'Program details' and a general program URL, not a practical employment-related next step. Finalization preserves that omission."
+        },
+        "notes": "Program-skills claim matches the overview. The absence-of-promise statement is appropriately limited to available information, and no placement statistics or student outcomes are invented. Program identity persists in state and prose. A concrete suggestion such as comparing relevant job postings with one's experience would fulfill the frozen next-step expectation; the generic link only partially does so. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation even though the final acknowledgment stops advising."
+        },
+        "notes": "The visible reply is brief, respectful and appropriate, and active program 7710DIPMA is preserved. The failure is unnecessary forced retrieval, not the model's closing prose; the trace does not establish the specific internal routing subcomponent. No academic claims appear, so factual correctness is null. Necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

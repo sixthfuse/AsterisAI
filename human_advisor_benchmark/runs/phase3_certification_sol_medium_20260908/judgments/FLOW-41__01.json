@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-41",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "47ff2daab01e437071d287c7f15aaf39bfd19ca46dba30f19d7971c41b28b0d7",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "ca90e1eba6d9016fad376f54d5e8b9b33d5509b3850c4da3dabe9817037a2926",
+  "packet_sha256": "acd55a8631491c80f266a2595555c4a858a0ae75567866c147357d03e51e3b4f",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0c91e52751d3407b006aa10bde492887d0aff8ea70ea814707",
+  "usage": {
+    "input_tokens": 49688,
+    "input_tokens_details": {
+      "cache_write_tokens": 48334,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1395,
+    "output_tokens_details": {
+      "reasoning_tokens": 652
+    },
+    "total_tokens": 51083
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly lists exactly the five active master's programs and their credentials, with no non-master credentials. Context retention is not applicable on the first turn; no clarification, frustration handling, or next-step guidance was needed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 0,
+          "context_retention": 0,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 0,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "missing_next_step",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The resolver replaced the prior master's-set query with the literal follow-up, retained no prior_program_ids, and marked program_set_query false. The model consequently issued repeated global searches that returned zero results, and finalization produced a generic failure instead of filtering the known five programs. The prior evidence already showed that Building Science and Smart Grid Systems and Technologies are Master of Engineering programs."
+        },
+        "notes": "The response honestly avoids fabricating an answer, so factual correctness is unassessable and evidence discipline remains sound. However, it loses the prior result set, fails to identify the two Master of Engineering programs, and unnecessarily asks the student to narrow an already clear follow-up. No clarification was genuinely required."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly resolves “the smart grid one” to M500MENG and provides a supported, relevant program overview. The credential, subject areas, delivery, campus, study modes, representative courses, 33-credit total, and final-term alternatives all match the frozen evidence."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly retains M500MENG and answers that Smart Grid Systems and Technologies is taught at Burnaby Campus. The phrase “stored location” is slightly database-like, but the response is otherwise concise and direct."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

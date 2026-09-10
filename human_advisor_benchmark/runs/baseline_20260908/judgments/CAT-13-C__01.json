@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-13-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "c168d129939a21601a6383e4350f7e88b4305c6c1547e062a99ef40c7bf5d84d",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "ea39105a83ce7ae934e394b6ee71c8fe69569b8ce250ed8afda94a0e3eada25a",
+  "response_id": "resp_00da07e27bb75df3006aa079c905b087d0b9857a9815e9d477",
+  "usage": {
+    "input_tokens": 60875,
+    "input_tokens_details": {
+      "cache_write_tokens": 59482,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 698,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 61573
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two-sentence overview meets the brevity expectation. Program identity, delivery, campus, 33 credits and capstone OR elective pathway match the frozen evidence. The subject list describes curriculum coverage rather than asserting every listed course is compulsory. Finalization adds the correct capstone code. Context retention is inapplicable on turn 1; no clarification, frustration handling or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "scope_mismatch",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final answer appropriately reject a guarantee but add 'applicants with relevant industry experience have an advantage,' an admission fact tangential to the employment-outcomes question."
+        },
+        "notes": "The academic claims are supported by the overview and admission records; the admission advantage is not explicitly represented as a job-placement advantage. No placement statistics or employment guarantee are invented. The program and active state remain M500MENG. Reviewing the linked program page and confirming career outcomes with BCIT is a proportionate practical next step. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it; the frozen tools_empty expectation fails. The final response nevertheless stops politely without further advising."
+        },
+        "notes": "The concise user-facing acknowledgment is appropriate and the active program state remains M500MENG. The failure is unnecessary retrieval on a stop turn, not a language-level refusal to stop or an unnecessary clarification. Forced tool selection supports deterministic routing attribution. No academic claims appear, so factual correctness is null; necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 2
+}

@@ -1,0 +1,87 @@
+{
+  "id": "CAT-06-A",
+  "category": "program_identity",
+  "tags": [
+    "program_identity",
+    "singular_reference",
+    "campus_followup",
+    "aliases_credentials"
+  ],
+  "status": "interrupted_or_error",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I'm considering the Combined Honours in Biochemistry and Forensic Science. Give me a brief introduction.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I'm considering the Combined Honours in Biochemistry and Forensic Science. Give me a brief introduction.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "9940BSC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 500,
+      "response": {
+        "error": "RateLimitError",
+        "detail": "Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+        "blocker": "api_credits_exhausted"
+      },
+      "elapsed_seconds": 5.5,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "conversation_state": {
+              "academic_scope": null,
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "9940BSC",
+              "reported_completed_course_ids": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "9940BSC",
+            "program_name": "Combined Honours in Biochemistry and Forensic Science",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

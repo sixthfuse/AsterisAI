@@ -1,0 +1,2347 @@
+{
+  "id": "CAT-19-A",
+  "category": "program_identity",
+  "tags": [
+    "program_identity",
+    "singular_reference",
+    "campus_followup",
+    "aliases_credentials"
+  ],
+  "status": "complete",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I'm considering the Civil Technology Certificate. Give me a brief introduction.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I'm considering the Civil Technology Certificate. Give me a brief introduction.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 500,
+      "response": {
+        "error": "non_json_response",
+        "body": "Internal Server Error"
+      },
+      "elapsed_seconds": 6.687,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "none",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: I'm considering the Civil Technology Certificate. Give me a brief introduction.\nRouted intent: PROGRAM_INFO\nRequired response language from current turn: English\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"none\", \"program_id\": null, \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_04edf195dd865d9f006aa073ef8c7487d08b1e1548bd8a2d94",
+            "created_at": 1788900335.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_04edf195dd865d9f006aa073effe9487d08d757f0425e06854",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHPwn5eXK5-WPsj62PGPTAn84nM3sWgfDpHKPrpawVRY4E4YYTMjrGXneMtl-U2b--DYnHY4uyZDkTNgzOpFNqd3Gkq3BJ-QswIq9E85FPGHq5zIi2Q2RmarW5NPqa5qP3CdXVXiQy7EztbqiAPpyfGF3fYOwnm-pHWUdKfJ9yizy6ukEKIrVdAmgf23AZAElnYIIUOb8x0QasG_dgR11_nONUJP76IJexcqo_U5S_jbuKXblK05Pw2bl9rsi3gsXhYNlZ9ffXRqPBPfAeMnNuZHXpI66myx9tYNubTFiKhuzeqd6tsQx1iPXUgu7DuDdh03hws44sKcQVBUe12td3TEqny90QOHE7VyiZRPV8QvesceauIK7X4A8kL-r3wEvd_ASlGm96MZS9shljRyl42iF-hB3Xl8kRo26HdwvIxjH7qybR15aMC1ecvUqKIPfeIjeNICzxtfG9FWocWP7Sk3iTgbCMP0S3JYnekpuz-ydbqK4tbcGC7NrfnbyqrNubuKdMD9whf9w30FPJROh2N1LAhw-BRTg0-EUwcGVYHFCBc6bkOikayeKCN2bRXfSJ3K4vMdXuP5gGkd9Q4Ea8fexZkXRjvJpAeLCnqYY0VryKTkI5RMdwS-dKDcBBE-tlKwA1uVZjiyBl8tq8xerPsbJaopyaW36VNA0B1T66wnYadrADznL6i5_k-g2Jy1NuDw8RnvgD5CuCC5qRZrWfo6_UsqtcxYCfT86eGxg-Qg6IEzj_FcwMeJGJfNuO_REJZJPCyVDb3jHIoCYJF_NeJzGO7jxj7HKV22ZXQSgwe0qoA4uRLaqVpEk_c5jsn9MJTy-NrK2viD5OceJ0i6CWzSTL2U-PZIwFtJo62XMHRwQgq5rLLD0SY1z_NVxcrf8KSYGf-kH_Uu6JXW1_Z8xcSFTUUx41W3RfNEOam1kCmKM5EnMMX7Yzj7_V__nwN5hyrCkB4jKsOCOsrxexR8Q4zN4gu3rIeVY-SJBI_eUEXPfJMNd1RMA3aFdebVknIe8L3CcEKDzEIPUb7ZRpb_MaKndI9srHTuRh1_Jgrd6OjiL7oeOI7SsLwNmjphwvcMLhyuttNxrPnzvVIfRjqK2LAKAbn6HzMXRlPCqw7uAIKPKNc1o93gcEPgLJqpIZf6VrvfGtiSfnli1OwUleGEKTzDcmDMXtAembSPqztJUWh-ga32YMT__Gkvv-i_1g2RKKKyVngDWkh5pEo2NWEbQTUD8DbONUtIdjcnAQyABfqIfjpMy7sM0DCr4xTnUm-as6XRuKdnW25PAguebOC-CLJELHRrsus3G2duvwMKmu4kTZdecvM7ZO5Pvy1g2mAlB7aBASPJVaTnfnN2tiejJh5Gyg==",
+                "status": null
+              },
+              {
+                "arguments": "{\"query\":\"Civil Technology Certificate\"}",
+                "call_id": "call_Sjq5tChQldZ63r6I8kOfAc03",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_04edf195dd865d9f006aa073f0522887d0bdac38997c34a490",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900336.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1464,
+              "input_tokens_details": {
+                "cache_write_tokens": 120,
+                "cached_tokens": 1341
+              },
+              "output_tokens": 51,
+              "output_tokens_details": {
+                "reasoning_tokens": 28
+              },
+              "total_tokens": 1515
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_programs",
+          "arguments": {
+            "query": "Civil Technology Certificate"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "I'm considering the Civil Technology Certificate. Give me a brief introduction.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "active_program_count": 164,
+            "distinct_credentials": [
+              "Advanced Certificate",
+              "Associate Certificate",
+              "BCIT/Industry Partnership Certificate",
+              "Certificate",
+              "Graduate Certificate"
+            ],
+            "programs": [
+              {
+                "campus": "Aerospace Technology Campus",
+                "credential": "BCIT/Industry Partnership Certificate",
+                "delivery_method": "In person",
+                "program_id": "1195IPCERT",
+                "program_name": "Advanced Gas Turbine",
+                "source_url": "https://www.bcit.ca/programs/advanced-gas-turbine-bcit-industry-partnership-certificate-full-time-1195ipcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Certificate",
+                "delivery_method": "Online",
+                "program_id": "6890CERT",
+                "program_name": "Advanced Safety Management",
+                "source_url": "https://www.bcit.ca/programs/advanced-safety-management-certificate-part-time-6890cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5530ACERT",
+                "program_name": "Agile Development",
+                "source_url": "https://www.bcit.ca/programs/agile-development-associate-certificate-part-time-5530acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Aerospace Technology Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1030CERTTS",
+                "program_name": "Aircraft Gas Turbine Technician",
+                "source_url": "https://www.bcit.ca/programs/aircraft-gas-turbine-technician-certificate-full-time-1030certts/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Aerospace Technology Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1070ACERT",
+                "program_name": "Airport Operations",
+                "source_url": "https://www.bcit.ca/programs/airport-operations-associate-certificate-part-time-1070acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6992ACERT",
+                "program_name": "Applied Computer Information Systems (ACIS)",
+                "source_url": "https://www.bcit.ca/programs/applied-computer-information-systems-acis-associate-certificate-part-time-6992acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5512CERT",
+                "program_name": "Applied Data Analytics",
+                "source_url": "https://www.bcit.ca/programs/applied-data-analytics-certificate-part-time-5512cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6994ACERT",
+                "program_name": "Applied Database Administration and Design",
+                "source_url": "https://www.bcit.ca/programs/applied-database-administration-and-design-associate-certificate-part-time-6994acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5515ACERT",
+                "program_name": "Applied Network Administration and Design",
+                "source_url": "https://www.bcit.ca/programs/applied-network-administration-and-design-associate-certificate-part-time-5515acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6958ACERT",
+                "program_name": "Applied Software Development (ASD)",
+                "source_url": "https://www.bcit.ca/programs/applied-software-development-asd-associate-certificate-part-time-6958acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6957ACERT",
+                "program_name": "Applied Web Development",
+                "source_url": "https://www.bcit.ca/programs/applied-web-development-associate-certificate-part-time-6957acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6030CERT",
+                "program_name": "Architectural and Building Technology",
+                "source_url": "https://www.bcit.ca/programs/architectural-and-building-technology-certificate-part-time-6030cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1720CERTTS",
+                "program_name": "Architectural and Structural CADD and Graphics Technician (Architectural Option)",
+                "source_url": "https://www.bcit.ca/programs/architectural-and-structural-cadd-and-graphics-technician-architectural-option-certificate-full-time-1720certts/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1710CERTTS",
+                "program_name": "Architectural and Structural CADD and Graphics Technician (Structural Option)",
+                "source_url": "https://www.bcit.ca/programs/architectural-and-structural-cadd-and-graphics-technician-structural-option-certificate-full-time-1710certts/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5245ACERT",
+                "program_name": "Artificial Intelligence Management",
+                "source_url": "https://www.bcit.ca/programs/artificial-intelligence-management-associate-certificate-part-time-5245acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1255CERT",
+                "program_name": "Auto Body Repair and Refinishing Technician Foundation",
+                "source_url": "https://www.bcit.ca/programs/auto-body-repair-and-refinishing-technician-foundation-certificate-full-time-1255cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1320ADCERT",
+                "program_name": "Automated Controls Installation and Maintenance",
+                "source_url": "https://www.bcit.ca/programs/automated-controls-installation-and-maintenance-advanced-certificate-part-time-1320adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1360CERT",
+                "program_name": "Automotive Technician (Honda/Acura Foundation)",
+                "source_url": "https://www.bcit.ca/programs/automotive-technician-honda-acura-foundation-certificate-full-time-1360cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1375TTCERT",
+                "program_name": "Automotive Technician (Toyota Foundation)",
+                "source_url": "https://www.bcit.ca/programs/automotive-technician-toyota-foundation-certificate-full-time-1375ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1355TTCERT",
+                "program_name": "Automotive Technician Foundation",
+                "source_url": "https://www.bcit.ca/programs/automotive-technician-foundation-certificate-full-time-1355ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1450TTCERT",
+                "program_name": "Boilermaker Foundation",
+                "source_url": "https://www.bcit.ca/programs/boilermaker-foundation-certificate-full-time-1450ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Marine Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "2933ACERT",
+                "program_name": "Bridge Watch Rating",
+                "source_url": "https://www.bcit.ca/programs/bridge-watch-rating-associate-certificate-full-time-2933acert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6645ADCERT",
+                "program_name": "Bridging Medical Radiography",
+                "source_url": "https://www.bcit.ca/programs/bridging-medical-radiography-advanced-certificate-part-time-6645adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6115ACERT",
+                "program_name": "Broadcast and Digital Journalism",
+                "source_url": "https://www.bcit.ca/programs/broadcast-and-digital-journalism-associate-certificate-part-time-6115acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "515GACERT",
+                "program_name": "Building Construction Technology",
+                "source_url": "https://www.bcit.ca/programs/building-construction-technology-associate-certificate-part-time-515gacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "515HACERT",
+                "program_name": "Building Design and Architectural CAD",
+                "source_url": "https://www.bcit.ca/programs/building-design-and-architectural-cad-associate-certificate-part-time-515hacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Graduate Certificate",
+                "delivery_method": "In person",
+                "program_id": "A200GRCERT",
+                "program_name": "Building Energy Modelling",
+                "source_url": "https://www.bcit.ca/programs/building-energy-modelling-graduate-certificate-part-time-a200grcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "5235ADCERT",
+                "program_name": "Building Energy Modelling and Performance Analysis",
+                "source_url": "https://www.bcit.ca/programs/building-energy-modelling-and-performance-analysis-advanced-certificate-part-time-5235adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5140ACERT",
+                "program_name": "Business Administration",
+                "source_url": "https://www.bcit.ca/programs/business-administration-associate-certificate-part-time-5140acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus, Vancouver",
+                "credential": "Graduate Certificate",
+                "delivery_method": "Blended (on campus and online)",
+                "program_id": "A700GRCERT",
+                "program_name": "Business Administration",
+                "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5205ACERT",
+                "program_name": "Business Analysis",
+                "source_url": "https://www.bcit.ca/programs/business-analysis-associate-certificate-part-time-5205acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Vancouver Campus",
+                "credential": "Graduate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "A600GRCERT",
+                "program_name": "Business Analytics",
+                "source_url": "https://www.bcit.ca/programs/business-analytics-graduate-certificate-full-time-a600grcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5295ACERT",
+                "program_name": "Business Data Management",
+                "source_url": "https://www.bcit.ca/programs/business-data-management-associate-certificate-part-time-5295acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "7985ACERT",
+                "program_name": "Business Fundamentals",
+                "source_url": "https://www.bcit.ca/programs/business-fundamentals-associate-certificate-full-time-7985acert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5275ACERT",
+                "program_name": "Business Intelligence",
+                "source_url": "https://www.bcit.ca/programs/business-intelligence-associate-certificate-part-time-5275acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6245MCERT",
+                "program_name": "Business Management",
+                "source_url": "https://www.bcit.ca/programs/business-management-certificate-part-time-6245mcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "5125ACERT",
+                "program_name": "Business of Sawmilling",
+                "source_url": "https://www.bcit.ca/programs/business-of-sawmilling-associate-certificate-part-time-5125acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2060CERT",
+                "program_name": "Cabinetmaker (Joiner) Foundation",
+                "source_url": "https://www.bcit.ca/programs/cabinetmaker-joiner-foundation-certificate-full-time-2060cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "5330ADCERT",
+                "program_name": "Cardiac Sciences (Cardiac Rhythm Device Technology Option)",
+                "source_url": "https://www.bcit.ca/programs/cardiac-sciences-cardiac-rhythm-device-technology-option-advanced-certificate-part-time-5330adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online / clinical sites",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5310ADCERT",
+                "program_name": "Cardiac Sciences (Cardiovascular Technology Option)",
+                "source_url": "https://www.bcit.ca/programs/cardiac-sciences-cardiovascular-technology-option-advanced-certificate-part-time-5310adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "5320ADCERT",
+                "program_name": "Cardiac Sciences (Electrophysiology Technology Option)",
+                "source_url": "https://www.bcit.ca/programs/cardiac-sciences-electrophysiology-technology-option-advanced-certificate-part-time-5320adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / clinical sites",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6820ASCERT",
+                "program_name": "Cardiovascular Perfusion",
+                "source_url": "https://www.bcit.ca/programs/cardiovascular-perfusion-advanced-certificate-part-time-6820ascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1645CERT",
+                "program_name": "Carpentry Framing and Forming Foundation",
+                "source_url": "https://www.bcit.ca/programs/carpentry-framing-and-forming-foundation-certificate-full-time-1645cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Refer to official BCIT program page",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2020CERTTS",
+                "program_name": "Chief Mate",
+                "source_url": "https://www.bcit.ca/programs/chief-mate-certificate-part-time-2020certts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5430CERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5430ACERT",
+                "program_name": "Civil Technology",
+                "source_url": "https://www.bcit.ca/programs/civil-technology-associate-certificate-part-time-5430acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5570ACERT",
+                "program_name": "Computer Aided Design (CAD) Technology",
+                "source_url": "https://www.bcit.ca/programs/computer-aided-design-cad-technology-associate-certificate-part-time-5570acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5500CERT",
+                "program_name": "Computer Systems",
+                "source_url": "https://www.bcit.ca/programs/computer-systems-certificate-part-time-5500cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5725ACERT",
+                "program_name": "Computerized Accounting",
+                "source_url": "https://www.bcit.ca/programs/computerized-accounting-associate-certificate-part-time-5725acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "1155ACERT",
+                "program_name": "Construction Drawings",
+                "source_url": "https://www.bcit.ca/programs/construction-drawings-associate-certificate-part-time-1155acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6530CERT",
+                "program_name": "Construction Estimating",
+                "source_url": "https://www.bcit.ca/programs/construction-estimating-certificate-part-time-6530cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5225ACERT",
+                "program_name": "Construction of Mass Timber Structures",
+                "source_url": "https://www.bcit.ca/programs/construction-of-mass-timber-structures-associate-certificate-part-time-5225acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "7880ACERT",
+                "program_name": "Construction Operations",
+                "source_url": "https://www.bcit.ca/programs/construction-operations-associate-certificate-part-time-7880acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "7870CERT",
+                "program_name": "Construction Supervision",
+                "source_url": "https://www.bcit.ca/programs/construction-supervision-certificate-part-time-7870cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680XADCERT",
+                "program_name": "Critical Care Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/critical-care-nursing-specialty-advanced-certificate-part-time-680xadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680LASCERT",
+                "program_name": "Critical Care Nursing Specialty (Combined Critical Care/Emergency Option)",
+                "source_url": "https://www.bcit.ca/programs/critical-care-nursing-specialty-combined-critical-care-emergency-option-advanced-certificate-part-time-680lascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "5165ADCERT",
+                "program_name": "Digital Health",
+                "source_url": "https://www.bcit.ca/programs/digital-health-advanced-certificate-part-time-5165adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6375ACERT",
+                "program_name": "Digital Marketing Foundations",
+                "source_url": "https://www.bcit.ca/programs/digital-marketing-foundations-associate-certificate-part-time-6375acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "6385ACERT",
+                "program_name": "Digital Marketing Strategy",
+                "source_url": "https://www.bcit.ca/programs/digital-marketing-strategy-associate-certificate-part-time-6385acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5365ACERT",
+                "program_name": "Digital Media Foundations",
+                "source_url": "https://www.bcit.ca/programs/digital-media-foundations-associate-certificate-part-time-5365acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1780CERT",
+                "program_name": "Electrical Foundation",
+                "source_url": "https://www.bcit.ca/programs/electrical-foundation-certificate-full-time-1780cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680SASCERT",
+                "program_name": "Emergency Nursing Specialty (Combined Emergency/Critical Care Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-combined-emergency-critical-care-option-advanced-certificate-part-time-680sascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680YADCERT",
+                "program_name": "Emergency Nursing Specialty (Pediatric Emergency Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-pediatric-emergency-option-advanced-certificate-part-time-680yadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680EASCERT",
+                "program_name": "Emergency Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-standard-option-advanced-certificate-part-time-680eascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6090CERT",
+                "program_name": "Essential Technical Skills for Architecture, Construction, and Engineering",
+                "source_url": "https://www.bcit.ca/programs/essential-technical-skills-for-architecture-construction-and-engineering-certificate-part-time-6090cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5077CERT",
+                "program_name": "Event Marketing and Management Strategy",
+                "source_url": "https://www.bcit.ca/programs/event-marketing-and-management-strategy-certificate-part-time-5077cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6315ACERT",
+                "program_name": "Event Marketing and Planning Foundations",
+                "source_url": "https://www.bcit.ca/programs/event-marketing-and-planning-foundations-associate-certificate-part-time-6315acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "585CMCERT",
+                "program_name": "Financial Management (Finance Option)",
+                "source_url": "https://www.bcit.ca/programs/financial-management-finance-option-certificate-part-time-585cmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "585IACERT",
+                "program_name": "Financial Management (Financial Planning)",
+                "source_url": "https://www.bcit.ca/programs/financial-management-financial-planning-associate-certificate-part-time-585iacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "585FMCERT",
+                "program_name": "Financial Management (Professional Accounting Option)",
+                "source_url": "https://www.bcit.ca/programs/financial-management-professional-accounting-option-certificate-part-time-585fmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "675FACERT",
+                "program_name": "Fire Protection Inspection and Testing",
+                "source_url": "https://www.bcit.ca/programs/fire-protection-inspection-and-testing-associate-certificate-part-time-675facert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Certificate",
+                "delivery_method": "Online",
+                "program_id": "6285CERT",
+                "program_name": "Fire Service Industry Leadership",
+                "source_url": "https://www.bcit.ca/programs/fire-service-industry-leadership-certificate-part-time-6285cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6365ACERT",
+                "program_name": "Food Safety",
+                "source_url": "https://www.bcit.ca/programs/food-safety-associate-certificate-part-time-6365acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "528AADCERT",
+                "program_name": "Forensic Investigation (Crime and Intelligence Analysis Option)",
+                "source_url": "https://www.bcit.ca/programs/forensic-investigation-crime-and-intelligence-analysis-option-advanced-certificate-part-time-528aadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus",
+                "credential": "Advanced Certificate",
+                "delivery_method": "In person",
+                "program_id": "528CADCERT",
+                "program_name": "Forensic Investigation (Digital Forensics and Cybersecurity Option)",
+                "source_url": "https://www.bcit.ca/programs/forensic-investigation-digital-forensics-and-cybersecurity-option-advanced-certificate-part-time-528cadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "528BADCERT",
+                "program_name": "Forensic Investigation (Forensic Science Option)",
+                "source_url": "https://www.bcit.ca/programs/forensic-investigation-forensic-science-option-advanced-certificate-part-time-528badcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "5325ACERT",
+                "program_name": "Foundations in Occupational Health and Safety",
+                "source_url": "https://www.bcit.ca/programs/foundations-in-occupational-health-and-safety-associate-certificate-part-time-5325acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "6535CERT",
+                "program_name": "Front-End Web Developer",
+                "source_url": "https://www.bcit.ca/programs/front-end-web-developer-certificate-full-time-6535cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "6040ACERT",
+                "program_name": "Fundamentals of Water and Wastewater Operations",
+                "source_url": "https://www.bcit.ca/programs/fundamentals-of-water-and-wastewater-operations-associate-certificate-part-time-6040acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "5440ADCERT",
+                "program_name": "Geographic Information Systems",
+                "source_url": "https://www.bcit.ca/programs/geographic-information-systems-advanced-certificate-part-time-5440adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "6225ACERT",
+                "program_name": "Global Business Studies",
+                "source_url": "https://www.bcit.ca/programs/global-business-studies-associate-certificate-part-time-6225acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Graduate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "A500GRCERT",
+                "program_name": "Global Leadership",
+                "source_url": "https://www.bcit.ca/programs/global-leadership-graduate-certificate-full-time-a500grcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6585CERT",
+                "program_name": "Graphic Design",
+                "source_url": "https://www.bcit.ca/programs/graphic-design-certificate-full-time-part-time-6585cert/",
+                "study_mode": "Full-time/Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6505ACERT",
+                "program_name": "Graphic Design Foundations",
+                "source_url": "https://www.bcit.ca/programs/graphic-design-foundations-associate-certificate-part-time-6505acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "6860ADCERT",
+                "program_name": "Health Leadership",
+                "source_url": "https://www.bcit.ca/programs/health-leadership-advanced-certificate-part-time-6860adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "5170ACERT",
+                "program_name": "Healthcare Unit Clerk",
+                "source_url": "https://www.bcit.ca/programs/healthcare-unit-clerk-associate-certificate-part-time-5170acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2958CERT",
+                "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+                "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Annacis Island Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1940CERT",
+                "program_name": "Heavy Mechanical Trades Foundation",
+                "source_url": "https://www.bcit.ca/programs/heavy-mechanical-trades-foundation-certificate-full-time-1940cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680WASCERT",
+                "program_name": "High Acuity Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/high-acuity-nursing-specialty-advanced-certificate-part-time-680wascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "7610ACERT",
+                "program_name": "Human Resource Management",
+                "source_url": "https://www.bcit.ca/programs/human-resource-management-associate-certificate-part-time-7610acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "625AMCERT",
+                "program_name": "Human Resource Management",
+                "source_url": "https://www.bcit.ca/programs/human-resource-management-certificate-part-time-625amcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "1790ACERT",
+                "program_name": "Hydronic Technician",
+                "source_url": "https://www.bcit.ca/programs/hydronic-technician-associate-certificate-part-time-1790acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "5160ACERT",
+                "program_name": "Industrial Wood Processing",
+                "source_url": "https://www.bcit.ca/programs/industrial-wood-processing-associate-certificate-part-time-5160acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "6195CERT",
+                "program_name": "Interior Design Fundamentals",
+                "source_url": "https://www.bcit.ca/programs/interior-design-fundamentals-certificate-full-time-part-time-6195cert/",
+                "study_mode": "Full-time/Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "7460MCERT",
+                "program_name": "International Trade and Transportation Logistics",
+                "source_url": "https://www.bcit.ca/programs/international-trade-and-transportation-logistics-certificate-part-time-7460mcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2000TTCERT",
+                "program_name": "Ironworker Foundation",
+                "source_url": "https://www.bcit.ca/programs/ironworker-foundation-certificate-full-time-2000ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6830ACERT",
+                "program_name": "Leadership",
+                "source_url": "https://www.bcit.ca/programs/leadership-associate-certificate-part-time-6830acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6265ACERT",
+                "program_name": "Lean Six Sigma Principles",
+                "source_url": "https://www.bcit.ca/programs/lean-six-sigma-principles-associate-certificate-part-time-6265acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2175TTCERT",
+                "program_name": "Machinist Foundation",
+                "source_url": "https://www.bcit.ca/programs/machinist-foundation-certificate-full-time-2175ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "7950ASCERT",
+                "program_name": "Magnetic Resonance Imaging",
+                "source_url": "https://www.bcit.ca/programs/magnetic-resonance-imaging-advanced-certificate-part-time-7950ascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Annacis Island Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "1920CERT",
+                "program_name": "Marine Mechanical Technician Foundation",
+                "source_url": "https://www.bcit.ca/programs/marine-mechanical-technician-foundation-certificate-full-time-1920cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6300MCERT",
+                "program_name": "Marketing Management",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-certificate-part-time-6300mcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630WACERT",
+                "program_name": "Marketing Management - Customer Relationship Marketing",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-customer-relationship-marketing-associate-certificate-part-time-630wacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630HACERT",
+                "program_name": "Marketing Management - Entrepreneurship",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-entrepreneurship-associate-certificate-part-time-630hacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6390ACERT",
+                "program_name": "Marketing Management - Fundraising Management",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-fundraising-management-associate-certificate-part-time-6390acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630DACERT",
+                "program_name": "Marketing Management - Marketing Communications",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-marketing-communications-associate-certificate-part-time-630dacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630XACERT",
+                "program_name": "Marketing Management - Public Relations",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-public-relations-associate-certificate-part-time-630xacert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630MACERT",
+                "program_name": "Marketing Management - Sales Skills",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-sales-skills-associate-certificate-part-time-630macert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630DMCERT",
+                "program_name": "Marketing Management (Marketing Communications Option)",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-marketing-communications-option-certificate-part-time-630dmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630VMCERT",
+                "program_name": "Marketing Management (Professional Sales Option)",
+                "source_url": "https://www.bcit.ca/programs/marketing-management-professional-sales-option-certificate-part-time-630vmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Marine Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "2505ACERTS",
+                "program_name": "Master 150GT Domestic",
+                "source_url": "https://www.bcit.ca/programs/master-150gt-domestic-associate-certificate-part-time-2505acerts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Marine Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2522CERTTS",
+                "program_name": "Master 3000GT Domestic",
+                "source_url": "https://www.bcit.ca/programs/master-3000gt-domestic-certificate-part-time-2522certts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Marine Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "2515ACERTS",
+                "program_name": "Master 500GT Domestic",
+                "source_url": "https://www.bcit.ca/programs/master-500gt-domestic-associate-certificate-part-time-2515acerts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6760ACERT",
+                "program_name": "Mechanical Systems",
+                "source_url": "https://www.bcit.ca/programs/mechanical-systems-associate-certificate-part-time-6760acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "630PMCERT",
+                "program_name": "Media Techniques and Marketing Communications",
+                "source_url": "https://www.bcit.ca/programs/media-techniques-and-marketing-communications-certificate-part-time-630pmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6450MCERT",
+                "program_name": "Media Techniques for Business",
+                "source_url": "https://www.bcit.ca/programs/media-techniques-for-business-certificate-part-time-6450mcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "6630ACERT",
+                "program_name": "Medical Office Assistant",
+                "source_url": "https://www.bcit.ca/programs/medical-office-assistant-associate-certificate-part-time-6630acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2825CERT",
+                "program_name": "Metal Fabricator Foundation",
+                "source_url": "https://www.bcit.ca/programs/metal-fabricator-foundation-certificate-full-time-2825cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2230CERT",
+                "program_name": "Millwright Foundation",
+                "source_url": "https://www.bcit.ca/programs/millwright-foundation-certificate-full-time-2230cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "2365CERT",
+                "program_name": "Motorcycle Technician Foundation",
+                "source_url": "https://www.bcit.ca/programs/motorcycle-technician-foundation-certificate-full-time-2365cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5115ACERT",
+                "program_name": "Music Business",
+                "source_url": "https://www.bcit.ca/programs/music-business-associate-certificate-part-time-5115acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680FASCERT",
+                "program_name": "Neonatal Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/neonatal-nursing-specialty-advanced-certificate-part-time-680fascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680MASCERT",
+                "program_name": "Nephrology Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/nephrology-nursing-specialty-advanced-certificate-part-time-680mascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "1885ACERTS",
+                "program_name": "Network Administrator Technician",
+                "source_url": "https://www.bcit.ca/programs/network-administrator-technician-associate-certificate-part-time-1885acerts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6310ACERT",
+                "program_name": "Nonprofit Management",
+                "source_url": "https://www.bcit.ca/programs/nonprofit-management-associate-certificate-part-time-6310acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "5755ACERT",
+                "program_name": "Occupational Health and Safety Practitioners",
+                "source_url": "https://www.bcit.ca/programs/occupational-health-and-safety-practitioners-associate-certificate-part-time-5755acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6998CERT",
+                "program_name": "Office Administrator with Technology Program (OAT)",
+                "source_url": "https://www.bcit.ca/programs/office-administrator-with-technology-program-oat-certificate-full-time-6998cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "690FMCERT",
+                "program_name": "Operations Management (Facilities Management Option)",
+                "source_url": "https://www.bcit.ca/programs/operations-management-facilities-management-option-certificate-part-time-690fmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "690AMCERT",
+                "program_name": "Operations Management (Industrial Engineering Option)",
+                "source_url": "https://www.bcit.ca/programs/operations-management-industrial-engineering-option-certificate-part-time-690amcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "690BMCERT",
+                "program_name": "Operations Management (Management Engineering Option)",
+                "source_url": "https://www.bcit.ca/programs/operations-management-management-engineering-option-certificate-part-time-690bmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "690DMCERT",
+                "program_name": "Operations Management (Materials Management Option)",
+                "source_url": "https://www.bcit.ca/programs/operations-management-materials-management-option-certificate-part-time-690dmcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6008CERT",
+                "program_name": "Payroll Administration",
+                "source_url": "https://www.bcit.ca/programs/payroll-administration-certificate-part-time-6008cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6005ACERT",
+                "program_name": "Payroll and Human Resources",
+                "source_url": "https://www.bcit.ca/programs/payroll-and-human-resources-associate-certificate-part-time-6005acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "6835ADCERT",
+                "program_name": "Pediatric Emergency Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/pediatric-emergency-nursing-specialty-advanced-certificate-part-time-6835adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "681BADCERT",
+                "program_name": "Pediatric Nursing Specialty (Anesthesia Care Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-anesthesia-care-option-advanced-certificate-part-time-681badcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680ZADCERT",
+                "program_name": "Pediatric Nursing Specialty (Critical Care Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-critical-care-option-advanced-certificate-part-time-680zadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680BASCERT",
+                "program_name": "Pediatric Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-standard-option-advanced-certificate-part-time-680bascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680VASCERT",
+                "program_name": "Perinatal Nursing Specialty (Perinatal - Perioperative Option)",
+                "source_url": "https://www.bcit.ca/programs/perinatal-nursing-specialty-perinatal-perioperative-option-advanced-certificate-part-time-680vascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680CASCERT",
+                "program_name": "Perinatal Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/perinatal-nursing-specialty-standard-option-advanced-certificate-part-time-680cascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680PASCERT",
+                "program_name": "Perioperative Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/perioperative-nursing-specialty-advanced-certificate-part-time-680pascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2440CERT",
+                "program_name": "Piping Foundation",
+                "source_url": "https://www.bcit.ca/programs/piping-foundation-certificate-full-time-2440cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5175ACERT",
+                "program_name": "Polytechnic Teaching",
+                "source_url": "https://www.bcit.ca/programs/polytechnic-teaching-associate-certificate-part-time-5175acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2410TTCERT",
+                "program_name": "Power Engineering (General Program)",
+                "source_url": "https://www.bcit.ca/programs/power-engineering-general-program-certificate-full-time-2410ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5085ACERT",
+                "program_name": "Project Management",
+                "source_url": "https://www.bcit.ca/programs/project-management-associate-certificate-part-time-5085acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus / Online",
+                "credential": "Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6945CERT",
+                "program_name": "Quality and Process Management",
+                "source_url": "https://www.bcit.ca/programs/quality-and-process-management-certificate-part-time-6945cert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "6125ACERT",
+                "program_name": "Radio Arts and Entertainment",
+                "source_url": "https://www.bcit.ca/programs/radio-arts-and-entertainment-associate-certificate-part-time-6125acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Annacis Island Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1685ACERT",
+                "program_name": "Railway Conductor and Operations",
+                "source_url": "https://www.bcit.ca/programs/railway-conductor-and-operations-associate-certificate-part-time-1685acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2425CERT",
+                "program_name": "Refrigeration and Air Conditioning Mechanic Foundation",
+                "source_url": "https://www.bcit.ca/programs/refrigeration-and-air-conditioning-mechanic-foundation-certificate-full-time-2425cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Advanced Certificate",
+                "delivery_method": "In person",
+                "program_id": "6185ADCERT",
+                "program_name": "Renewable Energy Electrical Systems Installation & Maintenance",
+                "source_url": "https://www.bcit.ca/programs/renewable-energy-electrical-systems-installation-and-maintenance-advanced-certificate-part-time-6185adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2915CERT",
+                "program_name": "Security Systems Technician",
+                "source_url": "https://www.bcit.ca/programs/security-systems-technician-certificate-full-time-2915cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2645CERT",
+                "program_name": "Sheet Metal Worker Foundation",
+                "source_url": "https://www.bcit.ca/programs/sheet-metal-worker-foundation-certificate-full-time-2645cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5145ADCERT",
+                "program_name": "Sustainable Business",
+                "source_url": "https://www.bcit.ca/programs/sustainable-business-advanced-certificate-part-time-5145adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Online",
+                "program_id": "6425ACERT",
+                "program_name": "Technical Writing",
+                "source_url": "https://www.bcit.ca/programs/technical-writing-associate-certificate-part-time-6425acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "7110CERT",
+                "program_name": "Technology Support Professional (TSP)",
+                "source_url": "https://www.bcit.ca/programs/technology-support-professional-tsp-certificate-full-time-7110cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6590ACERT",
+                "program_name": "Tourism and Hospitality",
+                "source_url": "https://www.bcit.ca/programs/tourism-and-hospitality-associate-certificate-part-time-6590acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "1190ACERT",
+                "program_name": "Trades Discovery for Women",
+                "source_url": "https://www.bcit.ca/programs/trades-discovery-for-women-associate-certificate-full-time-1190acert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "1180ACERT",
+                "program_name": "Trades Discovery General",
+                "source_url": "https://www.bcit.ca/programs/trades-discovery-general-associate-certificate-full-time-1180acert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Downtown Campus / Online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "5985ACERT",
+                "program_name": "User Interface (UI) and User Experience (UX) Design",
+                "source_url": "https://www.bcit.ca/programs/user-interface-ui-and-user-experience-ux-design-associate-certificate-part-time-5985acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / Burnaby Campus",
+                "credential": "Associate Certificate",
+                "delivery_method": "In person",
+                "program_id": "6120ACERT",
+                "program_name": "Video Production and Editing",
+                "source_url": "https://www.bcit.ca/programs/video-production-and-editing-associate-certificate-part-time-6120acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Refer to official BCIT program page",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2542CERTTS",
+                "program_name": "Watchkeeping Mate Near Coastal (WKMNC)",
+                "source_url": "https://www.bcit.ca/programs/watchkeeping-mate-near-coastal-wkmnc-certificate-part-time-2542certts/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Downtown Campus / online",
+                "credential": "Associate Certificate",
+                "delivery_method": "Blended",
+                "program_id": "6465ACERT",
+                "program_name": "Web and Mobile Application Development",
+                "source_url": "https://www.bcit.ca/programs/web-and-mobile-application-development-associate-certificate-part-time-6465acert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2847CERT",
+                "program_name": "Welder Foundation",
+                "source_url": "https://www.bcit.ca/programs/welder-foundation-certificate-full-time-2847cert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2870TTCERT",
+                "program_name": "Welding, Level A",
+                "source_url": "https://www.bcit.ca/programs/welding-level-a-certificate-full-time-2870ttcert/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby Campus",
+                "credential": "Certificate",
+                "delivery_method": "In person",
+                "program_id": "2860TTCERT",
+                "program_name": "Welding, Level B",
+                "source_url": "https://www.bcit.ca/programs/welding-level-b-certificate-full-time-2860ttcert/",
+                "study_mode": "Full-time"
+              }
+            ]
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Where is it taught?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I'm considering the Civil Technology Certificate. Give me a brief introduction."
+          }
+        ],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Where is it taught?",
+        "expected": "Give the stored location for this program; don't confuse delivery mode or the institution's headquarters.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Which course or program would you like to know about? Please provide its name or course code.",
+        "tools_used": [],
+        "verification": null,
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "none",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 5.5,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "none",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Where is it taught?\nRouted intent: COURSE_INFO\nRequired response language from current turn: English\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"none\", \"program_id\": null, \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}\nRecent conversation:\nUser: I'm considering the Civil Technology Certificate. Give me a brief introduction.",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_09e9029e83d3ab5d006aa073f691e887d09cda76bdfb0c8048",
+            "created_at": 1788900342.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_09e9029e83d3ab5d006aa073f6e40087d08998d1776d2ad99c",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHP64HNQX9oCr_dmpMUJpff3YLYrYNOeoX0JerRZe_4OUECqUhcbYt7NWhteUk-_h8itwpqwg6MAxM4P3j8zUR55RvpnxOJpUPDkxrEHYg83bRYWTjn0xNVD1YOAe3FcQ42OXMiWfutkDoqEeopzlBt8lL7HEvxHHif53yReWDMelrkF7D44fSkKHvbSdpe5VHk_4ktgiNYmYRfcZSwr3guHsdhknIb7h5v8tfXXgrHr-ubKeOndVNzqf-O0ILzZ6G3YDgENbGWgEOZZfsItsxcWXYkpZVV2NQSPNDgJE97H-Phc3NV5VWzHXpm5G1f2bOBiIcEs4BH2K-WRlpeygAYlDxz-Mtl7NVI-d6t0GjB9FWPDzjtFavXbyEaa28K4hkM-gzJH1T2EDgLi6Qfs7JoOKjKOTV3wredmUWrDuAbYl1mpMMYLa7dXRit7ZA6GzogCu2Pjyfy37cQN70k0FUuZrVRT05lypxTGssKwhWB_7AyeEjT5kh3U6GgjkJfjMMTu3AkOuIB7j6_1ateAhcqSs00uXdfuU7SeyvMvADsfVwcRPRsmgPS5UDZtgRNMLV8cqaajISGt1dZdeUlFa8uw2jVB35jvb9GGznkIsQsNQih3KBrwykqR4JR1S0Vp4S0BbczLzeEzzVwUzpTVQH1tVKHUyTpy0y3yz7gcY3hkmCELnjH_vyQzdZHo4Grm-R-uKW1wUM5h6m0ZfPTlVeh3a5QipZBSu-QgAqGEOZ6-lFXlxJchz95kuG1VFiyVkSbQ8V5N1Z_D6jEuNgHx9bPjtIxgOJMNeRGHLLhudN3JrZqIaDLcTq3ZQHt2xqnXQSDLKSJeENpgmcos6keBQSLKoYLLakz_l6RwRe0Iz_NNP2lHCpJzjp3RXI9QRydeBksqF2JeoOM1fu-0OnMNDAuMVrA9eBeNE8gtrYBWxUy1ia7d7KVsiJnLewi4fPtM2P2Imook-uox6X06NueRLRSsNNrRhPZs9AIYA34b0I-0Xslxe_gqA0DtEYYUXroobUB9SokJLVbxpjSWWYekMp3ranLO9EE04765TOi3CYUS02M34Y8IofbYNGPM-avcjQHS8OQ-Zo9dYOfZ-GMeI3nph5nrvTsEnVzVhe07CjECfnrD7-UG7VOYSstStWxWtAxhALlcnYO4s3Kp-9tC_Asx4iJLu3iFoAcj7_qjPVU7VpVeiJp_j2REEBsEokpzxswDeQelbPmFQUHErroXLJCT7eRjKW_eLGr-PyTb5H9L4HpjiYckGulc4KbaDk5D0hy6n_SVV-UIwCiRZ2W-ZS4bgrKtPziElc4at9QkPIbbnHWBoFPp8P2_enn9e2NCvZT28ksreP1Cyg8qBIC9GtKz8skAtxItvJJLy4_kG4VIyTM7TAyNZYXTJoqC8FAUZsl4UjjJHsMKClyk0VsCJT-mbkaKJlGTcUD--tECwRMUqMLRQRwgBi7aAqRpkZ2ANpzSOQtVb40F-GwwmpT62INGPPJ-QyfCMeTiG0ME_6UqkCBMvUbnW_fTHQvs6shUJbROORU0BNc0SwNa4E7A_wG0JZb2N8uGzNObPhXfF0ZB1EzM_zXpOayHlMzQ6EhhELvH3db5YlxuJ5y1L9ZXzEz_7A==",
+                "status": null
+              },
+              {
+                "id": "msg_09e9029e83d3ab5d006aa073f780b887d0a554e50ed4e0d558",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Which course or program would you like to know about? Please provide its name or course code.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900343.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1427,
+              "input_tokens_details": {
+                "cache_write_tokens": 1424,
+                "cached_tokens": 0
+              },
+              "output_tokens": 91,
+              "output_tokens_details": {
+                "reasoning_tokens": 66
+              },
+              "total_tokens": 1518
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Which course or program would you like to know about? Please provide its name or course code.",
+          "final_answer": "Which course or program would you like to know about? Please provide its name or course code."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "5430CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "request": {
+        "question": "And the official page for that one?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I'm considering the Civil Technology Certificate. Give me a brief introduction."
+          },
+          {
+            "role": "user",
+            "content": "Where is it taught?"
+          },
+          {
+            "role": "assistant",
+            "content": "Which course or program would you like to know about? Please provide its name or course code."
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "none",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "And the official page for that one?",
+        "expected": "Provide this program's exact stored official source URL.",
+        "scope": "source",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "contains_any",
+            "value": [
+              "https://www\\.bcit\\.ca/"
+            ],
+            "dimension": "evidence_discipline",
+            "root_cause": "unknown_human_confirmation"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "I can’t verify the official page for the Civil Technology Certificate from the available Asteris data. Please confirm the institution or program name if you’d like me to help locate it.",
+        "tools_used": [],
+        "verification": null,
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "none",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 5.062,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "none",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: And the official page for that one?\nRouted intent: COURSE_INFO\nRequired response language from current turn: English\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"none\", \"program_id\": null, \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}\nRecent conversation:\nUser: I'm considering the Civil Technology Certificate. Give me a brief introduction.\nUser: Where is it taught?\nAssistant: Which course or program would you like to know about? Please provide its name or course code.",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_0e455e5d9b128bf6006aa073fcbaf887d0b448c2afc7b6ff72",
+            "created_at": 1788900348.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0e455e5d9b128bf6006aa073fd271887d0af8982ea1e1e7508",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHP_z9YtnAQSMTE2setuqMFBR_99HMAOCUJgVrwnFkfvk3FcEgex3Re_Qza9dapIp5gAyUBNM3B0Fb_2a-Md1B73YTfwez2vRq1xHj00bRe5IrCjku9MSm9kFNSgB1xohIE89w7hwmJs_wbH3wEBwxT4bSXxwhQrPv5hv4Z8lV2rn1qfgwRIfsirIEOjceT3Q0dlMrf5E2Lls8_zPduZIfdXBfQU2JRSJdck1yqXXdslpdjgV4AiT6nQfpa_BXJgNnOcfOUO7JDsbuDkwzVln43ZPdvmu2pC3Ry0Y-wlpyzLDmdEn4YyYnGKcoRl20rCLxdaOXNasYciHm564xweAF1oeGIVesx0JN-YQr_t052FZ4CdxX5f0WTvh343CtKsdubsS00yNH5ZPCo48ENfNE1iig5c7sibiZudajNuzjOItZ-LtA-pqUEhDPUeQEfZAKO8xCsWhslNrerf05FoNcizAT5xvujoekWQo_Bg-cT0kCyegfTLKvQ_tMuJnopO9vBwN-7Hgc0eFalfINnbvYhE961f8IAJuc2dWquJDa500FqutdXRivsnVCKfe6Y5jLOiY3tg3WGToWtr4OZp8Y1GswSbSfY4rRCzRzbM-8Y-_D3zhJoXEzJj7KY-EJsxQyYkizqKTt3J1ppuGhwN3KdGC3oJ_fd3liL5_0HfrAjvTxbujsESwYHU4UTYWqL1RhTpB6ur02DQknxTmDDgOYxpvEqUIxn_RwPXR2UgalDoz2kuwLHD-rtK8bsJUTaWqz-yC-bcp5OHsO58yDVjtCqfRtEyOvpiEMshcL6K7l_7UiZ1QRmjBoCnALDK9ffHWXX0sMQoGfO4ULTMWhn0FdFlYu-robnNSWY6dsBRaq7IAeRBrHuBRli7DJOwTWPfufVbxYTjGxYlgkeDP37oJF9PtWeg-uBQcLtDnGDLMajuGA9s97msgOtVNTlBtZq81KTJDKTpy4IB-1xOVUt56AcIzm9UuCLRPFtulM8ov5vieWMB9tgDzflA4lMoSXV-Mqjww6OJqj8rzQv_zvlBz0BsGIfhkrzDyszqvHX7c7KUjow71sZOJkXtjY3DFQ24bn4OMZU-E1281_9aNUGrQBFO8cEn7KTHn7dlxGNSswBtcjIHB79ffhUbGAdWwmiHXs07xg-HzaJBkdpIG_8aT8DpjpjwPPgcFdFy4h-NmSqXnpCgQ1uwyjfS-B2NDILMiDoJSmsNDMi4VnRtsWeSbqJJdOjww3UNigRZcxEathRVm1RU-JNu7SEaRtl6vaYJJj3yYIqaH2fovWo-PQWcvFfjmCgNzE5ckWCYZUwE9C51LT3itKVNF1JiGS7XMpQsJsalnCGqNyWNXh92chGWDRfGylvWwzoJWQ5m_YYbhUsk9AB92WjZTjVzLiPesfzNSQ1aCXnRZaLHxfYuvmatMRfaP3Qie89ghA1zakoh36oU5KSOfrODjUGniTzFGa4BmH_UpJnrMnq1SA7seue4M3DRPggvXr8kZkj2PokiAbA8vtNJ1g_6HMzM40EL08g_MgBabT4A56u6PON7GlHkwmRskq8hKxZzlHJfg7V6Hl7aqqaa0AwvGje7RuMcA4e2wpu0Zjo5-RWjzqYXZnMeE-BZzkKE1KAzaM73KLdyTTBjy2_LA5garnmOe5lqH6bj9OEOIJWv_YtSDX3VB7q1J0_Sy6uWZb8g8DIEt6vY7Y10CDFnrdKOMJWXdPsfE2wMItWGejyuORVwbkZYY_Q9betgAsOJEje8IGCIwZK7HLy8EqUulXZ0ol8pCpGt-5bu4zWJgpG7pGjgJH2xFd8XAfcrRDoXXHK9tkzkiDJVDNEiJ_cxWiwFYxBN2CoPlKTyRF87qU53-Am81XksEo3yV-nvQqieC-vP1B2oemkmNUZg1ZnrqLWuIUsxM7o9mMHujloRGkjDKXZSMP596lwndnavEuzfx0fie2-X73Ok5so_3GC6uZKiZu01ZM1DZ1QW8tSOY2jtQ9gNUtQv9U0uMxMq0mUIasPKwVMEhrJi1jexIw9Z-zSF2mf78eU537WGfef3mQSOGzolxMc6TlSXJBtqWLzXy2OUnTG7cVoa8rohkJGJ1Zqk4y5RsGR_lJTEaiiMa-J7V8NL6u3K7bzNQWlhysAqMsdXDKuTMBWMpBZmNq8=",
+                "status": null
+              },
+              {
+                "id": "msg_0e455e5d9b128bf6006aa073fe759c87d0ad0987e266a4e2e0",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "I can’t verify the official page for the Civil Technology Certificate from the available Asteris data. Please confirm the institution or program name if you’d like me to help locate it.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900350.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1458,
+              "input_tokens_details": {
+                "cache_write_tokens": 161,
+                "cached_tokens": 1294
+              },
+              "output_tokens": 182,
+              "output_tokens_details": {
+                "reasoning_tokens": 139
+              },
+              "total_tokens": 1640
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "I can’t verify the official page for the Civil Technology Certificate from the available Asteris data. Please confirm the institution or program name if you’d like me to help locate it.",
+          "final_answer": "I can’t verify the official page for the Civil Technology Certificate from the available Asteris data. Please confirm the institution or program name if you’d like me to help locate it."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "contains_any",
+          "value": [
+            "https://www\\.bcit\\.ca/"
+          ],
+          "dimension": "evidence_discipline",
+          "root_cause": "unknown_human_confirmation",
+          "pass": false,
+          "actual": null
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "5430CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": false,
+          "actual": null
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

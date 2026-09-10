@@ -1,0 +1,1338 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-22",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The referent \"them\" was the three compared programs, all of which are degrees: a BSN, an MSc, and a BTech. The resolver instead preserved scope_query \"nursing programs,\" routed to a search for 28 nursing programs, and the answer listed 13 nursing BSN programs while omitting Applied Computing and Construction Management entirely.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech.",
+        "expected": "Compare all three with distinct credentials and requirements.",
+        "scope": "comparison",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "- **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time.",
+        "tools_used": [
+          "compare_programs"
+        ],
+        "verification": {
+          "count": 3,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "nursing programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "8875BSN",
+            "M600MSC",
+            "8800BTECH"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "nursing programs:study_mode"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 8.578,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "8875BSN",
+              "M600MSC",
+              "8800BTECH"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "8875BSN",
+                "M600MSC",
+                "8800BTECH"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "nursing programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "nursing programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech.\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"nursing programs\",\"comparison_program_ids\":[\"8875BSN\",\"M600MSC\",\"8800BTECH\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: nursing programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0eb263f0cc5b626d006aa1039869a887d0893a768dd501d072",
+            "created_at": 1788937112.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech across the nursing programs family/category; report every returned member, including unknown results.\"}",
+                "call_id": "call_AlQxIsigsw3BURJlmWCxiz6g",
+                "name": "compare_programs",
+                "type": "function_call",
+                "id": "fc_0eb263f0cc5b626d006aa1039963a887d083fef2c2ba6f8cc2",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "compare_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937114.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1817,
+              "input_tokens_details": {
+                "cache_write_tokens": 187,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 51,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1868
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "compare_programs",
+          "arguments": {
+            "query": "Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech across the nursing programs family/category; report every returned member, including unknown results."
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "8875BSN",
+              "M600MSC",
+              "8800BTECH"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "nursing programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "comparison": "full_time",
+            "matching_programs": [
+              {
+                "campus": "Burnaby",
+                "classification": "matches",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery In person: This program is delivered on campus.",
+                "evidence": [
+                  "Full-time",
+                  "Program delivery In person: This program is delivered on campus.",
+                  "Burnaby"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "8875BSN",
+                "program_name": "Nursing, Bachelor of Science in Nursing, Full-time",
+                "source_url": "https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "classification": "matches",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Full-time",
+                  "In person",
+                  "Burnaby; possible Downtown Campus or field locations"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby",
+                "classification": "matches",
+                "credential": "Bachelor of Technology / Bachelor's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Full-time and Part-time",
+                  "In person",
+                  "Burnaby"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "8800BTECH",
+                "program_name": "Construction Management",
+                "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+                "study_mode": "Full-time and Part-time"
+              }
+            ],
+            "program_count": 3,
+            "programs": [
+              {
+                "campus": "Burnaby",
+                "classification": "matches",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery In person: This program is delivered on campus.",
+                "evidence": [
+                  "Full-time",
+                  "Program delivery In person: This program is delivered on campus.",
+                  "Burnaby"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "8875BSN",
+                "program_name": "Nursing, Bachelor of Science in Nursing, Full-time",
+                "source_url": "https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby; possible Downtown Campus or field locations",
+                "classification": "matches",
+                "credential": "Master of Science / Master's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Full-time",
+                  "In person",
+                  "Burnaby; possible Downtown Campus or field locations"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "M600MSC",
+                "program_name": "Applied Computing",
+                "source_url": "https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Burnaby",
+                "classification": "matches",
+                "credential": "Bachelor of Technology / Bachelor's Degree",
+                "delivery_method": "In person",
+                "evidence": [
+                  "Full-time and Part-time",
+                  "In person",
+                  "Burnaby"
+                ],
+                "human_confirmation_required": false,
+                "program_id": "8800BTECH",
+                "program_name": "Construction Management",
+                "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+                "study_mode": "Full-time and Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_AlQxIsigsw3BURJlmWCxiz6g",
+                "output": "{\"comparison\": \"full_time\", \"program_count\": 3, \"programs\": [{\"program_id\": \"8875BSN\", \"program_name\": \"Nursing, Bachelor of Science in Nursing, Full-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby\", \"delivery_method\": \"Program delivery In person: This program is delivered on campus.\", \"source_url\": \"https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/\", \"classification\": \"matches\", \"evidence\": [\"Full-time\", \"Program delivery In person: This program is delivered on campus.\", \"Burnaby\"], \"human_confirmation_required\": false}, {\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"classification\": \"matches\", \"evidence\": [\"Full-time\", \"In person\", \"Burnaby; possible Downtown Campus or field locations\"], \"human_confirmation_required\": false}, {\"program_id\": \"8800BTECH\", \"program_name\": \"Construction Management\", \"credential\": \"Bachelor of Technology / Bachelor's Degree\", \"study_mode\": \"Full-time and Part-time\", \"campus\": \"Burnaby\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/\", \"classification\": \"matches\", \"evidence\": [\"Full-time and Part-time\", \"In person\", \"Burnaby\"], \"human_confirmation_required\": false}], \"matching_programs\": [{\"program_id\": \"8875BSN\", \"program_name\": \"Nursing, Bachelor of Science in Nursing, Full-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby\", \"delivery_method\": \"Program delivery In person: This program is delivered on campus.\", \"source_url\": \"https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/\", \"classification\": \"matches\", \"evidence\": [\"Full-time\", \"Program delivery In person: This program is delivered on campus.\", \"Burnaby\"], \"human_confirmation_required\": false}, {\"program_id\": \"M600MSC\", \"program_name\": \"Applied Computing\", \"credential\": \"Master of Science / Master's Degree\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby; possible Downtown Campus or field locations\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/applied-computing-master-of-science-full-time-m600msc/\", \"classification\": \"matches\", \"evidence\": [\"Full-time\", \"In person\", \"Burnaby; possible Downtown Campus or field locations\"], \"human_confirmation_required\": false}, {\"program_id\": \"8800BTECH\", \"program_name\": \"Construction Management\", \"credential\": \"Bachelor of Technology / Bachelor's Degree\", \"study_mode\": \"Full-time and Part-time\", \"campus\": \"Burnaby\", \"delivery_method\": \"In person\", \"source_url\": \"https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/\", \"classification\": \"matches\", \"evidence\": [\"Full-time and Part-time\", \"In person\", \"Burnaby\"], \"human_confirmation_required\": false}]}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0eb263f0cc5b626d006aa1039869a887d0893a768dd501d072"
+          },
+          "response": {
+            "id": "resp_0eb263f0cc5b626d006aa1039b22e087d0be7181582e52e672",
+            "created_at": 1788937115.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0eb263f0cc5b626d006aa1039c1ef887d0a3204d51e8d0827c",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQOg-Gjpotg7NWL4XKuEg2dEYAZmPgymrft6ojdf5eVzFYR-g54jxY97xxdFPTN3RZH86aCfxMPuZc5J9kd8MrN4uWHipLwolZvhFgdFyilPMY6mQKRNseHy2Bg-czFFbOMjR2EJngOy1VkTK8o5ztSm_VhptU-NdEliJKPyUG6Dzm1hZAVPC514uIIdRGVO99cXVxy5k6swSWg7ZdUqshexBXKP19lkE0T7kNVOX8fnqJvXwKFyKANxsiM__iafdM6is9uTDIHiZTY9PXGJWCp97pbZSRvObpgDX83k5ZE43U-KN3k9PogMbIBh5zQgD662-5r2X_574FgssTUYrlFOia9tkiMiBGkOPyOiVOu4a3xFQB_aFNYq5Dbgx8M34JE002pYebCwqEbp24z5EtINXXzCI5VtYZjtJ9KV7rrkZtOVKizREvYwsAnvDihHYNXl6OgtiljLnxkGq71ib8k9_G54-zancCysqKVSlVgrRmuQptqcj3lOPrcLNhTy8znYFa5wm4W_4VZsw7_OPa-c03Pur2eIVoMsthct4He15uzsTSO9oD0kWdOCW7kROqg31z6D6pS704beVdIuc8T22-UJ0dwdq8HiAcqyCibin1fn_wydYKJDTbX47qUsq-RWWdEAFQ8rjGyMRYW_9MX6gTdzcO9mAV8FkH1qQwahWkrf7SrixSc4_lNwBBDrW3MYDpngajwG1BPraAFqLVvyXPyO6AX88sNfAeP-y79PAaj0uBbIx0oYTldiEux6dRuUS-v2ZKnkqnW_jA-UlY2peS8WHuCWex-gGGan7j-OM1qArfeDlCIZumPxrNr_Xcrgvyg0NrPEhiLWVPSUWA65tcnW1CraT0l9Q-tNi3Q-2PZeabtL-q4U6yG0imsA1WcLh6_1QQ6Otun-TutJfhSRIGBFwgfhzSXAx2AXhc5ItfBMCzqYfnRccDPbxICaJlA66Uuj14FgJjO1loISUWiaNe9axn0gLdAblDl-PUt9vJVqkQxi42VewOn4K1Q0Mtx2fe7sU3hhCZ09p5T7h3ZffjT7WnfBt-PHa2cHg6i_m_pxcNjcvCEYyZHIOuW6ZdwESOqp7O9Fh07m1qjj3CqkCkDbNvLgSonekQuWNyVXZP51DBEVWCxkmRuSKUAOlfH1EVNyNJLwtlu-t5J6wXSYsr6fHigCZAhwaYINoxT7iCsjj_v11yooEWQ51SPD2yCJm7v52Q2PSsENod8UkhqXcqkHVXqpjUOlHwULW0TQQTwDRbMyWYrhyarMNYmevhCOfABjBEOoLwDwp_LhDFr7xaAbRHnuAcKGJwuruig97hDUbAsfZ_jRfpc07C6xFWkTKMevfNUoaQBWnMcfikhdOa7oMrDF3-f-hv5uK0k9oVpdjsAvUCcB3lIuhWsvSoGJjTgTB7Pvm7e_6f47Fa8iMO2gBy20n_7yss3XGm1WS4kACGOTpgRxsOWARPmkijtx_BNAtPVpmOT4RI_gZYzBfR7LZX6S5KwebhRy3K9Zze25QiI93XGajm8GGiR2KK_ecga_Lb2U779yjgI9T6VEavdLeML1eyL_MW7JEOW916UnX5O3kSOEs6foZfGCOdm_by53CSj_Wu39Qocjwvu3bNQ7ingINBd2_wTaiS6i7mtleayU0luyUPfAe4U7S7kiUYGzLZLsmCX6v1d2DQUT1YLV09jrR5zUjFMN0lQFciS4OfhH_xtVIsH7V5GlkWVYRvC3QcuIV6mTNRgoHRcDGY4pTVPQexlnX4Yd2pGWN5RwDg7OfLqqTmvRpZrdZhtEBtGs2Zi1hlcka2zOo4nNZoXJGjd_fDcHdRhtAEQfcfarZ620lPNVqPlVCNa3npLCBZmhxrYLcyAgIvRfYalaMnilywSTsRfLtE8GZK_G_xIOuGgn_K-Q1wDSYQXj4bierlMETfU_KjsRvDRdrmwdpQ==",
+                "status": null
+              },
+              {
+                "id": "msg_0eb263f0cc5b626d006aa1039de54c87d0951d22925e8c9dfb",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "- **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937119.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0eb263f0cc5b626d006aa1039869a887d0893a768dd501d072",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2588,
+              "input_tokens_details": {
+                "cache_write_tokens": 1036,
+                "cached_tokens": 1549
+              },
+              "output_tokens": 239,
+              "output_tokens_details": {
+                "reasoning_tokens": 107
+              },
+              "total_tokens": 2827
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "- **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time.",
+          "final_answer": "- **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time."
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Which of them are degrees?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech."
+          },
+          {
+            "role": "assistant",
+            "content": "- **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "nursing programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "8875BSN",
+            "M600MSC",
+            "8800BTECH"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "nursing programs:study_mode"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Which of them are degrees?",
+        "expected": "Answer for all three without reducing comparison to last named.",
+        "scope": "comparison",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "The nursing programs that award degrees are all **Bachelor of Science in Nursing (BSN)** programs:\n\n- Nursing, Bachelor of Science in Nursing, Full-time\n- Specialty Nursing (Critical Care – Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Critical Care – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Perioperative Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time\n\nThe other 15 nursing programs award **Advanced Certificates**, not degrees.",
+        "tools_used": [
+          "search_programs"
+        ],
+        "verification": {
+          "count": 28,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_CATEGORY",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program_family",
+          "program_id": null,
+          "course_id": null,
+          "scope_query": "nursing programs",
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [
+            "8875BSN",
+            "M600MSC",
+            "8800BTECH"
+          ],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "nursing programs:study_mode"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 8.688,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "8875BSN",
+              "M600MSC",
+              "8800BTECH"
+            ],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [
+                "nursing programs:study_mode"
+              ],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [
+                "8875BSN",
+                "M600MSC",
+                "8800BTECH"
+              ],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": null,
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program_family",
+              "scope_query": "nursing programs",
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "nursing programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Which of them are degrees?\nRouted intent: PROGRAM_CATEGORY\nRequired response depth: comparison\nRequired response language from current turn: English\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program_family\",\"scope_query\":\"nursing programs\",\"comparison_program_ids\":[\"8875BSN\",\"M600MSC\",\"8800BTECH\"],\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[\"nursing programs:study_mode\"]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nRecent conversation:\nUser: Compare the Nursing BSN full-time, Applied Computing MSc, and Construction Management BTech.\nAssistant: - **Nursing, Bachelor of Science in Nursing, Full-time** — Bachelor of Science in Nursing; full-time, in person at Burnaby.\n- **Applied Computing** — Master of Science; full-time, in person at Burnaby, with possible Downtown Campus or field locations.\n- **Construction Management** — Bachelor of Technology; full-time or part-time, in person at Burnaby.\n\nThe practical differences are the disciplines, credential levels, and scheduling flexibility: Applied Computing is the only master’s degree, Nursing is a full-time bachelor’s program, and Construction Management is the only option offered both full-time and part-time.\nThis is a program family/category list request. Return the complete matching set from search_programs. Do not select a program or append details for one member.\nResolved program-set scope for this turn: nursing programs. Keep this set neutral and do not activate a member.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "search_programs",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0cc898b63e4bd1fe006aa103a0f0c887d0bff1b155488ed540",
+            "created_at": 1788937120.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"nursing programs\"}",
+                "call_id": "call_iSB6ARXJl1ATpq5KTehZBt9X",
+                "name": "search_programs",
+                "type": "function_call",
+                "id": "fc_0cc898b63e4bd1fe006aa103a1dae887d09429326646b1f5b6",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "search_programs",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937122.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1962,
+              "input_tokens_details": {
+                "cache_write_tokens": 332,
+                "cached_tokens": 1500
+              },
+              "output_tokens": 21,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1983
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_programs",
+          "arguments": {
+            "query": "nursing programs"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [
+              "8875BSN",
+              "M600MSC",
+              "8800BTECH"
+            ],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Which of them are degrees?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": true,
+            "program_set_scope": "nursing programs",
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "active_program_count": 28,
+            "distinct_credentials": [
+              "Advanced Certificate",
+              "Bachelor of Science in Nursing"
+            ],
+            "programs": [
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680XADCERT",
+                "program_name": "Critical Care Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/critical-care-nursing-specialty-advanced-certificate-part-time-680xadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680LASCERT",
+                "program_name": "Critical Care Nursing Specialty (Combined Critical Care/Emergency Option)",
+                "source_url": "https://www.bcit.ca/programs/critical-care-nursing-specialty-combined-critical-care-emergency-option-advanced-certificate-part-time-680lascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680SASCERT",
+                "program_name": "Emergency Nursing Specialty (Combined Emergency/Critical Care Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-combined-emergency-critical-care-option-advanced-certificate-part-time-680sascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680YADCERT",
+                "program_name": "Emergency Nursing Specialty (Pediatric Emergency Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-pediatric-emergency-option-advanced-certificate-part-time-680yadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680EASCERT",
+                "program_name": "Emergency Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/emergency-nursing-specialty-standard-option-advanced-certificate-part-time-680eascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680WASCERT",
+                "program_name": "High Acuity Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/high-acuity-nursing-specialty-advanced-certificate-part-time-680wascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680FASCERT",
+                "program_name": "Neonatal Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/neonatal-nursing-specialty-advanced-certificate-part-time-680fascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680MASCERT",
+                "program_name": "Nephrology Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/nephrology-nursing-specialty-advanced-certificate-part-time-680mascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Burnaby",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery In person: This program is delivered on campus.",
+                "program_id": "8875BSN",
+                "program_name": "Nursing, Bachelor of Science in Nursing, Full-time",
+                "source_url": "https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/",
+                "study_mode": "Full-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "6835ADCERT",
+                "program_name": "Pediatric Emergency Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/pediatric-emergency-nursing-specialty-advanced-certificate-part-time-6835adcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "681BADCERT",
+                "program_name": "Pediatric Nursing Specialty (Anesthesia Care Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-anesthesia-care-option-advanced-certificate-part-time-681badcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680ZADCERT",
+                "program_name": "Pediatric Nursing Specialty (Critical Care Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-critical-care-option-advanced-certificate-part-time-680zadcert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680BASCERT",
+                "program_name": "Pediatric Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/pediatric-nursing-specialty-standard-option-advanced-certificate-part-time-680bascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680VASCERT",
+                "program_name": "Perinatal Nursing Specialty (Perinatal - Perioperative Option)",
+                "source_url": "https://www.bcit.ca/programs/perinatal-nursing-specialty-perinatal-perioperative-option-advanced-certificate-part-time-680vascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680CASCERT",
+                "program_name": "Perinatal Nursing Specialty (Standard Option)",
+                "source_url": "https://www.bcit.ca/programs/perinatal-nursing-specialty-standard-option-advanced-certificate-part-time-680cascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Advanced Certificate",
+                "delivery_method": "Online",
+                "program_id": "680PASCERT",
+                "program_name": "Perioperative Nursing Specialty",
+                "source_url": "https://www.bcit.ca/programs/perioperative-nursing-specialty-advanced-certificate-part-time-680pascert/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810KBSN",
+                "program_name": "Specialty Nursing (Critical Care - Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-critical-care-combined-critical-care-emergency-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810kbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810ABSN",
+                "program_name": "Specialty Nursing (Critical Care - Standard Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-critical-care-standard-option-bachelor-of-science-in-nursing-part-time-810absn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810NBSN",
+                "program_name": "Specialty Nursing (Emergency - Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-emergency-combined-emergency-critical-care-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810nbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810BBSN",
+                "program_name": "Specialty Nursing (Emergency - Standard Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-emergency-standard-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810bbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810MBSN",
+                "program_name": "Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-high-acuity-bachelor-of-science-in-nursing-part-time-810mbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810CBSN",
+                "program_name": "Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810DBSN",
+                "program_name": "Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-nephrology-bachelor-of-science-in-nursing-part-time-810dbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810QBSN",
+                "program_name": "Specialty Nursing (Pediatric - Critical Care Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-pediatric-critical-care-option-bachelor-of-science-in-nursing-part-time-810qbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810FBSN",
+                "program_name": "Specialty Nursing (Pediatric - Standard Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-pediatric-standard-option-bachelor-of-science-in-nursing-part-time-810fbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810SBSN",
+                "program_name": "Specialty Nursing (Perinatal - Perioperative Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-perinatal-perioperative-option-bachelor-of-science-in-nursing-part-time-810sbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810GBSN",
+                "program_name": "Specialty Nursing (Perinatal - Standard Option), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-perinatal-standard-option-bachelor-of-science-in-nursing-part-time-810gbsn/",
+                "study_mode": "Part-time"
+              },
+              {
+                "campus": "Online",
+                "credential": "Bachelor of Science in Nursing",
+                "delivery_method": "Program delivery Online: This program is delivered fully online.",
+                "program_id": "810HBSN",
+                "program_name": "Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time",
+                "source_url": "https://www.bcit.ca/programs/specialty-nursing-perioperative-bachelor-of-science-in-nursing-part-time-810hbsn/",
+                "study_mode": "Part-time"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_iSB6ARXJl1ATpq5KTehZBt9X",
+                "output": "{\"programs\": [{\"program_id\": \"680XADCERT\", \"program_name\": \"Critical Care Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/critical-care-nursing-specialty-advanced-certificate-part-time-680xadcert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680LASCERT\", \"program_name\": \"Critical Care Nursing Specialty (Combined Critical Care/Emergency Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/critical-care-nursing-specialty-combined-critical-care-emergency-option-advanced-certificate-part-time-680lascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680SASCERT\", \"program_name\": \"Emergency Nursing Specialty (Combined Emergency/Critical Care Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/emergency-nursing-specialty-combined-emergency-critical-care-option-advanced-certificate-part-time-680sascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680YADCERT\", \"program_name\": \"Emergency Nursing Specialty (Pediatric Emergency Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/emergency-nursing-specialty-pediatric-emergency-option-advanced-certificate-part-time-680yadcert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680EASCERT\", \"program_name\": \"Emergency Nursing Specialty (Standard Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/emergency-nursing-specialty-standard-option-advanced-certificate-part-time-680eascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680WASCERT\", \"program_name\": \"High Acuity Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/high-acuity-nursing-specialty-advanced-certificate-part-time-680wascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680FASCERT\", \"program_name\": \"Neonatal Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/neonatal-nursing-specialty-advanced-certificate-part-time-680fascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680MASCERT\", \"program_name\": \"Nephrology Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/nephrology-nursing-specialty-advanced-certificate-part-time-680mascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"8875BSN\", \"program_name\": \"Nursing, Bachelor of Science in Nursing, Full-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby\", \"source_url\": \"https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/\", \"delivery_method\": \"Program delivery In person: This program is delivered on campus.\"}, {\"program_id\": \"6835ADCERT\", \"program_name\": \"Pediatric Emergency Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/pediatric-emergency-nursing-specialty-advanced-certificate-part-time-6835adcert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"681BADCERT\", \"program_name\": \"Pediatric Nursing Specialty (Anesthesia Care Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/pediatric-nursing-specialty-anesthesia-care-option-advanced-certificate-part-time-681badcert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680ZADCERT\", \"program_name\": \"Pediatric Nursing Specialty (Critical Care Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/pediatric-nursing-specialty-critical-care-option-advanced-certificate-part-time-680zadcert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680BASCERT\", \"program_name\": \"Pediatric Nursing Specialty (Standard Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/pediatric-nursing-specialty-standard-option-advanced-certificate-part-time-680bascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680VASCERT\", \"program_name\": \"Perinatal Nursing Specialty (Perinatal - Perioperative Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/perinatal-nursing-specialty-perinatal-perioperative-option-advanced-certificate-part-time-680vascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680CASCERT\", \"program_name\": \"Perinatal Nursing Specialty (Standard Option)\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/perinatal-nursing-specialty-standard-option-advanced-certificate-part-time-680cascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"680PASCERT\", \"program_name\": \"Perioperative Nursing Specialty\", \"credential\": \"Advanced Certificate\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/perioperative-nursing-specialty-advanced-certificate-part-time-680pascert/\", \"delivery_method\": \"Online\"}, {\"program_id\": \"810KBSN\", \"program_name\": \"Specialty Nursing (Critical Care - Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-critical-care-combined-critical-care-emergency-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810kbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810ABSN\", \"program_name\": \"Specialty Nursing (Critical Care - Standard Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-critical-care-standard-option-bachelor-of-science-in-nursing-part-time-810absn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810NBSN\", \"program_name\": \"Specialty Nursing (Emergency - Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-emergency-combined-emergency-critical-care-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810nbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810BBSN\", \"program_name\": \"Specialty Nursing (Emergency - Standard Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-emergency-standard-option-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810bbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810MBSN\", \"program_name\": \"Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-high-acuity-bachelor-of-science-in-nursing-part-time-810mbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810CBSN\", \"program_name\": \"Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-neonatal-bachelor-of-science-in-nursing-part-time-distance-and-online-learning-810cbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810DBSN\", \"program_name\": \"Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-nephrology-bachelor-of-science-in-nursing-part-time-810dbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810QBSN\", \"program_name\": \"Specialty Nursing (Pediatric - Critical Care Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-pediatric-critical-care-option-bachelor-of-science-in-nursing-part-time-810qbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810FBSN\", \"program_name\": \"Specialty Nursing (Pediatric - Standard Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-pediatric-standard-option-bachelor-of-science-in-nursing-part-time-810fbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810SBSN\", \"program_name\": \"Specialty Nursing (Perinatal - Perioperative Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-perinatal-perioperative-option-bachelor-of-science-in-nursing-part-time-810sbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810GBSN\", \"program_name\": \"Specialty Nursing (Perinatal - Standard Option), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-perinatal-standard-option-bachelor-of-science-in-nursing-part-time-810gbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}, {\"program_id\": \"810HBSN\", \"program_name\": \"Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time\", \"credential\": \"Bachelor of Science in Nursing\", \"study_mode\": \"Part-time\", \"campus\": \"Online\", \"source_url\": \"https://www.bcit.ca/programs/specialty-nursing-perioperative-bachelor-of-science-in-nursing-part-time-810hbsn/\", \"delivery_method\": \"Program delivery Online: This program is delivered fully online.\"}], \"active_program_count\": 28, \"distinct_credentials\": [\"Advanced Certificate\", \"Bachelor of Science in Nursing\"]}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0cc898b63e4bd1fe006aa103a0f0c887d0bff1b155488ed540"
+          },
+          "response": {
+            "id": "resp_0cc898b63e4bd1fe006aa103a2b95487d0908975228872fef0",
+            "created_at": 1788937122.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_CATEGORY. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (comparison): Synthesize the programs against the student's stated criterion. Lead with the practical difference, then compare only supported attributes. Do not write separate program profiles or repeat shared facts. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0cc898b63e4bd1fe006aa103a3737c87d0937c5b7dd6c6eb40",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQOpJfwzHzvjs_m03HSXjIYrFzblheFW0qfalupnAWkAnqmXwUWmnx20o7SawzvBQDHOE-8i0HrIa4u3sdsBzlGrlQM_RrBkA44qlcNR9Byd02yJP-IKPQ4infm5aK118AVJ0mofj1jaAt6jy7NQkGz-X80qkhFEcRRz7by1Vw3pc8NF7wFVULQOmpY2wJ8X-XQXNvlEwSyFaPdE2rvGYFrjoqqKsF6JGVOJ56JYCG3FHCONrutZ6ZrKoNoANLkaTxH8QMsl2O2RLeIDZ_xfLcwDTKvHJFOP_tki2IYqAZ8nxmdJj6zlHUzqtnLwLdd1oflRAIJR6tQyQ7S3RvgpPdWf8rnV19fGsE0lU1Cgr57y1Xv6YdmrtI_6rClN-0eFDiOoIF147KNoPNKFSUYGisIOqRtsEj4Y25dEfjE5joqv0KajLdCYfayKabLUjQuafAJUv-esS0MtVeBGuYTvNgCgsVyC33-kPBnoeyykSbDf3eJcf6rfbRlXzFPIKWitUAZfbObWz2jTOai9fT6h5qCGxzosxlU4HH7YXUl0W8XDogf3Nmo5uMZl8GdT9ataBVZbq7F97T9CSF-GZXOquOm5T2JDAFBc_yrJGmnbU1N6LOjkHpFdNAom8fg0_eaCZAY7icL5Bk2caH60CFzUG4QpYD493SBNsUfCTD8UJkYAxl0NQ2mD6sNrG-RnwSAt7drwtCDsCw2fvX9w5B4yYpV-VJrBMxQ8pD93hcSowvlccn_Iy_pOeN6QS5pDmsPzS6EHTAbYYezU6v8zf7PNxDWcKKR2YSalTyddHwf8GJpCwm04yhVw6ASDZ3xtsu7ME5l2kIoVOoP4VYDdbAjvxz43j9Re6bJMw16NX0kQcbh5VWBd8AenFfbTsBl9WYIZKkQzz6mboY5jwe5-KTtsPN7upjmMxl3XesCColDRVF4ZnRZBhcoK4bkrlDhGv6KKYjzwK-dYORqmDWl8xMP2t89C2qUlAt-f5f1fvStLXcuqVbxnS-zM0C61s3El-neAL5EHxihF87yFzaSuKSvLPMIa3tT5i6jQyKpwt3DRh_MjzJtOydBhMy5KNEC3g0HCn_O_PFML7b0P41dykuqI6rqKLXoGLrWYohThAaDHuZ5YpR4aOGX7-XoEdgqOAP581y5JnjVXGghrCSg-rgHAJXdxonV9xZwIiO-dztmExxA1be53ZuonJwDMA9dAdB9rhsNMKjxgg39PavfCekBJ4gqmjdbp68bUKDL02iOovycktgNIZ3SIBvL3I8NCrkadCqKx8jUmzvOm5kFp8UjkrExwmZvQDf2iDqbax3fydxb5lUlS-KbBkHtJIIYuHzKpZDJbNlWGeeVmrv5Z2UKqJDCm9Y830zn1mAuCO2uQCCYd8I_FqqEhIbfwF91Hd1s9KspSnojQre7lg6R8Be5vBFksVtLEC7lJw6zcK8JLvBTovo0JWvvCTuBKNeb0XN395iZlIcnHnjE5eBLbCkhrfqeD2n_-Ue3_CwbNJqqJrubsdBnLLmdqrEiCHqoit8Li-1v8xCHn0lAbmbK8kEcLN3utr5YbrLcjPVk8W-qAVYy_npHKlOpVZeXJkXaIw_E8KuQQj_NNyPsjnv_IGiOAEGcHHWM0Hiue8joOg6cKoiBlfBQjeKrEZYb5ZfCbA6fPVQWJWZ1dAzHpcAUDuHPxPeBayMDg08z2KBhYy1JVrz5JbZhjF8oFwODFqRDON02jna1Gpo5jvVbZvebeF7FlYzZWLA==",
+                "status": null
+              },
+              {
+                "id": "msg_0cc898b63e4bd1fe006aa103a5118887d09a94601784a52faa",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "The nursing programs that award degrees are all **Bachelor of Science in Nursing (BSN)** programs:\n\n- Nursing, Bachelor of Science in Nursing, Full-time\n- Specialty Nursing (Critical Care – Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Critical Care – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Perioperative Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time\n\nThe other 15 nursing programs award **Advanced Certificates**, not degrees.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "compare_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Compare one stored admission requirement or program attribute across every program in a requested family/category.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788937128.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0cc898b63e4bd1fe006aa103a0f0c887d0bff1b155488ed540",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 4811,
+              "input_tokens_details": {
+                "cache_write_tokens": 2849,
+                "cached_tokens": 1959
+              },
+              "output_tokens": 390,
+              "output_tokens_details": {
+                "reasoning_tokens": 106
+              },
+              "total_tokens": 5201
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The nursing programs that award degrees are all **Bachelor of Science in Nursing (BSN)** programs:\n\n- Nursing, Bachelor of Science in Nursing, Full-time\n- Specialty Nursing (Critical Care – Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Critical Care – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Perioperative Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time\n\nThe other 15 nursing programs award **Advanced Certificates**, not degrees.",
+          "final_answer": "The nursing programs that award degrees are all **Bachelor of Science in Nursing (BSN)** programs:\n\n- Nursing, Bachelor of Science in Nursing, Full-time\n- Specialty Nursing (Critical Care – Combined Critical Care/Emergency Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Critical Care – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Combined Emergency/Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Emergency – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (High Acuity), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Neonatal), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Nephrology), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Critical Care Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Pediatric – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Perioperative Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perinatal – Standard Option), Bachelor of Science in Nursing, Part-time\n- Specialty Nursing (Perioperative), Bachelor of Science in Nursing, Part-time\n\nThe other 15 nursing programs award **Advanced Certificates**, not degrees."
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "scenario_id": "FLOW-04",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "3bc11c199860558c2e4e78c16c3744426ce296ffd944f54abc6ed6a880c02471",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "0aafee879f53d067786b85b5feff2d2544e178e4149275520bde435b10abb09e",
+  "packet_sha256": "d89448975cd8be42108f890983f74415d9e711aba4a291ccca826a6e1885a462",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0cb4759775a7c920006aa0803b8c0c87d0abbe80441744fcbf",
+  "usage": {
+    "input_tokens": 48145,
+    "input_tokens_details": {
+      "cache_write_tokens": 46752,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 1144,
+    "output_tokens_details": {
+      "reasoning_tokens": 65
+    },
+    "total_tokens": 49289
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The count matches the frozen catalog and expectation. Global catalog state is appropriate. Context retention is inapplicable on turn 1; no clarification, frustration handling, or next step was needed."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Returns exactly the five master's degrees with correct credentials, excluding maritime credentials containing 'Master' in their names. The requested list is proportionate, and global state with result_query='master' is correct. No necessary clarification, frustration handling, or next-step guidance applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After correctly identifying the MSc, the raw model answer adds ten 'Related courses' to a simple identification question. Finalization preserves this unnecessary curriculum list."
+        },
+        "notes": "Both prose and resolver state correctly identify Applied Computing, M600MSC. Listed academic facts match the records; 'related courses include' does not claim that all alternatives are mandatory. The defect is disproportionate listing, not unnecessary clarification. No frustration or actionable next step is present."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 3,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer uses database-facing phrases such as 'stored entry routes' and 'stored English requirement', and loosely labels the seven first-year courses 'Year 1 and core Year 2 courses'. The retrieved curriculum places those courses in the first two terms."
+        },
+        "notes": "Correctly retains M600MSC and supplies substantial new program and admission detail rather than repeating the master's set. Entry routes and Year 2 paths remain alternatives, and thresholds, credits, substitution options, completion limit, and intake dates are supported. The core-course heading is a minor timing imprecision rather than a changed requirement. Some course details repeat turn 3, but the request for more information justifies substantial expansion. No eligibility decision or required next step is at issue."
+      }
+    ]
+  },
+  "attempt": 2
+}

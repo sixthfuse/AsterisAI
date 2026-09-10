@@ -1,0 +1,89 @@
+{
+  "id": "CAT-04-B",
+  "category": "international",
+  "tags": [
+    "international",
+    "international_status",
+    "human_confirmation",
+    "unsupported_inference"
+  ],
+  "status": "interrupted_or_error",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I am an international applicant interested in the Civil Engineering Bachelor of Engineering. Is it available to international applicants?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I am an international applicant interested in the Civil Engineering Bachelor of Engineering. Is it available to international applicants?",
+        "expected": "Use this program's INTERNATIONAL evidence. Distinguish available, restricted, not accepted, and unknown; never infer ineligibility from silence.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8660BENG"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 500,
+      "response": {
+        "error": "RateLimitError",
+        "detail": "Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+        "blocker": "api_credits_exhausted"
+      },
+      "elapsed_seconds": 4.562,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "international",
+            "conversation_state": {
+              "academic_scope": "international",
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "8660BENG",
+              "reported_completed_course_ids": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": {
+              "name": "Civil Engineering"
+            },
+            "program_id": "8660BENG",
+            "program_name": "Civil Engineering Bachelor of Engineering",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

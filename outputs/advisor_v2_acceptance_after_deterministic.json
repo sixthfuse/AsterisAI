@@ -1,0 +1,686 @@
+{
+  "database_inventory": {
+    "active_programs": 374,
+    "active_courses": 3973,
+    "campuses": 5,
+    "computing_area_programs": 44,
+    "areas": [
+      {
+        "area_id": "A01",
+        "area_name": "Applied and Natural Sciences",
+        "active_programs": 1
+      },
+      {
+        "area_id": "A04",
+        "area_name": "Engineering",
+        "active_programs": 2
+      },
+      {
+        "area_id": "A05",
+        "area_name": "Health Sciences",
+        "active_programs": 13
+      },
+      {
+        "area_id": "BUS",
+        "area_name": "Business & Media",
+        "active_programs": 105
+      },
+      {
+        "area_id": "CE",
+        "area_name": "Construction & Environment",
+        "active_programs": 65
+      },
+      {
+        "area_id": "COMP",
+        "area_name": "Computing & IT",
+        "active_programs": 44
+      },
+      {
+        "area_id": "ENG",
+        "area_name": "Engineering",
+        "active_programs": 49
+      },
+      {
+        "area_id": "HEALTH",
+        "area_name": "Health Sciences",
+        "active_programs": 54
+      },
+      {
+        "area_id": "SCI",
+        "area_name": "Applied & Natural Sciences",
+        "active_programs": 1
+      },
+      {
+        "area_id": "TRADES",
+        "area_name": "Trades & Apprenticeships",
+        "active_programs": 7
+      },
+      {
+        "area_id": "TRANS",
+        "area_name": "Transportation",
+        "active_programs": 33
+      }
+    ]
+  },
+  "deterministic_current_path": [
+    {
+      "turn": 1,
+      "message": "Hello",
+      "latency_ms": 3.73,
+      "intent": "greeting",
+      "question_class": "greeting",
+      "context": {
+        "action": "none",
+        "previous_kind": "none",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "institution",
+        "query": "BCIT",
+        "status": "conversation_opening",
+        "candidates": []
+      },
+      "retrieval": [],
+      "evaluation": "not_invoked",
+      "response_path": "greeting",
+      "answer": "Hello! I can help with BCIT programs, courses, admission requirements, campuses, and international availability."
+    },
+    {
+      "turn": 2,
+      "message": "How many campuses does BCIT have?",
+      "latency_ms": 29.32,
+      "intent": "campus_information",
+      "question_class": "campus_information",
+      "context": {
+        "action": "reset",
+        "previous_kind": "none",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "campus_directory",
+        "query": "BCIT campuses",
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "get_campus_directory",
+          "status": "found",
+          "detail": "query_count=1;latency_ms=29.00"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "campus_directory",
+      "answer": "BCIT has 5 campuses: Aerospace Technology Campus, Annacis Island Campus, Burnaby Campus, Downtown Campus, Marine Campus."
+    },
+    {
+      "turn": 3,
+      "message": "more information about the campuses",
+      "latency_ms": 28.9,
+      "intent": "campus_information",
+      "question_class": "campus_information",
+      "context": {
+        "action": "reset",
+        "previous_kind": "campus_directory",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "campus_directory",
+        "query": "BCIT campuses",
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "get_campus_directory",
+          "status": "found",
+          "detail": "query_count=1;latency_ms=28.64"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "campus_directory",
+      "answer": "BCIT's campuses are:\n• Aerospace Technology Campus — 3800 Cessna Drive, Richmond, BC, V7B 0A1 — BCIT's specialized aerospace training campus in Richmond..\n• Annacis Island Campus — 1608 Cliveden Avenue, Delta, BC, V3M 6P1 — A specialized facility for motive power and heavy mechanical trades programs..\n• Burnaby Campus — 3700 Willingdon Avenue, Burnaby, BC, V5G 3H2 — BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces..\n• Downtown Campus — 555 Seymour Street, Vancouver, BC, V6B 3H6 — BCIT's campus in Vancouver's business and technology core..\n• Marine Campus — 265 West Esplanade, North Vancouver, BC, V7M 1A5 — BCIT's centre for maritime training in Western Canada.."
+    },
+    {
+      "turn": 4,
+      "message": "how many technology programs do you offer?",
+      "latency_ms": 132.48,
+      "intent": "institutional_counts",
+      "question_class": "institutional_counts",
+      "context": {
+        "action": "reset",
+        "previous_kind": "campus_directory",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "institution",
+        "query": "technology",
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "get_catalog_counts",
+          "status": "found",
+          "detail": "query_count=1;latency_ms=132.19"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "institutional_counts",
+      "answer": "BCIT has 374 active programs across its academic areas. If you mean programs whose credential is specifically Bachelor of Technology, there are 8."
+    },
+    {
+      "turn": 5,
+      "message": "how many programs and courses do you offer?",
+      "latency_ms": 32.42,
+      "intent": "institutional_counts",
+      "question_class": "institutional_counts",
+      "context": {
+        "action": "reset",
+        "previous_kind": "none",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "institution",
+        "query": null,
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "get_catalog_counts",
+          "status": "found",
+          "detail": "query_count=1;latency_ms=32.16"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "institutional_counts",
+      "answer": "BCIT has 374 active programs and 3973 active courses."
+    },
+    {
+      "turn": 6,
+      "message": "Do you offer any computing programs?",
+      "latency_ms": 31.91,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "none",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=31.46"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 7,
+      "message": "Do you have any programs where I can use my Red Seal certification that would help me get into any programs at bcit?",
+      "latency_ms": 42.56,
+      "intent": "red_seal_options",
+      "question_class": "red_seal_options",
+      "context": {
+        "action": "preserved_ambiguous",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program_set",
+        "query": "Red Seal admission evidence",
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "find_red_seal_programs",
+          "status": "found",
+          "detail": "query_count=1;rows_returned=4;latency_ms=42.19"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "red_seal_program_options",
+      "answer": "These active BCIT programs have published admission evidence involving a Red Seal:\n• Automated Controls Installation and Maintenance — Advanced Certificate — https://www.bcit.ca/programs/automated-controls-installation-and-maintenance-advanced-certificate-part-time-1320adcert/\n• Construction Management — Bachelor of Technology / Bachelor's Degree — https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/\n• Renewable Energy Electrical Systems Installation & Maintenance — Advanced Certificate — https://www.bcit.ca/programs/renewable-energy-electrical-systems-installation-and-maintenance-advanced-certificate-part-time-6185adcert/\n• Technology Teacher Education — Diploma — https://www.bcit.ca/programs/technology-teacher-education-diploma-full-time-605ddipma/\nA Red Seal can satisfy only the stated pathway; each program may have additional requirements."
+    },
+    {
+      "turn": 8,
+      "message": "I have English 12 with 73 percent, I have Red Seal certification as an electrician, and I have Foundations of Math 11 with 55 percent, I have the associate certificate construction operations with 70 percent and I have an 11-month work experience, do I have the requirements for the construction management bachelor degree?",
+      "latency_ms": 142.41,
+      "intent": "admission_eligibility",
+      "question_class": "admission_eligibility",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "construction management bachelor degree",
+        "status": "found",
+        "candidates": [
+          {
+            "program_id": "7710DIPMA",
+            "program_name": "Construction Management",
+            "score": 2.2419,
+            "fuzzy_ratio": 0.7419,
+            "token_overlap": 0.5,
+            "exact": false
+          },
+          {
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "score": 2.2419,
+            "fuzzy_ratio": 0.7419,
+            "token_overlap": 0.5,
+            "exact": false
+          },
+          {
+            "program_id": "6915DIPMA",
+            "program_name": "Operations & Management Engineering",
+            "score": 1.3611,
+            "fuzzy_ratio": 0.6111,
+            "token_overlap": 0.25,
+            "exact": false
+          },
+          {
+            "program_id": "690BMCERT",
+            "program_name": "Operations Management (Management Engineering Option)",
+            "score": 1.3056,
+            "fuzzy_ratio": 0.5556,
+            "token_overlap": 0.25,
+            "exact": false
+          },
+          {
+            "program_id": "630XACERT",
+            "program_name": "Marketing Management - Public Relations",
+            "score": 1.3026,
+            "fuzzy_ratio": 0.5526,
+            "token_overlap": 0.25,
+            "exact": false
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "capability": "resolve_program",
+          "status": "found",
+          "detail": null
+        },
+        {
+          "capability": "get_program_facts",
+          "status": "found",
+          "detail": null
+        },
+        {
+          "capability": "evaluate_admission",
+          "status": "found",
+          "detail": null
+        }
+      ],
+      "evaluation": "unmet",
+      "response_path": "deterministic_rule_evaluation",
+      "answer": "For Construction Management, at least one modeled requirement is not met.\n• not yet provided: Approved departmental pre-entry assessment before application\n• met: English Studies 12 at 73% or equivalent; you reported 73.0; minimum 73\n• not yet provided: Specified international post-secondary credentials require an accepted comprehensive credential evaluation\n• met: A master's degree alone is not sufficient for admission; you reported ['Associate Certificate construction operations']\n• met: Approved Red Seal trade; you reported electrician\n• not yet provided: One accepted math option at 60%; minimum 60\n• met: Construction Operations Associate Certificate with minimum 67% GPA; you reported 70.0; minimum 67\n• not met: At least 1 year construction-industry experience in addition to apprenticeship hours; you reported 0.9166666666666666; minimum 1"
+    },
+    {
+      "turn": 9,
+      "message": "what are the requirements for the construction management bachelors degree",
+      "latency_ms": 252.07,
+      "intent": "admission_requirements",
+      "question_class": "admission_requirements",
+      "context": {
+        "action": "reset",
+        "previous_kind": "program",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "the construction management bachelors degree",
+        "status": "found",
+        "candidates": [
+          {
+            "program_id": "7710DIPMA",
+            "program_name": "Construction Management",
+            "score": 2.1866,
+            "fuzzy_ratio": 0.6866,
+            "token_overlap": 0.5,
+            "exact": false
+          },
+          {
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "score": 2.1866,
+            "fuzzy_ratio": 0.6866,
+            "token_overlap": 0.5,
+            "exact": false
+          },
+          {
+            "program_id": "6915DIPMA",
+            "program_name": "Operations & Management Engineering",
+            "score": 1.3214,
+            "fuzzy_ratio": 0.5714,
+            "token_overlap": 0.25,
+            "exact": false
+          },
+          {
+            "program_id": "630XACERT",
+            "program_name": "Marketing Management - Public Relations",
+            "score": 1.2932,
+            "fuzzy_ratio": 0.5432,
+            "token_overlap": 0.25,
+            "exact": false
+          },
+          {
+            "program_id": "703DDIPMA",
+            "program_name": "Business Administration (Management Option)",
+            "score": 1.2912,
+            "fuzzy_ratio": 0.5412,
+            "token_overlap": 0.25,
+            "exact": false
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "capability": "resolve_program",
+          "status": "found",
+          "detail": null
+        },
+        {
+          "capability": "get_program_facts",
+          "status": "found",
+          "detail": null
+        },
+        {
+          "capability": "get_admission_rules",
+          "status": "found",
+          "detail": null
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "admission_rule_summary",
+      "answer": "Admission requirements recorded for Construction Management:\n• Approved departmental pre-entry assessment before application\n• English Studies 12 at 73% or equivalent\n• Specified international post-secondary credentials require an accepted comprehensive credential evaluation\n• A master's degree alone is not sufficient for admission\n• Construction-related diploma or degree from a recognized institution with minimum 67% GPA\n• At least 1 year construction-industry work experience\n• Unrelated diploma or degree from a recognized institution with minimum 67% GPA\n• BCIT Construction Operations Associate Certificate with minimum 67% GPA\n• At least 1 year construction-industry work experience\n• Unrelated diploma or degree from a recognized institution with minimum 67% GPA\n• At least 8 years North American construction-management experience in mid/senior roles\n• Approved Red Seal trade\n• One accepted math option at 60%\n• Construction Operations Associate Certificate with minimum 67% GPA\n• At least 1 year construction-industry experience in addition to apprenticeship hours"
+    },
+    {
+      "turn": 10,
+      "message": "tienen programas de ingenieria?",
+      "latency_ms": 33.45,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "program",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Engineering",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=51;latency_ms=33.10"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 51 active programs in engineering:\n• Advanced Topics in Networking — Microcredential\n• Applied Additive Manufacturing — Microcredential\n• Applied Mass Timber Engineering — Microcredential\n• Biomedical Engineering Technology — Diploma\n• Building Energy Modelling and Simulation — Microcredential\n• Building Engineering/Building Science — Master of Applied Science\n• Building Science — Master of Engineering\n• Canadian Engineering Professional Practice — Microcredential\n• Chemical and Environmental Engineering Technology — Diploma\n• Civil Engineering Bachelor of Engineering — Bachelor's Degree\n• Civil Engineering Diploma — Diploma\n• Computer Aided Design (CAD) Technology — Associate Certificate\n• Construction Management — Bachelor of Technology / Bachelor's Degree\n• Cybersecurity Analysis for Network Administrators — Microcredential\n• Cybersecurity Operations — Microcredential\n• Digital Communications and Wireless Technologies — Diploma\n• Distribution Design for Electrical Utilities — Microcredential\n• Electrical and Computer Engineering Technology (Automation and Instrumentation Option) — Diploma\n• Electrical and Computer Engineering Technology (Electrical Power and Industrial Control Option) — Diploma\n• Electrical and Computer Engineering Technology (Telecommunications and Networks Option) — Diploma\n• Electrical Engineering — Bachelor of Engineering\n• Electronics — Bachelor of Technology / Bachelor's Degree\n• Environmental Engineering — Bachelor of Technology\n• Essentials of Data Networks — Microcredential\n• Fiber Optics - Principles, Installation and Repair — Microcredential\n• Fundamentals of Virtual Containers — Microcredential\n• Geomatics — Bachelor of Science\n• Heat Pump Maintenance and Troubleshooting — Microcredential\n• Heating, Ventilation, Air Conditioning and Refrigeration Technician — Certificate\n• Heating, Ventilation, Air Conditioning and Refrigeration Technician — Diploma\n• Industrial Instrumentation and Process Control Technician — Diploma\n• Industrial Network Cybersecurity — Diploma\n• Industrial Networking for Cybersecurity Professionals — Microcredential\n• Introduction to Power Systems Protection Design — Microcredential\n• Machinist Foundation — Certificate\n• Mechanical Engineering — Bachelor of Engineering\n• Mechanical Engineering Technology (Mechanical Design Option) — Diploma\n• Mechanical Engineering Technology (Mechanical Manufacturing Option) — Diploma\n• Mechanical Engineering Technology (Mechanical Systems Option) — Diploma\n• Mechanical Systems — Associate Certificate\n• Mechatronics and Robotics — Diploma\n• Millwright Foundation — Certificate\n• Network Administrator Technician — Associate Certificate\n• Network Switching and Routing — Microcredential\n• Power and Process Engineering — Diploma\n• Power Engineering (General Program) — Certificate\n• Refrigeration and Air Conditioning Mechanic Foundation — Certificate\n• Smart Grid Systems and Technologies — Master of Engineering\n• Technology Teacher Education — Diploma\n• Thermal Power Plant Simulation Proficiency — Microcredential\n• Wind Turbine Essentials — Microcredential"
+    },
+    {
+      "turn": 11,
+      "message": "engineering. list all programs related to engineering",
+      "latency_ms": 133.65,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Engineering",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=51;latency_ms=133.21"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 51 active programs in engineering:\n• Advanced Topics in Networking — Microcredential\n• Applied Additive Manufacturing — Microcredential\n• Applied Mass Timber Engineering — Microcredential\n• Biomedical Engineering Technology — Diploma\n• Building Energy Modelling and Simulation — Microcredential\n• Building Engineering/Building Science — Master of Applied Science\n• Building Science — Master of Engineering\n• Canadian Engineering Professional Practice — Microcredential\n• Chemical and Environmental Engineering Technology — Diploma\n• Civil Engineering Bachelor of Engineering — Bachelor's Degree\n• Civil Engineering Diploma — Diploma\n• Computer Aided Design (CAD) Technology — Associate Certificate\n• Construction Management — Bachelor of Technology / Bachelor's Degree\n• Cybersecurity Analysis for Network Administrators — Microcredential\n• Cybersecurity Operations — Microcredential\n• Digital Communications and Wireless Technologies — Diploma\n• Distribution Design for Electrical Utilities — Microcredential\n• Electrical and Computer Engineering Technology (Automation and Instrumentation Option) — Diploma\n• Electrical and Computer Engineering Technology (Electrical Power and Industrial Control Option) — Diploma\n• Electrical and Computer Engineering Technology (Telecommunications and Networks Option) — Diploma\n• Electrical Engineering — Bachelor of Engineering\n• Electronics — Bachelor of Technology / Bachelor's Degree\n• Environmental Engineering — Bachelor of Technology\n• Essentials of Data Networks — Microcredential\n• Fiber Optics - Principles, Installation and Repair — Microcredential\n• Fundamentals of Virtual Containers — Microcredential\n• Geomatics — Bachelor of Science\n• Heat Pump Maintenance and Troubleshooting — Microcredential\n• Heating, Ventilation, Air Conditioning and Refrigeration Technician — Certificate\n• Heating, Ventilation, Air Conditioning and Refrigeration Technician — Diploma\n• Industrial Instrumentation and Process Control Technician — Diploma\n• Industrial Network Cybersecurity — Diploma\n• Industrial Networking for Cybersecurity Professionals — Microcredential\n• Introduction to Power Systems Protection Design — Microcredential\n• Machinist Foundation — Certificate\n• Mechanical Engineering — Bachelor of Engineering\n• Mechanical Engineering Technology (Mechanical Design Option) — Diploma\n• Mechanical Engineering Technology (Mechanical Manufacturing Option) — Diploma\n• Mechanical Engineering Technology (Mechanical Systems Option) — Diploma\n• Mechanical Systems — Associate Certificate\n• Mechatronics and Robotics — Diploma\n• Millwright Foundation — Certificate\n• Network Administrator Technician — Associate Certificate\n• Network Switching and Routing — Microcredential\n• Power and Process Engineering — Diploma\n• Power Engineering (General Program) — Certificate\n• Refrigeration and Air Conditioning Mechanic Foundation — Certificate\n• Smart Grid Systems and Technologies — Master of Engineering\n• Technology Teacher Education — Diploma\n• Thermal Power Plant Simulation Proficiency — Microcredential\n• Wind Turbine Essentials — Microcredential"
+    },
+    {
+      "turn": 12,
+      "message": "do you have any computing programs?",
+      "latency_ms": 38.34,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=38.00"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 13,
+      "message": "computing programs",
+      "latency_ms": 35.28,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=34.85"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 14,
+      "message": "I know you have more computing programs",
+      "latency_ms": 36.91,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=36.44"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 15,
+      "message": "BCIT is the largest Computing and IT school in canada and you are telling me you have one computing program",
+      "latency_ms": 140.51,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=139.93"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 16,
+      "message": "list all programs under the computing and IT area of study",
+      "latency_ms": 33.74,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=33.30"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 17,
+      "message": "list all programs under the computing and IT area of study",
+      "latency_ms": 32.7,
+      "intent": "program_discovery",
+      "question_class": "program_discovery",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program",
+        "query": "Computing & IT",
+        "status": "discovery_set",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "list_programs_by_area",
+          "status": "found",
+          "detail": "query_count=1;rows_scanned=374;rows_returned=44;latency_ms=32.21"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "taxonomy_program_discovery",
+      "answer": "BCIT has 44 active programs in computing it:\n• Advanced Forensic Nurse Examiner — Microcredential\n• Agile Development — Associate Certificate\n• Applied Computer Information Systems (ACIS) — Associate Certificate\n• Applied Computer Science (Database Option) — Bachelor of Science\n• Applied Computer Science (Games Development Option) — Bachelor of Science\n• Applied Computer Science (Human Computer Interface Option) — Bachelor of Science\n• Applied Computer Science (Network Security Administration Option) — Bachelor of Science\n• Applied Computer Science (Network Security Applications Development Option) — Bachelor of Science\n• Applied Computer Science (Wireless and Mobile Applications Development Option) — Bachelor of Science\n• Applied Computing — Master of Science / Master's Degree\n• Applied Data Analytics — Certificate\n• Applied Database Administration and Design — Associate Certificate\n• Applied Network Administration and Design — Associate Certificate\n• Applied Software Development (ASD) — Associate Certificate\n• Applied Web Development — Associate Certificate\n• Business Information Technology Management — Diploma\n• Computer Information Systems Administration — Diploma\n• Computer Information Technology — Diploma\n• Computer Systems — Certificate\n• Computer Systems — Diploma\n• Computer Systems Technology — Diploma\n• Cybersecurity Essentials for IT Professionals — Microcredential\n• Data Visualization with MS Power BI — Microcredential\n• Digital Health — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Advanced Certificate\n• Forensic Investigation (Crime and Intelligence Analysis Option) — Bachelor of Technology\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Advanced Certificate\n• Forensic Investigation (Digital Forensics and Cybersecurity Option) — Bachelor of Technology\n• Forensic Investigation (Forensic Science Option) — Advanced Certificate\n• Forensic Investigation (Forensic Science Option) — Bachelor of Technology\n• Forensic Nurse Death Investigator — Microcredential\n• Forensic Nurse Examiner Education for RNs — Microcredential\n• Foundational Digital Forensics Skills — Microcredential\n• Fraud and Financial Crime Investigation — Microcredential\n• Front-End Web Developer — Certificate\n• Introduction to Full-Stack Web Development — Microcredential\n• Low-Code Mobile Application Development — Microcredential\n• Office Administrator with Technology Program (OAT) — Certificate\n• Technical Communication Essentials — Microcredential\n• Technical Writing — Associate Certificate\n• Techniques for Crime & Intelligence Analysts (TCIA) — Microcredential\n• Technology Support Professional (TSP) — Certificate\n• Web and Mobile Application Development — Associate Certificate\n• Web Development Foundations (WDF) — Microcredential"
+    },
+    {
+      "turn": 18,
+      "message": "as an international student, which programs can I apply for the nursing programs?",
+      "latency_ms": 31.45,
+      "intent": "international_availability",
+      "question_class": "international_availability",
+      "context": {
+        "action": "reset",
+        "previous_kind": "discovery",
+        "inherited_program_id": null,
+        "inherited_course_id": null
+      },
+      "entity_resolution": {
+        "kind": "program_family",
+        "query": "nursing",
+        "status": "found",
+        "candidates": []
+      },
+      "retrieval": [
+        {
+          "capability": "get_international_availability",
+          "status": "found",
+          "detail": "query_count=1;rows_returned=16;latency_ms=31.10"
+        }
+      ],
+      "evaluation": "not_invoked",
+      "response_path": "international_program_availability",
+      "answer": "Published as available to international applicants:\n• Critical Care Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/critical-care-nursing-specialty-advanced-certificate-part-time-680xadcert/\n• Critical Care Nursing Specialty (Combined Critical Care/Emergency Option) — Advanced Certificate — https://www.bcit.ca/programs/critical-care-nursing-specialty-combined-critical-care-emergency-option-advanced-certificate-part-time-680lascert/\n• Emergency Nursing Specialty (Combined Emergency/Critical Care Option) — Advanced Certificate — https://www.bcit.ca/programs/emergency-nursing-specialty-combined-emergency-critical-care-option-advanced-certificate-part-time-680sascert/\n• Emergency Nursing Specialty (Pediatric Emergency Option) — Advanced Certificate — https://www.bcit.ca/programs/emergency-nursing-specialty-pediatric-emergency-option-advanced-certificate-part-time-680yadcert/\n• Emergency Nursing Specialty (Standard Option) — Advanced Certificate — https://www.bcit.ca/programs/emergency-nursing-specialty-standard-option-advanced-certificate-part-time-680eascert/\n• High Acuity Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/high-acuity-nursing-specialty-advanced-certificate-part-time-680wascert/\n• Neonatal Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/neonatal-nursing-specialty-advanced-certificate-part-time-680fascert/\n• Nephrology Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/nephrology-nursing-specialty-advanced-certificate-part-time-680mascert/\n• Pediatric Emergency Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/pediatric-emergency-nursing-specialty-advanced-certificate-part-time-6835adcert/\n• Pediatric Nursing Specialty (Anesthesia Care Option) — Advanced Certificate — https://www.bcit.ca/programs/pediatric-nursing-specialty-anesthesia-care-option-advanced-certificate-part-time-681badcert/\n• Pediatric Nursing Specialty (Critical Care Option) — Advanced Certificate — https://www.bcit.ca/programs/pediatric-nursing-specialty-critical-care-option-advanced-certificate-part-time-680zadcert/\n• Pediatric Nursing Specialty (Standard Option) — Advanced Certificate — https://www.bcit.ca/programs/pediatric-nursing-specialty-standard-option-advanced-certificate-part-time-680bascert/\n• Perinatal Nursing Specialty (Perinatal - Perioperative Option) — Advanced Certificate — https://www.bcit.ca/programs/perinatal-nursing-specialty-perinatal-perioperative-option-advanced-certificate-part-time-680vascert/\n• Perinatal Nursing Specialty (Standard Option) — Advanced Certificate — https://www.bcit.ca/programs/perinatal-nursing-specialty-standard-option-advanced-certificate-part-time-680cascert/\n• Perioperative Nursing Specialty — Advanced Certificate — https://www.bcit.ca/programs/perioperative-nursing-specialty-advanced-certificate-part-time-680pascert/\nPublished as unavailable to international applicants:\n• Nursing, Bachelor of Science in Nursing, Full-time — Bachelor of Science in Nursing — https://www.bcit.ca/programs/nursing-bachelor-of-science-in-nursing-full-time-8875bsn/"
+    }
+  ],
+  "live_sol_interpretations": []
+}

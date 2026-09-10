@@ -1,0 +1,1761 @@
+{
+  "id": "CAT-10-A",
+  "category": "program_identity",
+  "tags": [
+    "program_identity",
+    "singular_reference",
+    "campus_followup",
+    "aliases_credentials"
+  ],
+  "status": "complete",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+        "expected": "Answer about the named/current program using its certified evidence.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "elapsed_seconds": 7.531,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "A700GRCERT",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: A700GRCERT. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"A700GRCERT\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0e5a18c67c7203e0006aa10143f8c887d08f8844eabfa0f1fb",
+            "created_at": 1788936516.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"A700GRCERT\"}",
+                "call_id": "call_146Xw2h9EnqDVHMkE12tlC8U",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0e5a18c67c7203e0006aa10144a3f887d094a3fb2b9b610e0d",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936516.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1802,
+              "input_tokens_details": {
+                "cache_write_tokens": 146,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 24,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1826
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "A700GRCERT"
+          },
+          "context": {
+            "academic_scope": "graduation",
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "A700GRCERT",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 453,
+                            "condition_type": "ALL_SIX_COURSES_19_CREDITS",
+                            "description": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "all",
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "ALL_SIX_COURSES_19_CREDITS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 176,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "ALL_SIX_COURSES_19_CREDITS",
+                    "notes": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                    "rule_set_id": 311,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "credential_award_evidence": [],
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Every course must be passed with a 60% mark.",
+                    "from_level": 1,
+                    "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                    "to_level": 2,
+                    "type": "PROGRAM_COURSE_GRADE",
+                    "value": "60"
+                  }
+                ]
+              },
+              "campus": "Downtown Campus, Vancouver",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "A700GRCERT"
+              },
+              "courses": [
+                {
+                  "course_id": "ECON9100",
+                  "course_name": "Managerial Economics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT9152",
+                  "course_name": "Accounting for Managers",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT9260",
+                  "course_name": "Business Finance",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "GLBL9200",
+                  "course_name": "Business Capstone Project",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "MKTG9120",
+                  "course_name": "Marketing Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "OPMT9170",
+                  "course_name": "Systems and Operations Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                }
+              ],
+              "credential": "Graduate Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 272,
+                    "component_name": "Term 1 (15 weeks)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "ECON9100",
+                        "course_name": "Managerial Economics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "ECON 9100",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT9152",
+                        "course_name": "Accounting for Managers",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9152",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MKTG9120",
+                        "course_name": "Marketing Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MKTG 9120",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 1 (15 weeks)",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 273,
+                    "component_name": "Term 2 (20 weeks)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "FMGT9260",
+                        "course_name": "Business Finance",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9260",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "GLBL9200",
+                        "course_name": "Business Capstone Project",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "GLBL 9200",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "OPMT9170",
+                        "course_name": "Systems and Operations Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "OPMT 9170",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 2 (20 weeks) Total Credits: 19.0",
+                    "required_credits": null
+                  }
+                ],
+                "credit_requirements": [],
+                "program_id": "A700GRCERT",
+                "substitutions": []
+              },
+              "delivery_method": "Blended (on campus and online)",
+              "program_id": "A700GRCERT",
+              "program_name": "Business Administration",
+              "program_overview": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master’s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master’s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master’s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements",
+              "school": "School of Business + Media",
+              "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_146Xw2h9EnqDVHMkE12tlC8U",
+                "output": "{\"program\": {\"program_id\": \"A700GRCERT\", \"program_name\": \"Business Administration\", \"program_overview\": \"Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master\\u2019s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master\\u2019s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master\\u2019s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements\", \"school\": \"School of Business + Media\", \"credential\": \"Graduate Certificate\", \"study_mode\": \"Full-time\", \"campus\": \"Downtown Campus, Vancouver\", \"delivery_method\": \"Blended (on campus and online)\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"courses\": [{\"course_id\": \"ECON9100\", \"course_name\": \"Managerial Economics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"FMGT9152\", \"course_name\": \"Accounting for Managers\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"FMGT9260\", \"course_name\": \"Business Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}, {\"course_id\": \"GLBL9200\", \"course_name\": \"Business Capstone Project\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}, {\"course_id\": \"MKTG9120\", \"course_name\": \"Marketing Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"OPMT9170\", \"course_name\": \"Systems and Operations Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}], \"curriculum\": {\"program_id\": \"A700GRCERT\", \"components\": [{\"component_id\": 272, \"component_name\": \"Term 1 (15 weeks)\", \"component_order\": 1, \"required_credits\": null, \"notes\": \"Term 1 (15 weeks)\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"ECON9100\", \"course_name\": \"Managerial Economics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"ECON 9100\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT9152\", \"course_name\": \"Accounting for Managers\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 9152\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"MKTG9120\", \"course_name\": \"Marketing Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"MKTG 9120\"}]}, {\"component_id\": 273, \"component_name\": \"Term 2 (20 weeks)\", \"component_order\": 2, \"required_credits\": null, \"notes\": \"Term 2 (20 weeks) Total Credits: 19.0\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT9260\", \"course_name\": \"Business Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 9260\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"GLBL9200\", \"course_name\": \"Business Capstone Project\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"GLBL 9200\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"OPMT9170\", \"course_name\": \"Systems and Operations Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"OPMT 9170\"}]}], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"A700GRCERT\", \"rule_sets\": [{\"rule_set_id\": 311, \"scope\": \"COMPLETION\", \"name\": \"ALL_SIX_COURSES_19_CREDITS\", \"study_mode\": \"Full-time\", \"exact_choice_count\": null, \"notes\": \"Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.\", \"groups\": [{\"rule_group_id\": 176, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"ALL_SIX_COURSES_19_CREDITS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 453, \"condition_type\": \"ALL_SIX_COURSES_19_CREDITS\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"executable\": false, \"verification\": \"human_confirmation\"}, \"description\": \"Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.\", \"sort_order\": 1}], \"children\": []}]}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"A700GRCERT\", \"clinical_placement\": [], \"practice_hours\": []}, \"academic_scope_boundaries\": {\"credential_award_evidence\": [], \"later_level_progression_requirements\": [{\"from_level\": 1, \"to_level\": 2, \"type\": \"PROGRAM_COURSE_GRADE\", \"value\": \"60\", \"description\": \"Every course must be passed with a 60% mark.\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\"}], \"binding_rule\": \"Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.\"}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0e5a18c67c7203e0006aa10143f8c887d08f8844eabfa0f1fb"
+          },
+          "response": {
+            "id": "resp_0e5a18c67c7203e0006aa10145917c87d0bcd6142b5ba260b8",
+            "created_at": 1788936517.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0e5a18c67c7203e0006aa1014624f087d08511670ac25711e4",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQFKmosyLJRX9NgAvLe0cjfbCvL-hUbX4Gj3kCa8LAvi4IK8T3NgEn-0c9wFkQTg8ZDtJBF0bCrEruUILHCF6NLOFZ7YanhB8k1L6NnwPX8jEdkat1BcG1IiaGbDtfONWGX7GMOoxZLGV1sKqW6vHltbryWkKLSR4xmqRjIfahjhLXitDbAovU4_sv1EKTHLN44xoClM2iCxVUrzof0TAnNzBGTwiYpXm9mxG_o5BRuDmrecHryG2Gm4CsPTU29clb0pFUH8px6fk2yjYhqkZl2KCzGhTs_bs1A2zTz0FH7NAFbvarPeC8iqXsFGUtEQKQXvsjjLAcxCagOAqZ15Qgh4iX_0iFMjAz51jtNHIxKtuUH3S7dkHHhMkOJIY4G0Z767HiRxwehS5M8qpVZsNSEUCjLwWAWeLVWNhpTeu1XoewgQvOq5RrJMqRSxzXPJNzFBfqIjEZH1_VC7KTpoJKt-EB9H-JPCLDldIGXCFDSpulxoZjGbY6YJ5ILvrftcDn7UsEa4oy6kGfB1p7HLUjV4OEs5M0jbVZYc-8E1gkaf12pjyZidh5RRzBc0eo1W4vPq8kfMI34lhTsI-zvLEMSC3Sn4HMk5sTqoTLRzvPPJHcaPpYEMP-l4ONB9iDSZEJAChmyJGQ-scFkAULV3VYHWxvmOimUN5ilGxLc3tduSLoYdLuoxa19pItodPlqrroINuMgXBE1_LyhUjOtRvWD63f3vt6_J6C9h7vx2lUed0BRgi-eogsgvyhnjZ3752P9-8PJiZlKPxZ96wlFKNBkxodF1K8_2FYxgrQoQ6e8ov1ahOfq3KfYXOuVHc0QqG68dIQxg-IxOsByq1RXfOQs--JcqzYAYj0QvRZYYSwyZD6J555iiM6fP8F7ROBD79ivKLl1rpdMTCxevwNqMlx3hf0sl7tcP7oaW2HpDyV-TfqA0EOe-ci6loXSsQYF8DnW-5GDJzLF86vgSQjSjIl6iBiOXNda19kjZ68Y80d8oeKjWOfzYrcLqUOQCOAqUAljvVI8bcAqT-lFSvGuRLIOjsmeE8Rd-OpfZwja4p08mKjOwR3MLf8YR9x6s1phR4wm4qziMUc8i0hcc7H8hfAP62Nbt238q1-pZR_YMjUuBOdXfNHgAxZ72zKuc1K64otLDXjNaz2_-Sd-VGmizntmw0vtrd_aDehtvCw1lmUvgrChIxDRscw7t2XkarbaY1vBYDktIF468hiOrzC_f6iGH9NK7sQDdqE-TBC7u0DsaNhqomMQXSI_3re_rViue-8DauClD81HSiWEQoT65rwJvZtun_TrNQ-Iff2kk73uZybU6ZL7Hq67WS8DYHD5kNP-pyTmsNmJi796DLinjxklVeAIgfRcbttK3Anc71Cl9Ug4-MzZqA0IvcARUjBHUBX8g-i1-EDwjV1IMzG2G0DhRIA-jwFsEEB1OAjY-rRxxXDH1cs3HAWTjAbhcaqGc-WXmxJAhbSgOIpV15TCYIy27hh10cbX_0YRaqxCjBqVvUH3lYwiBZgwc3ye3RghnzjSMJ481x_nEwg9OQgzcqH_p2JAumNJ64EGrHW9KsYf4c9uE1OXTO-hvOH_j7QUof-PwS1rZfR2VLXK5TBiqNGVYOCmH2gRJH8-5NmKWk_OQzOESUdoir615s14ijSO5fe83i0U65TFmj68kiLbiZFNaywOtIuknfmXhCqF3U6Zpe7cNG7FQU0shUK7LWlrWYKb5wW8zepV2OKD5ejk_57m1OaQZ-gafy_4UUEjLP-fHLb6_6WbiTQgVQcFc8CoNH5DdE20tJQwKVf7z7mSNVBR3sjP67hr18seweE3xV1ISgxHrCOfXa3LV8Y7zxrNEMhWzZnewFR21-NGOZ-iEbusaHw==",
+                "status": null
+              },
+              {
+                "id": "msg_0e5a18c67c7203e0006aa1014826c887d08bcf78731d89f1cf",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936522.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0e5a18c67c7203e0006aa10143f8c887d08f8844eabfa0f1fb",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 3923,
+              "input_tokens_details": {
+                "cache_write_tokens": 2121,
+                "cached_tokens": 1799
+              },
+              "output_tokens": 259,
+              "output_tokens_details": {
+                "reasoning_tokens": 104
+              },
+              "total_tokens": 4182
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)",
+          "final_answer": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)"
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Where is it taught?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction."
+          },
+          {
+            "role": "assistant",
+            "content": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "expectation": {
+        "question": "Where is it taught?",
+        "expected": "Give the stored location for this program; don't confuse delivery mode or the institution's headquarters.",
+        "scope": "campus",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Campus: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6.",
+        "tools_used": [
+          "campus_information"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "campuses": [
+          {
+            "campus_key": "downtown",
+            "official_name": "Downtown Campus",
+            "address": "555 Seymour Street",
+            "city": "Vancouver",
+            "region": "BC",
+            "postal_code": "V6B 3H6",
+            "relationship_type": "offered",
+            "notes": "Downtown Campus, Vancouver"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview",
+            "A700GRCERT:campus"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "elapsed_seconds": 0.578,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "answered_facets": [
+                "A700GRCERT:overview"
+              ],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "A700GRCERT",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "request": {
+        "question": "And the official page for that one?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "I'm considering the Business Administration Graduate Certificate. Give me a brief introduction."
+          },
+          {
+            "role": "assistant",
+            "content": "The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)"
+          },
+          {
+            "role": "user",
+            "content": "Where is it taught?"
+          },
+          {
+            "role": "assistant",
+            "content": "Campus: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview",
+            "A700GRCERT:campus"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "expectation": {
+        "question": "And the official page for that one?",
+        "expected": "Provide this program's exact stored official source URL.",
+        "scope": "source",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "contains_any",
+            "value": [
+              "https://www\\.bcit\\.ca/"
+            ],
+            "dimension": "evidence_discipline",
+            "root_cause": "unknown_human_confirmation"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "A700GRCERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Business Administration",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "A700GRCERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "A700GRCERT:overview",
+            "A700GRCERT:campus"
+          ],
+          "stopped": false,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "graduation"
+        }
+      },
+      "elapsed_seconds": 4.187,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "graduation",
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": "graduation",
+              "answered_facets": [
+                "A700GRCERT:overview",
+                "A700GRCERT:campus"
+              ],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "A700GRCERT",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 3,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: And the official page for that one?\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: A700GRCERT. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"A700GRCERT\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[\"A700GRCERT:overview\",\"A700GRCERT:campus\"]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.\nRecent conversation:\nUser: I'm considering the Business Administration Graduate Certificate. Give me a brief introduction.\nAssistant: The **Business Administration Graduate Certificate** is a full-time, 19-credit program completed over nine months, from September to May. Delivered in a blended format—with evening classes at BCIT’s Downtown Vancouver campus and online learning—it develops master’s-level skills in economics, accounting, finance, marketing, operations, and management.\n\nThe six-course curriculum culminates in **GLBL 9200 – Business Capstone Project**, where students address a real-world industry challenge. The September 2026 intake is closed; applications for September 2027 are scheduled to open October 1, 2026.\n\n[View the BCIT program page](https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/)\nUser: Where is it taught?\nAssistant: Campus: **Downtown Campus** — 555 Seymour Street, Vancouver, BC V6B 3H6.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0742e5dd46f3ca0e006aa1014c474487d0b2344b44a53e92f5",
+            "created_at": 1788936524.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"A700GRCERT\"}",
+                "call_id": "call_1hOLsXjhReYsMwUkF3bsNPmL",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0742e5dd46f3ca0e006aa1014cfa4c87d083f923274e24ef92",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936525.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2015,
+              "input_tokens_details": {
+                "cache_write_tokens": 359,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 24,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2039
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "A700GRCERT"
+          },
+          "context": {
+            "academic_scope": "graduation",
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "And the official page for that one?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "A700GRCERT",
+            "program_name": "Business Administration",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "A700GRCERT",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 453,
+                            "condition_type": "ALL_SIX_COURSES_19_CREDITS",
+                            "description": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "all",
+                              "verification": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "ALL_SIX_COURSES_19_CREDITS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 176,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "ALL_SIX_COURSES_19_CREDITS",
+                    "notes": "Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.",
+                    "rule_set_id": 311,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "credential_award_evidence": [],
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Every course must be passed with a 60% mark.",
+                    "from_level": 1,
+                    "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                    "to_level": 2,
+                    "type": "PROGRAM_COURSE_GRADE",
+                    "value": "60"
+                  }
+                ]
+              },
+              "campus": "Downtown Campus, Vancouver",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "A700GRCERT"
+              },
+              "courses": [
+                {
+                  "course_id": "ECON9100",
+                  "course_name": "Managerial Economics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT9152",
+                  "course_name": "Accounting for Managers",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT9260",
+                  "course_name": "Business Finance",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "GLBL9200",
+                  "course_name": "Business Capstone Project",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "MKTG9120",
+                  "course_name": "Marketing Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                },
+                {
+                  "course_id": "OPMT9170",
+                  "course_name": "Systems and Operations Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (20 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                  "term": null
+                }
+              ],
+              "credential": "Graduate Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 272,
+                    "component_name": "Term 1 (15 weeks)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "ECON9100",
+                        "course_name": "Managerial Economics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "ECON 9100",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT9152",
+                        "course_name": "Accounting for Managers",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9152",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MKTG9120",
+                        "course_name": "Marketing Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MKTG 9120",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 1 (15 weeks)",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 273,
+                    "component_name": "Term 2 (20 weeks)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "FMGT9260",
+                        "course_name": "Business Finance",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 9260",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "GLBL9200",
+                        "course_name": "Business Capstone Project",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "GLBL 9200",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "OPMT9170",
+                        "course_name": "Systems and Operations Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "OPMT 9170",
+                        "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 2 (20 weeks) Total Credits: 19.0",
+                    "required_credits": null
+                  }
+                ],
+                "credit_requirements": [],
+                "program_id": "A700GRCERT",
+                "substitutions": []
+              },
+              "delivery_method": "Blended (on campus and online)",
+              "program_id": "A700GRCERT",
+              "program_name": "Business Administration",
+              "program_overview": "Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master’s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master’s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master’s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements",
+              "school": "School of Business + Media",
+              "source_url": "https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_1hOLsXjhReYsMwUkF3bsNPmL",
+                "output": "{\"program\": {\"program_id\": \"A700GRCERT\", \"program_name\": \"Business Administration\", \"program_overview\": \"Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . In the BCIT Graduate Certificate in Business Administration you will gain practical business skills at a master\\u2019s level that can be applied across multiple industries. Graduates have the opportunity to continue their studies to complete a master\\u2019s degree or to enter the workforce in a managerial role. About the program The program incorporates a blend of assessments, including case studies, problem-based learning, collaborative group work, self-reflections, and individual projects. Students are exposed to real-world business issues throughout their coursework, culminating in a capstone project where students will be given the opportunity to work on solving real problems facing industry. Two terms to complete : Six graduate level courses taught over nine months (September to May) Blended course delivery : Evenings at the Vancouver campus combined with online learning Cohort program : You will work through this full-time program with your cohort, sharing your experience and expertise, and building a professional network that will last long after you have graduated Business capstone project : Students assume the role of a business professional and develop a report and presentation, addressing solutions to real-world industry challenges Laddering options : Articulations with partners are being developed so that alumni can ladder to master degree programs Master\\u2019s Degree Options The Graduate Certificate in Business Administration is structured to meet the requirements for direct entry and advanced placement in MBA programs. Learn more about the master pathways on the MBA Degree Options page. Next up Entrance Requirements\", \"school\": \"School of Business + Media\", \"credential\": \"Graduate Certificate\", \"study_mode\": \"Full-time\", \"campus\": \"Downtown Campus, Vancouver\", \"delivery_method\": \"Blended (on campus and online)\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"courses\": [{\"course_id\": \"ECON9100\", \"course_name\": \"Managerial Economics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"FMGT9152\", \"course_name\": \"Accounting for Managers\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"FMGT9260\", \"course_name\": \"Business Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}, {\"course_id\": \"GLBL9200\", \"course_name\": \"Business Capstone Project\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}, {\"course_id\": \"MKTG9120\", \"course_name\": \"Marketing Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"OPMT9170\", \"course_name\": \"Systems and Operations Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (20 weeks)\"}], \"curriculum\": {\"program_id\": \"A700GRCERT\", \"components\": [{\"component_id\": 272, \"component_name\": \"Term 1 (15 weeks)\", \"component_order\": 1, \"required_credits\": null, \"notes\": \"Term 1 (15 weeks)\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"ECON9100\", \"course_name\": \"Managerial Economics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"ECON 9100\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT9152\", \"course_name\": \"Accounting for Managers\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 9152\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"MKTG9120\", \"course_name\": \"Marketing Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"MKTG 9120\"}]}, {\"component_id\": 273, \"component_name\": \"Term 2 (20 weeks)\", \"component_order\": 2, \"required_credits\": null, \"notes\": \"Term 2 (20 weeks) Total Credits: 19.0\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT9260\", \"course_name\": \"Business Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 9260\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"GLBL9200\", \"course_name\": \"Business Capstone Project\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"GLBL 9200\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"OPMT9170\", \"course_name\": \"Systems and Operations Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"OPMT 9170\"}]}], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"A700GRCERT\", \"rule_sets\": [{\"rule_set_id\": 311, \"scope\": \"COMPLETION\", \"name\": \"ALL_SIX_COURSES_19_CREDITS\", \"study_mode\": \"Full-time\", \"exact_choice_count\": null, \"notes\": \"Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.\", \"groups\": [{\"rule_group_id\": 176, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"ALL_SIX_COURSES_19_CREDITS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 453, \"condition_type\": \"ALL_SIX_COURSES_19_CREDITS\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"executable\": false, \"verification\": \"human_confirmation\"}, \"description\": \"Complete all six prescribed graduate-level courses (19.0 credits), including the Business Capstone Project, with each course passed at 60% or higher.\", \"sort_order\": 1}], \"children\": []}]}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"A700GRCERT\", \"clinical_placement\": [], \"practice_hours\": []}, \"academic_scope_boundaries\": {\"credential_award_evidence\": [], \"later_level_progression_requirements\": [{\"from_level\": 1, \"to_level\": 2, \"type\": \"PROGRAM_COURSE_GRADE\", \"value\": \"60\", \"description\": \"Every course must be passed with a 60% mark.\", \"source_url\": \"https://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/\"}], \"binding_rule\": \"Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.\"}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0742e5dd46f3ca0e006aa1014c474487d0b2344b44a53e92f5"
+          },
+          "response": {
+            "id": "resp_0742e5dd46f3ca0e006aa1014e21e087d0bf5d2f775660a7f5",
+            "created_at": 1788936526.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "msg_0742e5dd46f3ca0e006aa1014ee90c87d08e85ef950a298c75",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936527.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0742e5dd46f3ca0e006aa1014c474487d0b2344b44a53e92f5",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 4136,
+              "input_tokens_details": {
+                "cache_write_tokens": 2121,
+                "cached_tokens": 2012
+              },
+              "output_tokens": 34,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 4170
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/",
+          "final_answer": "Here’s the BCIT program page:\n\nhttps://www.bcit.ca/programs/business-administration-graduate-certificate-full-time-a700grcert/"
+        }
+      ],
+      "assertions": [
+        {
+          "op": "contains_any",
+          "value": [
+            "https://www\\.bcit\\.ca/"
+          ],
+          "dimension": "evidence_discipline",
+          "root_cause": "unknown_human_confirmation",
+          "pass": true,
+          "actual": null
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "A700GRCERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "A700GRCERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

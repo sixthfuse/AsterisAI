@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-17",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "c8b4fdb79eb80dfa1bb287c13ed518e210af8134c63a8a6a6ec667b8887efecb",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b020d91f5f8d7847d8c24dbaf94082599137def83a1cfd116afc25ce8c026637",
+  "packet_sha256": "8913422d877f2630a7c94e4aede6aae0007a46156195c047ea0f8f2487067177",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_04b4ab0ab2bf3be6006aa0823aaa9487d09eb234d0ec9d1fc2",
+  "usage": {
+    "input_tokens": 64966,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 64963
+    },
+    "output_tokens": 1093,
+    "output_tokens_details": {
+      "reasoning_tokens": 91
+    },
+    "total_tokens": 66059
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly discovers the unique joint honours BSc; all listed facts match the frozen records. Family discovery state retains unique_result_program_id 9940BSC, appropriate at this stage. Slightly catalog-like wording is harmless. Context retention is inapplicable on turn 1; no required clarification, frustration, or actionable next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Resolution and get_program_details correctly use 9940BSC, and the prose answers its location accurately, but returned E11 keeps scope=program_family and program_id=null instead of persisting the selected program."
+        },
+        "notes": "The answer correctly identifies both campuses, in-person delivery, duration, and joint credential. The structural failure is real but is not a wrong-program prose answer. No clarification or next step is needed; frustration handling is inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 2,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E18 resolves the admissions follow-up as program_set_query=true for biochem, with search_programs forced by tool_choice. E1 consequently repeats the discovery listing and supplies no admission requirements; returned program_id remains null."
+        },
+        "notes": "The repeated academic catalog facts are correct, and the narrow statement that category results omit admission requirements accurately describes E9. Nevertheless, the full conversation already contains detailed admission evidence from turn 2, and frozen records provide both pathways and the September 2026 exception. Failure to answer is not itself a false academic claim. The program link is only a weak recovery step. No clarification was asked or required; no explicit frustration."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 2,
+          "context_retention": 1,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 1,
+          "naturalness": 1,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 1
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "wrong_or_lost_subject",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "E18 again routes the explicit graduation correction to a family search with forced search_programs. E2 repeats the category listing and says available Asteris data lacks graduation requirements, although turn 2 retrieved TOTAL_132_CREDITS and extensive curriculum evidence. The model's broad absence claim remains unchanged in finalization."
+        },
+        "notes": "The academic facts actually stated about credential, mode, and campuses are correct; the false claim about data availability is penalized under evidence discipline and unsupported inference. The answer omits the 132-credit completion requirement and graduation-specific requirements, rather than asserting a wrong credit threshold. State still has program_id=null despite retaining the unique result. Repeated catalog content and failure to acknowledge the correction are inattentive. The link and conditional BCIT referral offer a reasonable but unnecessary fallback. This is a scope correction, not an explicit stop or frustration turn; necessary clarification is inapplicable."
+      }
+    ]
+  },
+  "attempt": 3
+}

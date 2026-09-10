@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-07",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "ab1f9f793f147f6d0bf7f743037e71d7b92ee1d7166b78d9d6f294c661f5aa3b",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "bb5eb558bf05b3f528dc1f7cf3cf664ccab8c76853b4e14853b36c4e07cfec17",
+  "packet_sha256": "6f4d9c2aafdcccac7dcd792707f037e0ab0cc0568ed9ebcf0d180846b4e6137d",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_03b8944b1d83535b006aa10a0077ec87d092a4de2707a32d04",
+  "usage": {
+    "input_tokens": 57265,
+    "input_tokens_details": {
+      "cache_write_tokens": 55911,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1735,
+    "output_tokens_details": {
+      "reasoning_tokens": 1025
+    },
+    "total_tokens": 59000
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 4,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly identified both active Civil Technology credentials and requested the necessary disambiguation. Context retention is not applicable on the first turn. The semicolon-formatted question is slightly stiff but clear."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly resolved the fragment to program 5430ACERT and described the Associate Certificate. The minimum 30-credit total, 9.5-credit elective requirement, blended Burnaby/online delivery, admissions information, international-applicant restriction, curriculum review, and declaration approval requirement are supported by the frozen records."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 1,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "wrong_academic_rule_or_arithmetic",
+          "layer": "model_language",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The resolver and tool correctly selected 5430CERT, and source E4 states that the Certificate must contain a minimum of 60.0 credits. The raw model/final answer instead says “Program total: 60 credits,” dropping the minimum qualifier and presenting the threshold as a fixed total."
+        },
+        "notes": "The credential switch and nearly all other program details are correct. However, the answer materially confuses a minimum-credit requirement with a fixed program total, despite the correct source evidence being available to the model."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly retained the Civil Technology Certificate as the subject and reported its Burnaby Campus/online location. “Stored location” is somewhat system-oriented wording but does not impair the answer."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

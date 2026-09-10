@@ -1,0 +1,1156 @@
+{
+  "classification": {
+    "scenario_id": "CAT-13-B",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "credential_ambiguity",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer says ICES evaluation 'may be required'. The source requires comprehensive credential evaluation for the specified countries, although other Canadian services may be considered. The wording leaves that distinction less clear.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "I am an international applicant interested in the Smart Grid Systems and Technologies Master of Engineering. Is it available to international applicants?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "I am an international applicant interested in the Smart Grid Systems and Technologies Master of Engineering. Is it available to international applicants?",
+        "expected": "Use this program's INTERNATIONAL evidence. Distinguish available, restricted, not accepted, and unknown; never infer ineligibility from silence.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "M500MENG"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Yes. The **Master of Engineering in Smart Grid Systems and Technologies** is available to international applicants through its **full-time blended delivery option**. The **part-time online option is not available** to international applicants.\n\nAdmission is competitive and requires meeting the program’s entrance requirements, including:\n\n- Graduate Studies English proficiency requirement\n- A bachelor’s degree in electrical/electronics engineering with a minimum GPA of **2.4/4.0**, or an eligible relevant bachelor’s degree through alternate entry\n- Department review and ranking\n- Credential evaluation through ICES may be required for studies completed outside Canada, the United States, the United Kingdom, Australia, or New Zealand\n\nThe **September 2026 intake is closed**. Applications for **September 2027** are scheduled to open **October 1, 2026**.\n\nProgram details: https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 7,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Smart Grid Systems and Technologies",
+        "conversation_state": {
+          "version": 1,
+          "scope": "program",
+          "program_id": "M500MENG",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 8.891,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": null,
+              "level": null,
+              "program_id": "M500MENG",
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "M500MENG",
+            "program_name": "Smart Grid Systems and Technologies",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: I am an international applicant interested in the Smart Grid Systems and Technologies Master of Engineering. Is it available to international applicants?\nRouted intent: PROGRAM_INFO\nRequired response language from current turn: English\nResolved internal program for tool use: M500MENG. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"program\", \"program_id\": \"M500MENG\", \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}",
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x000001BD1CEF66F0>"
+          },
+          "response": {
+            "id": "resp_02bead03eb9764b0006aa073c11d0087d0a2a33148d5d04699",
+            "created_at": 1788900289.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"M500MENG\"}",
+                "call_id": "call_joRU0rKemja2DKc4uXOiuM9u",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_02bead03eb9764b0006aa073c1a11887d09191b3b6fc5185a1",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900289.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1512,
+              "input_tokens_details": {
+                "cache_write_tokens": 168,
+                "cached_tokens": 1214
+              },
+              "output_tokens": 23,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1535
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "M500MENG"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "I am an international applicant interested in the Smart Grid Systems and Technologies Master of Engineering. Is it available to international applicants?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "M500MENG",
+            "program_name": "Smart Grid Systems and Technologies",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "M500MENG",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 697,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "Scheduled intakes September each year. Application processing Applications are accepted: October 1st* to April 15th* April 16th* to June 30th* July 1st* to August 15th* *or next business day This program has multiple application deadlines and may fill after each deadline date. We recommend that you apply early. All supporting documents must be submitted by the application deadline. Entrance requirements Competitive Entry: Two-step process Step 1: Meet the following entrance requirements English language proficiency: Graduate Studies – English Studies 12 (67%) or equivalent Entry options: one of the following: Option 1: standard entry Post-secondary education: bachelor’s degree in electrical or electronics engineering, with a minimum GPA of 2.4 out of 4.0 (60%) based on the entire program. Option 2: alternate entry Alternate entry is for applicants who do not have a bachelor's degree in electrical or electronic engineering and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 2.4 out of 4.0 (60%) in a relevant discipline, such as: software engineering, computer engineering, computer science, physics, mathematics, information, or communications technology. Alternate entry applicants must complete a Pre-entry Assessment form to have their education, experience, and interest assessed by the program. After the review, bridging courses may be recommended for the applicant to take to apply for the program. Email a completed Pre-entry Assessment form [PDF] to: meng_sgst@bcit.ca . You may be requested to send additional documents or meet with the Program Head. Once your pre-entry assessment has been approved, submit it to your online application. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Read more about how to meet BCIT’s entrance requirements Step 2: Department Review All complete applications will be reviewed by the Graduate Selection Committee and ranked on a competitive basis. Applicants who are best suited for success in the program will be offered acceptance. Only complete applications that include all the required supporting documentation will be evaluated. For engineering disciplines outside of electrical and electronics, you may be required to—or it may be identified that you need to—take a bridging course to get accepted and succeed in the program. We have developed and recommend ELEX 0101 - Modern Power System and Circuit Fundamentals or ELEX 0102 - Fundamentals of Power Systems and Circuits that provide the fundamentals of electric circuits and systems. Recommended for success Applicants with sufficient knowledge base in electrical power systems, computer science, or ICT (information and communications technology) will have a higher chance of being successful in this program. Since admission into the program will be on a competitive basis, applicants with relevant industry experience will have an advantage due to the applied nature of the program. International applicants The full-time blended delivery option is available to international applicants. The part-time online delivery option is not available to international applicants. View available programs . Study permit: A valid BCIT study permit is required prior to starting the full-time program. Post-graduation Work Permit (PGWP) eligibility : Only the full-time option of this program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [],
+                              "executable": false,
+                              "minimum_credits": null,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 412,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "Scheduled intakes September each year. Application processing Applications are accepted: October 1st* to April 15th* April 16th* to June 30th* July 1st* to August 15th* *or next business day This program has multiple application deadlines and may fill after each deadline date. We recommend that you apply early. All supporting documents must be submitted by the application deadline. Entrance requirements Competitive Entry: Two-step process Step 1: Meet the following entrance requirements English language proficiency: Graduate Studies – English Studies 12 (67%) or equivalent Entry options: one of the following: Option 1: standard entry Post-secondary education: bachelor’s degree in electrical or electronics engineering, with a minimum GPA of 2.4 out of 4.0 (60%) based on the entire program. Option 2: alternate entry Alternate entry is for applicants who do not have a bachelor's degree in electrical or electronic engineering and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 2.4 out of 4.0 (60%) in a relevant discipline, such as: software engineering, computer engineering, computer science, physics, mathematics, information, or communications technology. Alternate entry applicants must complete a Pre-entry Assessment form to have their education, experience, and interest assessed by the program. After the review, bridging courses may be recommended for the applicant to take to apply for the program. Email a completed Pre-entry Assessment form [PDF] to: meng_sgst@bcit.ca . You may be requested to send additional documents or meet with the Program Head. Once your pre-entry assessment has been approved, submit it to your online application. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Read more about how to meet BCIT’s entrance requirements Step 2: Department Review All complete applications will be reviewed by the Graduate Selection Committee and ranked on a competitive basis. Applicants who are best suited for success in the program will be offered acceptance. Only complete applications that include all the required supporting documentation will be evaluated. For engineering disciplines outside of electrical and electronics, you may be required to—or it may be identified that you need to—take a bridging course to get accepted and succeed in the program. We have developed and recommend ELEX 0101 - Modern Power System and Circuit Fundamentals or ELEX 0102 - Fundamentals of Power Systems and Circuits that provide the fundamentals of electric circuits and systems. Recommended for success Applicants with sufficient knowledge base in electrical power systems, computer science, or ICT (information and communications technology) will have a higher chance of being successful in this program. Since admission into the program will be on a competitive basis, applicants with relevant industry experience will have an advantage due to the applied nature of the program. International applicants The full-time blended delivery option is available to international applicants. The part-time online delivery option is not available to international applicants. View available programs . Study permit: A valid BCIT study permit is required prior to starting the full-time program. Post-graduation Work Permit (PGWP) eligibility : Only the full-time option of this program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 553,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 698,
+                            "condition_type": "COMPONENT_1",
+                            "description": "Term 1 (15 weeks):",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [
+                                "SGST9010",
+                                "SGST9110",
+                                "SGST9120",
+                                "SGST9130"
+                              ],
+                              "executable": true,
+                              "minimum_credits": null,
+                              "semantic": "all"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "COMPONENT_1",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 413,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_1",
+                    "notes": "Term 1 (15 weeks):",
+                    "rule_set_id": 554,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 699,
+                            "condition_type": "COMPONENT_2",
+                            "description": "Term 2 (15 weeks):",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [
+                                "SGST9210",
+                                "SGST9220",
+                                "SGST9230"
+                              ],
+                              "executable": true,
+                              "minimum_credits": null,
+                              "semantic": "all"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "COMPONENT_2",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 414,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_2",
+                    "notes": "Term 2 (15 weeks):",
+                    "rule_set_id": 555,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 700,
+                            "condition_type": "COMPONENT_3",
+                            "description": "Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [
+                                "SGST9020",
+                                "SGST9310",
+                                "SGST9320",
+                                "SGST9330",
+                                "SGST9340"
+                              ],
+                              "executable": true,
+                              "minimum_credits": null,
+                              "semantic": "all"
+                            },
+                            "sort_order": 3,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "COMPONENT_3",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 415,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_3",
+                    "notes": "Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:",
+                    "rule_set_id": 556,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 701,
+                            "condition_type": "COMPONENT_4",
+                            "description": "Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master’s-level course in an accredited program. Total Credits: 33.0",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [
+                                "SGST9410",
+                                "SGST9430"
+                              ],
+                              "executable": false,
+                              "minimum_credits": null,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 4,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "COMPONENT_4",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 416,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_4",
+                    "notes": "Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master’s-level course in an accredited program. Total Credits: 33.0",
+                    "rule_set_id": 557,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [],
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2121,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 702,
+                            "condition_type": "PUBLISHED_PATHWAY_1",
+                            "description": "Term 4 (30 weeks): Credits: Choose one of the following options: Complete the capstone project.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [],
+                              "executable": false,
+                              "minimum_credits": null,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "PUBLISHED_PATHWAY_1",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 417,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "PUBLISHED_PATHWAY_1",
+                    "notes": "Term 4 (30 weeks): Credits: Choose one of the following options: Complete the capstone project.",
+                    "rule_set_id": 558,
+                    "scope": "PATHWAY",
+                    "study_mode": "Full-time/Part-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 703,
+                            "condition_type": "PUBLISHED_PATHWAY_2",
+                            "description": "Term 4 (30 weeks): Credits: Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master’s-level course in an accredited program.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [],
+                              "executable": false,
+                              "minimum_credits": null,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "PUBLISHED_PATHWAY_2",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 418,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "PUBLISHED_PATHWAY_2",
+                    "notes": "Term 4 (30 weeks): Credits: Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master’s-level course in an accredited program.",
+                    "rule_set_id": 559,
+                    "scope": "PATHWAY",
+                    "study_mode": "Full-time/Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "M500MENG"
+              },
+              "courses": [
+                {
+                  "course_id": "SGST9010",
+                  "course_name": "Applied Research Methods, Policies, and Ethics",
+                  "course_type": "REQUIRED",
+                  "credits": "0.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/applied-research-methods-policies-and-ethics-sgst-9010/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9020",
+                  "course_name": "Applied Research Proposal Development",
+                  "course_type": "REQUIRED",
+                  "credits": "0.00",
+                  "level": null,
+                  "notes": "Term 3 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/applied-research-proposal-development-sgst-9020/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9110",
+                  "course_name": "Introduction to Smart Electricity Grids",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-smart-electricity-grids-sgst-9110/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9120",
+                  "course_name": "Modern Electric Utility Systems Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/modern-electric-utility-systems-management-sgst-9120/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9130",
+                  "course_name": "Smart Cities and Sustainable Transportation",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 1 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/smart-cities-and-sustainable-transportation-sgst-9130/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9210",
+                  "course_name": "Advanced Power Systems Analysis",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/advanced-power-systems-analysis-sgst-9210/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9220",
+                  "course_name": "Information & Communication Technology in Electric Utilities",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9230",
+                  "course_name": "Power System Protection & Control",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 2 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/power-system-protection-and-control-sgst-9230/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9310",
+                  "course_name": "Microgrid Design, Operation & Control",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 3 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/microgrid-design-operation-and-control-sgst-9310/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9320",
+                  "course_name": "Renewable & Distributed Energy Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 3 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/renewable-and-distributed-energy-systems-sgst-9320/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9330",
+                  "course_name": "Data Acquisition and Analytics in Electric Utilities",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 3 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/data-acquisition-and-analytics-in-electric-utilities-sgst-9330/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9340",
+                  "course_name": "Energy Storage & Power Electronics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 3 (15 weeks)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/energy-storage-and-power-electronics-sgst-9340/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9410",
+                  "course_name": "Capstone Project",
+                  "course_type": "PATHWAY",
+                  "credits": "6.00",
+                  "level": null,
+                  "notes": "Term 4 (30 weeks)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/capstone-project-sgst-9410/",
+                  "term": null
+                },
+                {
+                  "course_id": "SGST9430",
+                  "course_name": "Directed Studies in Smart Grid (Elective Course",
+                  "course_type": "PATHWAY",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Term 4 (30 weeks)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/directed-studies-in-smart-grid-elective-course-sgst-9430/",
+                  "term": null
+                }
+              ],
+              "credential": "Master of Engineering",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 483,
+                    "component_name": "Term 1 (15 weeks)",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "SGST9010",
+                        "course_name": "Applied Research Methods, Policies, and Ethics",
+                        "course_role": "REQUIRED",
+                        "credits": "0.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9010",
+                        "source_url": "https://www.bcit.ca/courses/applied-research-methods-policies-and-ethics-sgst-9010/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9110",
+                        "course_name": "Introduction to Smart Electricity Grids",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9110",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-smart-electricity-grids-sgst-9110/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9120",
+                        "course_name": "Modern Electric Utility Systems Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9120",
+                        "source_url": "https://www.bcit.ca/courses/modern-electric-utility-systems-management-sgst-9120/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9130",
+                        "course_name": "Smart Cities and Sustainable Transportation",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9130",
+                        "source_url": "https://www.bcit.ca/courses/smart-cities-and-sustainable-transportation-sgst-9130/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 1 (15 weeks):",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 484,
+                    "component_name": "Term 2 (15 weeks)",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "SGST9210",
+                        "course_name": "Advanced Power Systems Analysis",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/advanced-power-systems-analysis-sgst-9210/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9220",
+                        "course_name": "Information & Communication Technology in Electric Utilities",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9230",
+                        "course_name": "Power System Protection & Control",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/power-system-protection-and-control-sgst-9230/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 2 (15 weeks):",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 485,
+                    "component_name": "Term 3 (15 weeks)",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "SGST9020",
+                        "course_name": "Applied Research Proposal Development",
+                        "course_role": "REQUIRED",
+                        "credits": "0.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9020",
+                        "source_url": "https://www.bcit.ca/courses/applied-research-proposal-development-sgst-9020/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9310",
+                        "course_name": "Microgrid Design, Operation & Control",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9310",
+                        "source_url": "https://www.bcit.ca/courses/microgrid-design-operation-and-control-sgst-9310/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9320",
+                        "course_name": "Renewable & Distributed Energy Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9320",
+                        "source_url": "https://www.bcit.ca/courses/renewable-and-distributed-energy-systems-sgst-9320/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9330",
+                        "course_name": "Data Acquisition and Analytics in Electric Utilities",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/data-acquisition-and-analytics-in-electric-utilities-sgst-9330/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9340",
+                        "course_name": "Energy Storage & Power Electronics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9340",
+                        "source_url": "https://www.bcit.ca/courses/energy-storage-and-power-electronics-sgst-9340/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 486,
+                    "component_name": "Term 4 (30 weeks)",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "SGST9410",
+                        "course_name": "Capstone Project",
+                        "course_role": "PATHWAY",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SGST 9410",
+                        "source_url": "https://www.bcit.ca/courses/capstone-project-sgst-9410/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SGST9430",
+                        "course_name": "Directed Studies in Smart Grid (Elective Course",
+                        "course_role": "PATHWAY",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/courses/directed-studies-in-smart-grid-elective-course-sgst-9430/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master’s-level course in an accredited program. Total Credits: 33.0",
+                    "required_credits": null
+                  }
+                ],
+                "credit_requirements": [],
+                "program_id": "M500MENG",
+                "substitutions": []
+              },
+              "delivery_method": "Blended",
+              "program_id": "M500MENG",
+              "program_name": "Smart Grid Systems and Technologies",
+              "program_overview": "The Master of Engineering in Smart Grid Systems and Technologies (MEng SGST) is a unique graduate program aimed at providing students with the competencies required to conduct research, plan, design, implement, maintain, commission, and operate Smart Grid systems and applications in the electric utility and related sectors. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . About the program The MEng in SGST program leverages BCIT’s decade long research results, domain expertise, world-class infrastructure, seasoned faculty, and strategic partnerships with industry. Graduates of MEng in SGST will develop hands-on knowledge and understanding of foundational concepts involved in Smart Grid technologies employed in Critical Infrastructure, including applications in renewable energies, green transportation, and smart cities. Who it’s for The program caters to professionals currently employed in the industry, as well as those interested in continuing their education. As a BCIT Full-Time program, MEng SGST enables students to enrich and complement their Smart Grid domain knowledge outside normal working hours without interfering with their current jobs, thereby preparing them for exciting future careers in the carbon-constrained economy of the new millennia. MEng SGST’s learning outcomes are achieved through a combination of theoretical studies, complemented with hands-on project work at BCIT or in industry. What grads can do The program prepares students with the skills and capacity to combine knowledge from several areas traditionally taught in separate programs, including electrical power systems, computer science, and ICT (information and communications technology) to address strategic challenges, which the utility industry across the world faces in reducing its carbon footprint and transitioning to Green Economy. Next up Entrance Requirements",
+              "school": "School of Energy",
+              "source_url": "https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+              "status": "Active",
+              "study_mode": "Full-time/Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_joRU0rKemja2DKc4uXOiuM9u",
+                "output": "{\"program\": {\"program_id\": \"M500MENG\", \"program_name\": \"Smart Grid Systems and Technologies\", \"program_overview\": \"The Master of Engineering in Smart Grid Systems and Technologies (MEng SGST) is a unique graduate program aimed at providing students with the competencies required to conduct research, plan, design, implement, maintain, commission, and operate Smart Grid systems and applications in the electric utility and related sectors. Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. Delivery: blended. See details . About the program The MEng in SGST program leverages BCIT\\u2019s decade long research results, domain expertise, world-class infrastructure, seasoned faculty, and strategic partnerships with industry. Graduates of MEng in SGST will develop hands-on knowledge and understanding of foundational concepts involved in Smart Grid technologies employed in Critical Infrastructure, including applications in renewable energies, green transportation, and smart cities. Who it\\u2019s for The program caters to professionals currently employed in the industry, as well as those interested in continuing their education. As a BCIT Full-Time program, MEng SGST enables students to enrich and complement their Smart Grid domain knowledge outside normal working hours without interfering with their current jobs, thereby preparing them for exciting future careers in the carbon-constrained economy of the new millennia. MEng SGST\\u2019s learning outcomes are achieved through a combination of theoretical studies, complemented with hands-on project work at BCIT or in industry. What grads can do The program prepares students with the skills and capacity to combine knowledge from several areas traditionally taught in separate programs, including electrical power systems, computer science, and ICT (information and communications technology) to address strategic challenges, which the utility industry across the world faces in reducing its carbon footprint and transitioning to Green Economy. Next up Entrance Requirements\", \"school\": \"School of Energy\", \"credential\": \"Master of Engineering\", \"study_mode\": \"Full-time/Part-time\", \"campus\": \"Burnaby Campus\", \"delivery_method\": \"Blended\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\", \"courses\": [{\"course_id\": \"SGST9010\", \"course_name\": \"Applied Research Methods, Policies, and Ethics\", \"credits\": \"0.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-research-methods-policies-and-ethics-sgst-9010/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"SGST9020\", \"course_name\": \"Applied Research Proposal Development\", \"credits\": \"0.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-research-proposal-development-sgst-9020/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 3 (15 weeks)\"}, {\"course_id\": \"SGST9110\", \"course_name\": \"Introduction to Smart Electricity Grids\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/introduction-to-smart-electricity-grids-sgst-9110/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"SGST9120\", \"course_name\": \"Modern Electric Utility Systems Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/modern-electric-utility-systems-management-sgst-9120/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"SGST9130\", \"course_name\": \"Smart Cities and Sustainable Transportation\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/smart-cities-and-sustainable-transportation-sgst-9130/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 1 (15 weeks)\"}, {\"course_id\": \"SGST9210\", \"course_name\": \"Advanced Power Systems Analysis\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-power-systems-analysis-sgst-9210/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (15 weeks)\"}, {\"course_id\": \"SGST9220\", \"course_name\": \"Information & Communication Technology in Electric Utilities\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (15 weeks)\"}, {\"course_id\": \"SGST9230\", \"course_name\": \"Power System Protection & Control\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/power-system-protection-and-control-sgst-9230/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 2 (15 weeks)\"}, {\"course_id\": \"SGST9310\", \"course_name\": \"Microgrid Design, Operation & Control\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/microgrid-design-operation-and-control-sgst-9310/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 3 (15 weeks)\"}, {\"course_id\": \"SGST9320\", \"course_name\": \"Renewable & Distributed Energy Systems\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/renewable-and-distributed-energy-systems-sgst-9320/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 3 (15 weeks)\"}, {\"course_id\": \"SGST9330\", \"course_name\": \"Data Acquisition and Analytics in Electric Utilities\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/data-acquisition-and-analytics-in-electric-utilities-sgst-9330/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 3 (15 weeks)\"}, {\"course_id\": \"SGST9340\", \"course_name\": \"Energy Storage & Power Electronics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/energy-storage-and-power-electronics-sgst-9340/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Term 3 (15 weeks)\"}, {\"course_id\": \"SGST9410\", \"course_name\": \"Capstone Project\", \"credits\": \"6.00\", \"source_url\": \"https://www.bcit.ca/courses/capstone-project-sgst-9410/\", \"level\": null, \"term\": null, \"course_type\": \"PATHWAY\", \"required\": false, \"notes\": \"Term 4 (30 weeks)\"}, {\"course_id\": \"SGST9430\", \"course_name\": \"Directed Studies in Smart Grid (Elective Course\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/directed-studies-in-smart-grid-elective-course-sgst-9430/\", \"level\": null, \"term\": null, \"course_type\": \"PATHWAY\", \"required\": false, \"notes\": \"Term 4 (30 weeks)\"}], \"curriculum\": {\"program_id\": \"M500MENG\", \"components\": [{\"component_id\": 483, \"component_name\": \"Term 1 (15 weeks)\", \"component_order\": 1, \"required_credits\": null, \"notes\": \"Term 1 (15 weeks):\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9010\", \"course_name\": \"Applied Research Methods, Policies, and Ethics\", \"credits\": \"0.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-research-methods-policies-and-ethics-sgst-9010/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9010\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9110\", \"course_name\": \"Introduction to Smart Electricity Grids\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/introduction-to-smart-electricity-grids-sgst-9110/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9110\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9120\", \"course_name\": \"Modern Electric Utility Systems Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/modern-electric-utility-systems-management-sgst-9120/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9120\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9130\", \"course_name\": \"Smart Cities and Sustainable Transportation\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/smart-cities-and-sustainable-transportation-sgst-9130/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9130\"}]}, {\"component_id\": 484, \"component_name\": \"Term 2 (15 weeks)\", \"component_order\": 2, \"required_credits\": null, \"notes\": \"Term 2 (15 weeks):\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9210\", \"course_name\": \"Advanced Power Systems Analysis\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-power-systems-analysis-sgst-9210/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9220\", \"course_name\": \"Information & Communication Technology in Electric Utilities\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9230\", \"course_name\": \"Power System Protection & Control\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/power-system-protection-and-control-sgst-9230/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}, {\"component_id\": 485, \"component_name\": \"Term 3 (15 weeks)\", \"component_order\": 3, \"required_credits\": null, \"notes\": \"Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9020\", \"course_name\": \"Applied Research Proposal Development\", \"credits\": \"0.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-research-proposal-development-sgst-9020/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9020\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9310\", \"course_name\": \"Microgrid Design, Operation & Control\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/microgrid-design-operation-and-control-sgst-9310/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9310\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9320\", \"course_name\": \"Renewable & Distributed Energy Systems\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/renewable-and-distributed-energy-systems-sgst-9320/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9320\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9330\", \"course_name\": \"Data Acquisition and Analytics in Electric Utilities\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/data-acquisition-and-analytics-in-electric-utilities-sgst-9330/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9340\", \"course_name\": \"Energy Storage & Power Electronics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/energy-storage-and-power-electronics-sgst-9340/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9340\"}]}, {\"component_id\": 486, \"component_name\": \"Term 4 (30 weeks)\", \"component_order\": 4, \"required_credits\": null, \"notes\": \"Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master\\u2019s-level course in an accredited program. Total Credits: 33.0\", \"courses\": [{\"course_role\": \"PATHWAY\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9410\", \"course_name\": \"Capstone Project\", \"credits\": \"6.00\", \"source_url\": \"https://www.bcit.ca/courses/capstone-project-sgst-9410/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"SGST 9410\"}, {\"course_role\": \"PATHWAY\", \"study_mode\": \"ALL\", \"course_id\": \"SGST9430\", \"course_name\": \"Directed Studies in Smart Grid (Elective Course\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/directed-studies-in-smart-grid-elective-course-sgst-9430/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"M500MENG\", \"rule_sets\": [{\"rule_set_id\": 553, \"scope\": \"ADMISSION\", \"name\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Scheduled intakes September each year. Application processing Applications are accepted: October 1st* to April 15th* April 16th* to June 30th* July 1st* to August 15th* *or next business day This program has multiple application deadlines and may fill after each deadline date. We recommend that you apply early. All supporting documents must be submitted by the application deadline. Entrance requirements Competitive Entry: Two-step process Step 1: Meet the following entrance requirements English language proficiency: Graduate Studies \\u2013 English Studies 12 (67%) or equivalent Entry options: one of the following: Option 1: standard entry Post-secondary education: bachelor\\u2019s degree in electrical or electronics engineering, with a minimum GPA of 2.4 out of 4.0 (60%) based on the entire program. Option 2: alternate entry Alternate entry is for applicants who do not have a bachelor's degree in electrical or electronic engineering and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 2.4 out of 4.0 (60%) in a relevant discipline, such as: software engineering, computer engineering, computer science, physics, mathematics, information, or communications technology. Alternate entry applicants must complete a Pre-entry Assessment form to have their education, experience, and interest assessed by the program. After the review, bridging courses may be recommended for the applicant to take to apply for the program. Email a completed Pre-entry Assessment form [PDF] to: meng_sgst@bcit.ca . You may be requested to send additional documents or meet with the Program Head. Once your pre-entry assessment has been approved, submit it to your online application. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Read more about how to meet BCIT\\u2019s entrance requirements Step 2: Department Review All complete applications will be reviewed by the Graduate Selection Committee and ranked on a competitive basis. Applicants who are best suited for success in the program will be offered acceptance. Only complete applications that include all the required supporting documentation will be evaluated. For engineering disciplines outside of electrical and electronics, you may be required to\\u2014or it may be identified that you need to\\u2014take a bridging course to get accepted and succeed in the program. We have developed and recommend ELEX 0101 - Modern Power System and Circuit Fundamentals or ELEX 0102 - Fundamentals of Power Systems and Circuits that provide the fundamentals of electric circuits and systems. Recommended for success Applicants with sufficient knowledge base in electrical power systems, computer science, or ICT (information and communications technology) will have a higher chance of being successful in this program. Since admission into the program will be on a competitive basis, applicants with relevant industry experience will have an advantage due to the applied nature of the program. International applicants The full-time blended delivery option is available to international applicants. The part-time online delivery option is not available to international applicants. View available programs . Study permit: A valid BCIT study permit is required prior to starting the full-time program. Post-graduation Work Permit (PGWP) eligibility : Only the full-time option of this program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master\\u2019s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies\", \"groups\": [{\"rule_group_id\": 412, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 697, \"condition_type\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"course_ids\": [], \"executable\": false, \"minimum_credits\": null}, \"description\": \"Scheduled intakes September each year. Application processing Applications are accepted: October 1st* to April 15th* April 16th* to June 30th* July 1st* to August 15th* *or next business day This program has multiple application deadlines and may fill after each deadline date. We recommend that you apply early. All supporting documents must be submitted by the application deadline. Entrance requirements Competitive Entry: Two-step process Step 1: Meet the following entrance requirements English language proficiency: Graduate Studies \\u2013 English Studies 12 (67%) or equivalent Entry options: one of the following: Option 1: standard entry Post-secondary education: bachelor\\u2019s degree in electrical or electronics engineering, with a minimum GPA of 2.4 out of 4.0 (60%) based on the entire program. Option 2: alternate entry Alternate entry is for applicants who do not have a bachelor's degree in electrical or electronic engineering and may need to take bridging courses before being accepted to the program. Applicants are required to have the following: Post-secondary education: bachelor's degree with a minimum GPA of 2.4 out of 4.0 (60%) in a relevant discipline, such as: software engineering, computer engineering, computer science, physics, mathematics, information, or communications technology. Alternate entry applicants must complete a Pre-entry Assessment form to have their education, experience, and interest assessed by the program. After the review, bridging courses may be recommended for the applicant to take to apply for the program. Email a completed Pre-entry Assessment form [PDF] to: meng_sgst@bcit.ca . You may be requested to send additional documents or meet with the Program Head. Once your pre-entry assessment has been approved, submit it to your online application. Applicants who have completed post-secondary studies outside of Canada, the United States, the United Kingdom, Australia or New Zealand will require a comprehensive evaluation of their credentials by the International Credential Evaluation Service (ICES) . Credential evaluation reports from other Canadian services may be considered. Read more about how to meet BCIT\\u2019s entrance requirements Step 2: Department Review All complete applications will be reviewed by the Graduate Selection Committee and ranked on a competitive basis. Applicants who are best suited for success in the program will be offered acceptance. Only complete applications that include all the required supporting documentation will be evaluated. For engineering disciplines outside of electrical and electronics, you may be required to\\u2014or it may be identified that you need to\\u2014take a bridging course to get accepted and succeed in the program. We have developed and recommend ELEX 0101 - Modern Power System and Circuit Fundamentals or ELEX 0102 - Fundamentals of Power Systems and Circuits that provide the fundamentals of electric circuits and systems. Recommended for success Applicants with sufficient knowledge base in electrical power systems, computer science, or ICT (information and communications technology) will have a higher chance of being successful in this program. Since admission into the program will be on a competitive basis, applicants with relevant industry experience will have an advantage due to the applied nature of the program. International applicants The full-time blended delivery option is available to international applicants. The part-time online delivery option is not available to international applicants. View available programs . Study permit: A valid BCIT study permit is required prior to starting the full-time program. Post-graduation Work Permit (PGWP) eligibility : Only the full-time option of this program currently meets the PGWP eligibility requirements based on study program - graduates with a master's degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a master\\u2019s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC. Apply to program Note: The September 2026 intake is now closed for new applications. Applications for the September 2027 intake will be accepted starting October 1, 2026. To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 554, \"scope\": \"COMPLETION\", \"name\": \"COMPONENT_1\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 1 (15 weeks):\", \"groups\": [{\"rule_group_id\": 413, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPONENT_1\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 698, \"condition_type\": \"COMPONENT_1\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"course_ids\": [\"SGST9010\", \"SGST9110\", \"SGST9120\", \"SGST9130\"], \"executable\": true, \"minimum_credits\": null}, \"description\": \"Term 1 (15 weeks):\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 555, \"scope\": \"COMPLETION\", \"name\": \"COMPONENT_2\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 2 (15 weeks):\", \"groups\": [{\"rule_group_id\": 414, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPONENT_2\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 699, \"condition_type\": \"COMPONENT_2\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"course_ids\": [\"SGST9210\", \"SGST9220\", \"SGST9230\"], \"executable\": true, \"minimum_credits\": null}, \"description\": \"Term 2 (15 weeks):\", \"sort_order\": 2}], \"children\": []}]}, {\"rule_set_id\": 556, \"scope\": \"COMPLETION\", \"name\": \"COMPONENT_3\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:\", \"groups\": [{\"rule_group_id\": 415, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPONENT_3\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 700, \"condition_type\": \"COMPONENT_3\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"course_ids\": [\"SGST9020\", \"SGST9310\", \"SGST9320\", \"SGST9330\", \"SGST9340\"], \"executable\": true, \"minimum_credits\": null}, \"description\": \"Term 3 (15 weeks): and Complete three courses (9.0 credits) from the following:\", \"sort_order\": 3}], \"children\": []}]}, {\"rule_set_id\": 557, \"scope\": \"COMPLETION\", \"name\": \"COMPONENT_4\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master\\u2019s-level course in an accredited program. Total Credits: 33.0\", \"groups\": [{\"rule_group_id\": 416, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPONENT_4\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 701, \"condition_type\": \"COMPONENT_4\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"alternative_path\", \"course_ids\": [\"SGST9410\", \"SGST9430\"], \"executable\": false, \"minimum_credits\": null}, \"description\": \"Term 4 (30 weeks): Choose one of the following options: Complete the capstone project. Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master\\u2019s-level course in an accredited program. Total Credits: 33.0\", \"sort_order\": 4}], \"children\": []}]}, {\"rule_set_id\": 2121, \"scope\": \"INTERNATIONAL\", \"name\": \"International eligibility source evidence\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"{\\\"evidence\\\":[{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/regular-credential-programs/\\\"},{\\\"checked_at\\\":\\\"2026-09-08T17:42:04.887145+00:00\\\",\\\"evidence_type\\\":\\\"international_list_positive_flag\\\",\\\"source_sha256\\\":\\\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\\\",\\\"url\\\":\\\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\\\"}],\\\"offering_scope\\\":\\\"Any Domestic Only offering remains mode/intake-specific.\\\",\\\"pgwp\\\":\\\"ELIGIBLE_TO_APPLY\\\",\\\"status\\\":\\\"ACCEPTED_AVAILABLE\\\",\\\"study_permit\\\":\\\"UNKNOWN_NOT_PUBLISHED\\\"}\", \"groups\": []}, {\"rule_set_id\": 558, \"scope\": \"PATHWAY\", \"name\": \"PUBLISHED_PATHWAY_1\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 4 (30 weeks): Credits: Choose one of the following options: Complete the capstone project.\", \"groups\": [{\"rule_group_id\": 417, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"PUBLISHED_PATHWAY_1\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 702, \"condition_type\": \"PUBLISHED_PATHWAY_1\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"alternative_path\", \"course_ids\": [], \"executable\": false, \"minimum_credits\": null}, \"description\": \"Term 4 (30 weeks): Credits: Choose one of the following options: Complete the capstone project.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 559, \"scope\": \"PATHWAY\", \"name\": \"PUBLISHED_PATHWAY_2\", \"study_mode\": \"Full-time/Part-time\", \"exact_choice_count\": null, \"notes\": \"Term 4 (30 weeks): Credits: Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master\\u2019s-level course in an accredited program.\", \"groups\": [{\"rule_group_id\": 418, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"PUBLISHED_PATHWAY_2\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 703, \"condition_type\": \"PUBLISHED_PATHWAY_2\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"alternative_path\", \"course_ids\": [], \"executable\": false, \"minimum_credits\": null}, \"description\": \"Term 4 (30 weeks): Credits: Or Complete 6.0 credits of electives. You may choose to take the below directed studies course, an additional course from the above Components cluster, or another relevant master\\u2019s-level course in an accredited program.\", \"sort_order\": 2}], \"children\": []}]}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"M500MENG\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "tool_choice": "<openai.Omit object at 0x000001BD1CEF66F0>",
+            "previous_response_id": "resp_02bead03eb9764b0006aa073c11d0087d0a2a33148d5d04699"
+          },
+          "response": {
+            "id": "resp_02bead03eb9764b0006aa073c2f85c87d0840a59635814b4cb",
+            "created_at": 1788900291.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_02bead03eb9764b0006aa073c3b5e087d08d1d1494fffdb366",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHPJa3HHx4bXbzE2aUectSaTxUz5n1K9EL6Gw-gzxoKSLaLV1BpT-tBIpOA4S41ROELwRcQP4DWAJbfrf6oBtNeoxy5mwzzL-n-Q5gdgFHCL1c5sJRCjJN0-lH8mFPCVETQBFAdQSajtJ4Ay50RPf1zGmU-FAuKfOsbvTRuSqsoumpWL2TlDOfy5IfQQoVcl3NKCZDcyBaZy0ZHdeX3x8zN4Ph3PvJezaQwuK_JhqEFrfx24x_Z4h-fYa-s5u4pZI_d_a_5ImvovWz2agYh8Ubs6OChXQzsVKAsHr1ZIHYlnxp4uWbl5v4dhQ158a3dxq7DNmTFuFv1xGwQCm2rtZEPDuaFue__7jzkRNoitJn1Ns93I4l9iceXuJJsN1sWbKHs7qz__gMS_QPWxI1hFUGZ02SSuiRP0O3AlIzM7h3l89Y-OwRfjzSQlZEzUfyFPmdiATgEl_0jCtGFgeBON6kO5uyykAP94OifP0zp4wS3B7X0Q2ZMlGKOSgX5CzwzP2L2kfQhH9ZdOjYZgtisjRPDzcdzi_1pDvmwNFMoRKYqmlakfAEwyKH97gYohS8hhYDNb3lE1A0CEIQiEfw2rV44buyJITnXuK42hgU9nK9EDqUa12ulKaFC3qNgcDuJa7N7ozdnfzk4tA7mDnFG9U_Hpk1pIDJZ8almbjGotiZ_cAxnLhDqnSNVhEKaRx0qyMIvhh5V_raU7rMcno3SVs9-CtL6rW6wN63WHjJic_G8LcPNawDP2FLqyzXclbAu83IPJq4tQu8lQjNAYALDgpU2Q6Z0o0d-l6lvyqJK40dq2sOb1ybBZruB57G0COB9XF2ruRnjfxuHKx_CtOUUvJifwBWsrN8ufFZqhONNzKaIOOegNSE5sj8NK6FaIL0luR5c2bjYeUldmG2vPiIbi2SAfmF0uOPMUvRT9oIqjK4MurnK2P9jtpB4DtwT3yeWoOI_R3uPNbjvx7nhSduZ7ldH_ZDNkjVV69bwyKHsgwBi1O5SEXTofZSlZuA8eGKvW6cY1CgOwCm02z8kShkQCfMvDnClnyodOEDsxwttdqgpYOrdXXLeSdNOuFaB2sgvnM4X-lYLLfKkGwImAJ4HuwMIXsxmiKuJInGi2I7DaySiBL_bDxsGmpZvi1ftCAS1vPcqVqZV-y9hdXI8uVoSVy1SEgcMiqen9TanZ6_TcBmyFoki_Ap_NnbAOaaChST-9JOhpX8aOo1Nk82-5uUBWATIAJaX64FdJryYWpJJgv-5TJKEgF1gbxWmdeN9UMO2K3y5rB9uTOd6EypItDpLtn8Vm9MeovO3sE1hEkGzL3RDnZEbUoUSvJsy7w8r_iJdPxU_N4H8TP0WtNnb-uTgJaOzJ4XgXp22cOFX2p7k8zNSBsG8M9CAhORqJ86Usl3ZN3xqH9ZUtzITXZiigjnv5fXF_jPxBCba8hIBb53fW3XbMY-jP_iUrUseeSpsg2NmfB-1qEjesDUh9ZKlgYi9tdzijzXc8NMVGrAP3L6MrBejN9iJ5yQzHxrB_X5lpYnzDVEd1d8zolqTZR07Gl0fyWylEcglM-kJ773c9uIq6E2dlN4nA9GfsREOaBxXJwMjSWtlIVHJgGeDzobEB5_DOPdyEANbAhhGLz51PtS__tSG2YWcdry2vyDWoL6p7aTW6ZqvOs1JtZKaINcPhnVh4bNWGsflzpchHjezJ_vuLNGxCVHo7Ka_fS6pMYUxunT_BlW59oD9Jaj05Sr86t8dZVCYLhF71ZI7b_Ayuiz4OsBBvkgEmdUmplJrjuMCLMIsT3IYirSskMG_fkVrQp9BgJBIZxDFonOQKvMZ2pwPVgHtt0UoIh8SqUDJPVAcm6MaaaasiiW0v_3fddyaDWA_fz_PwUWyzx1hAEjdCY5AcjlP3ycI2NuqhfnaiYOXA8SXyoTXMCg_6oVEo78oe7wx0xMd6iajtm4VG-1CiDGa9yXmQc6Kin847vvpVFhm7-oAYe3XSsT99WxTHMxwQouw1P70KHP34qaAyCQADkXC2LTXvFadTReEShM_JcpwKX7q8-uh8CLjjnfoGL3fW0Qou_Vvy5qnjukk9CczlDsvggTnXGM0y7ohdo4MXM85zilqIq2lnVhgyj9rHIo5FtWabB0BgmqvNuE7VjiZdi7IsPHYYqEMtqBKTPlQj5G74AeRW8JzrRybnqtEB6Ix7b_M6uHSrPCcVKn6WIksmMmI_knx77vBizbEVflKpGN-Y9iCvoWg4IsFp_fwfw97VHnLvnr9UsUZMyjB2zzyflpAXURugtuLoEFrzgcOszo2hQly2wGoqHdoENhFb9hsQiOjWyVPbEN7P9HVLHoIB7FSgIlMpha1HgfFAseAMoBz6PuvJXXbCUYVOODXbODWQxZ6opMAfTo2Zdt0BqtAgwMVjHm6aqhbi77sGnUG9x5kBaTg1J2afbc65S5Y_t79ty2hM7uGRTQWUkw0t1QB3XdTY9h7shjM=",
+                "status": null
+              },
+              {
+                "id": "msg_02bead03eb9764b0006aa073c5d5ec87d0a31ff2c3f9a789fd",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Yes. The **Master of Engineering in Smart Grid Systems and Technologies** is available to international applicants through its **full-time blended delivery option**. The **part-time online option is not available** to international applicants.\n\nAdmission is competitive and requires meeting the program’s entrance requirements, including:\n\n- Graduate Studies English proficiency requirement\n- A bachelor’s degree in electrical/electronics engineering with a minimum GPA of **2.4/4.0**, or an eligible relevant bachelor’s degree through alternate entry\n- Department review and ranking\n- Credential evaluation through ICES may be required for studies completed outside Canada, the United States, the United Kingdom, Australia, or New Zealand\n\nThe **September 2026 intake is closed**. Applications for **September 2027** are scheduled to open **October 1, 2026**.\n\nProgram details: https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788900295.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_02bead03eb9764b0006aa073c11d0087d0a2a33148d5d04699",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 8850,
+              "input_tokens_details": {
+                "cache_write_tokens": 7338,
+                "cached_tokens": 1509
+              },
+              "output_tokens": 378,
+              "output_tokens_details": {
+                "reasoning_tokens": 173
+              },
+              "total_tokens": 9228
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Yes. The **Master of Engineering in Smart Grid Systems and Technologies** is available to international applicants through its **full-time blended delivery option**. The **part-time online option is not available** to international applicants.\n\nAdmission is competitive and requires meeting the program’s entrance requirements, including:\n\n- Graduate Studies English proficiency requirement\n- A bachelor’s degree in electrical/electronics engineering with a minimum GPA of **2.4/4.0**, or an eligible relevant bachelor’s degree through alternate entry\n- Department review and ranking\n- Credential evaluation through ICES may be required for studies completed outside Canada, the United States, the United Kingdom, Australia, or New Zealand\n\nThe **September 2026 intake is closed**. Applications for **September 2027** are scheduled to open **October 1, 2026**.\n\nProgram details: https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/",
+          "final_answer": "Yes. The **Master of Engineering in Smart Grid Systems and Technologies** is available to international applicants through its **full-time blended delivery option**. The **part-time online option is not available** to international applicants.\n\nAdmission is competitive and requires meeting the program’s entrance requirements, including:\n\n- Graduate Studies English proficiency requirement\n- A bachelor’s degree in electrical/electronics engineering with a minimum GPA of **2.4/4.0**, or an eligible relevant bachelor’s degree through alternate entry\n- Department review and ranking\n- Credential evaluation through ICES may be required for studies completed outside Canada, the United States, the United Kingdom, Australia, or New Zealand\n\nThe **September 2026 intake is closed**. Applications for **September 2027** are scheduled to open **October 1, 2026**.\n\nProgram details: https://www.bcit.ca/programs/smart-grid-systems-and-technologies-master-of-engineering-full-time-part-time-m500meng/\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "M500MENG"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "M500MENG"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

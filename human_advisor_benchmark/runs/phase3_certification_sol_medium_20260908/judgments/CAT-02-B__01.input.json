@@ -1,0 +1,2565 @@
+{
+  "scenario_id": "CAT-02-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I am an international applicant interested in the Construction Management Bachelor of Technology. Is it available to international applicants?",
+      "advisor": "Yes. The Construction Management Bachelor of Technology is available to international applicants in both full-time and part-time study modes.\n\nIt is listed as eligible to apply for a post-graduation work permit, but study-permit information is not published and should be confirmed with BCIT.\n\n[Program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+      "expectation": {
+        "question": "I am an international applicant interested in the Construction Management Bachelor of Technology. Is it available to international applicants?",
+        "expected": "Use this program's INTERNATIONAL evidence. Distinguish available, restricted, not accepted, and unknown; never infer ineligibility from silence.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "So does that automatically mean I'm admitted?",
+      "advisor": "No. Being eligible to apply as an international applicant does **not** mean automatic admission.\n\nAdmission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and meeting one of the program’s four entry pathways. Some international credentials also require a course-by-course credential evaluation. Your qualifications and admission decision must be confirmed by BCIT.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+      "expectation": {
+        "question": "So does that automatically mean I'm admitted?",
+        "expected": "No. Separate international availability from individual admission, competition, and human verification. Do not guarantee admission.",
+        "scope": "admission",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "What can you actually verify, and what should I confirm with BCIT?",
+      "advisor": "**I can verify:**\n\n- Construction Management is an active Bachelor of Technology degree-completion program offered full-time or part-time, in person at BCIT’s Burnaby campus.\n- Admission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and qualification through one of four defined entry pathways.\n- Depending on where your post-secondary credential was earned, a comprehensive course-by-course credential evaluation with GPA calculation may be required.\n- The program record does not include a configured course list, so I cannot verify individual curriculum courses here.\n\n**Confirm with BCIT:**\n\n- Whether your education and work experience satisfy a specific entry pathway.\n- Whether your English credential is accepted as equivalent.\n- Whether you need an international credential evaluation.\n- Pre-entry assessment approval, study-permit requirements, and the final admission decision.\n\n[BCIT Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+      "expectation": {
+        "question": "What can you actually verify, and what should I confirm with BCIT?",
+        "expected": "Clearly distinguish stored rules from unverified personal eligibility and current/human decisions; provide useful confirmation guidance.",
+        "scope": "international",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8800BTECH"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "8800BTECH",
+        "program_name": "Construction Management",
+        "credential": "Bachelor of Technology / Bachelor's Degree",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "8800BTECH",
+        "program_name": "Construction Management",
+        "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+        "area_id": "ENG",
+        "school": "School of Construction and the Environment",
+        "credential": "Bachelor of Technology / Bachelor's Degree",
+        "program_level": "Degree completion (Years 3 and 4)",
+        "study_mode": "Full-time and Part-time",
+        "accepts_international_students": true,
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "Two-year degree-completion program providing Years 3 and 4 of a four-year bachelor's degree."
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "8800BTECH",
+        "international_eligibility": "ACCEPTED_AVAILABLE",
+        "authoritative_raw": "\nInternational evidence: {\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "8800BTECH-PT-APR",
+        "program_id": "8800BTECH",
+        "study_mode": "Part-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Flexible Learning",
+        "application_status": "Active",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "April intake"
+      },
+      {
+        "offering_id": "8800BTECH-PT-JAN",
+        "program_id": "8800BTECH",
+        "study_mode": "Part-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Flexible Learning",
+        "application_status": "Active",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "January intake"
+      },
+      {
+        "offering_id": "8800BTECH-PT-SEP",
+        "program_id": "8800BTECH",
+        "study_mode": "Part-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Flexible Learning",
+        "application_status": "Active",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "September intake"
+      },
+      {
+        "offering_id": "8800BTECH-FT-SEP",
+        "program_id": "8800BTECH",
+        "study_mode": "Full-time",
+        "campus": "Burnaby",
+        "delivery_method": "In person",
+        "application_type": "Planned Program",
+        "application_status": "Active",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "September intake"
+      }
+    ],
+    "program_campuses": [
+      {
+        "program_id": "8800BTECH",
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "relationship_type": "offered",
+        "notes": "Burnaby",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/"
+      }
+    ],
+    "curriculum_components": [
+      {
+        "component_id": 1,
+        "program_id": "8800BTECH",
+        "component_name": "Construction Controls and Techniques",
+        "component_order": 1
+      },
+      {
+        "component_id": 2,
+        "program_id": "8800BTECH",
+        "component_name": "Organization Management",
+        "component_order": 2,
+        "required_credits": 12
+      },
+      {
+        "component_id": 3,
+        "program_id": "8800BTECH",
+        "component_name": "Stakeholder Engagement",
+        "component_order": 3,
+        "required_credits": 9
+      },
+      {
+        "component_id": 4,
+        "program_id": "8800BTECH",
+        "component_name": "Management Electives",
+        "component_order": 4,
+        "required_credits": 4
+      },
+      {
+        "component_id": 5,
+        "program_id": "8800BTECH",
+        "component_name": "Liberal Studies Component",
+        "component_order": 5,
+        "required_credits": 12
+      },
+      {
+        "component_id": 6,
+        "program_id": "8800BTECH",
+        "component_name": "Professional Standards",
+        "component_order": 6,
+        "required_credits": 11
+      }
+    ],
+    "credit_requirements": [
+      {
+        "credit_requirement_id": 2,
+        "program_id": "8800BTECH",
+        "component_id": 5,
+        "requirement_name": "Liberal Studies total",
+        "minimum_credits": 12,
+        "allows_external_courses": false,
+        "approval_required": false,
+        "notes": "9 mandatory credits plus 3 elective credits."
+      },
+      {
+        "credit_requirement_id": 1,
+        "program_id": "8800BTECH",
+        "component_id": 4,
+        "requirement_name": "Management elective credits",
+        "minimum_credits": 4,
+        "allows_external_courses": true,
+        "approval_required": true,
+        "notes": "Approved external management courses may satisfy this requirement."
+      }
+    ],
+    "curriculum_substitutions": [
+      {
+        "substitution_id": 1,
+        "program_id": "8800BTECH",
+        "study_mode": "Part-time",
+        "replaced_course_id": "LIBS7013",
+        "replacement_type": "CREDIT_POOL",
+        "replacement_credits": 3,
+        "description": "Part-time students may take 3 additional approved Liberal Studies elective credits instead of LIBS 7013."
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 1,
+        "program_id": "8800BTECH",
+        "rule_scope": "ADMISSION",
+        "rule_name": "Construction Management admission",
+        "exact_choice_count": 1,
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/#entry",
+        "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways."
+      },
+      {
+        "rule_set_id": 2,
+        "program_id": "8800BTECH",
+        "rule_scope": "CONTINUATION",
+        "rule_name": "Capstone and graduation work experience",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "Admission work experience counts toward the two-year total."
+      },
+      {
+        "rule_set_id": 3,
+        "program_id": "8800BTECH",
+        "rule_scope": "COMPLETION",
+        "rule_name": "Professional Standards capstone choice",
+        "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+        "notes": "CMGT 8700 followed by one of CMGT 8800 or CMGT 8810."
+      },
+      {
+        "rule_set_id": 2107,
+        "program_id": "8800BTECH",
+        "rule_scope": "INTERNATIONAL",
+        "rule_name": "International eligibility source evidence",
+        "study_mode": "Full-time and Part-time",
+        "source_url": "https://www.bcit.ca/international-applicants/regular-credential-programs/",
+        "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}"
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 1,
+        "rule_set_id": 1,
+        "operator": "AND",
+        "label": "Admission requirements",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 7,
+        "rule_set_id": 2,
+        "operator": "AND",
+        "label": "Capstone and graduation eligibility",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 9,
+        "rule_set_id": 3,
+        "parent_group_id": 8,
+        "operator": "OR",
+        "label": "Choose one final project",
+        "sort_order": 2
+      },
+      {
+        "rule_group_id": 2,
+        "rule_set_id": 1,
+        "parent_group_id": 1,
+        "operator": "OR",
+        "label": "Exactly one entry pathway",
+        "sort_order": 3
+      },
+      {
+        "rule_group_id": 3,
+        "rule_set_id": 1,
+        "parent_group_id": 2,
+        "operator": "AND",
+        "label": "Pathway A",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 4,
+        "rule_set_id": 1,
+        "parent_group_id": 2,
+        "operator": "AND",
+        "label": "Pathway B",
+        "sort_order": 2
+      },
+      {
+        "rule_group_id": 5,
+        "rule_set_id": 1,
+        "parent_group_id": 2,
+        "operator": "AND",
+        "label": "Pathway C",
+        "sort_order": 3
+      },
+      {
+        "rule_group_id": 6,
+        "rule_set_id": 1,
+        "parent_group_id": 2,
+        "operator": "AND",
+        "label": "Pathway D",
+        "sort_order": 4
+      },
+      {
+        "rule_group_id": 8,
+        "rule_set_id": 3,
+        "operator": "AND",
+        "label": "Professional Standards",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 18,
+        "rule_group_id": 1,
+        "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+        "accepted_values": [
+          "ICES comprehensive evaluation",
+          "accepted Canadian credential-assessment service"
+        ],
+        "parameters": {
+          "requires": "course-by-course evaluation and GPA calculation",
+          "applies_outside": [
+            "Canada",
+            "United States",
+            "United Kingdom",
+            "Australia",
+            "New Zealand"
+          ]
+        },
+        "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+        "sort_order": 4
+      },
+      {
+        "condition_id": 11,
+        "rule_group_id": 6,
+        "condition_type": "MATH_OPTION_GRADE",
+        "minimum_value": 60,
+        "unit": "PERCENT",
+        "accepted_values": [
+          "Pre-Calculus 11",
+          "Foundations Math 11",
+          "Workplace Math 11",
+          "BLDT 1011",
+          "accepted BC/Yukon equivalent"
+        ],
+        "description": "One accepted math option at 60%",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 10,
+        "rule_group_id": 6,
+        "condition_type": "RED_SEAL_TRADE",
+        "accepted_values": [
+          "cabinetmaker",
+          "carpenter",
+          "electrician",
+          "industrial mechanic/millwright",
+          "metal fabricator",
+          "plumber",
+          "refrigeration & air conditioning mechanic",
+          "welder level A"
+        ],
+        "description": "Approved Red Seal trade",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 19,
+        "rule_group_id": 1,
+        "condition_type": "CREDENTIAL_EXCLUSION",
+        "accepted_values": [
+          "master's degree alone"
+        ],
+        "description": "A master's degree alone is not sufficient for admission",
+        "sort_order": 5
+      },
+      {
+        "condition_id": 1,
+        "rule_group_id": 1,
+        "condition_type": "PRE_ENTRY_ASSESSMENT",
+        "description": "Approved departmental pre-entry assessment before application",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 12,
+        "rule_group_id": 6,
+        "condition_type": "BRIDGING_CREDENTIAL_GPA",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 13,
+        "rule_group_id": 6,
+        "condition_type": "WORK_EXPERIENCE",
+        "minimum_value": 1,
+        "unit": "YEAR",
+        "parameters": {
+          "field": "construction industry",
+          "excludes": "apprenticeship hours"
+        },
+        "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+        "sort_order": 4
+      },
+      {
+        "condition_id": 14,
+        "rule_group_id": 7,
+        "condition_type": "WORK_EXPERIENCE",
+        "minimum_value": 2,
+        "unit": "YEAR",
+        "parameters": {
+          "field": "related",
+          "admission_experience_counts": true
+        },
+        "description": "Minimum 2 years related work experience total; qualifying admission experience counts toward the total",
+        "sort_order": 0
+      },
+      {
+        "condition_id": 15,
+        "rule_group_id": 8,
+        "condition_type": "COURSE",
+        "subject_id": "CMGT8700",
+        "description": "Complete CMGT 8700",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 16,
+        "rule_group_id": 9,
+        "condition_type": "COURSE",
+        "subject_id": "CMGT8800",
+        "minimum_value": 50,
+        "unit": "PERCENT",
+        "description": "CMGT 8800 after CMGT 8700 and department approval",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 17,
+        "rule_group_id": 9,
+        "condition_type": "COURSE",
+        "subject_id": "CMGT8810",
+        "minimum_value": 50,
+        "unit": "PERCENT",
+        "description": "CMGT 8810 after CMGT 8700 and department approval",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 2,
+        "rule_group_id": 1,
+        "condition_type": "ENGLISH_GRADE",
+        "subject_id": "ENGLISH_STUDIES_12",
+        "minimum_value": 73,
+        "unit": "PERCENT",
+        "description": "English Studies 12 at 73% or equivalent",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 3,
+        "rule_group_id": 3,
+        "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 4,
+        "rule_group_id": 3,
+        "condition_type": "WORK_EXPERIENCE",
+        "minimum_value": 1,
+        "unit": "YEAR",
+        "description": "At least 1 year construction-industry work experience",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 5,
+        "rule_group_id": 4,
+        "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 6,
+        "rule_group_id": 4,
+        "condition_type": "BRIDGING_CREDENTIAL_GPA",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 7,
+        "rule_group_id": 4,
+        "condition_type": "WORK_EXPERIENCE",
+        "minimum_value": 1,
+        "unit": "YEAR",
+        "description": "At least 1 year construction-industry work experience",
+        "sort_order": 3
+      },
+      {
+        "condition_id": 8,
+        "rule_group_id": 5,
+        "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+        "minimum_value": 67,
+        "unit": "PERCENT",
+        "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 9,
+        "rule_group_id": 5,
+        "condition_type": "WORK_EXPERIENCE",
+        "minimum_value": 8,
+        "unit": "YEAR",
+        "parameters": {
+          "field": "construction management",
+          "region": "North America",
+          "role_level": "mid_or_senior"
+        },
+        "description": "At least 8 years North American construction-management experience in mid/senior roles",
+        "sort_order": 2
+      }
+    ],
+    "curriculum_component_courses": [
+      {
+        "component_id": 1,
+        "course_id": "CMGT7160",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1,
+        "course_id": "CMGT7190",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1,
+        "course_id": "CMGT7211",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1,
+        "course_id": "CMGT7400",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 2,
+        "course_id": "BUSA7250",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 2,
+        "course_id": "CMGT7330",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 2,
+        "course_id": "CMGT7420",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 2,
+        "course_id": "CMGT8435",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 3,
+        "course_id": "CMGT7535",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 3,
+        "course_id": "CMGT7660",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 3,
+        "course_id": "CMGT8602",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT7125",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT7220",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT7605",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT7840",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT8040",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT8050",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "CMGT8060",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "EENG7000",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7101",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7102",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7111",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7112",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7113",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7121",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7124",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7134",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7143",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7144",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 4,
+        "course_id": "TMGT7145",
+        "course_role": "ELECTIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 5,
+        "course_id": "LIBS7001",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 5,
+        "course_id": "LIBS7002",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 5,
+        "course_id": "LIBS7013",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 6,
+        "course_id": "CMGT7810",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 6,
+        "course_id": "CMGT8211",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 6,
+        "course_id": "CMGT8700",
+        "course_role": "REQUIRED",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 6,
+        "course_id": "CMGT8800",
+        "course_role": "CHOICE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 6,
+        "course_id": "CMGT8810",
+        "course_role": "CHOICE",
+        "study_mode": "ALL"
+      }
+    ],
+    "credit_requirement_courses": [
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT7125"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT7220"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT7605"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT7840"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT8040"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT8050"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "CMGT8060"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "EENG7000"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7101"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7102"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7111"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7112"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7113"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7121"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7124"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7134"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7143"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7144"
+      },
+      {
+        "credit_requirement_id": 1,
+        "course_id": "TMGT7145"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "Yes. The Construction Management Bachelor of Technology is available to international applicants in both full-time and part-time study modes.\n\nIt is listed as eligible to apply for a post-graduation work permit, but study-permit information is not published and should be confirmed with BCIT.\n\n[Program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/.",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 16,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Construction Management",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [
+            {
+              "key": "international:8800BTECH",
+              "summary": "International availability is explicitly available.",
+              "program_id": "8800BTECH",
+              "certainty": "verified",
+              "source": "asteris_derived",
+              "dependency_keys": [],
+              "valid": true
+            }
+          ],
+          "answered_facets": [
+            "8800BTECH:international"
+          ],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "international"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8800BTECH"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "international",
+            "conversation_state": {
+              "academic_scope": "international",
+              "program_id": "8800BTECH",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"8800BTECH\"}",
+              "call_id": "call_O99Hr3bU7w6Zjb1fjhxp9Te9",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_021ac2697623e25f006aa1006ffdc487d0853f02b0d2de33da",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8800BTECH"
+          },
+          "context": {
+            "academic_scope": "international",
+            "current_question": "I am an international applicant interested in the Construction Management Bachelor of Technology. Is it available to international applicants?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8800BTECH",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 3,
+                                    "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 4,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway A",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 3,
+                                "sort_order": 1
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 5,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 6,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 7,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 3,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway B",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 4,
+                                "sort_order": 2
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 8,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 9,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 8 years North American construction-management experience in mid/senior roles",
+                                    "minimum_value": "8",
+                                    "parameters": {
+                                      "field": "construction management",
+                                      "region": "North America",
+                                      "role_level": "mid_or_senior"
+                                    },
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway C",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 5,
+                                "sort_order": 3
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "accepted_values": [
+                                      "cabinetmaker",
+                                      "carpenter",
+                                      "electrician",
+                                      "industrial mechanic/millwright",
+                                      "metal fabricator",
+                                      "plumber",
+                                      "refrigeration & air conditioning mechanic",
+                                      "welder level A"
+                                    ],
+                                    "condition_id": 10,
+                                    "condition_type": "RED_SEAL_TRADE",
+                                    "description": "Approved Red Seal trade",
+                                    "sort_order": 1
+                                  },
+                                  {
+                                    "accepted_values": [
+                                      "Pre-Calculus 11",
+                                      "Foundations Math 11",
+                                      "Workplace Math 11",
+                                      "BLDT 1011",
+                                      "accepted BC/Yukon equivalent"
+                                    ],
+                                    "condition_id": 11,
+                                    "condition_type": "MATH_OPTION_GRADE",
+                                    "description": "One accepted math option at 60%",
+                                    "minimum_value": "60",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 12,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 3,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 13,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+                                    "minimum_value": "1",
+                                    "parameters": {
+                                      "excludes": "apprenticeship hours",
+                                      "field": "construction industry"
+                                    },
+                                    "sort_order": 4,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway D",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 6,
+                                "sort_order": 4
+                              }
+                            ],
+                            "label": "Exactly one entry pathway",
+                            "operator": "OR",
+                            "parent_group_id": 1,
+                            "rule_group_id": 2,
+                            "sort_order": 3
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "condition_id": 1,
+                            "condition_type": "PRE_ENTRY_ASSESSMENT",
+                            "description": "Approved departmental pre-entry assessment before application",
+                            "sort_order": 1
+                          },
+                          {
+                            "condition_id": 2,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "English Studies 12 at 73% or equivalent",
+                            "minimum_value": "73",
+                            "sort_order": 2,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": [
+                              "ICES comprehensive evaluation",
+                              "accepted Canadian credential-assessment service"
+                            ],
+                            "condition_id": 18,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+                            "parameters": {
+                              "applies_outside": [
+                                "Canada",
+                                "United States",
+                                "United Kingdom",
+                                "Australia",
+                                "New Zealand"
+                              ],
+                              "requires": "course-by-course evaluation and GPA calculation"
+                            },
+                            "sort_order": 4
+                          },
+                          {
+                            "accepted_values": [
+                              "master's degree alone"
+                            ],
+                            "condition_id": 19,
+                            "condition_type": "CREDENTIAL_EXCLUSION",
+                            "description": "A master's degree alone is not sufficient for admission",
+                            "sort_order": 5
+                          }
+                        ],
+                        "label": "Admission requirements",
+                        "operator": "AND",
+                        "rule_group_id": 1,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Construction Management admission",
+                    "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways.",
+                    "rule_set_id": 1,
+                    "scope": "ADMISSION"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2107,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time and Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby",
+              "clinical_and_practice_requirements": {
+                "program_id": "8800BTECH"
+              },
+              "credential": "Bachelor of Technology / Bachelor's Degree",
+              "delivery_method": "In person",
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+              "status": "Active",
+              "study_mode": "Full-time and Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_021ac2697623e25f006aa100721a5087d09e9641c24d3fe712",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQB37ZOPyH5ontc5Q0-JcPm29HqLo2AlTppfV0YU3qAaBOKJdfuC9Gr398Ydp_57_7y2uERIBjmxdEkAus2mglgxIcRPPVUhO19IntXcnwkpf0s0MC21bJZXKQ_2yIbPakVAfaKJXVZg1RbQjXw-Sz9blO_IJq5Rfvsa505AizAXI2Tpv72LFolxMOSpQgpPxFrBvn3FmyrXLIICo9PH5f0meCMCkFl_9zI2PnsUuXDDkqXr_SLVOrnqwYzrXK6Tz2qaKbAUlF_TrJUUgrklUlhQwv3PlkMFYc8ByrcK4RKk61cj4DTmLkQmrjeUG5sztZ5trcGhvSfm9VN3crtfyA9oA8kwy9HYN6m-LuXceQWXBybbfVoLuKbkmI5XR4SqHsoPSXG-9iBiWyof-tKYKCu9jIzkQEGrlI4eWTmwA0wOarzmPkoegqkjDBTVJ1LggFYi4SZyNqJlhGfVtlVuX4vzWysi5V2sHB9NdYTP98w0LCrGOR6KodBovCwEvzvGLBdRktbBSVO4UgW-5_fPI4OP7De04z-VKDPvepCnQuSoH1cpmw2QgbQRqmL3XKR-igZpimkCjUVfUCbGRlkXTcxQGt3CyrIYEOWYR9MP-t4H2SODEjdJV7QNWiu_kHL_HKMMKsKajfBBjCzPFOmIz583VKpemI7OEC5pzZwsYoVwOYMYDP8juGEtEbW848WRyDvzIVW38ZkPhKAiw3p4X2LcF3sNcNcZZOzhcy8IIbjmdN5t4UiHZEJnRZcpIJ8q6XmiDPS2S8vFt3OV7TdIDVmEwzmVBPkKHJKaaPEmLbtK1Ha5Si-qmzV2_Y_DkFyuZCGGaLWd_v5L-ck4yNtv6_Z5t3uf8geVDu8b-9YlF6tnf_sxy32EjOvH-iMX6g6XbUjXhVYFh7vdvoCHAbcbGGIkQ_d8myRNWRSo2s6UZd34Jucls346lO78Mr32PmO1EPRrnDWu4RpUyI4M28ftvIfga_-MKKdd1Kxp_8jtdWMDFUjPy-gGq-y4S7L-55uKrIJmrHS6upEI1CEDxlqSFvlGiH4GijaLaZejjDgq53Y7R3cdkcydRO7u7Xh6qUWxA6ol5pyigTgp0Qw2NYTiMH-vaY7-u_i4YJHNxnTPU5CA463anzbq9YfpA2X_VXwqRfWFhcwEPRZr6q1X1Ju1qe1pOoBRqzPpWIH_alhCViwyQGvC1ewgFWH1bmoV2Vw-YCjYVOeyO5P1coA-UUD3nTreObp6UEPOg684GI6Mo0Ej8oPhsC8strXmE0jw0fT_OcRpU6qC2uWdhmso-WGRBrN3iqCgrkKpSLrrC6KegBRGKO1qZdXGJ2Rf_bFyuw6g1A8LGtTuys8Tce4Poy_jXJDDsrpJB9tj1uPyWGVIYF9mCdCc5KmzkRJgX_g4Fi-_fu--LvcYUJedfjMZgJzUKusqtIG1KA_yxBH31jdDaNBke79q4bwVN7aCqmk79CPVv2d9jrd896XpnAVStQRcR7jEDceOnFcD78NGS8kLLU0htlCmY7Zccx_SUjLhM6LWJX1zzDw_BDvzDwdebJ-bnz0quEijH28mXhTVppLMiQX774wAQghq9fPFng4uORKuTAHZyGkkXLPYtx2NbSABFi3y24PnaDfIa7Vrs10DYkX0zFc3P656ZzLXeQGl7w26klgqzpbJ2qpSgGQceJ84zXGc6AXjpiVn9B8saZdD4b6FlCHVSILPEmcHXwFvNL796BnteYGccVCBNw-iNiix91BU4HFF1jlNb5dZp6AxW2YpfayoLMAd-f6Bn-ZHLVGqYT29Tlgy0BjpxwGQelupR6_XXzDdijBmKeOdb-bHAG2QP_UCUNeg1_W1Gu6FIaYm03zmfdRts-XaAuLuAyuppf6vx3gEeoxj0R2q14peQHRUpX9eHaBsAwBSoxqU3nQlFkoX_GMizdXrFq34t9x1D3Xx0Y4T-kh82SY7JpjOLk5gt-Ej8kY1Qj5DWyFvR6qzwV6XkKeIq7NG9QQs-YRpAnjVyo_zK3d1zLJTHMsjNyy-alR2I1y3oc1rQR11dxSO5zcOjF92DtGtFrsC0vQSICTe_w6lPn4RVm9q3uNqI1k2PhWnHJ2WrmRTJUiT8nOveh3cbS8p4sAFYYobUEOThMMPTpBGZpTZd9V0XH0Zfx12jv8ld7qB8ztDwEpdjecKqoO0T1VMKlc7q77DVulQbsCCFjAyxODYuWPx3Y_as_LM8h2xvX9sl6pwCg_pFhq3BcI1IPDBTHjbwi_0Sz3rhXDCvV6kJT1OPcJLaIqAqEs9ytsCqPQYNT46Zy_uIVxsuGCpKq3nZuKQY_P72pbXXMrFp_ojl3T5Al61bwj21OrOlC0DuwbeCVW9hrpv4V9twHnleUqhUdp9TslNxEbr0rgJazKnBPLDD-qt-OAOwOnoVNE="
+            },
+            {
+              "id": "msg_021ac2697623e25f006aa10075bc2c87d0940228d87e1d9d42",
+              "content": [
+                {
+                  "text": "Yes. The Construction Management Bachelor of Technology is available to international applicants in both full-time and part-time study modes.\n\nIt is listed as eligible to apply for a post-graduation work permit, but study-permit information is not published and should be confirmed with BCIT.\n\n[Program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Yes. The Construction Management Bachelor of Technology is available to international applicants in both full-time and part-time study modes.\n\nIt is listed as eligible to apply for a post-graduation work permit, but study-permit information is not published and should be confirmed with BCIT.\n\n[Program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+          "final_answer": "Yes. The Construction Management Bachelor of Technology is available to international applicants in both full-time and part-time study modes.\n\nIt is listed as eligible to apply for a post-graduation work permit, but study-permit information is not published and should be confirmed with BCIT.\n\n[Program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)\n\nFor more information, see BCIT International Students: https://www.bcit.ca/international-students/."
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "No. Being eligible to apply as an international applicant does **not** mean automatic admission.\n\nAdmission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and meeting one of the program’s four entry pathways. Some international credentials also require a course-by-course credential evaluation. Your qualifications and admission decision must be confirmed by BCIT.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 16,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Construction Management",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [
+            {
+              "key": "international:8800BTECH",
+              "summary": "International availability is explicitly available.",
+              "program_id": "8800BTECH",
+              "certainty": "verified",
+              "source": "asteris_derived",
+              "dependency_keys": [],
+              "valid": true
+            }
+          ],
+          "answered_facets": [
+            "8800BTECH:international"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "admission"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8800BTECH"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "admission",
+            "conversation_state": {
+              "academic_scope": "admission",
+              "answered_facets": [
+                "8800BTECH:international"
+              ],
+              "conclusions": [
+                {
+                  "certainty": "verified",
+                  "key": "international:8800BTECH",
+                  "program_id": "8800BTECH",
+                  "source": "asteris_derived",
+                  "summary": "International availability is explicitly available.",
+                  "valid": true
+                }
+              ],
+              "program_id": "8800BTECH",
+              "scope": "program",
+              "stopped": false,
+              "student_facts": [
+                {
+                  "key": "applicant_status",
+                  "source": "user_reported",
+                  "value": "international"
+                }
+              ],
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"8800BTECH\"}",
+              "call_id": "call_qZnmuVgCl1Ki0HNpWOiDUPQh",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_08fd018eddc7e817006aa1007982f887d0b1feb43a97a5a769",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8800BTECH"
+          },
+          "context": {
+            "academic_scope": "admission",
+            "current_question": "So does that automatically mean I'm admitted?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8800BTECH",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 3,
+                                    "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 4,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway A",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 3,
+                                "sort_order": 1
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 5,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 6,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 7,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 3,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway B",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 4,
+                                "sort_order": 2
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 8,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 9,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 8 years North American construction-management experience in mid/senior roles",
+                                    "minimum_value": "8",
+                                    "parameters": {
+                                      "field": "construction management",
+                                      "region": "North America",
+                                      "role_level": "mid_or_senior"
+                                    },
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway C",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 5,
+                                "sort_order": 3
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "accepted_values": [
+                                      "cabinetmaker",
+                                      "carpenter",
+                                      "electrician",
+                                      "industrial mechanic/millwright",
+                                      "metal fabricator",
+                                      "plumber",
+                                      "refrigeration & air conditioning mechanic",
+                                      "welder level A"
+                                    ],
+                                    "condition_id": 10,
+                                    "condition_type": "RED_SEAL_TRADE",
+                                    "description": "Approved Red Seal trade",
+                                    "sort_order": 1
+                                  },
+                                  {
+                                    "accepted_values": [
+                                      "Pre-Calculus 11",
+                                      "Foundations Math 11",
+                                      "Workplace Math 11",
+                                      "BLDT 1011",
+                                      "accepted BC/Yukon equivalent"
+                                    ],
+                                    "condition_id": 11,
+                                    "condition_type": "MATH_OPTION_GRADE",
+                                    "description": "One accepted math option at 60%",
+                                    "minimum_value": "60",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 12,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 3,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 13,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+                                    "minimum_value": "1",
+                                    "parameters": {
+                                      "excludes": "apprenticeship hours",
+                                      "field": "construction industry"
+                                    },
+                                    "sort_order": 4,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway D",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 6,
+                                "sort_order": 4
+                              }
+                            ],
+                            "label": "Exactly one entry pathway",
+                            "operator": "OR",
+                            "parent_group_id": 1,
+                            "rule_group_id": 2,
+                            "sort_order": 3
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "condition_id": 1,
+                            "condition_type": "PRE_ENTRY_ASSESSMENT",
+                            "description": "Approved departmental pre-entry assessment before application",
+                            "sort_order": 1
+                          },
+                          {
+                            "condition_id": 2,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "English Studies 12 at 73% or equivalent",
+                            "minimum_value": "73",
+                            "sort_order": 2,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": [
+                              "ICES comprehensive evaluation",
+                              "accepted Canadian credential-assessment service"
+                            ],
+                            "condition_id": 18,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+                            "parameters": {
+                              "applies_outside": [
+                                "Canada",
+                                "United States",
+                                "United Kingdom",
+                                "Australia",
+                                "New Zealand"
+                              ],
+                              "requires": "course-by-course evaluation and GPA calculation"
+                            },
+                            "sort_order": 4
+                          },
+                          {
+                            "accepted_values": [
+                              "master's degree alone"
+                            ],
+                            "condition_id": 19,
+                            "condition_type": "CREDENTIAL_EXCLUSION",
+                            "description": "A master's degree alone is not sufficient for admission",
+                            "sort_order": 5
+                          }
+                        ],
+                        "label": "Admission requirements",
+                        "operator": "AND",
+                        "rule_group_id": 1,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Construction Management admission",
+                    "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways.",
+                    "rule_set_id": 1,
+                    "scope": "ADMISSION"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2107,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time and Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby",
+              "clinical_and_practice_requirements": {
+                "program_id": "8800BTECH"
+              },
+              "credential": "Bachelor of Technology / Bachelor's Degree",
+              "delivery_method": "In person",
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+              "status": "Active",
+              "study_mode": "Full-time and Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_08fd018eddc7e817006aa1007bdbdc87d0b1d42d92029a3160",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQB_mD0jPGmDEPFZmYKx8J-qkY1atLNSM0CsAFJIYlBuO2mdQph5_8J-c67gtLDQaQ4OsXWlpK0V8hy2ptlnHGmesFYb7ektmuXBhU2J_Oc0jgXfbetFc0_XgiJxUn5G5sl4R6dm5kVem6tuijuV_Jr5gFTqRntkFLQwil8RDrBVhziBooDrV2fWs9pKpgwKgFTiwqQjv1Gp5cea-DJFWxO6jyBsaNtttRJGba0X6kP8-Q9Dk6yN2DxDvIVayt3C7rOQQHKmJUJlA0HjAARg-qxTUxrCWDEK_pHK--PbChH8isdoyK6x0O4qyd9KCmtUx_PviuwOp9xocUqFbRqd5TPvvOJ0Y5Ha3_M3a4lNT1TJnZXhmJioRJ_FILrzNNcRQ2DxTjQYLHV_8AvEfkyai8UEkaRokzWrmGUSDcxoNhnwDcHz20QxWRWcqCMyT0pdZrntSa1ZBUP3j9a04UHEdUOxpZkzfm6cY8NUDU086rulTrmxVKHlUTU6Ue8LIu7NCaO2W_ER-8pUXvY9G9pXSy8FdmCGtpbPsIaKi_vXk3kTh9cLNnhzx7oQg3M2UEaamSBI-oCFL4mvKHRYhqpCpus0xC0aCSIXXFTTNONg1yY0WRzaRMDFi4oOn0qZ0-NiYuqtrHR8n8rKWy04YWISOyBgjGyVFnb6AWAnjKda57BozkJhZqQySNMWxKNHD7OGIfn6juRf26mONQ9H8LkMthtYdAepVNgD6ACDxMdJgAz76dXG48gapHhaBxYL4PsBEm0Q_NC_NHXIM3XrkS_Gwi4aVuQb1IFBXm5iwKQEoUx6zuXc3tuf08JeKRm5i_mwLoEMeD1P27GVgfHkXhaztVTRVCldhZIXUGq4BsvqwRsCHW0GdPhwjs26u6DHmKm-EIeSQAWarFLEn_PBHqcygwGOfAU11Olsxqt6scO4dMPGoauAf0z3QZt3hk4bAnezuUgJ2v67gNQDG9E7YpPLSSZr5Fi5MkRnPqQGeoub7y_zyzdP1eNTaqr-CjuzZqe_dMm9RI8HU1OE88EFb74n-Wd3CR9MJY4Okfbdq1cU_I5IS90i5sQLkR8MBtDniDtGxKdStBh53sAWEE9cDonuB31zYt-k1zhMD8ITFlw_9yerhTrd_NRNaE_FZjkZrg1h8kPMXjDIvJ6ueNL03m-YrTsSS1S9-QBvnsqQ1xXFJhJJbj1cnYcFOIoCx9dkIEjX6ayj8vTQrI20qBp7h2k0Uiyp_4h2h3XbMX8MJNg71uGvK2Qx3IidimwhVj7yBOk6tFJVeRQeU6S9oQTipnE_KSXrEOX--MzDlS3Gq82hLwidsxu12WQ8vd7mc59ob-ZOCvUy7s2Q4LCmfzn2X7dSnXv_Y_k8TdZZxjBk5rlqz8wJGprZMZSUh4B5_KvEu1Oi7nOmJTO2X5jpYbxOc-Z4pc-AgA1K3H-vgvw5YryQrr4fgaEVvQlrlisW8-qP7LGgOcKDvFvulL6ftQKLM9-7iSpkwkt0xZdpjEp2xRe7cMXW2J5nOFCFhNIz0KL591dtiNSm6NLcr6gqI8GuA8ZimMznzgWP4u2DxtCxXkvrbffbOzQtWl-xmISIImWjAZ4S1jOKHFcWb-lxgGBSImGpsF_q3Ey6DS1UatXlk3y0N8LKXLEP8QyyOg4ST1MQHR5Z3HhDvo3PcQDQGdQkd-zHly2EUezcc-Api4L0aQ1WAVbEmwCVcgIQTLh33x4NolDb3449EsLFsPhS_3a_OucbkZywlA=="
+            },
+            {
+              "id": "msg_08fd018eddc7e817006aa1007d7c1c87d0a9acd2274b00fba1",
+              "content": [
+                {
+                  "text": "No. Being eligible to apply as an international applicant does **not** mean automatic admission.\n\nAdmission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and meeting one of the program’s four entry pathways. Some international credentials also require a course-by-course credential evaluation. Your qualifications and admission decision must be confirmed by BCIT.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "No. Being eligible to apply as an international applicant does **not** mean automatic admission.\n\nAdmission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and meeting one of the program’s four entry pathways. Some international credentials also require a course-by-course credential evaluation. Your qualifications and admission decision must be confirmed by BCIT.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+          "final_answer": "No. Being eligible to apply as an international applicant does **not** mean automatic admission.\n\nAdmission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and meeting one of the program’s four entry pathways. Some international credentials also require a course-by-course credential evaluation. Your qualifications and admission decision must be confirmed by BCIT.\n\n[Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "**I can verify:**\n\n- Construction Management is an active Bachelor of Technology degree-completion program offered full-time or part-time, in person at BCIT’s Burnaby campus.\n- Admission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and qualification through one of four defined entry pathways.\n- Depending on where your post-secondary credential was earned, a comprehensive course-by-course credential evaluation with GPA calculation may be required.\n- The program record does not include a configured course list, so I cannot verify individual curriculum courses here.\n\n**Confirm with BCIT:**\n\n- Whether your education and work experience satisfy a specific entry pathway.\n- Whether your English credential is accepted as equivalent.\n- Whether you need an international credential evaluation.\n- Pre-entry assessment approval, study-permit requirements, and the final admission decision.\n\n[BCIT Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 16,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Construction Management",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8800BTECH",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [
+            {
+              "key": "applicant_status",
+              "value": "international",
+              "source": "user_reported"
+            }
+          ],
+          "conclusions": [
+            {
+              "key": "international:8800BTECH",
+              "summary": "International availability is explicitly available.",
+              "program_id": "8800BTECH",
+              "certainty": "verified",
+              "source": "asteris_derived",
+              "dependency_keys": [],
+              "valid": true
+            }
+          ],
+          "answered_facets": [
+            "8800BTECH:international"
+          ],
+          "stopped": false,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": "admission"
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8800BTECH"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8800BTECH"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": "admission",
+            "conversation_state": {
+              "academic_scope": "admission",
+              "answered_facets": [
+                "8800BTECH:international"
+              ],
+              "conclusions": [
+                {
+                  "certainty": "verified",
+                  "key": "international:8800BTECH",
+                  "program_id": "8800BTECH",
+                  "source": "asteris_derived",
+                  "summary": "International availability is explicitly available.",
+                  "valid": true
+                }
+              ],
+              "program_id": "8800BTECH",
+              "scope": "program",
+              "stopped": false,
+              "student_facts": [
+                {
+                  "key": "applicant_status",
+                  "source": "user_reported",
+                  "value": "international"
+                }
+              ],
+              "turn_index": 3,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"8800BTECH\"}",
+              "call_id": "call_i36bVLIYPwd40CYAV0jnuNyY",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_0669e981f795a078006aa10080d71c87d08442fa4a492081f3",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8800BTECH"
+          },
+          "context": {
+            "academic_scope": "admission",
+            "current_question": "What can you actually verify, and what should I confirm with BCIT?",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "8800BTECH",
+            "program_name": "Construction Management",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8800BTECH",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": 1,
+                    "groups": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 3,
+                                    "condition_type": "RELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Construction-related diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 4,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway A",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 3,
+                                "sort_order": 1
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 5,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 6,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "BCIT Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 7,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry work experience",
+                                    "minimum_value": "1",
+                                    "sort_order": 3,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway B",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 4,
+                                "sort_order": 2
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "condition_id": 8,
+                                    "condition_type": "UNRELATED_POSTSECONDARY_CREDENTIAL_GPA",
+                                    "description": "Unrelated diploma or degree from a recognized institution with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 1,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 9,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 8 years North American construction-management experience in mid/senior roles",
+                                    "minimum_value": "8",
+                                    "parameters": {
+                                      "field": "construction management",
+                                      "region": "North America",
+                                      "role_level": "mid_or_senior"
+                                    },
+                                    "sort_order": 2,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway C",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 5,
+                                "sort_order": 3
+                              },
+                              {
+                                "conditions": [
+                                  {
+                                    "accepted_values": [
+                                      "cabinetmaker",
+                                      "carpenter",
+                                      "electrician",
+                                      "industrial mechanic/millwright",
+                                      "metal fabricator",
+                                      "plumber",
+                                      "refrigeration & air conditioning mechanic",
+                                      "welder level A"
+                                    ],
+                                    "condition_id": 10,
+                                    "condition_type": "RED_SEAL_TRADE",
+                                    "description": "Approved Red Seal trade",
+                                    "sort_order": 1
+                                  },
+                                  {
+                                    "accepted_values": [
+                                      "Pre-Calculus 11",
+                                      "Foundations Math 11",
+                                      "Workplace Math 11",
+                                      "BLDT 1011",
+                                      "accepted BC/Yukon equivalent"
+                                    ],
+                                    "condition_id": 11,
+                                    "condition_type": "MATH_OPTION_GRADE",
+                                    "description": "One accepted math option at 60%",
+                                    "minimum_value": "60",
+                                    "sort_order": 2,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 12,
+                                    "condition_type": "BRIDGING_CREDENTIAL_GPA",
+                                    "description": "Construction Operations Associate Certificate with minimum 67% GPA",
+                                    "minimum_value": "67",
+                                    "sort_order": 3,
+                                    "unit": "PERCENT"
+                                  },
+                                  {
+                                    "condition_id": 13,
+                                    "condition_type": "WORK_EXPERIENCE",
+                                    "description": "At least 1 year construction-industry experience in addition to apprenticeship hours",
+                                    "minimum_value": "1",
+                                    "parameters": {
+                                      "excludes": "apprenticeship hours",
+                                      "field": "construction industry"
+                                    },
+                                    "sort_order": 4,
+                                    "unit": "YEAR"
+                                  }
+                                ],
+                                "label": "Pathway D",
+                                "operator": "AND",
+                                "parent_group_id": 2,
+                                "rule_group_id": 6,
+                                "sort_order": 4
+                              }
+                            ],
+                            "label": "Exactly one entry pathway",
+                            "operator": "OR",
+                            "parent_group_id": 1,
+                            "rule_group_id": 2,
+                            "sort_order": 3
+                          }
+                        ],
+                        "conditions": [
+                          {
+                            "condition_id": 1,
+                            "condition_type": "PRE_ENTRY_ASSESSMENT",
+                            "description": "Approved departmental pre-entry assessment before application",
+                            "sort_order": 1
+                          },
+                          {
+                            "condition_id": 2,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "English Studies 12 at 73% or equivalent",
+                            "minimum_value": "73",
+                            "sort_order": 2,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          },
+                          {
+                            "accepted_values": [
+                              "ICES comprehensive evaluation",
+                              "accepted Canadian credential-assessment service"
+                            ],
+                            "condition_id": 18,
+                            "condition_type": "INTERNATIONAL_CREDENTIAL_EVALUATION",
+                            "description": "Specified international post-secondary credentials require an accepted comprehensive credential evaluation",
+                            "parameters": {
+                              "applies_outside": [
+                                "Canada",
+                                "United States",
+                                "United Kingdom",
+                                "Australia",
+                                "New Zealand"
+                              ],
+                              "requires": "course-by-course evaluation and GPA calculation"
+                            },
+                            "sort_order": 4
+                          },
+                          {
+                            "accepted_values": [
+                              "master's degree alone"
+                            ],
+                            "condition_id": 19,
+                            "condition_type": "CREDENTIAL_EXCLUSION",
+                            "description": "A master's degree alone is not sufficient for admission",
+                            "sort_order": 5
+                          }
+                        ],
+                        "label": "Admission requirements",
+                        "operator": "AND",
+                        "rule_group_id": 1,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "Construction Management admission",
+                    "notes": "Mandatory pre-entry assessment, common English, and exactly one of four pathways.",
+                    "rule_set_id": 1,
+                    "scope": "ADMISSION"
+                  },
+                  {
+                    "name": "International eligibility source evidence",
+                    "notes": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"},{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"80ccc30497514cdabeb24188c92933bde377ee28c660097ccd4abb46138608d4\",\"url\":\"https://www.bcit.ca/international-applicants/flexible-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+                    "rule_set_id": 2107,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time and Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby",
+              "clinical_and_practice_requirements": {
+                "program_id": "8800BTECH"
+              },
+              "credential": "Bachelor of Technology / Bachelor's Degree",
+              "delivery_method": "In person",
+              "program_id": "8800BTECH",
+              "program_name": "Construction Management",
+              "program_overview": "Bachelor of Technology Construction Management degree-completion program developing management, technical, and interpersonal construction-project skills.",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/",
+              "status": "Active",
+              "study_mode": "Full-time and Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_0669e981f795a078006aa100827fc887d091035ea3e444a609",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQCJIL25kldVbffnNZvxbmg5VPfzPSbynDnFuTnTmoty2iBcXS2QHyj9YNsGKSt_0W8Gt4-JIC_bgu9-mtA6-3iXz6U6GnMDrAv3srLJwGenMvhJ4thbIZRd4SMVbVTXCPfh1pqd2QZDvg3c3Ysb5hfe8-t5KNUR2KTUYcsKtsLZIdXOdSaWT9Sc9SdEeN2JwVaQmHHVN2gh_9eMJS9Yr0cV7K_H4rIi8NHzMio983zcStany2suQiruCRdsQCqovSUaQR9LXR_7g_LdcJAnfs4VVeeVsuzxLNQjn2c80Z7rHXd5B-UsOb5A1syjUlfHPQ1vCW9m6H4zK2nM_WCsP7dZGErZSa24bXnPHkm0ruACvlh6wgffklVyRHiGVnlMwEABaCKAZdUDcZw8jQ1VNR3XXsrOow2g7JsnAte2mEPBScgGmqUtetUHlsKHjDSdh_xR_2KqqTAqd9Sgp61CPgSxksg55coouO05epw_-4DRBdWKl5pjoSyX8l-5D_FYBIrSsQlAO8akpeWgzyj8Joy5pvJET6B-dFMjrrnIftjcfKMPWf-J94W6CWVSpb9alfQ1tza3fvCRRGJC73q3jGtJ94DoFRScM1K9xVfWtGOPEspzwJPSyuqmVGkgOOs63Jbd2T5KqBVbPOO4_IoXa6vSG_fUM_Lu9eupaiLarYMGiXZnNRNdxoJ297mZpa-izb8zB0jiGq0zUIsste5MZPL-zGV4iOX9q8b-8HBJGNXtClTur-bfWjjYyrL3qU374WUqcKMs8UtEf5FKU78DGnXpadue3pLhqRxAllR5ze6bUOBE63gB2KQ7ocZ_NO1eys1vsa5mpXTQP4d6Wy0OuV0DibmLQrHImfOJUGllRRtHH3ZtA1Wp7hKDi-cRz5c3_1i4wFoMRbgeb9XsBFHXxwcTSzZiiIgP1f7NVmFgwPpu7QNVXMSoSbVAGR5WcP3Svr_TksOdlkG1zHHQMKt38eKYbKHdvS4TnE8N6aYKifpXEvPdUWXGO7r_DYME-a-O9aKvQ6QYnda250xdbJGzbCdjE8p5JfErL63AVwfXzXhIjD2Yca1FgXiqoGgkz-UbK0-65riUH4y54MnaPJn7qfeTGmUlKITk9flBV1n2NWOyqicQqi0YH-zQgB2s0HDhTrrjMGwV5_iRnN_LIJwCHkWDMSAB_ucJ2Ayn_1d9xEkmWLBhoqvUJGXtl3wLno7N_EPb3VElUX0nEEBIWzko0gfVHKkPpTBuSzWTPNhJ9HSs5uBcjMfjSEKJ1t1x-T88AYu-31eMLU0plNPydp9lU-MVcqa02YEYtd0IXuXV4kNauS6Kh-k1AQ4RzTJD4hRJIk27R5nbB0_H_NP9QayZiJTITtLsR5U-MiQng5kPVgS_gm1pt0Be6TDxNSceDLkjjDzF-r4gRWYqYfntWvkIujgxARGlwVCD4qa1t8ZJk7I_HpsZU9pIzCtDb7j4xst1uNeNFVBYIUu3jB7rMyfEnEXLr3hdF28vPeZyexA8_-lBaLbqIyD14Ph4wn0zl-qOlq0PWapf0aQ_OnYlsKpLstwf-tWtCPsft7VG4ijKuhquiYHLZwGHcdS_o8K0MPuvAD6cnY9tatY0XOSKnl17dESMC38ufYfEZFgPTpX7zyd8z6LTXxzIku5khQ2TWR5n6_PYqE6xWzRVgbLF1c7bs_OlAOMpdjFTVYh9wAMjrE9JjY2UqjT9vhqyt1vBfhbJfIyHBZUUOuwpNhM2F9pW8-IGwELlQwLEglBiwfD5YR2xfWTuzi0fcPM-KSOlN-3KlBluyqwZtenKlq8OPQsIKu7Sg0x07-qEDE-uXr5dFI4LOfLkw2RgxBbDbiiB1uhFuKXvbHAIiq8gTlrZIdsFaTf6k73pas0IFSZueHTnGvfV4orJhUR-ywysIAxrQUt0n8-ae4TZke3R9u1afz-T0SXjh_z4q7RGd2amX0EbjJq-2zuTqi44a4pYr4lXwBH7EvgGkCz5eaPQwvoVthaOAWPCLklK3Mt4PhdgKYrbGIyL0K5KbXDywhjHngChuIFqTsZ2vbASV6dp73oudjkKqo3STfjlKX3d_XGu2gcapzdG5Jx8M6xFOiTXZqzvdZElG1B1t0CnEKt-9dLv84AAKZbeI0yURWxkpHk5vJSyx05xLNGDTMJE3BS-CeSVqoTp9zWDivO8cDL6NJcdkJ2R-Vr-UIdo35GK9DImQWSSXq7v3YnfyY3vUC4an28wfPZGUwER-OUpq8S2bvOY-EPTrzeuLlDHCztiNsiGMNA8VqCZ-2dQFSffpWOntGvNHcyT-9jD8EqYdV4_O-N8Q_ow58haSe1IeY3T5B4Lgw4u-w7EIxrYW3dwCNFt0ATmlKpbyyeuormnxW14Mx5UQDl3sAwJclNLPwMRjPO-_t9KSGE_U2Ke9CdcHsWjSOGKyk4avtmIUBNg3z4q0i8ZmmOC05RR1eo4zYsPAx2zuxOeWhXxvOI="
+            },
+            {
+              "id": "msg_0669e981f795a078006aa100862f9487d0b9894f8f0dff4311",
+              "content": [
+                {
+                  "text": "**I can verify:**\n\n- Construction Management is an active Bachelor of Technology degree-completion program offered full-time or part-time, in person at BCIT’s Burnaby campus.\n- Admission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and qualification through one of four defined entry pathways.\n- Depending on where your post-secondary credential was earned, a comprehensive course-by-course credential evaluation with GPA calculation may be required.\n- The program record does not include a configured course list, so I cannot verify individual curriculum courses here.\n\n**Confirm with BCIT:**\n\n- Whether your education and work experience satisfy a specific entry pathway.\n- Whether your English credential is accepted as equivalent.\n- Whether you need an international credential evaluation.\n- Pre-entry assessment approval, study-permit requirements, and the final admission decision.\n\n[BCIT Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "**I can verify:**\n\n- Construction Management is an active Bachelor of Technology degree-completion program offered full-time or part-time, in person at BCIT’s Burnaby campus.\n- Admission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and qualification through one of four defined entry pathways.\n- Depending on where your post-secondary credential was earned, a comprehensive course-by-course credential evaluation with GPA calculation may be required.\n- The program record does not include a configured course list, so I cannot verify individual curriculum courses here.\n\n**Confirm with BCIT:**\n\n- Whether your education and work experience satisfy a specific entry pathway.\n- Whether your English credential is accepted as equivalent.\n- Whether you need an international credential evaluation.\n- Pre-entry assessment approval, study-permit requirements, and the final admission decision.\n\n[BCIT Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)",
+          "final_answer": "**I can verify:**\n\n- Construction Management is an active Bachelor of Technology degree-completion program offered full-time or part-time, in person at BCIT’s Burnaby campus.\n- Admission requires an approved pre-entry assessment, English Studies 12 at 73% or equivalent, and qualification through one of four defined entry pathways.\n- Depending on where your post-secondary credential was earned, a comprehensive course-by-course credential evaluation with GPA calculation may be required.\n- The program record does not include a configured course list, so I cannot verify individual curriculum courses here.\n\n**Confirm with BCIT:**\n\n- Whether your education and work experience satisfy a specific entry pathway.\n- Whether your English credential is accepted as equivalent.\n- Whether you need an international credential evaluation.\n- Pre-entry assessment approval, study-permit requirements, and the final admission decision.\n\n[BCIT Construction Management program page](https://www.bcit.ca/programs/construction-management-bachelor-of-technology-full-time-part-time-8800btech/)"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

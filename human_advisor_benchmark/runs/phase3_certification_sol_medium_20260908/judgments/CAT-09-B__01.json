@@ -1,0 +1,102 @@
+{
+  "scenario_id": "CAT-09-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "5a8daae2b54232544a9976f9cec2117f1c1c2fe023c6b3b58bd427919f7e3f51",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "050d76494beb1904db9c840ed122be296a40ec99799d102f1f8885301ccd9f0c",
+  "packet_sha256": "1bb7d81d07f325a79750738223b6be92f47cb2eed92cebfcbf9831bffcb9590e",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_0e927eb25414f646006aa1083f591c87d0b5b88eaa65e21277",
+  "usage": {
+    "input_tokens": 24663,
+    "input_tokens_details": {
+      "cache_write_tokens": 23309,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1992,
+    "output_tokens_details": {
+      "reasoning_tokens": 1453
+    },
+    "total_tokens": 26655
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly identifies program 8900BTECH and states that it is available to international applicants. Delivery, campus, and study mode match the frozen records. The response appropriately recommends confirming immigration requirements without implying admission."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly and correctly distinguishes international availability from admission. It retains the correct program context and accurately notes the two-step process, entrance requirements, offer requirement, and space limitation without guaranteeing admission."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The frozen turn scope is international, but the turn-3 resolver and stored conversation state label academic_scope as admission. The final answer still addresses both international availability and admission-verification boundaries, so the impact is limited."
+        },
+        "notes": "The answer clearly separates verifiable program rules from matters requiring BCIT or IRCC confirmation and gives specific, appropriate confirmation steps. The curriculum-course examples are accurate but somewhat peripheral to the requested verification boundary, making the response slightly broader and longer than necessary."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

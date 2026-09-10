@@ -1,0 +1,4706 @@
+[
+  {
+    "scenario_id": "CAT-01-A",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For a brief introduction, the raw model answer adds eight course codes and titles across first-year examples and both second-year paths. Finalization preserves this unnecessary curricular detail.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-01-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer runs 'V6B 3H6 The stored program listing says' together without punctuation and repeats campus information in database-style wording. The trace contains no model calls.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-01-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer inserts 'The verified curriculum includes' followed by seven core courses, both Year 2 paths, substitutions and a continuation rule into an international-availability/admission verification conversation. Finalization preserves this unrequested catalog detail unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-01-C",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer packs seven core courses and four pathway courses into its second sentence despite the request for a brief two-sentence introduction. The observed word check reports 106 against a 100-word maximum; finalization leaves the answer unchanged.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-01-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that tool, failing the frozen tools_empty check. The final answer nevertheless acknowledges stopping in 12 words and gives no further advice.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-02-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands the international verification question into all four admission pathways, graduation work experience, and CMGT final-project courses, then adds transfer-credit confirmation advice. Finalization preserves that expansion unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-02-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw model answer correctly declines an employment guarantee but ends only with 'Program details' and the general program URL; it supplies no practical employment-related next step, as required by the frozen expectation. Finalization leaves it unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-02-C",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'Never mind, let's stop,' the trace still forces get_program_details via tool_choice and executes that retrieval, failing the frozen tools_empty check. The final answer itself correctly stops: 'Understood. Take care!'",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-03-B",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly says international applications are not accepted, but adds credential, delivery, length and five curriculum examples to a narrow availability question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-03-B",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer opens with 'Meeting the minimum entrance requirements' although the preceding discussion was international exclusion, and relegates that exclusion to 'Also'. It directs the user to 'your myCommunication account' without conditioning this on having applied.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-03-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Under 'Verified', the model states applicants 'educated outside' five countries require ICES evaluation. Rule 205 limits that trigger to completed post-secondary studies and says other Canadian credential evaluation services may be considered. It also changes required post-conditional-selection criminal and immunization documents to 'may require'. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/CAT-03-B__01.json"
+    ]
+  },
+  {
+    "scenario_id": "CAT-03-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice to get_program_details and executes it; tools_used is nonempty and intent remains PROGRAM_INFO. The final model answer nevertheless acknowledges stopping in ten words and provides no further advising.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-04-B",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The response says successful first-two-year completion leads to the Civil Engineering Diploma 'subject to the program’s continuation requirements'. Stored program overview and Level-5 progression rules attach continuation requirements to entry into the final two BEng years, not the diploma award. Correct source evidence was present in get_program_details; finalization retained the raw model claim.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: programs 8660BENG",
+      "database_before.json: progression_requirements 8660BENG",
+      "test_admission_normalization_six.py"
+    ]
+  },
+  {
+    "scenario_id": "CAT-04-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answers appropriately reject a guarantee but end only with 'Program details' and a generic program URL; they provide no specific practical action for assessing or improving employment prospects.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-04-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it, with intent PROGRAM_INFO. This violates the frozen tools-empty expectation, although the final answer respectfully stops.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-05-C",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw model output correctly refuses an immediate-employment guarantee but repeats the program introduction and lists seven courses not requested in this outcomes question. Finalization only spaces course codes.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-05-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit stop, trace forces tool_choice=get_program_details and performs that retrieval; tools_empty fails and intent remains PROGRAM_INFO. The final response itself appropriately acknowledges stopping in 11 words.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Finalization changes the correct raw CHEM 203 - Introduction to Organic Chemistry into a label containing CHEM 213. The frozen courses table identifies CHEM 203 and CHEM 213 as distinct courses. The before/after finalization event directly demonstrates the introduced wrong course identity.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: courses UBC-CHEM-203 and UBC-CHEM-213",
+      "transcripts/CAT-06-A.json: turn 1 finalization"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response accurately reports both campuses but uses database-facing wording, 'has the stored location', rather than natural advising language.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Finalization inserts UBC-CHEM-111, UBC-CHEM-121 and UBC-CHEM-141 into the correctly named raw CHEM 123 - Principles of Chemistry 2. These are distinct frozen course records with a different title. Unrequested calculus course IDs are also inserted. The saved raw/final event isolates this corruption to deterministic finalization.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: courses UBC-CHEM-123, UBC-CHEM-111, UBC-CHEM-121, UBC-CHEM-141",
+      "transcripts/CAT-06-B.json: turn 3 finalization"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-C",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changed the clean raw label 'BIOC 203 Fundamentals of Biochemistry' to 'BIOC 203 UBC-BIOC-203 — Fundamentals of Biochemistry', redundantly exposing the internal identifier.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-06-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop.', the trace forces tool_choice=get_program_details and executes retrieval; tools_used is nonempty and intent remains PROGRAM_INFO. The final response nevertheless stops appropriately: 'Understood. Take care!'",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "source_or_evidence_gap",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call answer says 'has the stored location', exposing database-oriented phrasing rather than natural advising language. The location itself is exactly correct.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-B",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer inserts all three course names and repeats delivery details after already answering the narrow automatic-admission question. Finalization only changes course-code spacing.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-C",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The unchanged raw model answer repeats the program introduction and lists all three XCIR courses in response to an employment-guarantee question, rather than using that space for an employment-focused practical next step.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-07-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'Never mind, let's stop,' the trace still forces get_program_details through an explicit function tool_choice and reports PROGRAM_INFO. This violates the frozen tools-empty expectation despite the appropriate final acknowledgment.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-A",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The user requested a 'brief introduction', but the raw model answer adds detailed curriculum bullets naming eight courses and optional work terms. Finalization preserves this unnecessary catalog-style expansion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands the international/admission verification question into a broad catalog recap, including '60 credits', FMGT 8911, General Education credits, seven-year completion time and CPA alignment, followed by eight confirmation items. Finalization preserves this expansion unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "source_or_evidence_gap",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answers give only 'You can review the program details here' as a next step. This repeats the program link without a practical action directed at assessing employment prospects or preparing for a job search.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-08-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through an explicit tool_choice and executes it; tools_used is not empty. The final answer nevertheless appropriately says 'Understood. I’ll stop here.'",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "tool_or_transport_failure",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For a 'brief introduction,' the raw model answer adds five curriculum-component bullets with numerous course codes and titles after an already sufficient introductory paragraph. Finalization preserves this extra detail.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands the verification-boundary question into a long admission and curriculum inventory, including four entry routes, named ELEX courses, specialization credits, Liberal Studies credits, and graduation details. Finalization preserves this expansion unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly rejects an employment guarantee but ends only with 'Program details' and a general program URL, without a practical employment-focused action; finalization preserves it unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-09-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval, with intent PROGRAM_INFO. The final answer nevertheless acknowledges stopping briefly and gives no further advice.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-A",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The user requested a 'brief introduction', but the raw model answer adds a full six-course list with course codes and individual credits under 'Required courses — 19 credits'. Finalization preserves this unsolicited curriculum list.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-B",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer adds 'The six required courses are' and the entire curriculum list to a question about international availability. This survives finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer repeats all six course names already supplied on turn 1 and introduces MBA pathways despite the international/admission verification context; finalization leaves this unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-C",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer spends its entire second sentence enumerating all six course codes and titles despite a request for a brief introduction; finalization preserves it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-C",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer repeats all six course names and codes from turn 1 in response to an employment-guarantee question, and the final answer retains that list.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-10-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the explicit stop request, tool_choice forces get_program_details and the tool executes; tools_used is nonempty and intent remains PROGRAM_INFO. The final prose nevertheless stops respectfully.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-A",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The user requested a brief introduction, but the raw model answer enumerates thirteen course codes and titles across four curriculum bullets; finalization preserves that list unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic campus response says the program 'has the stored location: Online', exposing database-style phrasing rather than conversational advising. No model call is shown.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer inserts 'The curriculum includes' followed by 15 named courses and a three-course elective pool before the BCIT confirmation guidance. This unsolicited curriculum inventory distracts from the international availability and personal-verification question; finalization preserves it unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer repeats the part-time/online description and NSER 7300/7500 examples from turn 1 despite an employment question, then offers only 'review the program details' rather than an outcomes-focused practical next step. Finalization leaves this unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-11-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval, failing the frozen tools_empty expectation. The final answer nevertheless acknowledges stopping briefly and provides no further advice.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer uses database-facing phrasing, 'has the stored location: Online,' rather than conversational advising language. The observed turn has no model call; attribution is limited to the deterministic response path.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-B",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer appends three curriculum examples ('NSNE 7100', 'NSNE 7300', 'NSNE 7900') to an admission-status question; finalization leaves this irrelevant addition unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer inserts a 17-course curriculum list plus a three-course elective pool between the stored international rules and the requested BCIT-confirmation guidance. This unsolicited catalog expansion survives finalization unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "background_as_topic",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The unchanged model answer offers only 'review the program details here' as its next step, rather than directing the student specifically to the outcomes report or to comparing current neonatal vacancies.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-12-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "background_as_topic",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it; tools_used is nonempty, failing the frozen stop assertion.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "tool_or_transport_failure",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands a requested 'brief introduction' into six coded course examples, seven highlight fields, pathway details and intake dates; finalization preserves that answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response says 'has the stored location' rather than conversationally answering where the program is taught.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-B",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "credential_ambiguity",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer says ICES evaluation 'may be required'. The source requires comprehensive credential evaluation for the specified countries, although other Canadian services may be considered. The wording leaves that distinction less clear.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-B",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Under verified alternate-entry rules, the raw model answer says 'A pre-entry assessment and possible bridging courses may apply.' The retrieved and frozen admission text explicitly says alternate-entry applicants 'must complete a Pre-entry Assessment form'. Finalization preserves the model's weakening of a mandatory application step. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/CAT-13-B__01.json"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer appropriately reject a guarantee but add 'applicants with relevant industry experience have an advantage,' an admission fact tangential to the employment-outcomes question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-13-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it; the frozen tools_empty expectation fails. The final response nevertheless stops politely without further advising.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "unverified_claim_or_guarantee",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The answer asserts 'blended/in-person delivery.' The structured delivery field says Blended, but the frozen authoritative delivery text explicitly states that both modes are delivered on campus in a face-to-face format. The retrieved overview also says 'Delivery: in person.' The model combined conflicting descriptions without explaining the discrepancy; finalization preserved that wording.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "unanswered_or_irrelevant",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response uses the database-oriented phrasing 'has the stored location' rather than ordinary advising language. This is only a minor stylistic issue; Burnaby Campus directly answers the question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer repeats document acceptance, academic-background assessment, laboratory-course need and admission status across the lengthy 'cannot verify' and nine-item 'confirm' lists, and adds curriculum pathways to an international/admission verification question. Finalization preserves this expansion unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-C",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization replaces 'an industry/research project pathway' with 'an BSCI 9755 — Industry/Research Project pathway', introducing awkward grammar and intrusive course labels into the two-sentence introduction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer refuse a guarantee appropriately but offer only 'For current program details, see' the general program URL, rather than an employment-focused practical next step; competitive graduate funding is an unrelated diversion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-14-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop.', the trace forces get_program_details through named tool_choice and executes it; the frozen expectation requires no tools. The final answer nevertheless acknowledges stopping in nine words and stops advising.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-A",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization adds 'ECOR 9600 —' to the raw model's 'Thesis-based option' heading, unnecessarily labeling the whole option with its thesis course code.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response says 'has the stored location' rather than conversationally stating where the program is taught.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-B",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changes the natural raw phrase 'Thesis-option applicants' to 'ECOR 9600 — Thesis-option applicants', an awkward course-code insertion into advice about program admission.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands the verification-boundary question into a long program summary, including curriculum route credits and transfer/prior-learning advice not needed for the international-admission discussion; finalization preserves it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-C",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization replaces the raw answer’s fluent 'a thesis-based option' with 'a ECOR 9600 — Thesis-based option', creating an awkward course-code insertion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answers refuse an employment guarantee appropriately but offer only 'View the program details', rather than a practical employment-focused next step.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-15-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let’s stop', the trace forces get_program_details through tool_choice and executes it, failing the frozen tools_empty expectation.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-A",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization replaced the raw answer's 'artificial intelligence and machine learning' with 'artificial intelligence and COMP 4983 — Machine Learning' inside a list of specialization areas. The frozen record names the option Artificial Intelligence and Machine Learning; COMP 4983 is a course within it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response says 'has the stored location' rather than naturally describing where the program is taught.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly refuses to guarantee employment but ends with a generic 'Program details' link rather than a practical employment-related next step; finalization preserves it unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-16-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit stop, the trace forces tool_choice=get_program_details and executes that retrieval; tools_used is nonempty and intent remains PROGRAM_INFO. The subsequent raw and final answer correctly say only 'Understood. I’ll stop here.'",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response says 'has the stored location', a mildly database-facing formulation rather than natural advising language. The trace contains resolution and a campus-information response with no model calls; no specific deterministic subcomponent can be identified.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands an international-admission verification question into curriculum totals and elective-pool rules, then adds acceptable electives to the confirmation advice. Finalization preserves this unnecessary expansion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly refuses an employment guarantee but ends with only 'Program details' and a general program URL, not a practical employment-related next step. Finalization preserves that omission.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-17-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation even though the final acknowledgment stops advising.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call response says 'has the stored location', an unnecessarily database-oriented formulation for a student asking where the program is taught.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-B",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly rejects automatic admission and explains declaration approval, but does not mention E2's first-qualified acceptance subject to remaining space, leaving the expected admission-versus-availability distinction slightly incomplete.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-B",
+    "turn": 3,
+    "root_cause": "unsupported_inference",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Under 'Verified', E1 calls Math 12 or MATH 0001 'the stated math requirement' in the admission record. E2 explicitly places that math guidance under 'Recommended for success', not mandatory entrance requirements. The correct source text was available in E97, and raw and final answers are identical.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly declines an immediate-job guarantee but ends with the repeated curriculum-review notice and generic 'Details' link, rather than a practical employment-related next step; finalization preserves this answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-18-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; response intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation even though the final acknowledgment appropriately stops advising.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-A",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite get_program_details selecting 5430CERT and accurate Certificate prose, returned state has program_id=null and scope=program_family rather than retaining the named credential.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-A",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "missing_next_step",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolver retains program_family with no program_id and sets program_set_query=true, forcing search_programs. Raw and final prose broaden singular 'it' to 'both the Certificate and Associate Certificate options'.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-A",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and returned state still use program_family with program_id=null, triggering a forced catalog search, while the model and unchanged final answer supply the exact 5430CERT source URL.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-B",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The model fetched get_program_details for 5430CERT and accurately named and described the Certificate, but returned conversation_state.program_id is null and scope is program_family.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-B",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "missing_next_step",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolver retains program_family with no program_id and forces search_programs for the admission follow-up. The final answer correctly denies automatic admission but appends two offerings and does not reconnect to the Certificate's established international restriction.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-B",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "unknown_or_human_boundary",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Persisted program_family state again forces catalog search. The raw and final answer then say international acceptance and review status cannot be verified from available data, undermining the earlier answer despite turn 1's explicit 5430CERT evidence of international exclusion and curriculum review. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/CAT-19-B__01.json"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-C",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolver leaves program_id null and candidates [5430ACERT, 5430CERT] despite the explicit Certificate credential. The final asks 'Civil Technology; Civil Technology?' rather than introducing 5430CERT.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-C",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolution trace again retains both credential candidates with program_id null, and the final repeats the identical clarification instead of addressing the employment-guarantee question.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-19-C",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'Never mind, let's stop,' the trace still reports scope ambiguous and the response repeats 'Which program do you mean: Civil Technology; Civil Technology?' rather than acknowledging and stopping.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-A",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response says the program 'has the stored location' rather than naturally stating where it is taught. The observed turn has no model call; this is a minor deterministic-output wording issue, not an academic error.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-B",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands the international verification question into delivery, duration, entrance requirements and curriculum totals, then repeats admission status, wait-list and space questions across the 'cannot verify' and 'confirm' lists. Finalization preserves that text.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw and final answers appropriately decline an employment guarantee but offer only 'View the program details' rather than a practical employment-focused next step; they repeat the prior apprenticeship-credit explanation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "CAT-20-C",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "tool_or_transport_failure",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Never mind, let's stop,' the trace forces tool_choice=get_program_details and executes that retrieval; response intent remains PROGRAM_INFO. This violates the frozen tools-empty expectation, although the final answer stops respectfully.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-01",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 supplies every core course and both pathway course lists, plus progression and admission details, for a general introductory question. This extra catalog detail appears in the raw model answer and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-01",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 expands a general Nursing introduction into all nine terms and fifteen specialty elective options. E2 retains this catalog dump; finalization merely capitalizes APRIL.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-02",
+    "turn": 1,
+    "root_cause": "retrieval_routing",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The broad Nursing-family question receives 13 BSNs and an unqualified all-BSN claim. The frozen active catalog also contains Critical Care Nursing Specialty 680XADCERT and Neonatal Nursing Specialty 680FASCERT, both Advanced Certificates with status Active. Retrieval supplies the narrow BSN set; model prose presents it without a coverage limitation. This materially excludes available credential options. Review assigns scope_mismatch instead of the evaluator's unknown_or_human_boundary label.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: programs 680XADCERT and 680FASCERT",
+      "transcripts/FLOW-02.json: turns 1 and 3"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-02",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "In response to 'I'm interested in the full-time Nursing BSN', the raw model answer provides all nine terms and the entire 15-course specialty pool before admission highlights. Finalization preserves this unsolicited curriculum dump.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-02",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The broad Nursing-family question receives 13 BSNs and an unqualified all-BSN claim. The frozen active catalog also contains Critical Care Nursing Specialty 680XADCERT and Neonatal Nursing Specialty 680FASCERT, both Advanced Certificates with status Active. Retrieval supplies the narrow BSN set; model prose presents it without a coverage limitation. This materially excludes available credential options. Review assigns scope_mismatch instead of the evaluator's unknown_or_human_boundary label.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: programs 680XADCERT and 680FASCERT",
+      "transcripts/FLOW-02.json: turns 1 and 3"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-03",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "or_and_elective_confusion",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators. The identical first-turn response recurs in FLOW-03. Its evaluator pattern missing_next_step is inconsistent with the evidence; this labeled review classifies it as OR/alternative corruption, without changing numeric scores.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+      "ai_advisor.py:1768"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-03",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The evaluator flagged CMGT8700 coursework, topic and sponsor requirements as unsupported because its scoped evidence packet omitted that course prerequisite record. The full frozen courses table CMGT8700 explicitly contains those requirements, and the production instructions also supply them. This is not a confirmed invented academic rule. The response still contains an unsolicited curriculum dump, supported by its repetition/naturalness scores of 2. Original numeric scores remain untouched; the source-coverage limitation is disclosed.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "critical_flag_rejected_by_task_agent",
+    "source_refs": [
+      "database_before.json: courses CMGT8700 prerequisite_text_clean",
+      "transcripts/FLOW-03.json: turn 2 response and model instructions",
+      "judgments/FLOW-03__01.json: turn 2"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-03",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response to 'Tell me about the Downtown Campus' supplies only its address, despite the campus result also providing a short description of its business-and-technology-core setting. The answer is accurate but offers little overview.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-04",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After correctly identifying the MSc, the raw model answer adds ten 'Related courses' to a simple identification question. Finalization preserves this unnecessary curriculum list.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-04",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer uses database-facing phrases such as 'stored entry routes' and 'stored English requirement', and loosely labels the seven first-year courses 'Year 1 and core Year 2 courses'. The retrieved curriculum places those courses in the first two terms.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 presents a long list of database credential labels, including overlapping Bachelor's Degree and Master's Degree variants, rather than a student-oriented overview with program examples. It also calls the BCIT catalog programs 'Asteris' offerings. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 correctly identifies the unique Combined Honours program but again says 'Asteris offers' while the retrieved catalog and linked institutional source are BCIT. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "source_or_evidence_gap",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changes the clean E3 admission answer into E4: 'CHEM 121 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141' and '3.0 credits of UBC-MATH-100 — UBC-MATH-102 — UBC-MATH-104 — Differential Calculus'. These inserted identifier chains obscure course alternatives and readability. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-05",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution E80 and get_program_details use 9940BSC, but returned conversation_state E57 still has program_id=null and scope=program_family rather than persisting the uniquely referenced program. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-06",
+    "turn": 1,
+    "root_cause": "retrieval_routing",
+    "pattern": "comparison_set_collapsed",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The call requesting get_program_details for 7710DIPMA returns E216, explicitly containing 8800BTECH. The final comparison consequently lacks diploma curriculum and admission information despite their presence in the frozen database. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-06",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer begin 'Yes' but immediately say that 'the other program—the Construction Management Diploma—is a diploma, not a degree.' This opening is awkward for the unresolved referent.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-06",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'I mean the diploma,' resolution E214 and final state E139 still identify 8800BTECH; E9 confirms the failed state check against 7710DIPMA. Even the explicit diploma-details call returns BTech data. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-06",
+    "turn": 4,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The zero-model-call turn resolves 'that one' to 8800BTECH and retains that ID in E139 despite the explicit diploma clarification on turn 3. The returned campus relationship corresponds to the BTech. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-07",
+    "turn": 1,
+    "root_cause": "clarification_logic",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Asking which credential is appropriate, but the choices are rendered as 'Civil Technology; Civil Technology?' without credential labels. The response is generated before any model call. This prevents a useful initial clarification.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "ai_advisor.py:2336",
+      "transcripts/FLOW-07.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-07",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The student specifies 'The associate certificate.' The state remains ambiguous and the advisor repeats identical program names instead of selecting 5430ACERT. No model call occurs.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-07.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-07",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Explicit 'Civil Technology certificate' still leaves ambiguous state and repeats the identical-label question instead of selecting 5430CERT. No model call occurs.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-07.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-07",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the explicit certificate correction, a campus follow-up again receives the unresolved identical-label question. This is a downstream continuation of the credential-resolution failure.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-07.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-08",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The retrieved pre-entry assessment condition explicitly says 'before application'; E5 lists the assessment but omits that sequence and directs the applicant generally to the program page.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-08",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Tool context still records diploma_completed=false despite the explicit completed-diploma statement. The final prose correctly acknowledges the diploma and treats eligibility as conditional.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-08",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Tool context correctly adds completed_courses=[LIBS7001] but continues to record diploma_completed=false after turn 2.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-08",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The turn-4 tool context still has diploma_completed=false, although E3 correctly references the completed Civil Engineering diploma and LIBS 7001.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-09",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit BTech credential, resolution returns candidates 7710DIPMA and 8800BTECH with program_id null. The response asks the student to choose between two identically named Construction Management options rather than answering.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-09",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The saved zero-model answer is 'Prerequisites: CMGT 8800; None; None; None; None (minimum grade: 2)'. The frozen CMGT8700 course record instead says completion of program courses with an exception for CMGT8800, and minimum two years related work experience, an industry topic and sponsor. The renderer turns an exception into a prerequisite, experience years into a grade, and drops non-course conditions.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-09.json: turn 2",
+      "database_before.json: courses CMGT8700",
+      "ai_advisor.py: course_prerequisites_answer"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-09",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and final state remain scoped to CMGT8700 with program_id null. Calls explicitly requesting CMGT8800 and CMGT8810 both return the CMGT8700 record. Nevertheless, the final prose correctly says department approval is required for both requested alternatives. Taxonomy-only review: original pattern student_fact_lost_or_not_corrected does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-09",
+    "turn": 4,
+    "root_cause": "retrieval_routing",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The campus question is resolved as course scope for CMGT8700 and the initial tool choice forces get_course_details. Only that course record is returned. The answer consequently cannot supply Burnaby, although frozen program_campuses, programs, and all program_offerings establish it. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-10",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E5 places CMGT 7330 under Construction Controls and Techniques, although both the frozen curriculum and retrieved E44/E76 place it under Organization Management. The raw model answer and final answer are identical. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-10",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The turn-4 tool context asserts completed_courses=[CMGT8800, CMGT8810], although the student only asks hypothetically, 'If I complete CMGT 8810'. Neither completion was reported. These context facts are not in the model's tool arguments.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-11",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The student only introduces their intended program, but E1 supplies the entire curriculum, including all 19 management electives, followed by all admission pathways. This catalog dump appears in the raw model answer and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-11",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After correctly answering the management-elective question, E3 adds the unrequested, data-centric aside, 'The available program data does not authorize external courses for the Liberal Studies requirement.' This wording is present in the raw answer and unchanged in finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-12",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 supplies the entire course inventory, including substitution options, alongside detailed admissions requirements for a general introductory question. This catalog-style expansion appears in the raw model answer and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-13",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "or_and_elective_confusion",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+      "ai_advisor.py:1768"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-13",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization changes the raw answer's 'at the 1100 level' to 'at THE 1100 level', introducing an unnecessary capitalization artifact into otherwise correct, direct advice.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer responds to a simple program identification with a lengthy curriculum list and stored requirements. Repeated 'Display course code not provided' placeholders remain in the final answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 2,
+    "root_cause": "retrieval_routing",
+    "pattern": "source_or_evidence_gap",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "On the resumed run, the CMGT 8700 experience question again drops program state to course scope. The model searches programs, then calls get_program_progression_requirements without the retained program and reports that the 2-year threshold cannot be verified. The frozen prerequisite_conditions for CMGT8700 explicitly publish 2 years. Deterministic state loss and restricted retrieval are implicated; no fabricated numeric result is emitted.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-14.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver and final state retain CMGT8700 but leave program_id null despite the established Construction Management program. The answer nevertheless correctly applies the retrieved two-year course threshold. Taxonomy-only review: original pattern list_dump_or_repetition does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-14__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-14",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The graduation question remains resolved as course scope with program_id null and intent COURSE_INFO. Forced initial retrieval targets CMGT8700; subsequent requests for CMGT8800 and CMGT8810 also return CMGT8700 data. Taxonomy-only review: original pattern list_dump_or_repetition does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-14__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-15",
+    "turn": 1,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer asks for the program but shifts from graduation to 'what courses you're eligible to take next' and omits completed coursework. The zero-model-call trace records scope 'none' and intent PROGRAM_PROGRESS; the exact deterministic subcomponent is not identifiable.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-15",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw answer E6 supplies an unsolicited eight-item program overview, including campus, delivery, focus and active status, before asking for completion details. Finalization preserves this structure.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-15",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 asks for 'the courses you told me you completed' although the student only said 'some courses.' This awkward wording originates in the raw model answer and is unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-15",
+    "turn": 4,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "E4 correctly explains that Levels 5–8 remain, but adds seven example courses and repeats Level 4 elective/co-op information that is not needed to resolve the graduation question; finalization only adjusts course-code formatting.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final E1 answer adds seven core courses and both Year 2 course lists to an admission-focused opening. Correct admission evidence was available; the unsolicited curriculum list distracts from establishing the applicant's background.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E8 calls the routes 'stored admission route[s]', exposing database-oriented wording in an otherwise attentive response; this wording appears in both raw and final output.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-16",
+    "turn": 4,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4/E5 provides eight questions, including post-secondary ICES evaluations, references, application rounds, and payment logistics, despite the corrected high-school-only background. These lower-priority application details and repeated requirements dilute the useful first three pathway-planning questions.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-17",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and get_program_details correctly use 9940BSC, and the prose answers its location accurately, but returned E11 keeps scope=program_family and program_id=null instead of persisting the selected program.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-17",
+    "turn": 3,
+    "root_cause": "retrieval_routing",
+    "pattern": "source_or_evidence_gap",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "On the resumed run, after unique Biochemistry discovery, the typo fragment admisson reqs? stays family-scoped and forces search_programs. It returns a program list and says category results lack admission requirements. The frozen ADMISSION records exist for 9940BSC, but the flow never retrieves them. This is a failure to answer with available evidence.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: academic_rule_sets 9940BSC",
+      "transcripts/FLOW-17.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-17",
+    "turn": 4,
+    "root_cause": "retrieval_routing",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E18 again routes the explicit graduation correction to a family search with forced search_programs. E2 repeats the category listing and says available Asteris data lacks graduation requirements, although turn 2 retrieved TOTAL_132_CREDITS and extensive curriculum evidence. The model's broad absence claim remains unchanged in finalization. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-17__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-18",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer E1, unchanged at finalization, supplies the complete course-by-course curriculum after already summarizing the first-year subjects and second-year paths. This is disproportionate to a general program introduction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-18",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4 answers with a dense 'Campus: ...; Possible site: ... The stored program listing says ...' string, without acknowledging the student's correction. The trace contains no model calls, supporting deterministic output attribution but not identification of a specific subcomponent.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-19",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization replaces the raw answer's 'data science' with 'COMP 9170 — Data Science' inside a list of application areas, making an otherwise smooth two-sentence overview awkward.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-19",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The campus response uses a compact label-and-address template followed by 'The stored program listing says', repeating the location rather than expressing it conversationally; the observed trace contains resolution only and no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-19",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer repeats turn 2 verbatim, including full addresses and 'The stored program listing says', instead of reformulating the primary-campus answer to 'Which campus would I actually go to?'; the trace shows resolution with no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-20",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly confirms international availability but adds a detailed admission list and Year 2 course paths to a simple availability question. Those course paths are not needed to answer this scope.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-20",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With international scope established, the answer spends substantial space on progression averages, Year 2 course paths, and maximum completion time, but omits the stored restriction that international applicants need a valid BCIT study permit to apply in the third round. E1 was present in the tool result.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-20",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer include the unrelated COMP 9190 source and the database-facing sentence 'All stored source URLs are available; none are missing' alongside the two relevant source links.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-21",
+    "turn": 1,
+    "root_cause": "retrieval_routing",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Resolution selects only M500MENG. Even the explicit get_program_details request for M600MSC returns E98, the Smart Grid record, leaving the comparison materially asymmetric. Separately, the model lists all four Term 3 subject options without the published 'Complete three courses (9.0 credits)' qualification, making the curriculum misleading.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-21",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "comparison_set_collapsed",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For 'Where are they taught?', resolver and returned state retain only M500MENG, and the unchanged raw/final answer names only Smart Grid. Applied Computing, explicitly compared in the preceding answer, is omitted. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-21__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-21",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "comparison_set_collapsed",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The comparative question 'Which one accepts international applicants?' again resolves solely to M500MENG and receives only Smart Grid's international-applicant information, omitting Applied Computing's affirmative eligibility. Taxonomy-only review: original pattern wrong_or_lost_subject does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-21__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-21",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After a simple request to focus on Computing, the raw model answer supplies a full Year 1 course list, both Year 2 course lists, progression threshold, and substitution details. Finalization leaves this unsolicited curriculum dump unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "comparison_set_collapsed",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "A substantive three-program raw answer was replaced with 'I could not complete that advising lookup' and error tool_round_limit_reached.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "comparison_set_collapsed",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and returned state select only M600MSC, program_set_query=false. Answer names all three but verifies only the MSc and says the other two cannot be verified, despite prior search results identifying their bachelor credentials.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 3,
+    "root_cause": "scope_confusion",
+    "pattern": "comparison_set_collapsed",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Zero model calls; resolution switches to campus_directory and clears program identity. Final answer lists five campus addresses rather than comparing the three programs' locations.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-22",
+    "turn": 4,
+    "root_cause": "entity_resolution",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Explicit 'Construction Management BTech alone' yields ambiguous candidates 7710DIPMA and 8800BTECH, null program_id, and the duplicate prompt 'Construction Management; Construction Management?' with no model calls. Taxonomy-only review: original pattern comparison_set_collapsed does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-22__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-23",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer lists all five programs, then repeats all five names in a separate program-link list; finalization preserves this duplication.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-23",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After identifying Applied Computing and giving a useful overview, the raw answer adds ten selected courses to the simple question 'Any of those in computing?' Finalization leaves the unsolicited course list intact.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-23",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Retrieved admission notes say alternate-entry bridging courses 'may be required before applying' and specified international credentials 'will require' comprehensive evaluation. The unchanged raw/final answer instead says bridging 'may be recommended' and qualifying international education 'may need' evaluation, weakening mandatory conditions. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-23__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-24",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 supplies a full course-by-course curriculum and substitution list in response to a simple expression of interest. This appears in the raw model answer and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-24",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After correctly refusing to invent a seat count, E5 repeats the Year 1 course list and Year 2 pathways already presented in E1, although the student asks only for an availability guess. The raw model answer contains this diversion and finalization preserves it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-24",
+    "turn": 4,
+    "root_cause": "unsupported_inference",
+    "pattern": "unverified_claim_or_guarantee",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4 says the program office/admissions team 'can confirm the exact number.' The evidence supports referring the student to the program area, but does not establish that an exact inventory will be provided. This wording is in the raw model output.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-25",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The final state E34 has program_id=null and scope=program_family despite unique_result_program_id=M600MSC and successful detail retrieval for M600MSC. The answer correctly names Applied Computing MSc.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-25",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolver E88 treats the already identified MSc as a program-family search and forces search_programs; returned E34 still has program_id=null. Prose identifies the correct degree and appropriately refuses equivalency approval.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-25",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and get_program_details correctly use M600MSC, and resolved_program is Applied Computing, but returned conversation state E34 again has program_id=null rather than the expected M600MSC.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-25",
+    "turn": 4,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver classifies the follow-up as program_family and forces search_programs. Raw and final E9 merely say 'The matching program is' and list the known MSc, rather than giving a credential-confirmation or application next step.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-26",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 gives the entire 18-course catalog, with codes and credits, plus admissions and clinical requirements in response to a general introduction. This appears in the raw model answer and is unchanged at finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-26",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After directly explaining international conditions, E13 repeats the admission checklist and clinical requirements already supplied in E1.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit BTech credential, resolution returns candidates 7710DIPMA and 8800BTECH with program_id null and scope ambiguous. With no model calls, the final asks the student to choose between two identically named Construction Management options.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution again retains the diploma/BTech candidate ambiguity rather than the BTech identified in the full history. The same duplicate-option clarification is emitted without model calls instead of answering whether a capstone is required for admission.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The third response repeats 'Which program do you mean: Construction Management; Construction Management?' Resolution still has program_id null and scope ambiguous, with no model calls, despite the established BTech and explicit switch to graduation.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-27",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver correctly identifies CMGT8700 but stores only course scope and course_id; final state still has program_id null rather than retaining 8800BTECH. The actual prose correctly answers about CMGT 8700 and does not name a wrong program. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-27__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 1,
+    "root_cause": "conversation_state",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution correctly starts with global course catalog scope and search_courses('biochemistry'), but the returned state E8 selects CHEM2305 and scope='course' without a student selection. The final prose correctly lists multiple courses.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'across BCIT, not within one program,' resolution retains CHEM2305 with global_catalog=false and forces get_course_details. Returned state remains course-specific. Prose partially recovers by listing all three previously identified courses, but adds a CHEM2305-only overview.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer copies the lengthy catalog overview verbatim rather than summarizing it conversationally. Finalization additionally changes 'the 1100 level' to 'THE 1100 level,' adding awkward capitalization without changing meaning.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-29",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "or_and_elective_confusion",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Answer is 'Prerequisites: ENGL 1177 (minimum grade: 50); None; None'. Frozen prerequisite group is OR: ENGL 1177 >=50 OR six credits of BCIT Communication at 1100+ OR three first-year postsecondary social science/humanities credits. Two valid entry routes and their relationship disappear. The response makes no model calls. course_prerequisites_answer formats prerequisite_course_id but not non-course conditions or group operators. The identical response is present at FLOW-29 turn 4.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "database_before.json: prerequisite_groups LIBS7001 and linked prerequisite_conditions",
+      "ai_advisor.py:1768"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-30",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For a general introduction, E1 enumerates every Year 1 course, both Year 2 course lists, a substitution, and detailed admission highlights. This catalog-like level of detail originates in the raw model answer and is unchanged at finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-30",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 joins two full addresses into a single line and runs the postal code directly into 'The stored program listing says', then repeats the campus information. The observed response has no model calls.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-30",
+    "turn": 4,
+    "root_cause": "scope_confusion",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Thanks, that's all', the turn is routed as PROGRAM_INFO with a forced get_program_details call. The raw model answer says 'You’re welcome!' but then repeats campus information and supplies a full-details link; finalization leaves it unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-31",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 already contains a near-complete curriculum listing across Levels 1–8 and all four co-op terms in response to a general program introduction. E1 preserves that catalog-style expansion.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-31",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "deterministic",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The saved finalization event transforms correct raw MATH 2423 - Introductory Statistics for Civil Engineering into MATH 2423 - Introductory CIVL 1020 - Statistics for Civil Engineering. The frozen courses table identifies MATH2423 and CIVL1020 as distinct records with distinct titles. This confirms the same course-title replacement defect beyond UBC courses.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "confirmed_by_task_agent",
+    "source_refs": [
+      "transcripts/FLOW-31.json: turn 2 finalization",
+      "database_before.json: courses MATH2423 and CIVL1020"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-31",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E7 retains detailed level-based elective counts and named capstone, Liberal Studies, and co-op courses despite the request for simpler wording. Finalization further replaces ordinary 'construction materials' with 'CIVL 2026 — Construction Materials' in E6.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-32",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After useful application timing and admission requirements, E1 adds the complete first-year course list, both second-year paths, substitutions, progression and immigration details. This unsolicited curriculum expansion is present in the raw model answer and unchanged at finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-32",
+    "turn": 4,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E10 correctly opens with Applied Computing — Master of Science, but then repeats seven first-year courses, both Year 2 paths and substitutions already supplied in E1, despite the simple question 'Which program were we discussing?' Raw and finalized answers are identical.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-33",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The raw and final answers place 'Plus 6 credits' under Term 7 and describe Term 8 as continuing 'as applicable.' Certified curriculum components specify a 3-credit specialty elective in each of Terms 7 and 8. The correct distribution was available in the tool result. Taxonomy-only review: original pattern source_or_evidence_gap does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-33__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-33",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "background_as_topic",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolver replaces M600MSC with 5410DIPLT when the student adds a civil engineering diploma as background. Retrieval then requests Civil Engineering Diploma details, and final state remains 5410DIPLT despite the unchanged Computing application target. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-33__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-33",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolution and returned state still identify 5410DIPLT, and campus_information returns the Civil Engineering relationship rather than M600MSC. No model call is observed on this turn. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review",
+      "structural_assertion"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-33__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-34",
+    "turn": 1,
+    "root_cause": "clarification_logic",
+    "pattern": "credential_ambiguity",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The resolution trace correctly retains candidates 7710DIPMA and 8800BTECH with ambiguous scope, but the fallback asks 'Construction Management; Construction Management?' without credential labels. The necessary clarification offers no distinguishable choices. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-34__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-34",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After 'The BTech, please,' resolution still lists both candidates and program_id remains null instead of 8800BTECH. The fallback repeats the identical ambiguous question rather than accepting the credential selection.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-34",
+    "turn": 3,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The explicit correction 'the diploma, not the degree' does not change the resolver's two-candidate ambiguous state: program_id stays null rather than 7710DIPMA. The same clarification is returned again.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-34",
+    "turn": 4,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the preceding diploma selection, the credential question receives the identical two-name clarification. The trace remains ambiguous and program_id is null instead of 7710DIPMA; the frozen catalog identifies that program's credential as Diploma.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-35",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "source_or_evidence_gap",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer correctly identifies all 12 part-time Specialty Nursing programs, but then says the available data 'does not independently verify this approval requirement.' Turn 1's comparison evidence explicitly supplied 'International students must receive program head approval before applying.' Finalization leaves this qualification unchanged. Taxonomy-only review: original pattern awkward_or_impersonal does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-35__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-36",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw and final answer enumerate every core course, both pathway course lists, and the substitution before a lengthy admission and other-details overview. This is disproportionate to the broad introductory request.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-36",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After directly explaining the two pathways, the answer repeats the directed-studies substitution and all three replaceable course names from turn 1, although that substitution is not a Year 2 pathway.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-36",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response repeats all seven Year 1 core courses and the directed-studies substitution when the student asks whether the pathway courses are optional. Correct pathway evidence was available, and the repeated material originates in the unchanged raw model answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-36",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The model uses abstract 'A or B' examples and ends with 'The program details should therefore distinguish...' rather than applying the distinction directly to the thesis versus project-and-internship requirement already established in conversation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-37",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 already lists all nine terms and the 15-course specialty pool in response to a simple expression of interest; finalization preserves this unsolicited catalog dump.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-37",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After directly declining an exact probability, E9 repeats the admission-minimum list and intake dates already supplied in turn 1, although the question only asks for an exact percentage.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-37",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4 appropriately rejects the 'average applicant' premise as insufficient for exact odds, but then repeats the same six-item minimum-requirement list for the third consecutive answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-37",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E16 refers to education 'outside the specified countries' without specifying those countries, and uses third-person 'Asteris' and 'stored data' within otherwise useful planning guidance.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-38",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E9 correctly highlights Applied Computing but adds four unrelated master's programs under 'Other master’s programs in the catalog'; this expansion appears in the raw model answer unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-38",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After the student's simple confirmation, E7 supplies a full Year 1 course list, both Year 2 pathways, substitutions, admission thresholds, and intake dates. The raw model response and final answer are identical.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-39",
+    "turn": 1,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E2 and final E1 say the pathway continues into Levels 3 and 4 for Bachelor of Engineering students, after listing only Levels 1–2 as Diploma-level courses. Frozen program_courses and the retrieved level results assign Levels 3–4, including the Level 4 elective choice, to Diploma 5410DIPLT. The error already occurs in the raw model answer; finalization only changes course-code formatting. Taxonomy-only review: original pattern credential_ambiguity does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-39__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-39",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer correctly opens with 'No' and denies decision authority, but then repeats the Diploma application route and program link for a simple question about the assistant's authority.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-39",
+    "turn": 4,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 repeats three application-route and credential-award bullets already covered in earlier answers, although the user asks about institutional confirmation of unpublished requirements. Raw and final answers are identical.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-40",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For a general introduction, E1 lists every core course, the directed-studies substitution, and all pathway courses with credits, in addition to program and admission details. This catalog-level expansion appears in the raw model response and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-41",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer expands 'The smart grid one interests me' into a complete four-term curriculum list plus admissions and intake details. Finalization preserves that answer unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-41",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The campus response says 'has the stored location: Burnaby Campus,' exposing database-oriented wording rather than conversational advising language. The trace shows a deterministic campus answer with no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-42",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The raw and final answer label Level 2 courses 'Year 2 / Level 2'. E18 explicitly places both taught terms in the first year, with the thesis or project/internship in the second year. The correct evidence was returned by get_program_details.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-42",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "unnecessary_clarification",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit 'Construction Management BTech', resolution returns candidates 7710DIPMA and 8800BTECH with program_id null. With no model calls, the final response asks 'Which program do you mean: Construction Management; Construction Management?'",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-42",
+    "turn": 3,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For a general program overview, the raw answer lists every course in Terms 1–4, many courses in Terms 5–9, and seven specialty course options. This catalog-style expansion dominates the overview and persists in the final answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-42",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "No history messages were omitted, and the first program was Applied Computing MSc. Nevertheless, resolution retains 8875BSN, the tool retrieves Nursing, and the raw answer says 'You’re back at the ... Bachelor of Science in Nursing program.' Finalization preserves that wrong subject.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-43",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 responds to an initial expression of interest with all twelve course listings, credits, substitution details, admission routes and immigration information. This unrequested catalog-style detail is already present in the raw model answer and is unchanged by finalization.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-43",
+    "turn": 4,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E5 compresses both addresses into a single run-on line, then repeats the location summary as 'The stored program listing says'. The observed turn uses campus_information with no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-44",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 expands a general introductory request into the entire core and pathway course list, substitution list, and detailed admission and immigration information. The raw model answer and final answer are identical.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-44",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E6 explains why high-school grades do not establish the undergraduate admission average, but does not explicitly reconnect 'it' to the program-course progression average identified in turn 2. E88 supplied that continuation evidence. Taxonomy-only review: original pattern missing_next_step does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-44__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-44",
+    "turn": 4,
+    "root_cause": "unsupported_inference",
+    "pattern": "unverified_claim_or_guarantee",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4, retained in E5, calls the student's hypothetical 'If I have 70% in high school' a 'previously stated 70% overall high-school average.' Neither actual possession nor an overall-average interpretation was established.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The student only identifies their program, but E4 adds a six-component curriculum list with numerous course codes. This unsolicited catalog-style detail appears unchanged in the raw model answer and final answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "or_and_elective_confusion",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E2 leads with 'The remaining final-project alternative is CMGT 8810' and reiterates that it remains after CMGT 8800 completion. The tool supplies the 'Choose one final project' OR group, yet the unchanged raw/final answer never explains that the requirement is already satisfied and 8810 is not additionally required.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 3,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite the explicit withdrawal of completion, turn 3 tool context still contains completed_courses: [{course_id: 'CMGT8800'}]. E3 correctly acknowledges 'have not completed it' and says one project must still be completed.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-45",
+    "turn": 4,
+    "root_cause": "conversation_state",
+    "pattern": "student_fact_lost_or_not_corrected",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Turn 4 tool context again lists CMGT8800 as completed despite turn 3's correction. The model nevertheless accurately says 'you have not completed CMGT 8800' and refuses to mark the requirement complete.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-46",
+    "turn": 1,
+    "root_cause": "entity_resolution",
+    "pattern": "comparison_set_collapsed",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Resolution and returned state select only 5430ACERT with empty candidates despite a two-credential comparison. A get_program_details call for 5430CERT also returns 5430ACERT (E265). The prose nevertheless labels both credentials and honestly withholds unavailable Certificate requirements.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-46",
+    "turn": 2,
+    "root_cause": "entity_resolution",
+    "pattern": "comparison_set_collapsed",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E191 again retains only 5430ACERT. Raw answer E4 opens 'No' and answers solely for the Associate Certificate without clarifying 'it' or covering the Certificate. Finalization adds a valid international-students link but does not repair the ambiguity.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-47",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer, unchanged by finalization, expands a general introduction into a full course-and-credit list, substitutions, detailed admission routes, and immigration information. This is an unrequested catalog-style dump.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-47",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The response supplies address-heavy fragments followed by 'The stored program listing says' and repeats the campus distinction, rather than giving a smooth single sentence acknowledging the request for less information. The trace contains no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-47",
+    "turn": 4,
+    "root_cause": "retrieval_routing",
+    "pattern": "stop_or_frustration_mishandled",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Stop.', the response remains classified PROGRAM_INFO and invokes get_program_details before acknowledging 'Stopped.' The trace explicitly forces that function through tool_choice, and the tools_empty assertion fails.",
+    "basis": [
+      "rubric",
+      "structural_assertion"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-48",
+    "turn": 1,
+    "root_cause": "clarification_logic",
+    "pattern": "missing_next_step",
+    "layer": "unresolved",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The advisor appropriately asks which program, but does not also request relevant completed courses, as the frozen expectation specifies. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/FLOW-48__01.json"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-48",
+    "turn": 2,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The student supplies the program in response to a next-course planning question. The trace labels this PROGRAM_INFO and forces get_program_details; the unchanged raw/final model answer supplies a full curriculum and admission overview rather than asking about completions or advancing progression planning.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "FLOW-48",
+    "turn": 3,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The unchanged model/final answer acknowledges 'completed no courses' but stops at bookkeeping and a program link, leaving the original 'What should I take next?' request without guidance.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw model answer acknowledges the subject but then supplies the full course inventory, credits, pathways, substitution and progression requirements without a request for that detail; finalization preserves it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'Give me a short overview,' E1 repeats the seven Year 1 courses, all Year 2 options and the substitution already given in turn 1. This appears in the raw model answer unchanged.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 7,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4 gives a useful admissions checklist but also repeats Year 2 course names and progression details from the earlier program overviews.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 9,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "The raw answer begins 'Meeting the entrance requirements does not guarantee admission' rather than explicitly distinguishing international availability from admission, then repeats documents, permits and intake dates.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 11,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E18 shortens the prior answer but still repeats seven separate confirmation bullets, including ICES and IRCC terminology, after the user asks for simpler wording.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 12,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The no-model campus response joins both addresses into one line and follows the postal code immediately with 'The stored program listing says,' repeating the location in database-oriented wording.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 15,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After correctly naming Applied Computing MSc, E22 repeats credential, mode, delivery, location, school and link even though the user only asks which program is being discussed.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 18,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E5 again uses a run-on campus/address string followed by 'The stored program listing says.' The observed trace has resolution and no model call.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The first program in the full conversation is Applied Computing MSc, but resolution and state remain 8800BTECH. With 30 history messages omitted, the model asserts 'You’re referring to Construction Management — Bachelor of Technology' rather than recovering the earlier subject or acknowledging uncertainty. Taxonomy-only review: original pattern wrong_academic_rule_or_arithmetic does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-01__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-01",
+    "turn": 22,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The explicit reminder correctly restores M600MSC, but the no-model final answer is again E5's run-on addresses and database-oriented 'stored program listing' phrasing.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 7,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E3 says an applicable credential from outside the five named countries 'may need' an evaluation. Condition 18, also present in the retrieved E74, requires an accepted comprehensive evaluation for those specified credentials. The raw model answer weakens that requirement and finalization preserves it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 8,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E7 again says applicable credentials outside the five specified countries 'may need' evaluation, although retrieved condition 18 requires it. This wording originates in the raw model answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 15,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E23 answers the program identity correctly in its opening, then repeats credential, study mode, campus, delivery, school, and the course-completion acknowledgement. The same unnecessary recap appears in the raw model output.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 19,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For 'Now switch to Applied Computing MSc,' E25 supplies a full course-and-credit inventory, second-year paths, substitution details, and an unsolicited LIBS-credit discussion. This expansion is already present in the raw model answer.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 20,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E5/E6 says 'A pre-entry assessment and possible bridging courses may be required' for alternate entry. Retrieved E2 explicitly requires the completed pre-entry assessment; only bridging is conditional. It also weakens the specified international comprehensive-evaluation requirement to 'may be required.' Finalization only appends the Admissions link.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-02",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The first program in the full conversation is Construction Management, but resolution remains M600MSC with 30 history messages omitted. The model retrieves that program and says 'Returning to Applied Computing – Master of Science,' then repeats its curriculum instead of restoring the original subject or acknowledging uncertainty.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 already contains an extensive nine-term curriculum, elective pool and admissions checklist in response to a request simply to keep Nursing as the subject. Finalization preserves that excessive scope. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 8,
+    "root_cause": "response_generation_quality",
+    "pattern": "source_or_evidence_gap",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E14 correctly states international exclusion but labels the Nursing program URL as a place to review 'available programs'; it does not supply the available-programs destination. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 9,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E16 answers the guarantee question using minimum entrance requirements rather than explicitly connecting 'that' to the immediately preceding international-applicant exclusion. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 11,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E23 partly simplifies the human-confirmation answer but adds entrance and international-status recap, and groups mandatory influenza/CPR items with conditional fit testing under 'may also need'. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 15,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E34 correctly names Nursing but follows a simple topic-identification question with seven previously supplied program facts and a link. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E36 follows a simple program-switch request with a full core-course list, both Year 2 paths, LIBS applicability commentary and intake details. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-03",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "With 30 history messages omitted, resolution and tool context remain M600MSC. E31 then asserts 'The first program you mentioned was Applied Computing' although turn 1 named Nursing, and supplies an MSc curriculum dump rather than returning to Nursing or acknowledging uncertainty. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-03__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E26 adds 13 course examples and a lengthy overview to a request simply to keep the named subject; finalization only changes course-code spacing.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 7,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 describes ACCEPTED_AVAILABLE as 'available for international eligibility review' and repeatedly uses database-oriented phrasing such as 'stored minimum requirements'.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 8,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E6 repeats the entire eight-item admissions list immediately after E3 instead of focusing on the international follow-up.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 9,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization appends a second 'For more information' Admissions link to E14, which already ends with an application-information link.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 14,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "E21 ends with generic 'Please confirm that with the institution' rather than a more specific advising or transfer-credit route.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 15,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E27 correctly names the program but then repeats credential, mode, campus, delivery and diploma-pathway facts for a simple subject-identification question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 20,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E7 nests the Mandatory Applicant Questionnaire only under alternate entry, although rule group 78 requires it for both routes. It also weakens the specified international credential-evaluation requirement to 'may require' without naming the country exceptions. Taxonomy-only review: original pattern unverified_claim_or_guarantee does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-04__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-04",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With 30 history messages omitted, resolution retains M600MSC and forces its details tool. E16 confidently says 'Returning to the Applied Computing Master of Science' instead of the original Civil Engineering program or acknowledging uncertainty.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-05",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw E4 already includes ten Level 4 course listings in response to a request merely to keep Civil Engineering Diploma as the subject; finalization only formats course codes. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-05",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E27 answers a simple topic switch with Year 2 course names, substitution mappings, continuation rules and completion limits; this content is already present in raw model output. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-05",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "After 30 history messages are omitted, resolver E85 retains M600MSC for 'the first program I mentioned today'; raw/final E26 confidently says 'You’re back at the Applied Computing Master of Science' rather than restoring Civil Engineering Diploma or acknowledging uncertainty. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-05__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Finalization changes the clean CHEM 123 label in E11 into 'CHEM 123 — UBC-CHEM-123 — UBC-CHEM-111 — UBC-CHEM-121 — UBC-CHEM-141 — Principles of Chemistry 2' in E12, conflating distinct courses. The model already supplied an unsolicited multi-year curriculum dump. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 7,
+    "root_cause": "formatting_repetition",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E2 has clean chemistry alternatives and '3.0 credits of differential calculus'; final E3 inserts chains of internal chemistry and calculus IDs into those phrases. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 10,
+    "root_cause": "formatting_repetition",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Finalization replaces E24's ordinary 'differential calculus' with 'UBC-MATH-100 — UBC-MATH-102 — UBC-MATH-104 — Differential Calculus' in E23. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "For 'Now switch to Applied Computing MSc,' raw and final E30 supply a full core-course and pathway catalogue rather than a proportionate acknowledgment or short introduction. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-06",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "Despite the first program being Combined Honours in Biochemistry and Forensic Science, resolver E286 retains M600MSC and the model says 'We’re back to the Applied Computing Master of Science.' Thirty history messages are omitted; the model confidently repeats the MSc catalogue instead of acknowledging uncertainty. Taxonomy-only review: original pattern unknown_or_human_boundary does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-06__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw E2 repeatedly says display codes are unavailable; finalization E1 inserts course codes while leaving those disclaimers, and replaces the concept 'design for disassembly' with a course label mid-sentence.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 4,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E28 answers the location correctly but repeats all three courses in response to 'Where would I study?' The same list appeared in the previous overview.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 6,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E13 correctly says 'part-time' but again supplies the full three-course list for a simple study-mode question.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 7,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E4 repeats the three-course list and delivery facts already supplied several times, though its main admission advice is correct.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 8,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E7 repeats background recommendations and delivery facts from E4, rather than keeping the follow-up focused on international availability.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 9,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E16 repeats the full recommended-background wording from the preceding answers, although the guarantee question only requires the availability/registration distinction.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 10,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After identifying appropriate human-confirmation boundaries, E23 appends the familiar three-course list, unrelated to which details need confirmation.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 11,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Asked to simplify E23's human-confirmation answer, E11 instead recaps admission, mode, and all three courses with credits before returning to verification.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 12,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The no-model campus response says 'has the stored location' rather than directly telling the student where they study.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 14,
+    "root_cause": "unsupported_inference",
+    "pattern": "unverified_claim_or_guarantee",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "medium",
+    "evidence": "E18 moves from 'LIBS 7001 is not listed' to 'does not appear to count' without transfer-credit or substitution evidence.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 15,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E27 correctly names the active program but adds five program fields and the entire three-course list to 'Which program are we discussing?'",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 16,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E15 appropriately declines an employment guarantee but inserts all three required courses again.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 18,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The no-model response uses the database-facing phrase 'has the stored location'.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 19,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E21 turns a topic-switch instruction into a substantial profile and pathway-course listing, retained in E20.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 20,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E8 places the Mandatory Applicant Questionnaire only under 'Alternate entry', although rule group 78 and E5 require it for both routes. It also says specified international credentials 'may need' ICES where E5 says the specified group will require it.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "With 30 history messages omitted, resolution retains M600MSC; E26 confidently says 'We’re back to Applied Computing' although the first program was Applied Circular Economy: Zero Waste Buildings. Taxonomy-only review: original pattern student_fact_lost_or_not_corrected does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-07__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-07",
+    "turn": 22,
+    "root_cause": "response_generation_quality",
+    "pattern": "awkward_or_impersonal",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The deterministic campus answer again uses 'has the stored location'.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After acknowledging the requested subject, raw and final E26 add the entire elective pool, completion rules, and admissions checklist although the student only asked to keep Accounting as the subject. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-08__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 10,
+    "root_cause": "unsupported_inference",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E10 says to confirm 'Whether the signed departmental assessment is required in your case'; retrieved E236 includes condition 489 explicitly stating that the signed assessment and any assigned bridging/upgrading are required. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-08__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E30 correctly acknowledges the switch but then lists every Year 1 course, both Year 2 paths, and substitutions despite the user only requesting a topic switch. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-08__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-08",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "With 30 history messages omitted, resolution remains M600MSC and the forced details call retrieves that program. Raw and final E9 repeat Applied Computing admissions instead of returning to Accounting or acknowledging uncertainty and asking which program. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-08__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 1,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Raw and final E15 append the entire curriculum to a request simply to retain Electronics as the subject. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 11,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E19 retains nine confirmation bullets and a four-course sublist after the student requests a simpler version of E11. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 19,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After correctly switching to M600MSC, raw/final E29 supplies the entire course list and a LIBS applicability discussion for a simple topic-switch request. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 20,
+    "root_cause": "response_generation_quality",
+    "pattern": "wrong_academic_rule_or_arithmetic",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E9/E10 says 'A pre-entry assessment and possible bridging courses may be required' for alternate entry. Retrieved E5 explicitly requires a completed Pre-entry Assessment form; only bridging courses are conditional. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-09",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The first program was Electronics, but resolution E206 and persistent E75 remain M600MSC. E1 confidently gives an Applied Computing catalog/admission dump rather than returning to Electronics or acknowledging uncertainty; 30 history messages were omitted. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-09__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The raw answer acknowledges the subject but adds a full course list, admissions, and international rules to a request only to retain the topic. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 2,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'short overview,' E1 repeats the entire six-course list already supplied in turn 1. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 7,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E3 includes the full six-course catalog again inside a pre-application answer. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 10,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E5 repeats the complete course list under completion verification and discusses the work component twice. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 11,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Asked to simplify, E8 retains eight categories and again enumerates all six courses instead of compressing the prior answer into a few key confirmation tasks. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 14,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "A simple reported completion triggers another complete six-course list and graduation explanation in E15. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 15,
+    "root_cause": "formatting_repetition",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E25 correctly names the program, then repeats six overview fields when only the active program's identity was requested. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The requested topic switch receives a long overview with course pathways, international policy, application timing, and unsolicited LIBS transfer discussion. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 20,
+    "root_cause": "response_generation_quality",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E7 lists all three application rounds and says international applicants need a permit before starting, but omits E2's explicit requirement to hold a valid BCIT study permit to apply in the third round. This omission is already in raw E6 despite E2 being retrieved. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-10",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "After 30 history messages are omitted, resolution/state remain M600MSC. Raw and final E21 assert 'Returning to the Master of Science in Applied Computing,' although the first program in the full conversation was Business Administration Graduate Certificate. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-10__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E16 acknowledges the subject but then supplies a full curriculum, admissions and international restrictions without being asked; raw and final answers match. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-11__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 15,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E30 correctly names the program but follows with repeated credential, school, delivery, overview and five course examples for a simple topic-identification question. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-11__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 20,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E9/E10 nests the Mandatory Applicant Questionnaire under alternate entry and calls its references 'alternate-entry' requirements. Frozen group 78 and tool E80 place questionnaire and references outside the OR entry routes as common requirements. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-11__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-11",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "With 30 history messages omitted, resolution retains M600MSC; E34 confidently says 'We’re returning to Applied Computing' rather than returning to nursing or admitting uncertainty. Finalization preserves this false referent. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-11__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 1,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E15 acknowledges the requested subject but then supplies a full curriculum and entrance-requirements dump; raw and final answers are identical. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 7,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E1 gives useful admission and clinical requirements, then repeats all neonatal, elective, core/management and Liberal Studies course names already supplied in turn 1. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 16,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "After appropriately declining a job guarantee, E17 adds online delivery and a list of two clinical courses unrelated to the guarantee question. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 19,
+    "root_cause": "response_generation_quality",
+    "pattern": "list_dump_or_repetition",
+    "layer": "model_language",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "E32 correctly switches programs but adds all first-year courses, path courses and unsolicited LIBS 7001 applicability commentary to a simple switch request. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 20,
+    "root_cause": "scope_confusion",
+    "pattern": "scope_mismatch",
+    "layer": "model_language",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "E9/E10 place the Mandatory Applicant Questionnaire and its two references under 'Alternate-entry applicants'. Retrieved group 78 places questionnaire and references outside the OR entry-route group, applying to all applicants. The answer also calls alternate-entry pre-entry assessment something that 'may be required', while E4 requires the completed assessment. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  },
+  {
+    "scenario_id": "LONG-12",
+    "turn": 21,
+    "root_cause": "conversation_state",
+    "pattern": "wrong_or_lost_subject",
+    "layer": "mixed",
+    "severity": "critical",
+    "confidence": "high",
+    "evidence": "The first program was neonatal nursing, but resolution and retrieval remain M600MSC after 30 omitted history messages. E29 confidently says 'We’re back to Applied Computing, Master of Science' and repeats its curriculum instead of restoring nursing or acknowledging a memory limit. Taxonomy-only review: original pattern unnecessary_clarification does not describe this evidence; numeric scores, severity and layer remain evaluator judgments.",
+    "basis": [
+      "rubric",
+      "task_agent_evidence_review"
+    ],
+    "review_status": "taxonomy_review_only",
+    "source_refs": [
+      "judgments/LONG-12__01.json"
+    ]
+  }
+]

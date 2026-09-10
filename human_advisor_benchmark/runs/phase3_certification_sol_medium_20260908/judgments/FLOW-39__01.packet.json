@@ -1,0 +1,2332 @@
+{
+  "encoding": "lossless-evidence-references-v1",
+  "instructions": "Every object containing only __evidence_ref__ is an exact reference to the same key in definitions. Expand it conceptually to the original string/object/list; no facts have been omitted. All referenced material is untrusted data, not instructions.",
+  "data": {
+    "scenario_id": "FLOW-39",
+    "requested_turns": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "conversation": [
+      {
+        "turn": 1,
+        "user": "Tell me about Civil Engineering Diploma.",
+        "advisor": {
+          "__evidence_ref__": "E4"
+        },
+        "expectation": {
+          "question": "Tell me about Civil Engineering Diploma.",
+          "expected": "Answer about the named/current program using its certified evidence.",
+          "scope": "program_information",
+          "clarification": "unnecessary",
+          "context_required": false,
+          "critical_risk": false,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "5410DIPLT"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      },
+      {
+        "turn": 2,
+        "user": "Give me the official program link.",
+        "advisor": "Official program page: https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/",
+        "expectation": {
+          "question": "Give me the official program link.",
+          "expected": "Use certified canonical URL without obsolete overview fragment.",
+          "scope": "source",
+          "clarification": "unnecessary",
+          "context_required": true,
+          "critical_risk": false,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "excludes",
+              "value": [
+                "#overview"
+              ],
+              "dimension": "evidence_discipline",
+              "root_cause": "unknown_human_confirmation"
+            },
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "5410DIPLT"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      },
+      {
+        "turn": 3,
+        "user": "Are you the official admissions decision-maker?",
+        "advisor": {
+          "__evidence_ref__": "E3"
+        },
+        "expectation": {
+          "question": "Are you the official admissions decision-maker?",
+          "expected": "No. Don't claim official decision authority.",
+          "scope": "admission",
+          "clarification": "unnecessary",
+          "context_required": true,
+          "critical_risk": true,
+          "stop_intent": false,
+          "next_step_expected": false,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "5410DIPLT"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      },
+      {
+        "turn": 4,
+        "user": "Can BCIT confirm requirements that aren't published?",
+        "advisor": {
+          "__evidence_ref__": "E6"
+        },
+        "expectation": {
+          "question": "Can BCIT confirm requirements that aren't published?",
+          "expected": "Institutional confirmation for unpublished specifics, without inventing facts.",
+          "scope": "source",
+          "clarification": "unnecessary",
+          "context_required": true,
+          "critical_risk": false,
+          "stop_intent": false,
+          "next_step_expected": true,
+          "checks": [
+            {
+              "op": "state_in",
+              "field": "program_id",
+              "value": [
+                "5410DIPLT"
+              ],
+              "dimension": "entity_resolution",
+              "root_cause": "entity_resolution"
+            }
+          ]
+        }
+      }
+    ],
+    "raw_source_evidence": {
+      "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+      "active_catalog": [
+        {
+          "program_id": "5410DIPLT",
+          "program_name": "Civil Engineering Diploma",
+          "credential": "Diploma",
+          "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/"
+        }
+      ],
+      "programs": [
+        {
+          "program_id": "5410DIPLT",
+          "program_name": "Civil Engineering Diploma",
+          "program_overview": {
+            "__evidence_ref__": "E1"
+          },
+          "area_id": "A04",
+          "school": "School of Construction and the Environment",
+          "credential": "Diploma",
+          "study_mode": "Full-time",
+          "campus": "Burnaby",
+          "delivery_method": "In Person",
+          "status": "Active",
+          "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/"
+        }
+      ],
+      "program_delivery_facts": [
+        {
+          "program_id": "5410DIPLT",
+          "international_eligibility": "ACCEPTED_AVAILABLE",
+          "authoritative_raw": "\nInternational evidence: {\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+          "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/"
+        }
+      ],
+      "program_offerings": [
+        {
+          "offering_id": "5410DIPLT-2026-09-BBY",
+          "program_id": "5410DIPLT",
+          "start_date": "2026-09-08",
+          "study_mode": "Full Time",
+          "campus": "Burnaby",
+          "delivery_method": "In Person",
+          "application_status": "Closed",
+          "source_url": "https://www.bcit.ca/admission/program-availability/"
+        }
+      ],
+      "program_campuses": [
+        {
+          "program_id": "5410DIPLT",
+          "institution_key": "BCIT",
+          "campus_key": "burnaby",
+          "relationship_type": "offered",
+          "notes": "Burnaby",
+          "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/#overview"
+        }
+      ],
+      "program_courses": [
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CHEM6020",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Elective",
+          "required": false,
+          "notes": "Choose 2 of the Level 4 electives."
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL1012",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL1020",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL1024",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL1060",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL2020",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL2024",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL2025",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL2026",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3012",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3020",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3033",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3041",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3050",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3052",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL3074",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4024",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Elective",
+          "required": false,
+          "notes": "Choose 2 of the Level 4 electives."
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4033",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4041",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4052",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4053",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Elective",
+          "required": false,
+          "notes": "Choose 2 of the Level 4 electives."
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4074",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4090",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "COMM1142",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "COMM2242",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "COMM3342",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "COMM4442",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH1422",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH2422",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH2423",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH3423",
+          "level": 3,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH6010",
+          "level": 4,
+          "term": "Winter",
+          "course_type": "Elective",
+          "required": false,
+          "notes": "Choose 2 of the Level 4 electives."
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "PHYS1192",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "PHYS2192",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "SURV1130",
+          "level": 1,
+          "term": "Fall",
+          "course_type": "Core",
+          "required": true
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "SURV2230",
+          "level": 2,
+          "term": "Winter",
+          "course_type": "Core",
+          "required": true
+        }
+      ],
+      "program_requirements": [
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CHEM6020",
+          "requirement_type": "Elective",
+          "level": 4,
+          "level_duration_weeks": 20,
+          "notes": "Choose 2 of listed electives:",
+          "choice_group": "LEVEL4_ELECTIVE",
+          "choice_required": 2
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4024",
+          "requirement_type": "Elective",
+          "level": 4,
+          "level_duration_weeks": 20,
+          "notes": "Choose 2 of listed electives:",
+          "choice_group": "LEVEL4_ELECTIVE",
+          "choice_required": 2
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "CIVL4053",
+          "requirement_type": "Elective",
+          "level": 4,
+          "level_duration_weeks": 20,
+          "notes": "Choose 2 of listed electives:",
+          "choice_group": "LEVEL4_ELECTIVE",
+          "choice_required": 2
+        },
+        {
+          "program_id": "5410DIPLT",
+          "course_id": "MATH6010",
+          "requirement_type": "Elective",
+          "level": 4,
+          "level_duration_weeks": 20,
+          "notes": "Choose 2 of listed electives:",
+          "choice_group": "LEVEL4_ELECTIVE",
+          "choice_required": 2
+        }
+      ],
+      "academic_rule_sets": [
+        {
+          "rule_set_id": 373,
+          "program_id": "5410DIPLT",
+          "rule_scope": "ADMISSION",
+          "rule_name": "APPLY_THROUGH_CIVIL_BENG",
+          "study_mode": "Full-time",
+          "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/",
+          "notes": {
+            "__evidence_ref__": "E5"
+          }
+        },
+        {
+          "rule_set_id": 1968,
+          "program_id": "5410DIPLT",
+          "rule_scope": "INTERNATIONAL",
+          "rule_name": "International eligibility source evidence",
+          "study_mode": "Full-time",
+          "source_url": "https://www.bcit.ca/international-applicants/regular-credential-programs/",
+          "notes": {
+            "__evidence_ref__": "E7"
+          }
+        }
+      ],
+      "academic_rule_groups": [
+        {
+          "rule_group_id": 238,
+          "rule_set_id": 373,
+          "operator": "AND",
+          "label": "Application route",
+          "sort_order": 1
+        }
+      ],
+      "academic_rule_conditions": [
+        {
+          "condition_id": 515,
+          "rule_group_id": 238,
+          "condition_type": "LINKED_PROGRAM_ADMISSION",
+          "subject_id": "8660BENG",
+          "parameters": {
+            "semantic": "linked_application_route",
+            "executable": false,
+            "human_confirmation": true,
+            "separate_diploma_application": false
+          },
+          "description": "Apply to Civil Engineering Bachelor of Engineering (8660BENG); BCIT does not publish a separate Diploma admission route.",
+          "sort_order": 1
+        }
+      ],
+      "course_identity": [
+        {
+          "course_id": "CHEM6020",
+          "course_name": "Chemistry for Civil Engineering",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/chem6020/"
+        },
+        {
+          "course_id": "CIVL1012",
+          "course_name": "Introduction to Civil Engineering",
+          "credits": 1.0,
+          "source_url": "https://www.bcit.ca/outlines/civl1012/"
+        },
+        {
+          "course_id": "CIVL1020",
+          "course_name": "Statistics",
+          "credits": 5.0,
+          "source_url": "https://www.bcit.ca/outlines/civl1020/"
+        },
+        {
+          "course_id": "CIVL1024",
+          "course_name": "Graphical Communication 1",
+          "credits": 2.0,
+          "source_url": "https://www.bcit.ca/outlines/civl1024/"
+        },
+        {
+          "course_id": "CIVL1060",
+          "course_name": "Applied Hydrology",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl1060/"
+        },
+        {
+          "course_id": "CIVL2020",
+          "course_name": "Mechanics of Materials 1",
+          "credits": 6.5,
+          "source_url": "https://www.bcit.ca/outlines/civl2020/"
+        },
+        {
+          "course_id": "CIVL2024",
+          "course_name": "Graphical Communication 2",
+          "credits": 2.5,
+          "source_url": "https://www.bcit.ca/outlines/civl2024/"
+        },
+        {
+          "course_id": "CIVL2025",
+          "course_name": "Applied Hydraulics",
+          "credits": 5.5,
+          "source_url": "https://www.bcit.ca/outlines/civl2025/"
+        },
+        {
+          "course_id": "CIVL2026",
+          "course_name": "Construction Materials",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl2026/"
+        },
+        {
+          "course_id": "CIVL3012",
+          "course_name": "Sustainability in Engineering",
+          "credits": 2.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3012/"
+        },
+        {
+          "course_id": "CIVL3020",
+          "course_name": "Computer Applications",
+          "credits": 3.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3020/"
+        },
+        {
+          "course_id": "CIVL3033",
+          "course_name": "Construction Management 1",
+          "credits": 3.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3033/"
+        },
+        {
+          "course_id": "CIVL3041",
+          "course_name": "Soil Mechanics",
+          "credits": 3.5,
+          "source_url": "https://www.bcit.ca/outlines/civl3041/"
+        },
+        {
+          "course_id": "CIVL3050",
+          "course_name": "Road Design",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3050/"
+        },
+        {
+          "course_id": "CIVL3052",
+          "course_name": "Municipal Engineering 1",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3052/"
+        },
+        {
+          "course_id": "CIVL3074",
+          "course_name": "Structural Engineering 1",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl3074/"
+        },
+        {
+          "course_id": "CIVL4024",
+          "course_name": "Land Development Modeling",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl4024/"
+        },
+        {
+          "course_id": "CIVL4033",
+          "course_name": "Construction Management 2",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl4033/"
+        },
+        {
+          "course_id": "CIVL4041",
+          "course_name": "Geotechnical Analysis and Design",
+          "credits": 5.5,
+          "source_url": "https://www.bcit.ca/outlines/civl4041/"
+        },
+        {
+          "course_id": "CIVL4052",
+          "course_name": "Municipal Engineering 2",
+          "credits": 5.5,
+          "source_url": "https://www.bcit.ca/outlines/civl4052/"
+        },
+        {
+          "course_id": "CIVL4053",
+          "course_name": "Traffic Engineering Fundamentals",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl4053/"
+        },
+        {
+          "course_id": "CIVL4074",
+          "course_name": "Structural Engineering 2",
+          "credits": 6.0,
+          "source_url": "https://www.bcit.ca/outlines/civl4074/"
+        },
+        {
+          "course_id": "CIVL4090",
+          "course_name": "Industry Project",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/civl4090/"
+        },
+        {
+          "course_id": "COMM1142",
+          "course_name": "Communication for Civil Engineering 1",
+          "credits": 3.0,
+          "source_url": "https://www.bcit.ca/outlines/comm1142/"
+        },
+        {
+          "course_id": "COMM2242",
+          "course_name": "Communication for Civil Engineering 2",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/comm2242/"
+        },
+        {
+          "course_id": "COMM3342",
+          "course_name": "Communications for Civil Engineering 3",
+          "credits": 2.0,
+          "source_url": "https://www.bcit.ca/outlines/comm3342/"
+        },
+        {
+          "course_id": "COMM4442",
+          "course_name": "Communication for Civil Engineering 4",
+          "credits": 2.5,
+          "source_url": "https://www.bcit.ca/outlines/comm4442/"
+        },
+        {
+          "course_id": "MATH1422",
+          "course_name": "Differential Calculus for Civil Engineering",
+          "credits": 5.0,
+          "source_url": "https://www.bcit.ca/outlines/math1422/"
+        },
+        {
+          "course_id": "MATH2422",
+          "course_name": "Integral Calculus for Civil Engineering",
+          "credits": 6.0,
+          "source_url": "https://www.bcit.ca/outlines/math2422/"
+        },
+        {
+          "course_id": "MATH2423",
+          "course_name": "Introductory Statistics for Civil Engineering",
+          "credits": 0.5,
+          "source_url": "https://www.bcit.ca/outlines/math2423/"
+        },
+        {
+          "course_id": "MATH3423",
+          "course_name": "Multivariable Calculus and Linear Algebra for Civil Engineering",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/math3423/"
+        },
+        {
+          "course_id": "MATH6010",
+          "course_name": "Advanced Mathematics for Civil Engineering 1",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/math6010/"
+        },
+        {
+          "course_id": "PHYS1192",
+          "course_name": "Physics for Civil Engineering 1",
+          "credits": 5.0,
+          "source_url": "https://www.bcit.ca/outlines/phys1192/"
+        },
+        {
+          "course_id": "PHYS2192",
+          "course_name": "Physics for Civil Engineering 2",
+          "credits": 6.5,
+          "source_url": "https://www.bcit.ca/outlines/phys2192/"
+        },
+        {
+          "course_id": "SURV1130",
+          "course_name": "Surveying for Civil Engineering 1",
+          "credits": 3.0,
+          "source_url": "https://www.bcit.ca/outlines/surv1130/"
+        },
+        {
+          "course_id": "SURV2230",
+          "course_name": "Surveying for Civil Engineering 2",
+          "credits": 4.0,
+          "source_url": "https://www.bcit.ca/outlines/surv2230/"
+        }
+      ],
+      "campuses": [
+        {
+          "campus_id": 4,
+          "institution_key": "BCIT",
+          "campus_key": "annacis_island",
+          "official_name": "Annacis Island Campus",
+          "address": "1608 Cliveden Avenue",
+          "city": "Delta",
+          "region": "BC",
+          "postal_code": "V3M 6P1",
+          "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 5,
+          "institution_key": "BCIT",
+          "campus_key": "marine",
+          "official_name": "Marine Campus",
+          "address": "265 West Esplanade",
+          "city": "North Vancouver",
+          "region": "BC",
+          "postal_code": "V7M 1A5",
+          "description": "BCIT's centre for maritime training in Western Canada.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 1,
+          "institution_key": "BCIT",
+          "campus_key": "burnaby",
+          "official_name": "Burnaby Campus",
+          "address": "3700 Willingdon Avenue",
+          "city": "Burnaby",
+          "region": "BC",
+          "postal_code": "V5G 3H2",
+          "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 3,
+          "institution_key": "BCIT",
+          "campus_key": "aerospace",
+          "official_name": "Aerospace Technology Campus",
+          "address": "3800 Cessna Drive",
+          "city": "Richmond",
+          "region": "BC",
+          "postal_code": "V7B 0A1",
+          "description": "BCIT's specialized aerospace training campus in Richmond.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        },
+        {
+          "campus_id": 2,
+          "institution_key": "BCIT",
+          "campus_key": "downtown",
+          "official_name": "Downtown Campus",
+          "address": "555 Seymour Street",
+          "city": "Vancouver",
+          "region": "BC",
+          "postal_code": "V6B 3H6",
+          "description": "BCIT's campus in Vancouver's business and technology core.",
+          "active": true,
+          "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          },
+          "main_phone": "604-434-5734"
+        }
+      ],
+      "institutional_resources": [
+        {
+          "institutional_resource_id": 9,
+          "institution_key": "BCIT",
+          "resource_key": "program_availability",
+          "title": "BCIT Program Availability",
+          "official_url": "https://www.bcit.ca/admission/program-availability/",
+          "topic": "program_availability",
+          "trigger_phrases": [
+            "program availability",
+            "program available",
+            "applications open",
+            "accepting applications",
+            "application open",
+            "program full"
+          ],
+          "normalized_intents": [
+            "PROGRAM_AVAILABILITY"
+          ],
+          "description": "Check current program availability and application status by intake.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 12,
+          "institution_key": "BCIT",
+          "resource_key": "program_advising",
+          "title": "BCIT Program Advising",
+          "official_url": "https://www.bcit.ca/advising/",
+          "topic": "advising",
+          "trigger_phrases": [
+            "program advising",
+            "academic advising",
+            "academic advisor",
+            "program advisor",
+            "talk to an advisor",
+            "contact an advisor"
+          ],
+          "normalized_intents": [
+            "ADVISING"
+          ],
+          "description": "Contact BCIT Program Advising for help planning academic next steps.",
+          "priority": 20,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 6,
+          "institution_key": "BCIT",
+          "resource_key": "financial_aid_awards",
+          "title": "BCIT Student Financial Aid & Awards",
+          "official_url": "https://www.bcit.ca/financial-aid/",
+          "topic": "financial_aid",
+          "trigger_phrases": [
+            "financial aid",
+            "student funding",
+            "scholarship",
+            "scholarships",
+            "bursary",
+            "bursaries",
+            "student loan",
+            "awards"
+          ],
+          "normalized_intents": [
+            "FINANCIAL_AID"
+          ],
+          "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 1,
+          "institution_key": "BCIT",
+          "resource_key": "equivalencies",
+          "title": "BCIT Equivalencies",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+          "topic": "equivalencies",
+          "trigger_phrases": [
+            "equivalency",
+            "equivalencies",
+            "equivalent course",
+            "course equivalent",
+            "requirement equivalency"
+          ],
+          "normalized_intents": [
+            "EQUIVALENCIES"
+          ],
+          "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 5,
+          "institution_key": "BCIT",
+          "resource_key": "tuition_fees",
+          "title": "BCIT Tuition & Fees",
+          "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+          "topic": "tuition_and_fees",
+          "trigger_phrases": [
+            "tuition",
+            "tuition fees",
+            "program cost",
+            "course cost",
+            "cost of attendance",
+            "how much does bcit cost",
+            "student fees"
+          ],
+          "normalized_intents": [
+            "TUITION_AND_FEES"
+          ],
+          "description": "Find tuition, fee, estimator, payment, and refund information.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 8,
+          "institution_key": "BCIT",
+          "resource_key": "plar",
+          "title": "BCIT Prior Learning Assessment & Recognition",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+          "topic": "prior_learning",
+          "trigger_phrases": [
+            "plar",
+            "prior learning",
+            "prior learning assessment",
+            "recognition of prior learning"
+          ],
+          "normalized_intents": [
+            "PLAR"
+          ],
+          "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 3,
+          "institution_key": "BCIT",
+          "resource_key": "international_students",
+          "title": "BCIT International Students",
+          "official_url": "https://www.bcit.ca/international-students/",
+          "topic": "international_students",
+          "trigger_phrases": [
+            "international student",
+            "international students",
+            "international applicant",
+            "study permit"
+          ],
+          "normalized_intents": [
+            "INTERNATIONAL_STUDENTS"
+          ],
+          "description": "Programs, services, permits, guides, and support for international students.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 4,
+          "institution_key": "BCIT",
+          "resource_key": "english_language_proficiency",
+          "title": "BCIT English Language Proficiency",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+          "topic": "english_language",
+          "trigger_phrases": [
+            "english language requirement",
+            "english language requirements",
+            "english proficiency",
+            "language proficiency",
+            "ielts",
+            "toefl",
+            "duolingo english"
+          ],
+          "normalized_intents": [
+            "ENGLISH_LANGUAGE_REQUIREMENTS"
+          ],
+          "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 10,
+          "institution_key": "BCIT",
+          "resource_key": "application_process",
+          "title": "How to Apply to BCIT",
+          "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+          "topic": "application_process",
+          "trigger_phrases": [
+            "how to apply",
+            "application process",
+            "apply to bcit",
+            "submit application",
+            "application deadline",
+            "application deadlines",
+            "when to apply"
+          ],
+          "normalized_intents": [
+            "APPLICATION_PROCESS"
+          ],
+          "description": "Review application steps, documents, timing, and applicant routes.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 7,
+          "institution_key": "BCIT",
+          "resource_key": "transfer_credit",
+          "title": "BCIT Transfer Credit",
+          "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+          "topic": "transfer_credit",
+          "trigger_phrases": [
+            "transfer credit",
+            "transfer credits",
+            "course credit",
+            "advanced placement"
+          ],
+          "normalized_intents": [
+            "TRANSFER_CREDIT"
+          ],
+          "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 2,
+          "institution_key": "BCIT",
+          "resource_key": "admissions",
+          "title": "BCIT Admissions",
+          "official_url": "https://www.bcit.ca/admission/",
+          "topic": "admissions",
+          "trigger_phrases": [
+            "admission",
+            "admissions",
+            "admission requirement",
+            "admission requirements"
+          ],
+          "normalized_intents": [
+            "ADMISSIONS"
+          ],
+          "description": "Start with BCIT admissions information and entrance requirements.",
+          "priority": 20,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        },
+        {
+          "institutional_resource_id": 11,
+          "institution_key": "BCIT",
+          "resource_key": "application_status",
+          "title": "BCIT Application Status",
+          "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+          "topic": "application_status",
+          "trigger_phrases": [
+            "application status",
+            "check my application",
+            "after i apply",
+            "after applying",
+            "admission decision"
+          ],
+          "normalized_intents": [
+            "APPLICATION_STATUS"
+          ],
+          "description": "Track an application and understand BCIT application and decision statuses.",
+          "priority": 10,
+          "active": true,
+          "source_type": "official_institution_page",
+          "source_checked_at": "2026-09-06",
+          "source_metadata": {
+            "publisher": "BCIT"
+          }
+        }
+      ]
+    },
+    "observations": [
+      {
+        "turn": 1,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E4"
+          },
+          "tools_used": [
+            "get_program_details"
+          ],
+          "verification": {
+            "count": 1,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Civil Engineering Diploma",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "5410DIPLT",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [],
+            "stopped": false,
+            "turn_index": 1,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E8"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "program_id": "5410DIPLT",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 1,
+                "version": 2
+              },
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"5410DIPLT\"}",
+                "call_id": "call_m9Vw0si2eC9RqyLjRNh9zsuL",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_025e451ada99f546006aa104b5d68887d0bcc80715887f4d77",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_details",
+            "arguments": {
+              "program_id": "5410DIPLT"
+            },
+            "context": {
+              "current_question": "Tell me about Civil Engineering Diploma.",
+              "diploma_completed": false,
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false,
+              "work_hours": 0
+            },
+            "result": {
+              "__evidence_ref__": "E54"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_025e451ada99f546006aa104b82a3887d0887acdcbe9cd7e15",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQTAwW69O4Qk4M-I38ZYgXFeSHKS2PyC3cl4X3h8RFnNdM2gDU64TU7ipSvWdaYvHol4_rVQ_Qr6R7WeQtaIaUGNI6gBJrCAepZcg7MRIa2cFHvqsN-8ganfleTj-k1P38S-CtZlTcZxuy2v_ANUSz8721B9QVuO15QKPeW0NnVzoqIU6s7TG9v7Siva8KSA75d3oPRh7v-0f7VpAErW7EpmGWChIkbR2ye04lFbAuymAhHUCgHLkm07DJdowu32CSyDid2CtcjRLQQPs_oelqLfHHG5FV5coe-ZXMldqqQVf7Uk8CQHTtdadibIB52ZOnA1-Wl5wzzkTU-sh_XX_L3La2_BBy5m7488daSDSZJXAQe-5X2BsxVf2IlkwjFwwzfWhJpwm7dFfRrG_QvwZM3fa4-74Vp0mWaC2iKc4z9HplLQIAl_CuiXfOZa5YtRzV-9KZ8DtrCj3IiWA9AIlhvNh4oXmqbFwnePqiXNFVGPCaHsmSbVKN9TAAiGtZFxRlKDieNMl4Fg-JOuujlIruap5cy6_3yWADEDPIbIGZjsARISkE55qcv1NmYjkmVloal7PiRyLsRM4qRNv2yjFvFg2CBecOWZaFE1tVJbqLemZ74rJIFHGZUL_bGCPehcPoYx7SWSC-pKfguR30HI6jQwycE5qJHXmW2FAuESQreqiqzeB7siqPr1VlURiLI5AQOw8FlvlWWCIVRHdD0Iv8pHI43Y3cLyF3UL2T_Hpp_-0dzz7TrGN3ndFtWAgWJBxZiV47VCXnvCuIMbBTek1Fir3Rns6KRKVEhibC-oou1DQ4T0qfXN-GgaF9uNgXHlNtoZMw9XlMMA8iStCPU2j004_GKQrMLqfoN4GQMranvTQpPss-fB-oP3Tz1LAPgYnkXGbN_RkGkwclY9F0Ty1FN8oa-zNbLi8BWo7A99-pYe9KDxgU3X8fzeSXxcBry-njgkt4fK7XJ3dAV6F0-XCbqYamoSN_EtwjolULr0u-4uPNj1aZYKupORzLHAciUy5weFWEVcxo__ZZwHrt82Ii2i59J-qpEKKW9hQfQM7xH2WcPgcEptcHcy_RlkJuW3nbkBPwDIc385l_gbTfOv66pU1Lwg0agPqhNux-WnL4ShtoEKKdq53140iwYB-8kupeAjfqQ2z-d3r-MyZDsQ7j-hvODAPMuCTlziALiRExyXwblq3GyJCqiWCOOLEGzUoiIRo1Dn5zDw68buO2MB770zOzhOoYZgSaz2oELDHy0xa0tWiON9uOet8oFLYm0Q4PAi-0yLM8sldtkkqBtfszlSpngclYH9QJybT1W2UWB7xVh4hWk_yGlEWQnRgBS1WyH1Xq5GfznR0QJXJwercukOmyp5TrljkSyqXtHhIlEn-ZEIXKrSm0JFDvZ-nPORuhUoGeP1fOPp4S6l7UDmXS5EWPRJNHKbg7F-wZfwcKN6miqH-d5nrt0U_hLMj4oSjaSWc_tVNjL0fz07LVBszY-CcxLdNGNZ3bfacU1j4_rQ6l9sZFeI7KDr6sqjKy6K2MWsK9SYJjIXRJM9Dw3BmDB67jRkPfOgs4BNoqaDmeDjs7FNChVoRKBoxYg4Y9bPQmJZ43b1eIih4S9vizt-U0mhy5fASrphnxGn7NKdkjejOBw6WbZ3XsMugPwVLm-yuCxnAyZ_ZhFSJgFCnrp5oEKzAQ6K0rNvelTxT_ecyNR_i33_k5Q9s8eDNa5mTvrIAG5fXgVzGlj8kTrncyf0Ar4kVW8XLL-k_NMhVepO4AWilP8cOuK5WjY3y6ovL5uYEQRj6spg1ZW7PdDFSg_CL3dgmBcftjN2KLaTF8fNQTnGtOGHkUD0jYcOTmPpoLOHyhl63kjSZ31pZUXyjBBGXND7lbUFPc2bXtOsS0RVvalBzz0p29PmttVzKUt3tdeVlnx0DgtIfcxIMsz5TOgNe9s5igR37a_P11VNg9oF7wE1d99_NtODXOMGZ8ZAfAKYU8a2awj8Y1hGDOvoVMWTfDiklXp7z-fKMDNzDrYvd26Iv-NXitIZDzSKw4_lJBdOga5uud4lIq-GcOKjZ0IZlZITu0Yz8n_Nxb6jcPNBIdCAZLwNgBFZIgbuOOAuHDVSILUTo7MaPKBRkaoK37_TpgDIRRk-_grq612Fre5kCiq1ghiGd4Sw-9E0FW37Irq5OV3cmipGYbkGuj15sJMwdnXsT9g-6dnvSRrHeySqLRyZq9UnLtWTH5J9HPBCTuWBp9q0AWzvk3spluKhZLrps9oDBjYP6aQTnipqk4D9iwDNjHTX8YoF4WfyEQHX6-7wHHp6JtHCOIO73Eqn6Nso2pNJOr63N5aGkidPV_9TwLxiQ2lnTtEQ90FX-lvWJM-Ff67vpzX_f_gW__jlbYczK0-jhB5xgpHd4x_R1jhhrdJlgI-b4hUO9LashuG6S-Z7lMq5O05YgUMQV2OEJ4ZU7trWAm39x5kRadwZihjUsk1DIUauOzMB_z77czw5BvrLOmm-Fh2-E7NrMIpEnpX517KuVOMtSCVAGems1zgLjioDJzoOBFzlK9gYjSAlyt1wdud1JD5PxioXRUpVM4UALnoCSzbXUkeDnPBBwkhJTfrhsnXq9wHrROHqwADJAoelqxQomV9bMDGTt5FWAe5y0cFpMmNinBxrjH-97T7Lm10iWGfYxgDnEtWKd23gxyd1hpFeLTVR7fEvDRxO-z_2jbWMWuCU8_RXHqFSxXN-WZLaK4NFxgt02wsivufwx3RKzQg3_fFFTS6Sxx3sx8E4g6T1mgR9pPzlZNQ1jhnnrqSbp9ruN2T5MIylia7rb2RkUWp9ttXKknVmlbXM0HLw2l4lVUCBn1mBJCP982Tr6sjLdlEQsk2rDJOEgglRlUe6W_npNpEFjYQFnT4qj8fOcXEvKluVW9COe_R06P1KnZFM3sjYVvvpp_QPQsL-h6ZjKD1FlwrDkdEhWmWhw_j2pkUCO5ht0KZa6wf-yBVHL04Gu0CoL0GxSb0kBgN21klqpD5sb8qqJaOUQLd1Hhez1FT4moN7XJIWMhDYCpxNq3pV9Es="
+              },
+              {
+                "id": "msg_025e451ada99f546006aa104bd9c8087d0908a9bf20b3f3aaa",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E4"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E4"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E4"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 2,
+        "response": {
+          "answer": "Official program page: https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/",
+          "tools_used": [
+            "get_program_details"
+          ],
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Civil Engineering Diploma",
+          "verification": {
+            "count": 1,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "5410DIPLT",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [
+              "5410DIPLT:source"
+            ],
+            "stopped": false,
+            "turn_index": 2,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": [
+          {
+            "op": "excludes",
+            "value": [
+              "#overview"
+            ],
+            "dimension": "evidence_discipline",
+            "root_cause": "unknown_human_confirmation",
+            "pass": true,
+            "actual": null
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5410DIPLT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution",
+            "pass": true,
+            "actual": "5410DIPLT"
+          }
+        ],
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "program_id": "5410DIPLT",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 2,
+                "version": 2
+              },
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 3,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E3"
+          },
+          "tools_used": [
+            "get_program_details"
+          ],
+          "verification": {
+            "count": 1,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Civil Engineering Diploma",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "5410DIPLT",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [
+              "5410DIPLT:source"
+            ],
+            "stopped": false,
+            "turn_index": 3,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E8"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "answered_facets": [
+                  "5410DIPLT:source"
+                ],
+                "program_id": "5410DIPLT",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 3,
+                "version": 2
+              },
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"5410DIPLT\"}",
+                "call_id": "call_7Wffm6o524peof0QrNjuoODR",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_00be3967cc574fe8006aa104c35fa487d0b2a0a9b539f89733",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_details",
+            "arguments": {
+              "program_id": "5410DIPLT"
+            },
+            "context": {
+              "current_question": "Are you the official admissions decision-maker?",
+              "diploma_completed": false,
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false,
+              "work_hours": 0
+            },
+            "result": {
+              "__evidence_ref__": "E54"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "msg_00be3967cc574fe8006aa104c4f4cc87d0bc275b2660faff71",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E2"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E2"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E3"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      },
+      {
+        "turn": 4,
+        "response": {
+          "answer": {
+            "__evidence_ref__": "E6"
+          },
+          "tools_used": [
+            "get_program_details"
+          ],
+          "verification": {
+            "count": 1,
+            "kind": "fact",
+            "exact_count_available": true
+          },
+          "intent": "PROGRAM_INFO",
+          "resolved_program": "Civil Engineering Diploma",
+          "conversation_state": {
+            "version": 2,
+            "scope": "program",
+            "program_id": "5410DIPLT",
+            "course_id": null,
+            "scope_query": null,
+            "result_query": null,
+            "unique_result_program_id": null,
+            "campus_name": null,
+            "catalog_kind": null,
+            "candidates": [],
+            "prior_program_ids": [],
+            "reported_completed_course_ids": [],
+            "reported_completed_courses": [],
+            "comparison_program_ids": [],
+            "subject_history": [],
+            "student_facts": [],
+            "conclusions": [],
+            "answered_facets": [
+              "5410DIPLT:source"
+            ],
+            "stopped": false,
+            "turn_index": 4,
+            "level": null,
+            "requirement_type": null,
+            "academic_scope": null
+          }
+        },
+        "http_status": 200,
+        "structural_assertions": {
+          "__evidence_ref__": "E8"
+        },
+        "observed_trace": [
+          {
+            "kind": "resolution",
+            "result": {
+              "conversation_state": {
+                "answered_facets": [
+                  "5410DIPLT:source"
+                ],
+                "program_id": "5410DIPLT",
+                "scope": "program",
+                "stopped": false,
+                "turn_index": 4,
+                "version": 2
+              },
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"5410DIPLT\"}",
+                "call_id": "call_EhujMV80eJsqz84PD7DLzhWH",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_049fab6682b2f236006aa104c9d2cc87d08fc366c11212e309",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "kind": "tool",
+            "name": "get_program_details",
+            "arguments": {
+              "program_id": "5410DIPLT"
+            },
+            "context": {
+              "current_question": "Can BCIT confirm requirements that aren't published?",
+              "diploma_completed": false,
+              "global_catalog": false,
+              "pathway": {
+                "name": "Civil Engineering"
+              },
+              "program_id": "5410DIPLT",
+              "program_name": "Civil Engineering Diploma",
+              "program_set_query": false,
+              "work_hours": 0
+            },
+            "result": {
+              "__evidence_ref__": "E54"
+            }
+          },
+          {
+            "kind": "model",
+            "model": "gpt-5.6-sol",
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "output": [
+              {
+                "id": "rs_049fab6682b2f236006aa104cbca9487d0ae7c71f528b77a6b",
+                "type": "reasoning",
+                "encrypted_content": "gAAAAABqoQTPfSa08LMlG5Z1m_h2_O4yyx_yU-EqDfE1hZO8jpNArk8QKGgRVeEmMYd0ittPDbT9_zjXeKp5AZH8-4SRE_JJQgxE-A6UIp74ZZYLuupNsfi82vU4qdnY6Bw2mMlp4w-DEHQpCSvnOzjDB8dy7x66n29kOsF58uT2gluUaNbxYUKp4H7kpa9s45LtP7JEDGwy4dfRVmXJf3OTM1DBiUWSiY4y85YOn3ixyXVW8eeYGKIfZbeYQ2YCsqMhfVyRYHE_kttODxNP8eqXBBI79IUEYmmEc-cE89W1gfArBwYuOcYadozaUVfnWVPmRVQSD5x_ZVkyUgYeKCdHAMlFSWZA-p4xMmWXVY4kzme-Bm3PhNcnVtLv5CKZfGWvTvUsV2udUxxdrILkaI9QhtRHxcJ3eTFP-rVrb22U_QQbHF9utkssMSi_rm2QNLgOwNPA8qz07hLjURJKm2rWWxfKp4O6BLcUiZf9bHcR5HvbWlp5OqXoCkCHXCetvAD4c3gGTZPeNFbnyjEkk5AAEPPNDPd6BfhuaeDv3Io2guOwOG3mfgrAXEK4HH4k3LkyXurpXOmX4qggOsTnUWHuoTmdzSywnRnNCGM8o763PVtBXEyyKINwpguiN64ZFnpRJnoYz63OuHx_MoNLNkathn-BeEpy8savcwJtnD3bElbkDA8_5q_bC0psJl-5VX9ArE2V5ZuY93V7OWJSXxea0pZ_lAwZjg6bStTvYYos5aEa6EXVKMPW4v6Kx46kkDCabd1RBHkvr5qaQIfekmjUY58wRxqH71YWbODooMoQfUfuuvR092qR1YD6Cm6NkqT8VLEHNIoYwwgPmOz70n3AFbOM_a1jgj4Sx8OUDPPcpGc8HkYILyApXxn-VUC_tg04PI-Z_IDzTiV8yYjsGPCMUltrpCpRJGX-2ar86uO3w1kqYpXd3yFlI1tCdLo2ZH_jcABqDM9F8S9C-RrLz5jYimrGaVtMNcvZH_udjmJSrfvOfkZH0zo15EbIi1_EvEsA-81PzVPFUhiUCr7fsCWVFG_05_H5PRBqyY3ujq3v2Yi2GxCulb88TNU_BlTciqnPFxOAsTfikiXE7nd-496WQ6ABpWamhCmJPuguRq45gPOWyzgNr9ddTGBmP_HxzBmaozfHzwUhsgG852lFUEuLHogbR_BDVF8JJqNc0hM56TjTffeodYLLIhg-7Fs48lMEZ_yxX1-rqjrlnlr6WwkR6LfD-Z086Lkadxtb90PyEEk-kNNhWWaXoKt2y_adflKM3lOb1WjoRjW5wGx6jAvt_MCRVvfkdFUJ2XaFmQpNimDl3a6JeHBvk7gNlNUGVXbJlWzr79yqUY0gUp_-sf_wrx6Qq5TXRQX1WRs0WA3jDnciwxEc5oRicH0T7fnrXr4XhoYFpboKG9qBLVznCzzOFWNCj3q72dnKAM2HNpL326UY5ZNGJ4UUZa-MkuC_spnDJy4tiRMpbBRIDhv4DgDNIHAbjo8IDzI9d2g6lGnyQiCzEyeW4Mu2elOhDsf449KPjVBQTqSZLyj__nzNxf2Kc0DnwNjgK1PGAW5Bs70tfI_Je1kjGdcEzBW995Dse9JIgdpgqCD6nMx99zmy_EOdBrSLItbB4O73_l1y_YjS4h3EYddGgfz464fFABx6GFUUfCLX0RSQnwGx5vXky_18RxYy26huQAEzsVCYZZEyQDjsLpHWd64ViLwbtY6pTOekM4xs6VJV7ZgejOfJZ1PPxlwoCbQdkB_wy3MI-WBDy289h2myW68LSgsBmKUI47Uv_HSAMENRLgPMilVawEYwS6XokDlnd3HCYtgm68IMx1xVNASk_0kuAcSRD4RirJMsZh9lInuwPDDvNcdz_m-LO-YRl0DIMZukLeyUMUTqTMnB7eLH3RC6nmiBBx1CijE41exJHb7VKbZ0wmj5g0ebTgbNXFDWYiYUFZDxeN5qwNuc3Bb8Kjen_MfSXDbJI4ktyc-wo7pYrpS19YNzQK2GQQ65fpt9U7-t5aoC9Gp86bpLU5CsR19EBpeKxReWTC-oSw45OXTst9i7h6RJPIkfFXM7bEZexuGmo8L9UXppYMPU8Fhuzns="
+              },
+              {
+                "id": "msg_049fab6682b2f236006aa104ce68d487d08b5a6266909577f9",
+                "content": [
+                  {
+                    "text": {
+                      "__evidence_ref__": "E6"
+                    },
+                    "type": "output_text"
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ]
+          },
+          {
+            "kind": "finalization",
+            "raw_answer": {
+              "__evidence_ref__": "E6"
+            },
+            "final_answer": {
+              "__evidence_ref__": "E6"
+            }
+          }
+        ],
+        "omitted_history_messages": 0
+      }
+    ]
+  },
+  "definitions": {
+    "E4": "The **Civil Engineering Diploma** is a two-year, full-time, in-person program at BCIT’s Burnaby campus. It emphasizes engineering fundamentals and practical experience in surveying, materials testing, drafting, design, communication, and engineering software.\n\nCoursework includes subjects such as:\n\n- **CIVL 1012 – Introduction to Civil Engineering**\n- **SURV 1130 – Surveying for Civil Engineering 1**\n- **CIVL 2026 – Construction Materials**\n- **CIVL 3050 – Road Design**\n- **CIVL 4074 – Structural Engineering 2**\n- **CIVL 4090 – Industry Project**\n\nThe diploma is awarded after successful completion of the first two years of the Civil Engineering pathway. Graduates may pursue work as civil engineering technologists, while qualified students can continue toward BCIT’s Bachelor of Engineering in Civil Engineering.\n\nThere is no separate diploma application route: students apply through the full-time Civil Engineering Bachelor of Engineering program.\n\n[View the Civil Engineering Diploma program page](https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/)",
+    "E3": "No. I’m an academic advising assistant, not BCIT’s admissions office, and I cannot make or guarantee admission decisions. I can explain the published requirements and help you assess how your stated qualifications compare.\n\nFinal decisions and any requirements needing institutional review must be confirmed by BCIT Admissions. For this diploma, applications go through the full-time Civil Engineering Bachelor of Engineering pathway rather than a separate diploma application.\n\nProgram page: https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/\n\nFor more information, see BCIT Admissions: https://www.bcit.ca/admission/.",
+    "E6": "Yes. Any requirements not published in the program information require confirmation directly from BCIT Admissions or the Civil Engineering program area. I can explain verified published requirements, but I cannot validate unpublished criteria or make admissions decisions.",
+    "E1": "BCIT has offered a very highly-regarded two-year Diploma in Civil Engineering since opening its doors in 1964. As with any successful educational program, it has evolved through its fifty-year lifespan to address changes in the engineering and construction fields, and reflect current states of practise. At present, the Diploma in Civil Engineering is one of two credentials available within BCIT’s Civil Engineering program, conferred after successful completion of the first two years of study.  At this point, the student may choose to enter the workforce and advance a career as a Civil Engineering Technologist or continue their academic studies towards acquiring an undergraduate degree in Civil Engineering. These further academic studies are possible for qualified students within the B.Eng. in Civil Engineering program at BCIT, or elsewhere in other Civil Engineering programs across Canada. The Civil Engineering Technologist is an essential member of the engineering team and contributes to the planning, design and construction of municipal works, residential development, industrial and commercial buildings, highways, environmental protection work and other types of projects. Many graduates have pursued very successful careers as technologists, and the demand from industry for technologists remains extremely strong. The Program: Presentation of the course material over the first two years is primarily delivered at a foundational level with engineering fundamentals stressed and reinforced across the curriculum. An abundance of learning opportunities is provided to practically apply these fundamentals to the solution of real-world design scenarios. Throughout, opportunities are presented to students to strengthen their graphical, written, and oral communication skills. A significant amount of time in the program is directly related to hands-on-training in material testing, surveying, manual and computer-aided drafting, and instruction in the use of engineering software tools. Please refer to the Civil Engineering: Full-time, Bachelor of Engineering program page for further information on entrance requirements, job opportunities, the program matrix and other details.",
+    "E5": "There is no separate Diploma application. To obtain the Diploma, apply to the full-time Civil Engineering Bachelor of Engineering program; the Diploma is conferred after successful completion of its first two years.",
+    "E7": "{\"evidence\":[{\"checked_at\":\"2026-09-08T17:42:04.887145+00:00\",\"evidence_type\":\"international_list_positive_flag\",\"source_sha256\":\"ef555c53d49601c848d071e461a1885414dddeb55de111d8bf063c4be05246ee\",\"url\":\"https://www.bcit.ca/international-applicants/regular-credential-programs/\"}],\"offering_scope\":\"Any Domestic Only offering remains mode/intake-specific.\",\"pgwp\":\"ELIGIBLE_TO_APPLY\",\"status\":\"ACCEPTED_AVAILABLE\",\"study_permit\":\"UNKNOWN_NOT_PUBLISHED\"}",
+    "E8": [
+      {
+        "op": "state_in",
+        "field": "program_id",
+        "value": [
+          "5410DIPLT"
+        ],
+        "dimension": "entity_resolution",
+        "root_cause": "entity_resolution",
+        "pass": true,
+        "actual": "5410DIPLT"
+      }
+    ],
+    "E14": {
+      "condition_id": 515,
+      "condition_type": "LINKED_PROGRAM_ADMISSION",
+      "description": "Apply to Civil Engineering Bachelor of Engineering (8660BENG); BCIT does not publish a separate Diploma admission route.",
+      "parameters": {
+        "executable": false,
+        "human_confirmation": true,
+        "semantic": "linked_application_route",
+        "separate_diploma_application": false
+      },
+      "sort_order": 1,
+      "subject_id": "8660BENG"
+    },
+    "E9": [
+      {
+        "__evidence_ref__": "E14"
+      }
+    ],
+    "E15": {
+      "conditions": {
+        "__evidence_ref__": "E9"
+      },
+      "label": "Application route",
+      "operator": "AND",
+      "rule_group_id": 238,
+      "sort_order": 1
+    },
+    "E10": [
+      {
+        "__evidence_ref__": "E15"
+      }
+    ],
+    "E52": {
+      "groups": {
+        "__evidence_ref__": "E10"
+      },
+      "name": "APPLY_THROUGH_CIVIL_BENG",
+      "notes": {
+        "__evidence_ref__": "E5"
+      },
+      "rule_set_id": 373,
+      "scope": "ADMISSION",
+      "study_mode": "Full-time"
+    },
+    "E53": {
+      "name": "International eligibility source evidence",
+      "notes": {
+        "__evidence_ref__": "E7"
+      },
+      "rule_set_id": 1968,
+      "scope": "INTERNATIONAL",
+      "study_mode": "Full-time"
+    },
+    "E12": [
+      {
+        "__evidence_ref__": "E52"
+      },
+      {
+        "__evidence_ref__": "E53"
+      }
+    ],
+    "E55": {
+      "program_id": "5410DIPLT",
+      "rule_sets": {
+        "__evidence_ref__": "E12"
+      }
+    },
+    "E17": {
+      "course_id": "CIVL1012",
+      "course_name": "Introduction to Civil Engineering",
+      "course_type": "Core",
+      "credits": "1.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl1012/",
+      "term": "Fall"
+    },
+    "E18": {
+      "course_id": "CIVL1020",
+      "course_name": "Statistics",
+      "course_type": "Core",
+      "credits": "5.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl1020/",
+      "term": "Fall"
+    },
+    "E19": {
+      "course_id": "CIVL1024",
+      "course_name": "Graphical Communication 1",
+      "course_type": "Core",
+      "credits": "2.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl1024/",
+      "term": "Fall"
+    },
+    "E20": {
+      "course_id": "CIVL1060",
+      "course_name": "Applied Hydrology",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl1060/",
+      "term": "Fall"
+    },
+    "E39": {
+      "course_id": "COMM1142",
+      "course_name": "Communication for Civil Engineering 1",
+      "course_type": "Core",
+      "credits": "3.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/comm1142/",
+      "term": "Fall"
+    },
+    "E43": {
+      "course_id": "MATH1422",
+      "course_name": "Differential Calculus for Civil Engineering",
+      "course_type": "Core",
+      "credits": "5.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/math1422/",
+      "term": "Fall"
+    },
+    "E48": {
+      "course_id": "PHYS1192",
+      "course_name": "Physics for Civil Engineering 1",
+      "course_type": "Core",
+      "credits": "5.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/phys1192/",
+      "term": "Fall"
+    },
+    "E50": {
+      "course_id": "SURV1130",
+      "course_name": "Surveying for Civil Engineering 1",
+      "course_type": "Core",
+      "credits": "3.00",
+      "level": 1,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/surv1130/",
+      "term": "Fall"
+    },
+    "E21": {
+      "course_id": "CIVL2020",
+      "course_name": "Mechanics of Materials 1",
+      "course_type": "Core",
+      "credits": "6.50",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl2020/",
+      "term": "Winter"
+    },
+    "E22": {
+      "course_id": "CIVL2024",
+      "course_name": "Graphical Communication 2",
+      "course_type": "Core",
+      "credits": "2.50",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl2024/",
+      "term": "Winter"
+    },
+    "E23": {
+      "course_id": "CIVL2025",
+      "course_name": "Applied Hydraulics",
+      "course_type": "Core",
+      "credits": "5.50",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl2025/",
+      "term": "Winter"
+    },
+    "E24": {
+      "course_id": "CIVL2026",
+      "course_name": "Construction Materials",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl2026/",
+      "term": "Winter"
+    },
+    "E40": {
+      "course_id": "COMM2242",
+      "course_name": "Communication for Civil Engineering 2",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/comm2242/",
+      "term": "Winter"
+    },
+    "E44": {
+      "course_id": "MATH2422",
+      "course_name": "Integral Calculus for Civil Engineering",
+      "course_type": "Core",
+      "credits": "6.00",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/math2422/",
+      "term": "Winter"
+    },
+    "E45": {
+      "course_id": "MATH2423",
+      "course_name": "Introductory Statistics for Civil Engineering",
+      "course_type": "Core",
+      "credits": "0.50",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/math2423/",
+      "term": "Winter"
+    },
+    "E49": {
+      "course_id": "PHYS2192",
+      "course_name": "Physics for Civil Engineering 2",
+      "course_type": "Core",
+      "credits": "6.50",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/phys2192/",
+      "term": "Winter"
+    },
+    "E51": {
+      "course_id": "SURV2230",
+      "course_name": "Surveying for Civil Engineering 2",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 2,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/surv2230/",
+      "term": "Winter"
+    },
+    "E25": {
+      "course_id": "CIVL3012",
+      "course_name": "Sustainability in Engineering",
+      "course_type": "Core",
+      "credits": "2.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3012/",
+      "term": "Fall"
+    },
+    "E26": {
+      "course_id": "CIVL3020",
+      "course_name": "Computer Applications",
+      "course_type": "Core",
+      "credits": "3.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3020/",
+      "term": "Fall"
+    },
+    "E27": {
+      "course_id": "CIVL3033",
+      "course_name": "Construction Management 1",
+      "course_type": "Core",
+      "credits": "3.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3033/",
+      "term": "Fall"
+    },
+    "E28": {
+      "course_id": "CIVL3041",
+      "course_name": "Soil Mechanics",
+      "course_type": "Core",
+      "credits": "3.50",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3041/",
+      "term": "Fall"
+    },
+    "E29": {
+      "course_id": "CIVL3050",
+      "course_name": "Road Design",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3050/",
+      "term": "Fall"
+    },
+    "E30": {
+      "course_id": "CIVL3052",
+      "course_name": "Municipal Engineering 1",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3052/",
+      "term": "Fall"
+    },
+    "E31": {
+      "course_id": "CIVL3074",
+      "course_name": "Structural Engineering 1",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl3074/",
+      "term": "Fall"
+    },
+    "E41": {
+      "course_id": "COMM3342",
+      "course_name": "Communications for Civil Engineering 3",
+      "course_type": "Core",
+      "credits": "2.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/comm3342/",
+      "term": "Fall"
+    },
+    "E46": {
+      "course_id": "MATH3423",
+      "course_name": "Multivariable Calculus and Linear Algebra for Civil Engineering",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 3,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/math3423/",
+      "term": "Fall"
+    },
+    "E16": {
+      "course_id": "CHEM6020",
+      "course_name": "Chemistry for Civil Engineering",
+      "course_type": "Elective",
+      "credits": "4.00",
+      "level": 4,
+      "notes": "Choose 2 of the Level 4 electives.",
+      "required": false,
+      "source_url": "https://www.bcit.ca/outlines/chem6020/",
+      "term": "Winter"
+    },
+    "E32": {
+      "course_id": "CIVL4024",
+      "course_name": "Land Development Modeling",
+      "course_type": "Elective",
+      "credits": "4.00",
+      "level": 4,
+      "notes": "Choose 2 of the Level 4 electives.",
+      "required": false,
+      "source_url": "https://www.bcit.ca/outlines/civl4024/",
+      "term": "Winter"
+    },
+    "E33": {
+      "course_id": "CIVL4033",
+      "course_name": "Construction Management 2",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl4033/",
+      "term": "Winter"
+    },
+    "E34": {
+      "course_id": "CIVL4041",
+      "course_name": "Geotechnical Analysis and Design",
+      "course_type": "Core",
+      "credits": "5.50",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl4041/",
+      "term": "Winter"
+    },
+    "E35": {
+      "course_id": "CIVL4052",
+      "course_name": "Municipal Engineering 2",
+      "course_type": "Core",
+      "credits": "5.50",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl4052/",
+      "term": "Winter"
+    },
+    "E36": {
+      "course_id": "CIVL4053",
+      "course_name": "Traffic Engineering Fundamentals",
+      "course_type": "Elective",
+      "credits": "4.00",
+      "level": 4,
+      "notes": "Choose 2 of the Level 4 electives.",
+      "required": false,
+      "source_url": "https://www.bcit.ca/outlines/civl4053/",
+      "term": "Winter"
+    },
+    "E37": {
+      "course_id": "CIVL4074",
+      "course_name": "Structural Engineering 2",
+      "course_type": "Core",
+      "credits": "6.00",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl4074/",
+      "term": "Winter"
+    },
+    "E38": {
+      "course_id": "CIVL4090",
+      "course_name": "Industry Project",
+      "course_type": "Core",
+      "credits": "4.00",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/civl4090/",
+      "term": "Winter"
+    },
+    "E42": {
+      "course_id": "COMM4442",
+      "course_name": "Communication for Civil Engineering 4",
+      "course_type": "Core",
+      "credits": "2.50",
+      "level": 4,
+      "required": true,
+      "source_url": "https://www.bcit.ca/outlines/comm4442/",
+      "term": "Winter"
+    },
+    "E47": {
+      "course_id": "MATH6010",
+      "course_name": "Advanced Mathematics for Civil Engineering 1",
+      "course_type": "Elective",
+      "credits": "4.00",
+      "level": 4,
+      "notes": "Choose 2 of the Level 4 electives.",
+      "required": false,
+      "source_url": "https://www.bcit.ca/outlines/math6010/",
+      "term": "Winter"
+    },
+    "E11": [
+      {
+        "__evidence_ref__": "E17"
+      },
+      {
+        "__evidence_ref__": "E18"
+      },
+      {
+        "__evidence_ref__": "E19"
+      },
+      {
+        "__evidence_ref__": "E20"
+      },
+      {
+        "__evidence_ref__": "E39"
+      },
+      {
+        "__evidence_ref__": "E43"
+      },
+      {
+        "__evidence_ref__": "E48"
+      },
+      {
+        "__evidence_ref__": "E50"
+      },
+      {
+        "__evidence_ref__": "E21"
+      },
+      {
+        "__evidence_ref__": "E22"
+      },
+      {
+        "__evidence_ref__": "E23"
+      },
+      {
+        "__evidence_ref__": "E24"
+      },
+      {
+        "__evidence_ref__": "E40"
+      },
+      {
+        "__evidence_ref__": "E44"
+      },
+      {
+        "__evidence_ref__": "E45"
+      },
+      {
+        "__evidence_ref__": "E49"
+      },
+      {
+        "__evidence_ref__": "E51"
+      },
+      {
+        "__evidence_ref__": "E25"
+      },
+      {
+        "__evidence_ref__": "E26"
+      },
+      {
+        "__evidence_ref__": "E27"
+      },
+      {
+        "__evidence_ref__": "E28"
+      },
+      {
+        "__evidence_ref__": "E29"
+      },
+      {
+        "__evidence_ref__": "E30"
+      },
+      {
+        "__evidence_ref__": "E31"
+      },
+      {
+        "__evidence_ref__": "E41"
+      },
+      {
+        "__evidence_ref__": "E46"
+      },
+      {
+        "__evidence_ref__": "E16"
+      },
+      {
+        "__evidence_ref__": "E32"
+      },
+      {
+        "__evidence_ref__": "E33"
+      },
+      {
+        "__evidence_ref__": "E34"
+      },
+      {
+        "__evidence_ref__": "E35"
+      },
+      {
+        "__evidence_ref__": "E36"
+      },
+      {
+        "__evidence_ref__": "E37"
+      },
+      {
+        "__evidence_ref__": "E38"
+      },
+      {
+        "__evidence_ref__": "E42"
+      },
+      {
+        "__evidence_ref__": "E47"
+      }
+    ],
+    "E13": {
+      "academic_rules": {
+        "__evidence_ref__": "E55"
+      },
+      "campus": "Burnaby",
+      "clinical_and_practice_requirements": {
+        "program_id": "5410DIPLT"
+      },
+      "courses": {
+        "__evidence_ref__": "E11"
+      },
+      "credential": "Diploma",
+      "curriculum": {
+        "program_id": "5410DIPLT"
+      },
+      "delivery_method": "In Person",
+      "program_id": "5410DIPLT",
+      "program_name": "Civil Engineering Diploma",
+      "program_overview": {
+        "__evidence_ref__": "E1"
+      },
+      "school": "School of Construction and the Environment",
+      "source_url": "https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/",
+      "status": "Active",
+      "study_mode": "Full-time"
+    },
+    "E54": {
+      "program": {
+        "__evidence_ref__": "E13"
+      }
+    },
+    "E2": "No. I’m an academic advising assistant, not BCIT’s admissions office, and I cannot make or guarantee admission decisions. I can explain the published requirements and help you assess how your stated qualifications compare.\n\nFinal decisions and any requirements needing institutional review must be confirmed by BCIT Admissions. For this diploma, applications go through the full-time Civil Engineering Bachelor of Engineering pathway rather than a separate diploma application.\n\nProgram page: https://www.bcit.ca/programs/civil-engineering-diploma-full-time-5410diplt/"
+  }
+}

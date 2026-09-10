@@ -1,0 +1,1680 @@
+{
+  "classification": {
+    "scenario_id": "CAT-08-C",
+    "turn": 2,
+    "root_cause": "response_generation_quality",
+    "pattern": "missing_next_step",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "The answer correctly refuses to guarantee employment but provides no practical next step, despite the frozen expectation explicitly requiring one. The phrase “applicable decision process and your circumstances” is also legalistic and less useful than directly referring to employers, job-search preparation, or the program’s optional work-term opportunity. No model call occurred on this turn, supporting deterministic attribution.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Accounting bachelor's degree, in two sentences.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Accounting bachelor's degree, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8630BACC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "BCIT’s Bachelor of Accounting is an in-person Burnaby program offered full-time or part-time, developing technical, communication, and problem-solving skills while providing academic preparation toward CPA pathways. Its 60-credit curriculum includes FMGT 8911 Strategic Performance Management, seven advanced technical electives, and 36 general-education credits; details: https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 15,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Accounting",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8630BACC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 6.219,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "8630BACC",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "8630BACC",
+            "program_name": "Accounting",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Tell me about Accounting bachelor's degree, in two sentences.\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: 8630BACC. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"8630BACC\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_05cfe984296befa6006aa1012045b087d0b0c435ffb26a0b81",
+            "created_at": 1788936480.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"8630BACC\"}",
+                "call_id": "call_rO055S0gl1k8jrMvtSVsHyKx",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_05cfe984296befa6006aa101212eb887d09f76ae6ff68c50df",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936481.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1798,
+              "input_tokens_details": {
+                "cache_write_tokens": 142,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 23,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1821
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "8630BACC"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Tell me about Accounting bachelor's degree, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "8630BACC",
+            "program_name": "Accounting",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "8630BACC",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 485,
+                            "condition_type": "PRIOR_DIPLOMA",
+                            "description": "BCIT Accounting, Finance, or Financial Planning diploma, or equivalent external diploma assessed individually.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "DIPLOMA_PATHWAY",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 208,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "DIPLOMA_PATHWAY",
+                    "notes": "BCIT Accounting, Finance, or Financial Planning diploma, or equivalent external diploma assessed individually.",
+                    "rule_set_id": 343,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 486,
+                            "condition_type": "GPA",
+                            "description": "Minimum diploma GPA 70%.",
+                            "minimum_value": "70",
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": "PERCENT"
+                          }
+                        ],
+                        "label": "DIPLOMA_GPA",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 209,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "DIPLOMA_GPA",
+                    "notes": "Minimum diploma GPA 70%.",
+                    "rule_set_id": 344,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 487,
+                            "condition_type": "ENGLISH_GRADE",
+                            "description": "English Studies 12 (67%) or equivalent.",
+                            "minimum_value": "67",
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 3,
+                            "subject_id": "ENGLISH_STUDIES_12",
+                            "unit": "PERCENT"
+                          }
+                        ],
+                        "label": "ENGLISH",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 210,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "ENGLISH",
+                    "notes": "English Studies 12 (67%) or equivalent.",
+                    "rule_set_id": 345,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 488,
+                            "condition_type": "SUBJECT_SEQUENCE_AVERAGES",
+                            "description": "Five second-year subject-sequence averages normally 65%; no more than two may be 62%-65%.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 4,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "SUBJECT_SEQUENCE_AVERAGES",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 211,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "SUBJECT_SEQUENCE_AVERAGES",
+                    "notes": "Five second-year subject-sequence averages normally 65%; no more than two may be 62%-65%.",
+                    "rule_set_id": 346,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 489,
+                            "condition_type": "PRE_ENTRY_ASSESSMENT",
+                            "description": "Signed departmental pre-entry assessment and any assigned bridging/upgrading are required.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 5,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "PRE_ENTRY_ASSESSMENT",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 212,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "PRE_ENTRY_ASSESSMENT",
+                    "notes": "Signed departmental pre-entry assessment and any assigned bridging/upgrading are required.",
+                    "rule_set_id": 347,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 494,
+                            "condition_type": "CREDITS",
+                            "description": "Complete 60.0 credits: FMGT 8911, seven Advanced Technical Specialty electives, and 36.0 General Education credits. The industry-sponsored-project statement is preserved as published. Optional work terms do not form part of the 60.0-credit academic requirement.",
+                            "minimum_value": "60",
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "minimum_credits"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": "CREDITS"
+                          }
+                        ],
+                        "label": "COMPLETE_60_CREDITS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 217,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPLETE_60_CREDITS",
+                    "notes": "Complete 60.0 credits: FMGT 8911, seven Advanced Technical Specialty electives, and 36.0 General Education credits. The industry-sponsored-project statement is preserved as published. Optional work terms do not form part of the 60.0-credit academic requirement.",
+                    "rule_set_id": 352,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": 7,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 490,
+                            "condition_type": "COURSE_CHOICE_COUNT",
+                            "description": "Complete seven courses from the listed Advanced Technical Specialty elective pool.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "choose_n"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "SEVEN_TECHNICAL_ELECTIVES",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 213,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "SEVEN_TECHNICAL_ELECTIVES",
+                    "notes": "Complete seven courses from the listed Advanced Technical Specialty elective pool.",
+                    "rule_set_id": 348,
+                    "scope": "CURRICULUM",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 491,
+                            "condition_type": "CREDITS",
+                            "description": "36.0 General Education credits under the published category policy.",
+                            "minimum_value": "36",
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "minimum_credits"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": "CREDITS"
+                          }
+                        ],
+                        "label": "GENERAL_EDUCATION_36",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 214,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "GENERAL_EDUCATION_36",
+                    "notes": "36.0 General Education credits under the published category policy.",
+                    "rule_set_id": 349,
+                    "scope": "CURRICULUM",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 495,
+                            "condition_type": "INTERNATIONAL_ELIGIBLE",
+                            "description": "International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. The optional Workplace Education courses, FMGT 7610 and FMGT 7620, are not available to international students. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a bachelor’s degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a bachelor’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "INTERNATIONAL_ELIGIBLE",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 218,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "INTERNATIONAL_ELIGIBLE",
+                    "notes": "International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. The optional Workplace Education courses, FMGT 7610 and FMGT 7620, are not available to international students. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a bachelor’s degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a bachelor’s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC.",
+                    "rule_set_id": 353,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 496,
+                            "condition_type": "WORK_TERM_RESTRICTION",
+                            "description": "FMGT 7610 and FMGT 7620 are unavailable to international students.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "raw_policy"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "WORK_TERM_RESTRICTION",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 219,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "WORK_TERM_RESTRICTION",
+                    "notes": "FMGT 7610 and FMGT 7620 are unavailable to international students.",
+                    "rule_set_id": 354,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 497,
+                            "condition_type": "PGWP_ADVISORY",
+                            "description": "The page says bachelor-degree graduates may apply for a PGWP; IRCC makes the final decision.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "raw_policy"
+                            },
+                            "sort_order": 3,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "PGWP_ADVISORY",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 220,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "PGWP_ADVISORY",
+                    "notes": "The page says bachelor-degree graduates may apply for a PGWP; IRCC makes the final decision.",
+                    "rule_set_id": 355,
+                    "scope": "INTERNATIONAL",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 498,
+                            "condition_type": "CPA_ALIGNMENT_NOT_CERTIFICATION",
+                            "description": "Academic preparation/alignment toward CPA PEP is advisory and does not award CPA designation or licensure.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "raw_policy"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "CPA_ALIGNMENT_NOT_CERTIFICATION",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 221,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "CPA_ALIGNMENT_NOT_CERTIFICATION",
+                    "notes": "Academic preparation/alignment toward CPA PEP is advisory and does not award CPA designation or licensure.",
+                    "rule_set_id": 356,
+                    "scope": "PROFESSIONAL",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 492,
+                            "condition_type": "MAXIMUM_DURATION",
+                            "description": "Maximum completion time is seven years.",
+                            "minimum_value": "7",
+                            "parameters": {
+                              "executable": true,
+                              "human_confirmation_only": false,
+                              "semantic": "threshold"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": "YEARS"
+                          }
+                        ],
+                        "label": "MAX_SEVEN_YEARS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 215,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "MAX_SEVEN_YEARS",
+                    "notes": "Maximum completion time is seven years.",
+                    "rule_set_id": 350,
+                    "scope": "PROGRESSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 493,
+                            "condition_type": "MODE_SEQUENCE",
+                            "description": "Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "raw_policy"
+                            },
+                            "sort_order": 2,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "MODE_SEQUENCE",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 216,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "MODE_SEQUENCE",
+                    "notes": "Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.",
+                    "rule_set_id": 351,
+                    "scope": "PROGRESSION",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 499,
+                            "condition_type": "INDIVIDUAL_EQUIVALENCY",
+                            "description": "External diplomas are assessed individually for equivalency and may require bridging. No program-specific transfer-credit maximum or PLAR rule is stated.",
+                            "minimum_value": null,
+                            "parameters": {
+                              "executable": false,
+                              "human_confirmation_only": true,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "INDIVIDUAL_EQUIVALENCY",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 222,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "INDIVIDUAL_EQUIVALENCY",
+                    "notes": "External diplomas are assessed individually for equivalency and may require bridging. No program-specific transfer-credit maximum or PLAR rule is stated.",
+                    "rule_set_id": 357,
+                    "scope": "TRANSFER",
+                    "study_mode": "Full-time / Part-time (Flexible Learning)"
+                  }
+                ]
+              },
+              "academic_scope_boundaries": {
+                "binding_rule": "Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.",
+                "credential_award_evidence": [],
+                "later_level_progression_requirements": [
+                  {
+                    "description": "Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.",
+                    "from_level": 1,
+                    "source_url": "https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/",
+                    "to_level": 2,
+                    "type": "MAXIMUM_DURATION",
+                    "value": "7 years"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "8630BACC"
+              },
+              "courses": [
+                {
+                  "course_id": "ACCG6310",
+                  "course_name": "Auditing and Assurance",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/auditing-and-assurance-accg-6310/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7121",
+                  "course_name": "Advanced Accounting",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-accounting-fmgt-7121/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7210",
+                  "course_name": "Advanced Management Accounting",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-management-accounting-fmgt-7210/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7310",
+                  "course_name": "Advanced Auditing",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-auditing-fmgt-7310/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7410",
+                  "course_name": "Taxation of Close Corporations",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/taxation-of-close-corporations-fmgt-7410/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7510",
+                  "course_name": "Advanced Finance",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-finance-fmgt-7510/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7520",
+                  "course_name": "Business Valuation",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/business-valuation-fmgt-7520/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7610",
+                  "course_name": "Workplace Education Workterm 1",
+                  "course_type": "OPTIONAL",
+                  "credits": "16.00",
+                  "level": null,
+                  "notes": "Optional Work Term (available to full-time domestic students only)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/workplace-education-workterm-1-fmgt-7610/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7620",
+                  "course_name": "Workplace Education Workterm 2",
+                  "course_type": "OPTIONAL",
+                  "credits": "16.00",
+                  "level": null,
+                  "notes": "Optional Work Term (available to full-time domestic students only)",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/workplace-education-workterm-2-fmgt-7620/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT7910",
+                  "course_name": "The Business Environment",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/the-business-environment-fmgt-7910/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT8121",
+                  "course_name": "Contemporary Issues in Accounting",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/contemporary-issues-in-accounting-fmgt-8121/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT8610",
+                  "course_name": "Independent Technical Studies Abroad 1",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/independent-technical-studies-abroad-1-fmgt-8610/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT8620",
+                  "course_name": "Independent Technical Studies Abroad 2",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/independent-technical-studies-abroad-2-fmgt-8620/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT8911",
+                  "course_name": "Strategic Performance Management",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/strategic-performance-management-fmgt-8911/",
+                  "term": null
+                },
+                {
+                  "course_id": "FMGT8920",
+                  "course_name": "Case Writing Fundamentals",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Complete seven courses from the following list of electives",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/case-writing-fundamentals-fmgt-8920/",
+                  "term": null
+                },
+                {
+                  "course_id": "LIBS7001",
+                  "course_name": "Critical Reading and Writing",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "General Education (36.0 credits)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/",
+                  "term": null
+                },
+                {
+                  "course_id": "LIBS7002",
+                  "course_name": "Applied Ethics",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "General Education (36.0 credits)",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/courses/applied-ethics-libs-7002/",
+                  "term": null
+                }
+              ],
+              "credential": "Bachelor's Degree",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 295,
+                    "component_name": "Required Courses",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "FMGT8911",
+                        "course_name": "Strategic Performance Management",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 8911",
+                        "source_url": "https://www.bcit.ca/courses/strategic-performance-management-fmgt-8911/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "1. Required Courses:",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 292,
+                    "component_name": "Complete seven courses from the following list of electives",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "ACCG6310",
+                        "course_name": "Auditing and Assurance",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "ACCG 6310",
+                        "source_url": "https://www.bcit.ca/courses/auditing-and-assurance-accg-6310/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7121",
+                        "course_name": "Advanced Accounting",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7121",
+                        "source_url": "https://www.bcit.ca/courses/advanced-accounting-fmgt-7121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7210",
+                        "course_name": "Advanced Management Accounting",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7210",
+                        "source_url": "https://www.bcit.ca/courses/advanced-management-accounting-fmgt-7210/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7310",
+                        "course_name": "Advanced Auditing",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7310",
+                        "source_url": "https://www.bcit.ca/courses/advanced-auditing-fmgt-7310/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7410",
+                        "course_name": "Taxation of Close Corporations",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7410",
+                        "source_url": "https://www.bcit.ca/courses/taxation-of-close-corporations-fmgt-7410/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7510",
+                        "course_name": "Advanced Finance",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7510",
+                        "source_url": "https://www.bcit.ca/courses/advanced-finance-fmgt-7510/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7520",
+                        "course_name": "Business Valuation",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7520",
+                        "source_url": "https://www.bcit.ca/courses/business-valuation-fmgt-7520/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7910",
+                        "course_name": "The Business Environment",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7910",
+                        "source_url": "https://www.bcit.ca/courses/the-business-environment-fmgt-7910/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT8121",
+                        "course_name": "Contemporary Issues in Accounting",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 8121",
+                        "source_url": "https://www.bcit.ca/courses/contemporary-issues-in-accounting-fmgt-8121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT8610",
+                        "course_name": "Independent Technical Studies Abroad 1",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 8610",
+                        "source_url": "https://www.bcit.ca/courses/independent-technical-studies-abroad-1-fmgt-8610/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT8620",
+                        "course_name": "Independent Technical Studies Abroad 2",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 8620",
+                        "source_url": "https://www.bcit.ca/courses/independent-technical-studies-abroad-2-fmgt-8620/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT8920",
+                        "course_name": "Case Writing Fundamentals",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 8920",
+                        "source_url": "https://www.bcit.ca/courses/case-writing-fundamentals-fmgt-8920/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "2. Complete seven courses from the following list of electives:",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 293,
+                    "component_name": "General Education (36.0 credits)",
+                    "component_order": 3,
+                    "courses": [
+                      {
+                        "course_id": "LIBS7001",
+                        "course_name": "Critical Reading and Writing",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "LIBS 7001",
+                        "source_url": "https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "LIBS7002",
+                        "course_name": "Applied Ethics",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "LIBS 7002",
+                        "source_url": "https://www.bcit.ca/courses/applied-ethics-libs-7002/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "3. General Education (36.0 credits): Mandatory Courses: *or equivalent applied ethics course Elective Courses: 6.0 credits - Social Science or Humanities 9.0 credits - Arts or Science 15.0 credits - Unspecified Students must achieve these elective credits in accordance with the Bachelor of Accounting General Education Requirements [PDF] .",
+                    "required_credits": null
+                  },
+                  {
+                    "component_id": 294,
+                    "component_name": "Optional Work Term (available to full-time domestic students only)",
+                    "component_order": 4,
+                    "courses": [
+                      {
+                        "course_id": "FMGT7610",
+                        "course_name": "Workplace Education Workterm 1",
+                        "course_role": "OPTIONAL",
+                        "credits": "16.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7610",
+                        "source_url": "https://www.bcit.ca/courses/workplace-education-workterm-1-fmgt-7610/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "FMGT7620",
+                        "course_name": "Workplace Education Workterm 2",
+                        "course_role": "OPTIONAL",
+                        "credits": "16.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "FMGT 7620",
+                        "source_url": "https://www.bcit.ca/courses/workplace-education-workterm-2-fmgt-7620/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "4. Optional Work Term (available to full-time domestic students only): Total Credits: 60.0",
+                    "required_credits": null
+                  }
+                ],
+                "credit_requirements": [],
+                "program_id": "8630BACC",
+                "substitutions": []
+              },
+              "delivery_method": "In person",
+              "program_id": "8630BACC",
+              "program_name": "Accounting",
+              "program_overview": "The Bachelor of Accounting program offers an academic credential leading to a Chartered Professional Accountant (CPA) designation. Choose between part-time Flexible Learning or full-time day stream options. Apply today to develop essential technical, communication, and problem-solving skills for success in the accounting field. Delivery: in person. See details . If you have completed a BCIT Accounting , Finance , or Financial Planning diploma, you can earn your Bachelor of Accounting (BAcc) at BCIT. This degree will provide you with an academic credential leading to a CPA (Chartered Professional Accountant ) designation, a MPAcc (Master of Professional Accounting) , or an MBA program. Students completing this program will acquire the key technical, interpersonal, communication, and problem-solving skills demanded by employers. The BCIT model: fast, flexible and effective BCIT’s Bachelor of Accounting is offered as: Flexible Learning: The flexible part-time program allows you to maintain your career and study at the same time. You can register course by course, and apply for admission to the program any time. Or Full-Time Day Stream: This program is offered on a full-time basis for those students who want to accelerate their completion of the program. The program starts every September and January. International study BCIT offers a number of international study opportunities that helps students gain a global perspective of the economy, culture, government, and everyday life of the country they study in. You could participate in a summer field school or complete an international degree. Learn more about studying abroad . Next up Entrance Requirements",
+              "school": "School of Business + Media",
+              "source_url": "https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/",
+              "status": "Active",
+              "study_mode": "Full-time / Part-time (Flexible Learning)"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_rO055S0gl1k8jrMvtSVsHyKx",
+                "output": "{\"program\": {\"program_id\": \"8630BACC\", \"program_name\": \"Accounting\", \"program_overview\": \"The Bachelor of Accounting program offers an academic credential leading to a Chartered Professional Accountant (CPA) designation. Choose between part-time Flexible Learning or full-time day stream options. Apply today to develop essential technical, communication, and problem-solving skills for success in the accounting field. Delivery: in person. See details . If you have completed a BCIT Accounting , Finance , or Financial Planning diploma, you can earn your Bachelor of Accounting (BAcc) at BCIT. This degree will provide you with an academic credential leading to a CPA (Chartered Professional Accountant ) designation, a MPAcc (Master of Professional Accounting) , or an MBA program. Students completing this program will acquire the key technical, interpersonal, communication, and problem-solving skills demanded by employers. The BCIT model: fast, flexible and effective BCIT\\u2019s Bachelor of Accounting is offered as: Flexible Learning: The flexible part-time program allows you to maintain your career and study at the same time. You can register course by course, and apply for admission to the program any time. Or Full-Time Day Stream: This program is offered on a full-time basis for those students who want to accelerate their completion of the program. The program starts every September and January. International study BCIT offers a number of international study opportunities that helps students gain a global perspective of the economy, culture, government, and everyday life of the country they study in. You could participate in a summer field school or complete an international degree. Learn more about studying abroad . Next up Entrance Requirements\", \"school\": \"School of Business + Media\", \"credential\": \"Bachelor's Degree\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"campus\": \"Burnaby Campus\", \"delivery_method\": \"In person\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/\", \"courses\": [{\"course_id\": \"ACCG6310\", \"course_name\": \"Auditing and Assurance\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/auditing-and-assurance-accg-6310/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7121\", \"course_name\": \"Advanced Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-accounting-fmgt-7121/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7210\", \"course_name\": \"Advanced Management Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-management-accounting-fmgt-7210/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7310\", \"course_name\": \"Advanced Auditing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-auditing-fmgt-7310/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7410\", \"course_name\": \"Taxation of Close Corporations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/taxation-of-close-corporations-fmgt-7410/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7510\", \"course_name\": \"Advanced Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-finance-fmgt-7510/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7520\", \"course_name\": \"Business Valuation\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/business-valuation-fmgt-7520/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT7610\", \"course_name\": \"Workplace Education Workterm 1\", \"credits\": \"16.00\", \"source_url\": \"https://www.bcit.ca/courses/workplace-education-workterm-1-fmgt-7610/\", \"level\": null, \"term\": null, \"course_type\": \"OPTIONAL\", \"required\": false, \"notes\": \"Optional Work Term (available to full-time domestic students only)\"}, {\"course_id\": \"FMGT7620\", \"course_name\": \"Workplace Education Workterm 2\", \"credits\": \"16.00\", \"source_url\": \"https://www.bcit.ca/courses/workplace-education-workterm-2-fmgt-7620/\", \"level\": null, \"term\": null, \"course_type\": \"OPTIONAL\", \"required\": false, \"notes\": \"Optional Work Term (available to full-time domestic students only)\"}, {\"course_id\": \"FMGT7910\", \"course_name\": \"The Business Environment\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/the-business-environment-fmgt-7910/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT8121\", \"course_name\": \"Contemporary Issues in Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/contemporary-issues-in-accounting-fmgt-8121/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT8610\", \"course_name\": \"Independent Technical Studies Abroad 1\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-technical-studies-abroad-1-fmgt-8610/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT8620\", \"course_name\": \"Independent Technical Studies Abroad 2\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-technical-studies-abroad-2-fmgt-8620/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"FMGT8911\", \"course_name\": \"Strategic Performance Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/strategic-performance-management-fmgt-8911/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"FMGT8920\", \"course_name\": \"Case Writing Fundamentals\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/case-writing-fundamentals-fmgt-8920/\", \"level\": null, \"term\": null, \"course_type\": \"ELECTIVE_POOL\", \"required\": false, \"notes\": \"Complete seven courses from the following list of electives\"}, {\"course_id\": \"LIBS7001\", \"course_name\": \"Critical Reading and Writing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"General Education (36.0 credits)\"}, {\"course_id\": \"LIBS7002\", \"course_name\": \"Applied Ethics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-ethics-libs-7002/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"General Education (36.0 credits)\"}], \"curriculum\": {\"program_id\": \"8630BACC\", \"components\": [{\"component_id\": 295, \"component_name\": \"Required Courses\", \"component_order\": 1, \"required_credits\": null, \"notes\": \"1. Required Courses:\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT8911\", \"course_name\": \"Strategic Performance Management\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/strategic-performance-management-fmgt-8911/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 8911\"}]}, {\"component_id\": 292, \"component_name\": \"Complete seven courses from the following list of electives\", \"component_order\": 2, \"required_credits\": null, \"notes\": \"2. Complete seven courses from the following list of electives:\", \"courses\": [{\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"ACCG6310\", \"course_name\": \"Auditing and Assurance\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/courses/auditing-and-assurance-accg-6310/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"ACCG 6310\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7121\", \"course_name\": \"Advanced Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-accounting-fmgt-7121/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7121\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7210\", \"course_name\": \"Advanced Management Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-management-accounting-fmgt-7210/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7210\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7310\", \"course_name\": \"Advanced Auditing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-auditing-fmgt-7310/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7310\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7410\", \"course_name\": \"Taxation of Close Corporations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/taxation-of-close-corporations-fmgt-7410/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7410\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7510\", \"course_name\": \"Advanced Finance\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/advanced-finance-fmgt-7510/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7510\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7520\", \"course_name\": \"Business Valuation\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/business-valuation-fmgt-7520/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7520\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7910\", \"course_name\": \"The Business Environment\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/the-business-environment-fmgt-7910/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7910\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT8121\", \"course_name\": \"Contemporary Issues in Accounting\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/contemporary-issues-in-accounting-fmgt-8121/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 8121\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT8610\", \"course_name\": \"Independent Technical Studies Abroad 1\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-technical-studies-abroad-1-fmgt-8610/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 8610\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT8620\", \"course_name\": \"Independent Technical Studies Abroad 2\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/independent-technical-studies-abroad-2-fmgt-8620/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 8620\"}, {\"course_role\": \"ELECTIVE_POOL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT8920\", \"course_name\": \"Case Writing Fundamentals\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/case-writing-fundamentals-fmgt-8920/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 8920\"}]}, {\"component_id\": 293, \"component_name\": \"General Education (36.0 credits)\", \"component_order\": 3, \"required_credits\": null, \"notes\": \"3. General Education (36.0 credits): Mandatory Courses: *or equivalent applied ethics course Elective Courses: 6.0 credits - Social Science or Humanities 9.0 credits - Arts or Science 15.0 credits - Unspecified Students must achieve these elective credits in accordance with the Bachelor of Accounting General Education Requirements [PDF] .\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7001\", \"course_name\": \"Critical Reading and Writing\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/critical-reading-and-writing-libs-7001/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"LIBS 7001\"}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"LIBS7002\", \"course_name\": \"Applied Ethics\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/courses/applied-ethics-libs-7002/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"LIBS 7002\"}]}, {\"component_id\": 294, \"component_name\": \"Optional Work Term (available to full-time domestic students only)\", \"component_order\": 4, \"required_credits\": null, \"notes\": \"4. Optional Work Term (available to full-time domestic students only): Total Credits: 60.0\", \"courses\": [{\"course_role\": \"OPTIONAL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7610\", \"course_name\": \"Workplace Education Workterm 1\", \"credits\": \"16.00\", \"source_url\": \"https://www.bcit.ca/courses/workplace-education-workterm-1-fmgt-7610/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7610\"}, {\"course_role\": \"OPTIONAL\", \"study_mode\": \"ALL\", \"course_id\": \"FMGT7620\", \"course_name\": \"Workplace Education Workterm 2\", \"credits\": \"16.00\", \"source_url\": \"https://www.bcit.ca/courses/workplace-education-workterm-2-fmgt-7620/\", \"institution_key\": \"BCIT\", \"native_course_code\": \"FMGT 7620\"}]}], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"8630BACC\", \"rule_sets\": [{\"rule_set_id\": 343, \"scope\": \"ADMISSION\", \"name\": \"DIPLOMA_PATHWAY\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"BCIT Accounting, Finance, or Financial Planning diploma, or equivalent external diploma assessed individually.\", \"groups\": [{\"rule_group_id\": 208, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"DIPLOMA_PATHWAY\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 485, \"condition_type\": \"PRIOR_DIPLOMA\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"alternative_path\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"BCIT Accounting, Finance, or Financial Planning diploma, or equivalent external diploma assessed individually.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 344, \"scope\": \"ADMISSION\", \"name\": \"DIPLOMA_GPA\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Minimum diploma GPA 70%.\", \"groups\": [{\"rule_group_id\": 209, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"DIPLOMA_GPA\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 486, \"condition_type\": \"GPA\", \"subject_id\": null, \"minimum_value\": \"70\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {\"semantic\": \"threshold\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"Minimum diploma GPA 70%.\", \"sort_order\": 2}], \"children\": []}]}, {\"rule_set_id\": 345, \"scope\": \"ADMISSION\", \"name\": \"ENGLISH\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"English Studies 12 (67%) or equivalent.\", \"groups\": [{\"rule_group_id\": 210, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"ENGLISH\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 487, \"condition_type\": \"ENGLISH_GRADE\", \"subject_id\": \"ENGLISH_STUDIES_12\", \"minimum_value\": \"67\", \"unit\": \"PERCENT\", \"accepted_values\": null, \"parameters\": {\"semantic\": \"threshold\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"English Studies 12 (67%) or equivalent.\", \"sort_order\": 3}], \"children\": []}]}, {\"rule_set_id\": 346, \"scope\": \"ADMISSION\", \"name\": \"SUBJECT_SEQUENCE_AVERAGES\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Five second-year subject-sequence averages normally 65%; no more than two may be 62%-65%.\", \"groups\": [{\"rule_group_id\": 211, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"SUBJECT_SEQUENCE_AVERAGES\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 488, \"condition_type\": \"SUBJECT_SEQUENCE_AVERAGES\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"Five second-year subject-sequence averages normally 65%; no more than two may be 62%-65%.\", \"sort_order\": 4}], \"children\": []}]}, {\"rule_set_id\": 347, \"scope\": \"ADMISSION\", \"name\": \"PRE_ENTRY_ASSESSMENT\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Signed departmental pre-entry assessment and any assigned bridging/upgrading are required.\", \"groups\": [{\"rule_group_id\": 212, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"PRE_ENTRY_ASSESSMENT\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 489, \"condition_type\": \"PRE_ENTRY_ASSESSMENT\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"Signed departmental pre-entry assessment and any assigned bridging/upgrading are required.\", \"sort_order\": 5}], \"children\": []}]}, {\"rule_set_id\": 352, \"scope\": \"COMPLETION\", \"name\": \"COMPLETE_60_CREDITS\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Complete 60.0 credits: FMGT 8911, seven Advanced Technical Specialty electives, and 36.0 General Education credits. The industry-sponsored-project statement is preserved as published. Optional work terms do not form part of the 60.0-credit academic requirement.\", \"groups\": [{\"rule_group_id\": 217, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPLETE_60_CREDITS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 494, \"condition_type\": \"CREDITS\", \"subject_id\": null, \"minimum_value\": \"60\", \"unit\": \"CREDITS\", \"accepted_values\": null, \"parameters\": {\"semantic\": \"minimum_credits\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"Complete 60.0 credits: FMGT 8911, seven Advanced Technical Specialty electives, and 36.0 General Education credits. The industry-sponsored-project statement is preserved as published. Optional work terms do not form part of the 60.0-credit academic requirement.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 348, \"scope\": \"CURRICULUM\", \"name\": \"SEVEN_TECHNICAL_ELECTIVES\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": 7, \"notes\": \"Complete seven courses from the listed Advanced Technical Specialty elective pool.\", \"groups\": [{\"rule_group_id\": 213, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"SEVEN_TECHNICAL_ELECTIVES\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 490, \"condition_type\": \"COURSE_CHOICE_COUNT\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"choose_n\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"Complete seven courses from the listed Advanced Technical Specialty elective pool.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 349, \"scope\": \"CURRICULUM\", \"name\": \"GENERAL_EDUCATION_36\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"36.0 General Education credits under the published category policy.\", \"groups\": [{\"rule_group_id\": 214, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"GENERAL_EDUCATION_36\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 491, \"condition_type\": \"CREDITS\", \"subject_id\": null, \"minimum_value\": \"36\", \"unit\": \"CREDITS\", \"accepted_values\": null, \"parameters\": {\"semantic\": \"minimum_credits\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"36.0 General Education credits under the published category policy.\", \"sort_order\": 2}], \"children\": []}]}, {\"rule_set_id\": 353, \"scope\": \"INTERNATIONAL\", \"name\": \"INTERNATIONAL_ELIGIBLE\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. The optional Workplace Education courses, FMGT 7610 and FMGT 7620, are not available to international students. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a bachelor\\u2019s degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a bachelor\\u2019s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC.\", \"groups\": [{\"rule_group_id\": 218, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"INTERNATIONAL_ELIGIBLE\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 495, \"condition_type\": \"INTERNATIONAL_ELIGIBLE\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"International applicants This program is available to international applicants. Study permit: A valid BCIT study permit is required prior to starting the program. The optional Workplace Education courses, FMGT 7610 and FMGT 7620, are not available to international students. Post-graduation Work Permit (PGWP) eligibility : This program currently meets the PGWP eligibility requirements based on study program - graduates with a bachelor\\u2019s degree and is eligible for students to apply for a PGWP. There are no field of study requirements (CIP) for graduates with a bachelor\\u2019s degree. Students are responsible for meeting all Immigration, Refugees, and Citizenship Canada (IRCC) PGWP eligibility requirements . Final PGWP approval is at the discretion of IRCC.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 354, \"scope\": \"INTERNATIONAL\", \"name\": \"WORK_TERM_RESTRICTION\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"FMGT 7610 and FMGT 7620 are unavailable to international students.\", \"groups\": [{\"rule_group_id\": 219, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"WORK_TERM_RESTRICTION\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 496, \"condition_type\": \"WORK_TERM_RESTRICTION\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"raw_policy\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"FMGT 7610 and FMGT 7620 are unavailable to international students.\", \"sort_order\": 2}], \"children\": []}]}, {\"rule_set_id\": 355, \"scope\": \"INTERNATIONAL\", \"name\": \"PGWP_ADVISORY\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"The page says bachelor-degree graduates may apply for a PGWP; IRCC makes the final decision.\", \"groups\": [{\"rule_group_id\": 220, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"PGWP_ADVISORY\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 497, \"condition_type\": \"PGWP_ADVISORY\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"raw_policy\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"The page says bachelor-degree graduates may apply for a PGWP; IRCC makes the final decision.\", \"sort_order\": 3}], \"children\": []}]}, {\"rule_set_id\": 356, \"scope\": \"PROFESSIONAL\", \"name\": \"CPA_ALIGNMENT_NOT_CERTIFICATION\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Academic preparation/alignment toward CPA PEP is advisory and does not award CPA designation or licensure.\", \"groups\": [{\"rule_group_id\": 221, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"CPA_ALIGNMENT_NOT_CERTIFICATION\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 498, \"condition_type\": \"CPA_ALIGNMENT_NOT_CERTIFICATION\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"raw_policy\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"Academic preparation/alignment toward CPA PEP is advisory and does not award CPA designation or licensure.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 350, \"scope\": \"PROGRESSION\", \"name\": \"MAX_SEVEN_YEARS\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Maximum completion time is seven years.\", \"groups\": [{\"rule_group_id\": 215, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"MAX_SEVEN_YEARS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 492, \"condition_type\": \"MAXIMUM_DURATION\", \"subject_id\": null, \"minimum_value\": \"7\", \"unit\": \"YEARS\", \"accepted_values\": null, \"parameters\": {\"semantic\": \"threshold\", \"executable\": true, \"human_confirmation_only\": false}, \"description\": \"Maximum completion time is seven years.\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 351, \"scope\": \"PROGRESSION\", \"name\": \"MODE_SEQUENCE\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.\", \"groups\": [{\"rule_group_id\": 216, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"MODE_SEQUENCE\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 493, \"condition_type\": \"MODE_SEQUENCE\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"raw_policy\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.\", \"sort_order\": 2}], \"children\": []}]}, {\"rule_set_id\": 357, \"scope\": \"TRANSFER\", \"name\": \"INDIVIDUAL_EQUIVALENCY\", \"study_mode\": \"Full-time / Part-time (Flexible Learning)\", \"exact_choice_count\": null, \"notes\": \"External diplomas are assessed individually for equivalency and may require bridging. No program-specific transfer-credit maximum or PLAR rule is stated.\", \"groups\": [{\"rule_group_id\": 222, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"INDIVIDUAL_EQUIVALENCY\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 499, \"condition_type\": \"INDIVIDUAL_EQUIVALENCY\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"executable\": false, \"human_confirmation_only\": true}, \"description\": \"External diplomas are assessed individually for equivalency and may require bridging. No program-specific transfer-credit maximum or PLAR rule is stated.\", \"sort_order\": 1}], \"children\": []}]}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"8630BACC\", \"clinical_placement\": [], \"practice_hours\": []}, \"academic_scope_boundaries\": {\"credential_award_evidence\": [], \"later_level_progression_requirements\": [{\"from_level\": 1, \"to_level\": 2, \"type\": \"MAXIMUM_DURATION\", \"value\": \"7 years\", \"description\": \"Full-time specialty courses are sequenced across Fall and Winter; Flexible Learning is course-by-course. Maximum completion time is seven years.\", \"source_url\": \"https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/\"}], \"binding_rule\": \"Later-level continuation requirements govern entry to the stated later level. They are not conditions for an earlier credential unless the stored credential-award evidence says so.\"}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_05cfe984296befa6006aa1012045b087d0b0c435ffb26a0b81"
+          },
+          "response": {
+            "id": "resp_05cfe984296befa6006aa10121f26887d0bed954546adc3ad4",
+            "created_at": 1788936482.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_05cfe984296befa6006aa10122e50887d08d049bd81c57f7d1",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQElyTT2g5QyJcDDb2MxHsA8MuDiazoTdg2Cw1nOqNQntkzdkzWaNPOUivZw-GWM3V78hUEAv4ELUbkBZgnZq5jyJheFyPDiLexRSTm1AROFoLd2nYsu1qNszQUv56hRlw_nqcyMSXe6kRVl54ZIblQrmNjB9a-JhRn16LQpbGtqJvTnZSJma7Lv878eaFMJpIpbEm_fVQZWULXBRAcXhJ7yzX2l_GihRSrEwL3K5O42rX90QhaDeMy3wawMdn3vkAJgufoz7cdrtYWWKXs80BIyCgTg7nVZWm8mtBg8tg0wDLoDzg-YxuZUhTikbfSXtpzLqzhxbdvyabRSuV3CksHhlNYalBIZ7pp7SxRrF5KzhJJZeYdMeNGzODBIsxopouiPtNtjzxvgz_gM9yS6GXW9lwWx8VdYjcLUz1PGzxJZIvdNRySBdeKfJBQDtVpC37XIdIt7D00LSoPjDLQskYW9iymnbi69oRCMXoYUi5xWaaUqiqz5j3HJneVG2cU0ftc1LWXCBgOxykS58a7T1bfhNVyOfIJaffa6JTKl4XKxUCPFNccYbc9H10s1Kn03w9kAjnwxa1CR90X8GiCOBYhf4Xso2ZbRMf658XoQqHx55bqJX0poZEnjCVg4VZOquGZmlalaKfWU6oofjgV9ymOSx1IbqLhEB35YNEvUzUTmKEsqRStMnTihH6KHDGzuzfH9jmJ9MA3sS42Gw4KOLfXjiDDXzhY9Ta4f_UKRZpbvhUWRsG-Cr6FfVin15MRloKqGgQPa1hoy2R1l7gog6qz0rccNwcPF1ZG_3dQq5kg0mSlmOarkzKQyqlcHtSmqXkVW6fijoVW_2_dEeeYLrxTvHu__KvWFB7BsE0IhuyGxED_dWWy2QX9W5VGjg7M96-MQFnigyQI0cfos8-U7L7807_yVcr8A8-KIYmt06G-U3web-70ITF-rmjEhmxH9VFZisnmbu7YSpDa-icCCv6RZTEDfWnYeYmX1bG2p5Orz-hL2VKzZpGbqwJCno2d0ckA6llH5MRCa14bPlclK3QGoMOYaRavfIqmzDH5JS6MCx-zjMw9kr_c_ODsE_JZ9kzJ2AZlSvLdpj_6oxbNG50G5Awfj0nFba5LqOU6ruJitntQvmtUByhAkN1g5rTpbcXF9fRTqUFY8kj3sUxYdXzGZQpH6jGgfPN9CHQZA4iV5iKE4YpZGz5eYPx-hZa7KyeqCNvPbm_KDUs_P8vMQIw0F43pcJQdMU0YkIIFJZBqSXgDg9MDbkgotBhua8NVY_BRnAeVVrQHT2bOcUNQTRIrz6Dg62C2Qnc9iztb2e1r_MWotAggq4TTqh_WABBnhunNeyRZxNk3-9zVKQtwyyh8itUqL8mIRoDAxjy_RrCfR4eSvH0UuUrh9rf3Yz6UsTbIuqkSbQ-IrFQi5YVnWF8pDiporT6JHWbqkbLHgGQLM-w5S5tzUC38BNDw5Edppu8ffYIyjD1Jj39J19bo8YdZ8uZ0C0gGx2UAp1wjtKQZNBViVwevUAqGEXeeOY_49YohVo7cXNJfEQqEBlZJVi2vrTuUbpvbFyVANlUG73taDGnNLbyCqwpY5z6mQYZcL1v1j",
+                "status": null
+              },
+              {
+                "id": "msg_05cfe984296befa6006aa10124573c87d0944cf2d7fb047d89",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "BCIT’s Bachelor of Accounting is an in-person Burnaby program offered full-time or part-time, developing technical, communication, and problem-solving skills while providing academic preparation toward CPA pathways. Its 60-credit curriculum includes FMGT 8911 Strategic Performance Management, seven advanced technical electives, and 36 general-education credits; details: https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936485.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_05cfe984296befa6006aa1012045b087d0b0c435ffb26a0b81",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 9402,
+              "input_tokens_details": {
+                "cache_write_tokens": 7604,
+                "cached_tokens": 1795
+              },
+              "output_tokens": 162,
+              "output_tokens_details": {
+                "reasoning_tokens": 64
+              },
+              "total_tokens": 9564
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "BCIT’s Bachelor of Accounting is an in-person Burnaby program offered full-time or part-time, developing technical, communication, and problem-solving skills while providing academic preparation toward CPA pathways. Its 60-credit curriculum includes FMGT 8911 Strategic Performance Management, seven advanced technical electives, and 36 general-education credits; details: https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/",
+          "final_answer": "BCIT’s Bachelor of Accounting is an in-person Burnaby program offered full-time or part-time, developing technical, communication, and problem-solving skills while providing academic preparation toward CPA pathways. Its 60-credit curriculum includes FMGT 8911 Strategic Performance Management, seven advanced technical electives, and 36 general-education credits; details: https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/"
+        }
+      ],
+      "assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 45
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8630BACC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8630BACC"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Accounting bachelor's degree, in two sentences."
+          },
+          {
+            "role": "assistant",
+            "content": "BCIT’s Bachelor of Accounting is an in-person Burnaby program offered full-time or part-time, developing technical, communication, and problem-solving skills while providing academic preparation toward CPA pathways. Its 60-credit curriculum includes FMGT 8911 Strategic Performance Management, seven advanced technical electives, and 36 general-education credits; details: https://www.bcit.ca/programs/accounting-bachelor-of-accounting-full-time-part-time-8630bacc/"
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8630BACC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "8630BACC"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Accounting",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "8630BACC",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "8630BACC:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.438,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "8630BACC",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "8630BACC",
+            "program_name": "Accounting",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "8630BACC"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "8630BACC"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "scenario_id": "LONG-07",
+    "turn": 1,
+    "historical_attempt": true,
+    "root_cause": "retrieval_routing",
+    "layer": "deterministic",
+    "severity": "availability_failure",
+    "evidence": "The saved get_program_level_courses call has context.pathway=None. ai_advisor.py line 1987 calls context.get('pathway', {}).get('name'), which dereferences None when the key exists with a null value. The trace records a null tool return followed by AttributeError. No production fix was made.",
+    "transcript": "prior_attempts\\LONG-07\\20260908T214032370040.json",
+    "recommendation": "Guard nullable pathway context in tool execution; regression-test the existing null-pathway contract before model comparison."
+  }
+]

@@ -1,0 +1,128 @@
+{
+  "scenario_id": "FLOW-11",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "3cfc48476002a95c574e7f5e732a938f6011de4f5e420a2ac35cc94bcdf21a7d",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b07e8484e7025c5d83803be3a01b8d6103e1b53ed506e218816d05bb0879704c",
+  "packet_sha256": "18600fa616b962c5f8a0c0671f44d996e7aa62f3e8c35f1d35e5be7c266dfbfe",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_07a474fc880ac6c8006aa0818181a487d0bf73f60b98e9a38a",
+  "usage": {
+    "input_tokens": 23095,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 23092
+    },
+    "output_tokens": 1256,
+    "output_tokens_details": {
+      "reasoning_tokens": 76
+    },
+    "total_tokens": 24351
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The student only introduces their intended program, but E1 supplies the entire curriculum, including all 19 management electives, followed by all admission pathways. This catalog dump appears in the raw model answer and is unchanged by finalization."
+        },
+        "notes": "The answer and resolver state correctly identify 8800BTECH. Assessable program, curriculum, credit and admission claims match the supplied records/tool evidence, including the OR project choice. Factual correctness covers those assessable claims only: the additional assertion that CMGT 8700 requires completed program coursework, an industry topic and an industry sponsor is not established by the supplied evidence and is not verified as correct or false. Presenting these extra requirements categorically lowers unsupported-inference avoidance and evidence discipline. Context retention is inapplicable on turn 1; no clarification, frustration handling or next step was required."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Directly states at least four approved management-elective credits, not four courses, and correctly makes external-course acceptance conditional on approval. Both state and prose retain the intended program and elective context. No necessary clarification, frustration handling or actionable next step was required."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Clearly corrects the credit/course misunderstanding with valid arithmetic. The two-2-credit example is explicitly conditional on approved options being available, not a claim that two such courses exist in the listed pool. Resolver state retains 8800BTECH and electives; although retrieval was forced to program details, the evidence and final answer remain appropriate. No clarification, frustration handling or next step was needed."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "awkward_or_impersonal",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After correctly answering the management-elective question, E3 adds the unrequested, data-centric aside, 'The available program data does not authorize external courses for the Liberal Studies requirement.' This wording is present in the raw answer and unchanged in finalization."
+        },
+        "notes": "The central answer correctly permits external management courses only with approval and recommends confirming approval before registering or relying on credit. The Liberal Studies aside matches the frozen allows_external_courses=false record and is expressly limited to available data; it is not an invented blanket transfer prohibition, but slightly distracts from the current scope. Program and elective state remain correct. Necessary clarification and frustration handling are inapplicable."
+      }
+    ]
+  },
+  "attempt": 4
+}

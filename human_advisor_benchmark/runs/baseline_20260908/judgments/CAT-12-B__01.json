@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-12-B",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "19876ececf990291d11efa462ce1524e611663232f469e463e16962298a82685",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "f414240cf39d5d845f33df984ae172a22224453dd5777d7a2dd5ac7663f8075e",
+  "response_id": "resp_07dd24ee30ee9eae006aa079af976087d0b96cff8a29c94927",
+  "usage": {
+    "input_tokens": 70781,
+    "input_tokens_details": {
+      "cache_write_tokens": 69388,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 727,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 71508
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correct program in state and prose. Accurately preserves the international eligibility OR, permit restrictions, and prior program-head approval. Provides verified program and international-resource links. Context retention is inapplicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer appends three curriculum examples ('NSNE 7100', 'NSNE 7300', 'NSNE 7900') to an admission-status question; finalization leaves this irrelevant addition unchanged."
+        },
+        "notes": "Directly and correctly denies automatic admission and retains the intended program and international context. Entrance requirements and course identities match the snapshot. Could mention that intakes can fill, but does not promise acceptance or invent competitive selection. The course aside detracts from an otherwise useful answer. No clarification, frustration, or additional next-step requirement applies."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 3
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer inserts a 17-course curriculum list plus a three-course elective pool between the stored international rules and the requested BCIT-confirmation guidance. This unsolicited catalog expansion survives finalization unchanged."
+        },
+        "notes": "Strong distinction between stored rules and individual eligibility, current availability, placement arrangements, and human decisions; the final prioritized questions are actionable. State and prose correctly retain 810CBSN. Online delivery, active status, 60 credits, course names, and minimum elective credits are supported by the snapshot. Minor qualification weaknesses: 'will ... hold' omits the current-work-permit wording, and 'may be required' softens notes saying electives must be approved, though structured approval_required=false conflicts with those notes and the answer still directs elective acceptance to BCIT. No invented clinical-hours total or admission guarantee. No required clarification or explicit frustration applies."
+      }
+    ]
+  },
+  "attempt": 2
+}

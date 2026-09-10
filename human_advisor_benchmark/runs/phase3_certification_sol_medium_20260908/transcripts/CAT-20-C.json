@@ -1,0 +1,1480 @@
+{
+  "id": "CAT-20-C",
+  "category": "unknown_boundaries",
+  "tags": [
+    "unknown_boundaries",
+    "unknown_facts",
+    "stop_intent",
+    "brevity"
+  ],
+  "status": "complete",
+  "turns": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences.",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/).",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 2,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 7.75,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "2958CERT",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 1,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences.\nRouted intent: PROGRAM_INFO\nRequired response depth: concise\nRequired response language from current turn: English\nResolved internal program for tool use: 2958CERT. Use get_program_details so the answer includes the curated program record, related courses, and stored source URL.\nDurable structured session memory (authoritative over recent conversation): {\"scope\":\"program\",\"program_id\":\"2958CERT\",\"subject_history\":[],\"verified_conclusions\":[],\"answered_facets\":[]}\nUse verified conclusions as concise context, but still use tools for the current factual answer. Do not repeat already answered facets unless the student asks again.",
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000189B8767FB0>"
+          },
+          "response": {
+            "id": "resp_0f735479a6c51b06006aa102736de087d09d0c42e2ccfc804d",
+            "created_at": 1788936819.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"program_id\":\"2958CERT\"}",
+                "call_id": "call_QYgwdvbm1sY7UtjAxdwyKWE0",
+                "name": "get_program_details",
+                "type": "function_call",
+                "id": "fc_0f735479a6c51b06006aa10274290c87d0ab5dec4dc4f360e0",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_program_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936820.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1805,
+              "input_tokens_details": {
+                "cache_write_tokens": 149,
+                "cached_tokens": 1526
+              },
+              "output_tokens": 22,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1827
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "2958CERT"
+          },
+          "context": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "2958CERT",
+                "rule_sets": [
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 1139,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [],
+                              "executable": false,
+                              "minimum_credits": null,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 854,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don’t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 – English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT’s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 995,
+                    "scope": "ADMISSION",
+                    "study_mode": "Full-time"
+                  },
+                  {
+                    "exact_choice_count": null,
+                    "groups": [
+                      {
+                        "children": [],
+                        "conditions": [
+                          {
+                            "accepted_values": null,
+                            "condition_id": 1140,
+                            "condition_type": "COMPONENT_1",
+                            "description": "Required Courses: Total Credits: 84.5",
+                            "minimum_value": null,
+                            "parameters": {
+                              "course_ids": [
+                                "HVAC1095",
+                                "HVAC1100",
+                                "HVAC1102",
+                                "HVAC1103",
+                                "HVAC1111",
+                                "HVAC1114",
+                                "HVAC1115",
+                                "HVAC1116",
+                                "HVAC1117",
+                                "HVAC1118",
+                                "HVAC1119",
+                                "HVAC2110",
+                                "HVAC2111",
+                                "HVAC2112",
+                                "HVAC2113",
+                                "HVAC2114",
+                                "HVAC2115",
+                                "HVAC2116",
+                                "HVAC3100",
+                                "HVAC3102",
+                                "HVAC3103",
+                                "HVAC3104",
+                                "HVAC3112"
+                              ],
+                              "executable": true,
+                              "minimum_credits": null,
+                              "semantic": "all"
+                            },
+                            "sort_order": 1,
+                            "subject_id": null,
+                            "unit": null
+                          }
+                        ],
+                        "label": "COMPONENT_1",
+                        "operator": "AND",
+                        "parent_group_id": null,
+                        "rule_group_id": 855,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_1",
+                    "notes": "Required Courses: Total Credits: 84.5",
+                    "rule_set_id": 996,
+                    "scope": "COMPLETION",
+                    "study_mode": "Full-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus",
+              "clinical_and_practice_requirements": {
+                "clinical_placement": [],
+                "practice_hours": [],
+                "program_id": "2958CERT"
+              },
+              "courses": [
+                {
+                  "course_id": "HVAC1095",
+                  "course_name": "Apply Effective Learning Techniques",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1100",
+                  "course_name": "Apply Trade Safety Practices",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1102",
+                  "course_name": "Process Technical Information",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1103",
+                  "course_name": "Apply Trade Tools and Fasteners",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1111",
+                  "course_name": "Install Refrigeration Project",
+                  "course_type": "REQUIRED",
+                  "credits": "2.50",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1114",
+                  "course_name": "Apply Fundamentals of Refrigeration",
+                  "course_type": "REQUIRED",
+                  "credits": "11.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1115",
+                  "course_name": "Proper Service Procedures",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1116",
+                  "course_name": "Apply Electrical Fundamentals",
+                  "course_type": "REQUIRED",
+                  "credits": "6.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1117",
+                  "course_name": "Interpret Electrical Diagrams",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1118",
+                  "course_name": "Apply Electrical Test Equipment",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC1119",
+                  "course_name": "Install Electrical/Mechanical Devices",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2110",
+                  "course_name": "Design Refrigeration Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2111",
+                  "course_name": "Ammonia Systems/Water Treatment",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2112",
+                  "course_name": "Describe Basic HVAC Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2113",
+                  "course_name": "Air Distribution Arrangement for HVAC",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2114",
+                  "course_name": "Air Properties and Measurements",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2115",
+                  "course_name": "Explain HVAC Control Loops",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC2116",
+                  "course_name": "Maintain Heat Pump Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "8.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC3100",
+                  "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC3102",
+                  "course_name": "Design HVAC Distribution Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "3.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC3103",
+                  "course_name": "Maintain Computer Environmental Systems",
+                  "course_type": "REQUIRED",
+                  "credits": "4.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC3104",
+                  "course_name": "Explain Heat Recovery/Energy Management",
+                  "course_type": "REQUIRED",
+                  "credits": "2.00",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                },
+                {
+                  "course_id": "HVAC3112",
+                  "course_name": "Prepare for Employment",
+                  "course_type": "REQUIRED",
+                  "credits": "0.50",
+                  "level": null,
+                  "notes": "Required Courses",
+                  "required": true,
+                  "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                  "term": null
+                }
+              ],
+              "credential": "Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 779,
+                    "component_name": "Required Courses",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "HVAC1095",
+                        "course_name": "Apply Effective Learning Techniques",
+                        "course_role": "REQUIRED",
+                        "credits": "0.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1100",
+                        "course_name": "Apply Trade Safety Practices",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1102",
+                        "course_name": "Process Technical Information",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1103",
+                        "course_name": "Apply Trade Tools and Fasteners",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1111",
+                        "course_name": "Install Refrigeration Project",
+                        "course_role": "REQUIRED",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1114",
+                        "course_name": "Apply Fundamentals of Refrigeration",
+                        "course_role": "REQUIRED",
+                        "credits": "11.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1115",
+                        "course_name": "Proper Service Procedures",
+                        "course_role": "REQUIRED",
+                        "credits": "8.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1116",
+                        "course_name": "Apply Electrical Fundamentals",
+                        "course_role": "REQUIRED",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1117",
+                        "course_name": "Interpret Electrical Diagrams",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1118",
+                        "course_name": "Apply Electrical Test Equipment",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC1119",
+                        "course_name": "Install Electrical/Mechanical Devices",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2110",
+                        "course_name": "Design Refrigeration Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2111",
+                        "course_name": "Ammonia Systems/Water Treatment",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2112",
+                        "course_name": "Describe Basic HVAC Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2113",
+                        "course_name": "Air Distribution Arrangement for HVAC",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2114",
+                        "course_name": "Air Properties and Measurements",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2115",
+                        "course_name": "Explain HVAC Control Loops",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC2116",
+                        "course_name": "Maintain Heat Pump Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "8.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC3100",
+                        "course_name": "Communicate HVAC Heat/Cool Load Calculations",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC3102",
+                        "course_name": "Design HVAC Distribution Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC3103",
+                        "course_name": "Maintain Computer Environmental Systems",
+                        "course_role": "REQUIRED",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC3104",
+                        "course_name": "Explain Heat Recovery/Energy Management",
+                        "course_role": "REQUIRED",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "HVAC3112",
+                        "course_name": "Prepare for Employment",
+                        "course_role": "REQUIRED",
+                        "credits": "0.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": null,
+                        "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "Required Courses: Total Credits: 84.5",
+                    "required_credits": null
+                  }
+                ],
+                "credit_requirements": [],
+                "program_id": "2958CERT",
+                "substitutions": []
+              },
+              "delivery_method": "In person",
+              "program_id": "2958CERT",
+              "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+              "program_overview": "The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it’s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements",
+              "school": "School of Energy",
+              "source_url": "https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/",
+              "status": "Active",
+              "study_mode": "Full-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-sol",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_QYgwdvbm1sY7UtjAxdwyKWE0",
+                "output": "{\"program\": {\"program_id\": \"2958CERT\", \"program_name\": \"Heating, Ventilation, Air Conditioning and Refrigeration Technician\", \"program_overview\": \"The Heating, Ventilation, Air Conditioning and Refrigeration (HVAC and R) Technician certificate is a non co-op program which provides a foundation in heating, ventilation, air conditioning and refrigeration system design, installation and service. industry designs, builds, maintains and repairs essential indoor comfort and cooling systems. Delivery: in person. See details . As a result of the expanding markets for refrigeration and air conditioning and changing technology, a dramatic need exists for qualified personnel both at home and abroad. Refrigeration equipment is used in supermarkets, and food processing and cold storage facilities, and sports facilities such as hockey and curling rinks, which are also a vital part of the industry. A Refrigeration and Air Conditioning Mechanic journeyperson fabricates, installs, alters, repairs/services any system used for cooling and/or heating (e.g. heat pumps) in closed systems that contain a refrigerant or a brine and thermoelectric cooling. This includes piping, controls and electrical work. These workers also connect rooftop units to gas and test and balance systems. The program The HVAC and R Technician certificate program is 41 weeks in duration combining classroom and shop instruction. After learning direct refrigeration systems, a broad range of topics focused on HVAC systems design, operation and controls are learned. Emphasis will be placed on diagnosis, service requirements and procedures. The first two levels of Gas B training is also included. (level 2 & 3). Who it\\u2019s for This career path is suited to those who are interested in designing, building, maintaining and repairing essential indoor comfort and cooling systems and who enjoy being independent, troubleshooting and and problem solving. What grads can do Graduates of this program who enter the trade within one year of graduation can expect to receive credit for three levels of technical training for the Refrigeration and Air Conditioning Mechanic apprenticeship. Students are encouraged to return to Level 4 apprentice training (10 weeks) when appropriate to complete their level 4 training to qualify to write their Gas B ticket and prepare for the Interprovincial Red Seal certification exam. Next up Entrance Requirements\", \"school\": \"School of Energy\", \"credential\": \"Certificate\", \"study_mode\": \"Full-time\", \"campus\": \"Burnaby Campus\", \"delivery_method\": \"In person\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"courses\": [{\"course_id\": \"HVAC1095\", \"course_name\": \"Apply Effective Learning Techniques\", \"credits\": \"0.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1100\", \"course_name\": \"Apply Trade Safety Practices\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1102\", \"course_name\": \"Process Technical Information\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1103\", \"course_name\": \"Apply Trade Tools and Fasteners\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1111\", \"course_name\": \"Install Refrigeration Project\", \"credits\": \"2.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1114\", \"course_name\": \"Apply Fundamentals of Refrigeration\", \"credits\": \"11.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1115\", \"course_name\": \"Proper Service Procedures\", \"credits\": \"8.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1116\", \"course_name\": \"Apply Electrical Fundamentals\", \"credits\": \"6.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1117\", \"course_name\": \"Interpret Electrical Diagrams\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1118\", \"course_name\": \"Apply Electrical Test Equipment\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC1119\", \"course_name\": \"Install Electrical/Mechanical Devices\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2110\", \"course_name\": \"Design Refrigeration Systems\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2111\", \"course_name\": \"Ammonia Systems/Water Treatment\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2112\", \"course_name\": \"Describe Basic HVAC Systems\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2113\", \"course_name\": \"Air Distribution Arrangement for HVAC\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2114\", \"course_name\": \"Air Properties and Measurements\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2115\", \"course_name\": \"Explain HVAC Control Loops\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC2116\", \"course_name\": \"Maintain Heat Pump Systems\", \"credits\": \"8.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC3100\", \"course_name\": \"Communicate HVAC Heat/Cool Load Calculations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC3102\", \"course_name\": \"Design HVAC Distribution Systems\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC3103\", \"course_name\": \"Maintain Computer Environmental Systems\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC3104\", \"course_name\": \"Explain Heat Recovery/Energy Management\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}, {\"course_id\": \"HVAC3112\", \"course_name\": \"Prepare for Employment\", \"credits\": \"0.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"level\": null, \"term\": null, \"course_type\": \"REQUIRED\", \"required\": true, \"notes\": \"Required Courses\"}], \"curriculum\": {\"program_id\": \"2958CERT\", \"components\": [{\"component_id\": 779, \"component_name\": \"Required Courses\", \"component_order\": 1, \"required_credits\": null, \"notes\": \"Required Courses: Total Credits: 84.5\", \"courses\": [{\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1095\", \"course_name\": \"Apply Effective Learning Techniques\", \"credits\": \"0.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1100\", \"course_name\": \"Apply Trade Safety Practices\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1102\", \"course_name\": \"Process Technical Information\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1103\", \"course_name\": \"Apply Trade Tools and Fasteners\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1111\", \"course_name\": \"Install Refrigeration Project\", \"credits\": \"2.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1114\", \"course_name\": \"Apply Fundamentals of Refrigeration\", \"credits\": \"11.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1115\", \"course_name\": \"Proper Service Procedures\", \"credits\": \"8.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1116\", \"course_name\": \"Apply Electrical Fundamentals\", \"credits\": \"6.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1117\", \"course_name\": \"Interpret Electrical Diagrams\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1118\", \"course_name\": \"Apply Electrical Test Equipment\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC1119\", \"course_name\": \"Install Electrical/Mechanical Devices\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2110\", \"course_name\": \"Design Refrigeration Systems\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2111\", \"course_name\": \"Ammonia Systems/Water Treatment\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2112\", \"course_name\": \"Describe Basic HVAC Systems\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2113\", \"course_name\": \"Air Distribution Arrangement for HVAC\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2114\", \"course_name\": \"Air Properties and Measurements\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2115\", \"course_name\": \"Explain HVAC Control Loops\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC2116\", \"course_name\": \"Maintain Heat Pump Systems\", \"credits\": \"8.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC3100\", \"course_name\": \"Communicate HVAC Heat/Cool Load Calculations\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC3102\", \"course_name\": \"Design HVAC Distribution Systems\", \"credits\": \"3.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC3103\", \"course_name\": \"Maintain Computer Environmental Systems\", \"credits\": \"4.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC3104\", \"course_name\": \"Explain Heat Recovery/Energy Management\", \"credits\": \"2.00\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}, {\"course_role\": \"REQUIRED\", \"study_mode\": \"ALL\", \"course_id\": \"HVAC3112\", \"course_name\": \"Prepare for Employment\", \"credits\": \"0.50\", \"source_url\": \"https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/\", \"institution_key\": \"BCIT\", \"native_course_code\": null}]}], \"credit_requirements\": [], \"substitutions\": []}, \"academic_rules\": {\"program_id\": \"2958CERT\", \"rule_sets\": [{\"rule_set_id\": 995, \"scope\": \"ADMISSION\", \"name\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"study_mode\": \"Full-time\", \"exact_choice_count\": null, \"notes\": \"Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don\\u2019t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 \\u2013 English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT\\u2019s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies\", \"groups\": [{\"rule_group_id\": 854, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 1139, \"condition_type\": \"OFFICIAL_ADMISSION_REQUIREMENTS\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"human_confirmation\", \"course_ids\": [], \"executable\": false, \"minimum_credits\": null}, \"description\": \"Note: This trade program is in high demand. Visit Trades Training BC to estimate a future start date. Scheduled intakes September each year. *Scheduled intakes are subject to change Application processing Applications are accepted throughout the year. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first qualified basis as long as space remains. When available intakes are full, qualified applicants are wait-listed. Applicants must meet all entrance requirements prior to applying to this program. If you are uncertain or don\\u2019t meet the requirements we strongly recommend you complete any applicable Trades Entry Assessments before applying. English language proficiency: one of the following: Category 2 \\u2013 English Studies 12 (67%) or equivalent or BCIT English Trades Entry Assessment Math: one of the following: Pre-Calculus 11 (60%) or Foundations of Math 11 (60%) or Workplace Math 11 (60%) or Other acceptable BC and Yukon courses or BCIT Math Trades Entry Assessment BCIT Mechanical Reasoning Trades Entry Assessment Read more about how to meet BCIT\\u2019s entrance requirements Trades Discovery The Trades Discovery General and Trades Discovery for Women are full-time programs designed to prepare participants to successfully enter and complete a Trades Training program. International applicants This program is not available to international students. View available programs . Apply to program To submit your application: Include proof of meeting all entrance requirements. Convert all transcripts and supporting documents to PDF files . Have a credit card ready to pay the application fee. Apply Now Learn more about how to apply myCommunication Within two business days of submitting your completed application, BCIT will send a message to your personal and myBCIT email addresses. All correspondence regarding your application will be posted to your online myCommunication account at my.bcit.ca . We will send you an email when a new message is posted. It is important to watch for these emails or regularly check your account online. You can expect to receive communication concerning the status of your application within four weeks. Go back Overview Next up Costs & Supplies\", \"sort_order\": 1}], \"children\": []}]}, {\"rule_set_id\": 996, \"scope\": \"COMPLETION\", \"name\": \"COMPONENT_1\", \"study_mode\": \"Full-time\", \"exact_choice_count\": null, \"notes\": \"Required Courses: Total Credits: 84.5\", \"groups\": [{\"rule_group_id\": 855, \"parent_group_id\": null, \"operator\": \"AND\", \"label\": \"COMPONENT_1\", \"sort_order\": 1, \"conditions\": [{\"condition_id\": 1140, \"condition_type\": \"COMPONENT_1\", \"subject_id\": null, \"minimum_value\": null, \"unit\": null, \"accepted_values\": null, \"parameters\": {\"semantic\": \"all\", \"course_ids\": [\"HVAC1095\", \"HVAC1100\", \"HVAC1102\", \"HVAC1103\", \"HVAC1111\", \"HVAC1114\", \"HVAC1115\", \"HVAC1116\", \"HVAC1117\", \"HVAC1118\", \"HVAC1119\", \"HVAC2110\", \"HVAC2111\", \"HVAC2112\", \"HVAC2113\", \"HVAC2114\", \"HVAC2115\", \"HVAC2116\", \"HVAC3100\", \"HVAC3102\", \"HVAC3103\", \"HVAC3104\", \"HVAC3112\"], \"executable\": true, \"minimum_credits\": null}, \"description\": \"Required Courses: Total Credits: 84.5\", \"sort_order\": 1}], \"children\": []}]}]}, \"clinical_and_practice_requirements\": {\"program_id\": \"2958CERT\", \"clinical_placement\": [], \"practice_hours\": []}}}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": {
+              "effort": "medium"
+            },
+            "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+            "previous_response_id": "resp_0f735479a6c51b06006aa102736de087d09d0c42e2ccfc804d"
+          },
+          "response": {
+            "id": "resp_0f735479a6c51b06006aa10275878487d0a615f5fa5c2556c7",
+            "created_at": 1788936821.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as PROGRAM_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Response-depth policy (concise): Answer the actual question first and keep supporting detail selective. Offer one specific next step only when it materially helps. Write like a concise professional academic advisor. Use natural transitions and plain language around exact program names, course names, and codes. Do not restate the question, narrate tool use, or repeat information from the immediately preceding assistant turn unless the student asks for repetition. Avoid generic disclaimers and the phrase 'available Asteris data' when a specific boundary can be stated. When the active program was already named, use a short natural reference instead of repeating its full long title. For an international follow-up after general admission requirements, state only the international-specific availability, restrictions, and verification needs; do not restate the general admission list. Use bullets only when three or more parallel items are genuinely useful; never dump a curriculum or catalog unless requested or necessary. For comparisons, state the meaningful differences and shared facts once. For frustration plus a substantive question, briefly acknowledge the problem and answer it. For a clear stop, stop. Describe evidence boundaries precisely: distinguish a verified fact, a conditional rule, missing or unpublished information, and a point requiring institutional confirmation. Never convert unknown information into a likely yes or no, and never guarantee admission, transfer credit, licensing, placement, employment, or permits. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish uses exactly the same tools and rules as English. When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. When program evidence includes academic_scope_boundaries, keep credential-award evidence separate from later-level progression requirements. A continuation rule for a later level is not a condition for an earlier credential unless the stored credential-award evidence explicitly says it is. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-sol",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0f735479a6c51b06006aa10276412087d087f649733e6025b8",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoQJ6XeTzWE3m9cUkuNFjDOfYJyATWDile3y3MYo4yz2RQafwF8myyXH4TL-oad3xPobhj5nMoQZxFZJlsHBFI6e-WrYi_Q9d-UMPD9SQurIaktoDIsd3lqkgAWGhD8-xzwFR4_N2PwjJBKvVPygATK9oyS1Qeb0PB4nL6rBI57NVtW2gZ_pfv_flzYhatajnPtdNhCXJuB1pPSeNapQOHFVltnGR8IiLsoGS2WNqwIARIaa0lyTlzTQEG2tOVyFoC0K0mBpne1o5T4dAlZZuSXELNw9nNGwCkjXSVL93wudoDp-67A9UIXlMpDGNM0fDEyKOmVFyluQZC90N33qP_nwI-0IztPtG0Lxfpfx0qe59T9_E03Zw8WtGN4DG5NR7jKFnbj9GB-RDv_TYK7wQUDgcLqjVl4Zsz8YSQe1txjM0VKdjHFbYXrKoPH8ws5aKoDlgJ_FP1gp3sM7iESJF4ZE-HFi9wq1z83B_kv75DiWZLH94r1zzSZfieL05DVDT8YJMSUt7FJxWHCE6lnMXHk8lXQQYbjhc6ouofigLOmqLWcOO6r8z7X3HPUFvkNce49nx2Xooa61cSAxrHk86LtJEcuxvvDQ90Ra08SU6L1k-Ibt4E-aIIcWkCACd7fIe7p_RtP_SS4TbTLlsiBU2yPSBGaCPYJKn9jh5EzfWnpK0adOtBhDtQ0bJugR1OLpUmhVcCwdmtV15nqY0zMJWAmH1-Kg2pV8uBn5C4JP57AL4YWSFjjy5aBZa_tobQfsVuUkUQX4HZS4mghXmBL9rrcDiw8pOgauAUV-Dif0MxLzg5438vSB4yQ-qLwPQO3q8brpBEYCNR_8gRbVKcs19iI5D4Q8LMMnNMMszGW3ZMHan4me9-CuPXNlPOHbuq09j8yqQxj1KuFSKNAfmO4vucuNOBcdvuc3FAodwnHlrBuvUCK4h70J35kecFeFjT2_grILWHe2E5Xf0dWmaL1KY0Bl_UZblHnUMYaUKK5-yCEpQKDqTN6ptni_-reYA_3nuvrwiIPJgtxC_-TYaf7gq1THiDvTRCsQ70uUWitgeoeXihfWkHEbkiu1qkXo0cLe1rETzU6bhQ4MIvFO2AL9K1ERKFK6jWLta_LRBjiJtcJZoqBWUe9eL9LuzBmMZkm7G5-t0YmTIkiq3Q0QTNBduVUqjHMNlVYMXtTnszOVU8rTWL_-Cmk-z1-qxcWrdPWsh4Hyc-AXNf3ARDrh5B7vZICT8a8aWTwBbXG3DzPcv3KZaIunoi_zoq8hvUBr_T0JCnYEfd6a6-AkLpldcbUDqmlv49Jz0OF0xqpYCCZZfwI3NIfHEg1eg00VrKzwh5gJdJL5P5ecjluIQWwRkqoFwnVikixUC5Ms_PpMxfZFdY6mzhNMiQH4NtSGsWwLWJr90GHFmaV6w3RdbRDY6PNQzC8Z8lCOAkMuucbDZ0S3aRwFOPsb2x41ZDV-xkNZG8d8VACyQi5IqCy95RRkVjfbZq44waZYL3mpAdfEs8aYTtkbZLiMLDBjFBxw2gzSbl0xiSU7_yXz2tafcvFNP15OlEFxJPmQTg5SNe-Pg2teqDJmFhVXI99siKvJWoeyLahaXWoDR7W1HNtmrRKk5rYd4lMLxBx2X1xX9Jw8_lVknS4Mw9TtOt_DBjaVg-PBCYMAQbmFgpHfKCUSR0iSphHb28HSq29FfGkBXY-ak9e7Hn-CncBXIMgnhQeWKeOT8NtFCBylftziVl6cqL1uutZokN7p9RUs8uUfD69t_Hy7cXLC1h4LS-cHsjvKV58Gcj_tYS1QVq5pb1efO_HE5q103rk7lA7hu_-B6_M2StHTGZ_vXa2lO35i3T1YGceWd638l-F-C",
+                "status": null
+              },
+              {
+                "id": "msg_0f735479a6c51b06006aa102783b0c87d0a6fc3253fdbda55f",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/).",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_programs",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Resolve a student-facing program name to an active Asteris program record.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "program_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "program_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified program-level information for one resolved program.",
+                "output_schema": null
+              },
+              {
+                "name": "get_program_level_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "level"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get the verified course list for a requested level of the already resolved program or shared academic pathway.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788936826.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0f735479a6c51b06006aa102736de087d09d0c42e2ccfc804d",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 8140,
+              "input_tokens_details": {
+                "cache_write_tokens": 6335,
+                "cached_tokens": 1802
+              },
+              "output_tokens": 227,
+              "output_tokens_details": {
+                "reasoning_tokens": 103
+              },
+              "total_tokens": 8367
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/).",
+          "final_answer": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)."
+        }
+      ],
+      "assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 60
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences."
+          },
+          {
+            "role": "assistant",
+            "content": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.641,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "academic_scope": null,
+            "comparison_program_ids": [],
+            "conversation_state": {
+              "academic_scope": null,
+              "answered_facets": [],
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "comparison_program_ids": [],
+              "conclusions": [],
+              "course_id": null,
+              "level": null,
+              "prior_program_ids": [],
+              "program_id": "2958CERT",
+              "reported_completed_course_ids": [],
+              "reported_completed_courses": [],
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "program",
+              "scope_query": null,
+              "stopped": false,
+              "student_facts": [],
+              "subject_history": [],
+              "turn_index": 2,
+              "unique_result_program_id": null,
+              "version": 2
+            },
+            "course_id": null,
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": "2958CERT",
+            "program_name": "Heating, Ventilation, Air Conditioning and Refrigeration Technician",
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "request": {
+        "question": "Never mind, let's stop.",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Tell me about Heating, Ventilation, Air Conditioning and Refrigeration Technician Certificate, in two sentences."
+          },
+          {
+            "role": "assistant",
+            "content": "The 41-week, full-time, in-person certificate at Burnaby Campus provides 84.5 credits of classroom and shop training in refrigeration, HVAC design, installation, controls, electrical systems, diagnostics, and servicing, including Gas B Levels 2 and 3. Graduates entering the trade within one year may receive credit for three technical-training levels of the Refrigeration and Air Conditioning Mechanic apprenticeship; [view full program details](https://www.bcit.ca/programs/heating-ventilation-air-conditioning-and-refrigeration-technician-certificate-full-time-2958cert/)."
+          },
+          {
+            "role": "user",
+            "content": "Can you guarantee I'll get a job immediately after graduating?"
+          },
+          {
+            "role": "assistant",
+            "content": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances."
+          }
+        ],
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "expectation": {
+        "question": "Never mind, let's stop.",
+        "expected": "Acknowledge stopping briefly and stop advising; preserve the active topic.",
+        "scope": "stop",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": true,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "tools_empty",
+            "dimension": "frustration_handling",
+            "root_cause": "conversation_state"
+          },
+          {
+            "op": "max_words",
+            "value": 35,
+            "dimension": "frustration_handling",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "2958CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Okay, we can stop here.",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "2958CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "2958CERT:outcomes"
+          ],
+          "stopped": true,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "elapsed_seconds": 0.0,
+      "events": [],
+      "assertions": [
+        {
+          "op": "tools_empty",
+          "dimension": "frustration_handling",
+          "root_cause": "conversation_state",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "op": "max_words",
+          "value": 35,
+          "dimension": "frustration_handling",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 5
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "2958CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "2958CERT"
+        }
+      ],
+      "omitted_history_messages": 0
+    }
+  ]
+}

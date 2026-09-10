@@ -1,0 +1,104 @@
+{
+  "scenario_id": "CAT-02-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "c8c378ee46f2fb737774dc35925aa39c1601bfdf7287367cf39b5c906c0b0163",
+  "response_id": "resp_0ff760a12d58c9cf006aa0740e85a087d09861851e2277d42a",
+  "usage": {
+    "input_tokens": 56799,
+    "input_tokens_details": {
+      "cache_write_tokens": 55445,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 702,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 57501
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correct program in prose and state. Two sentences within the frozen 100-word limit; the second is somewhat dense but not a catalog dump. Delivery, campus, overview and capstone OR sequence match the evidence. Course titles are supported by the retrieved record, though standalone raw course-title rows are not supplied. Context retention is inapplicable on turn 1; no required clarification, frustration or next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Raw model answer correctly declines an employment guarantee but ends only with 'Program details' and the general program URL; it supplies no practical employment-related next step, as required by the frozen expectation. Finalization leaves it unchanged."
+        },
+        "notes": "The skills description matches the snapshot. The absence statement is appropriately limited to the available program information, not a claim that employment is impossible. Program identity persists correctly despite the broad PROGRAM_INFO intent. The generic link offers little actionable help assessing employment prospects. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After 'Never mind, let's stop,' the trace still forces get_program_details via tool_choice and executes that retrieval, failing the frozen tools_empty check. The final answer itself correctly stops: 'Understood. Take care!'"
+        },
+        "notes": "Visible response is brief, respectful and fully honors stopping; active program 8800BTECH is preserved. The failure is unnecessary processing on the stop turn, not continued visible advising. Forced tool choice supports deterministic attribution, without identifying a specific internal component. No academic claims are made, so factual correctness is null; necessary clarification and next-step guidance are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

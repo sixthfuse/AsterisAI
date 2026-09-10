@@ -1,0 +1,104 @@
+{
+  "scenario_id": "CAT-04-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "86b87a9518c6d9d9663136ef6938f6bcc2cca8aa45afa0867ee7a62d50a0339d",
+  "response_id": "resp_06d07b31ff1372f6006aa07450f56887d0a6d2d5a6cc879d8c",
+  "usage": {
+    "input_tokens": 64423,
+    "input_tokens_details": {
+      "cache_write_tokens": 64420,
+      "cached_tokens": 0
+    },
+    "output_tokens": 687,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 65110
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Two sentences and under 100 words. Program identity, delivery, duration, diploma milestone and course examples match frozen records; successful completion is reasonably implicit in this brief overview. The sentences are somewhat dense but not a catalog dump. Context retention is inapplicable on turn 1; no required clarification, frustration or next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 2,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw and final answers appropriately reject a guarantee but end only with 'Program details' and a generic program URL; they provide no specific practical action for assessing or improving employment prospects."
+        },
+        "notes": "Training and co-op claims are supported by the overview and work-term records. The employment disclaimer appropriately respects uncertainty rather than inventing placement statistics or promising an outcome. Both prose and state retain 8660BENG. The expected practical next step is only weakly served by the link. Necessary clarification and frustration handling are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop,' the trace forces get_program_details through tool_choice and executes it, with intent PROGRAM_INFO. This violates the frozen tools-empty expectation, although the final answer respectfully stops."
+        },
+        "notes": "The user-facing response is a brief, appropriate acknowledgement with no continued advising. Active program 8660BENG is preserved correctly. The unnecessary retrieval is a routing failure, not a failure of the final prose to stop; the trace does not identify a more specific code component. No academic claims are made, so factual correctness is null. No clarification or next-step guidance is needed."
+      }
+    ]
+  },
+  "attempt": 3
+}

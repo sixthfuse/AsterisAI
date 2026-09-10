@@ -1,0 +1,130 @@
+{
+  "scenario_id": "FLOW-22",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "3647bc4b2166ceef44c32f1889e4e36672565bf5ac2f60ed4224d7b33e885fd9",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "7d7d96dc8ae3f1afa84c1a7685134a197291cc45a5ac0d7663611624ddcb4df9",
+  "packet_sha256": "194daf2718241deb54961045b322e1e6eab6e2ed5b5415a1e9a206c54092cac5",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_02af94c9c1f036a2006aa10acdb66c87d085031accb392ab0c",
+  "usage": {
+    "input_tokens": 52535,
+    "input_tokens_details": {
+      "cache_write_tokens": 51181,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 2747,
+    "output_tokens_details": {
+      "reasoning_tokens": 1934
+    },
+    "total_tokens": 55282
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "unresolved",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The response accurately compares all three programs by credential, study mode, delivery, and campus, but the frozen expectation also required their distinct requirements; no admission or entry requirements are provided."
+        },
+        "notes": "All stated program facts match the frozen records. The resolver nevertheless stored the comparison under the erroneous scope_query \"nursing programs,\" although the three correct comparison program IDs were retained and the final answer covered all three."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 0,
+          "context_retention": 0,
+          "scope_accuracy": 0,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 0,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "critical",
+          "confidence": "high",
+          "evidence": "The referent \"them\" was the three compared programs, all of which are degrees: a BSN, an MSc, and a BTech. The resolver instead preserved scope_query \"nursing programs,\" routed to a search for 28 nursing programs, and the answer listed 13 nursing BSN programs while omitting Applied Computing and Construction Management entirely."
+        },
+        "notes": "The nursing-family claims themselves are supported: 13 listed programs award BSNs and the other 15 award Advanced Certificates. However, those facts answer the wrong entity set and create a materially misleading response to the user's question."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The answer correctly compares the same three programs: Nursing and Construction Management are at Burnaby, while Applied Computing is based at Burnaby but may also use Downtown Campus or field locations. The hidden state still carried the stale \"nursing programs\" family scope, but the correct three comparison IDs were retained and the answer was unaffected."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The resolver correctly switched focus to program 8800BTECH, and the response accurately summarizes its degree-completion status, delivery modes, Burnaby campus, school, curriculum areas, representative courses, credit requirements, and final-project choice."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}

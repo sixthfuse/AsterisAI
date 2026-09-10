@@ -1,0 +1,142 @@
+{
+  "scenario_id": "FLOW-08",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "32c4d3f16f9b2681bd78f6858eeeb309cd077c1f731e7d843c966c4fe2231590",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "08e3458cdb626d6e34fbb89f1d8227f2e8cda130596064f21a297b89c14d440e",
+  "packet_sha256": "1093e344dca4d5f617909a52f2c3c0be884262297aed0e86ef30a4a7d68f1974",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_05e17ee4a60ae55f006aa08082d5e487d0acfe97ffff675d55",
+  "usage": {
+    "input_tokens": 30169,
+    "input_tokens_details": {
+      "cache_write_tokens": 28815,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1002,
+    "output_tokens_details": {
+      "reasoning_tokens": 30
+    },
+    "total_tokens": 31171
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 3,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The retrieved pre-entry assessment condition explicitly says 'before application'; E5 lists the assessment but omits that sequence and directs the applicant generally to the program page."
+        },
+        "notes": "Correct target in both prose and resolver state. Admission alternatives and numerical thresholds match the snapshot. Minor summary omissions include recognized-institution wording and BCIT specificity for the bridging credential. 'You can apply' is read in context as introducing the target, not guaranteeing eligibility. Context retention is inapplicable on turn 1; no required clarification or frustration."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Tool context still records diploma_completed=false despite the explicit completed-diploma statement. The final prose correctly acknowledges the diploma and treats eligibility as conditional."
+        },
+        "notes": "Program remains 8800BTECH rather than switching to Civil Engineering. The answer correctly identifies GPA, experience, English, assessment and potential credential evaluation as unverified requirements, with departmental classification needed. Hidden student-history state is inconsistent, but no resulting academic error appears in the answer. Necessary clarification and frustration dimensions are inapplicable."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Tool context correctly adds completed_courses=[LIBS7001] but continues to record diploma_completed=false after turn 2."
+        },
+        "notes": "The response correctly treats LIBS 7001 as applicant history within Construction Management, not a course-topic switch. Its title, 3 credits and relationship to the 12-credit Liberal Studies requirement are supported. Prose appropriately limits the tally to reported completions. No next step, required clarification or frustration handling is needed."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "conversation_state",
+          "pattern": "student_fact_lost_or_not_corrected",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The turn-4 tool context still has diploma_completed=false, although E3 correctly references the completed Civil Engineering diploma and LIBS 7001."
+        },
+        "notes": "Accurate conditional admission checklist and clear distinction between curriculum credit and admission requirements. No automatic admission or invented English equivalency is asserted. Guidance would be stronger if it explicitly stated that assessment approval precedes application and invited the missing GPA, experience and English details. The model already supplied a useful program link; finalization adds a verified but redundant general Admissions link. Necessary clarification and frustration dimensions are inapplicable."
+      }
+    ]
+  },
+  "attempt": 1
+}

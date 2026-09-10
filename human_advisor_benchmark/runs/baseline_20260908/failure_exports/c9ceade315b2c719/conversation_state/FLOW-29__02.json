@@ -1,0 +1,1284 @@
+{
+  "classification": {
+    "scenario_id": "FLOW-29",
+    "turn": 2,
+    "root_cause": "conversation_state",
+    "pattern": "scope_mismatch",
+    "layer": "deterministic",
+    "severity": "noncritical",
+    "confidence": "high",
+    "evidence": "Despite 'across BCIT, not within one program,' resolution retains CHEM2305 with global_catalog=false and forces get_course_details. Returned state remains course-specific. Prose partially recovers by listing all three previously identified courses, but adds a CHEM2305-only overview.",
+    "basis": [
+      "rubric"
+    ]
+  },
+  "conversation_prefix": [
+    {
+      "turn": 1,
+      "request": {
+        "question": "Does BCIT offer any biochemistry courses?",
+        "conversation": [],
+        "conversation_state": null
+      },
+      "expectation": {
+        "question": "Does BCIT offer any biochemistry courses?",
+        "expected": "Perform course catalog search, not only program search.",
+        "scope": "catalog",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**",
+        "tools_used": [
+          "search_courses",
+          "get_course_details",
+          "get_course_details",
+          "get_course_details"
+        ],
+        "verification": {
+          "count": 13,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "course",
+          "program_id": null,
+          "course_id": "CHEM2305",
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 10.64,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": "courses",
+              "course_id": null,
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "global",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": null,
+            "global_catalog": true,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: Does BCIT offer any biochemistry courses?\nRouted intent: COURSE_INFO\nRequired response language from current turn: English\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"global\", \"program_id\": null, \"course_id\": null, \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": \"courses\", \"candidates\": [], \"level\": null, \"requirement_type\": null}\nThis is an explicit whole-catalog request. Ignore program-specific history and use the complete active catalog returned by search_programs.",
+            "reasoning": "<openai.Omit object at 0x00000234D64FABD0>",
+            "tool_choice": {
+              "name": "search_courses",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000234D64FABD0>"
+          },
+          "response": {
+            "id": "resp_0c8361e40ceb15a9006aa07867ac0487d0bacec9f9b139659d",
+            "created_at": 1788901479.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"query\":\"biochemistry\"}",
+                "call_id": "call_uVuPYnmOvpOS0mIH2nedsLZR",
+                "name": "search_courses",
+                "type": "function_call",
+                "id": "fc_0c8361e40ceb15a9006aa078683dac87d09d08c17fd7ff7875",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "search_courses",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788901480.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1439,
+              "input_tokens_details": {
+                "cache_write_tokens": 142,
+                "cached_tokens": 1168
+              },
+              "output_tokens": 19,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1458
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "search_courses",
+          "arguments": {
+            "query": "biochemistry"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Does BCIT offer any biochemistry courses?",
+            "diploma_completed": false,
+            "global_catalog": true,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "courses": [
+              {
+                "course_id": "BIOT5240",
+                "course_name": "Biochemistry 1",
+                "display_course_code": "BIOT 5240"
+              },
+              {
+                "course_id": "BIOT6240",
+                "course_name": "Biochemistry 2",
+                "display_course_code": "BIOT 6240"
+              },
+              {
+                "course_id": "CHEM2305",
+                "course_name": "Biochemistry/Instrumental Analysis",
+                "display_course_code": "CHEM 2305"
+              },
+              {
+                "course_id": "UBC-BIOC-203",
+                "course_name": "Fundamentals of Biochemistry",
+                "display_course_code": "BIOC 203"
+              },
+              {
+                "course_id": "UBC-BIOC-301",
+                "course_name": "Biochemistry Laboratory",
+                "display_course_code": "BIOC 301"
+              },
+              {
+                "course_id": "UBC-BIOC-303",
+                "course_name": "Molecular Biochemistry",
+                "display_course_code": "BIOC 303"
+              },
+              {
+                "course_id": "UBC-BIOC-306",
+                "course_name": "Quantitative Methods in Biochemistry",
+                "display_course_code": "BIOC 306"
+              },
+              {
+                "course_id": "UBC-BIOC-430",
+                "course_name": "Advanced Topics in Protein Biochemistry",
+                "display_course_code": "BIOC 430"
+              },
+              {
+                "course_id": "UBC-BIOC-450",
+                "course_name": "Membrane Biochemistry",
+                "display_course_code": "BIOC 450"
+              },
+              {
+                "course_id": "UBC-BIOC-460",
+                "course_name": "Advanced Techniques in Biochemistry",
+                "display_course_code": "BIOC 460"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_uVuPYnmOvpOS0mIH2nedsLZR",
+                "output": "{\"courses\": [{\"course_id\": \"BIOT5240\", \"course_name\": \"Biochemistry 1\", \"display_course_code\": \"BIOT 5240\"}, {\"course_id\": \"BIOT6240\", \"course_name\": \"Biochemistry 2\", \"display_course_code\": \"BIOT 6240\"}, {\"course_id\": \"CHEM2305\", \"course_name\": \"Biochemistry/Instrumental Analysis\", \"display_course_code\": \"CHEM 2305\"}, {\"course_id\": \"UBC-BIOC-203\", \"course_name\": \"Fundamentals of Biochemistry\", \"display_course_code\": \"BIOC 203\"}, {\"course_id\": \"UBC-BIOC-301\", \"course_name\": \"Biochemistry Laboratory\", \"display_course_code\": \"BIOC 301\"}, {\"course_id\": \"UBC-BIOC-303\", \"course_name\": \"Molecular Biochemistry\", \"display_course_code\": \"BIOC 303\"}, {\"course_id\": \"UBC-BIOC-306\", \"course_name\": \"Quantitative Methods in Biochemistry\", \"display_course_code\": \"BIOC 306\"}, {\"course_id\": \"UBC-BIOC-430\", \"course_name\": \"Advanced Topics in Protein Biochemistry\", \"display_course_code\": \"BIOC 430\"}, {\"course_id\": \"UBC-BIOC-450\", \"course_name\": \"Membrane Biochemistry\", \"display_course_code\": \"BIOC 450\"}, {\"course_id\": \"UBC-BIOC-460\", \"course_name\": \"Advanced Techniques in Biochemistry\", \"display_course_code\": \"BIOC 460\"}]}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x00000234D64FABD0>",
+            "tool_choice": "<openai.Omit object at 0x00000234D64FABD0>",
+            "previous_response_id": "resp_0c8361e40ceb15a9006aa07867ac0487d0bacec9f9b139659d"
+          },
+          "response": {
+            "id": "resp_0c8361e40ceb15a9006aa07869044c87d0a0855cc11b772b30",
+            "created_at": 1788901481.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "rs_0c8361e40ceb15a9006aa078696f0087d08f2e3626ed208186",
+                "summary": [],
+                "type": "reasoning",
+                "content": [],
+                "encrypted_content": "gAAAAABqoHhr1GtFN9sPRi6GL-H80bhuBLwbPDbyKbrfmXV7EjDG8wXXNVySirmKicD8vYRC2I_ZBlymeUrqvqUG4a34Q_513Kg9MlgsKJFRhCGugsV9WtJ8IYZLaUyHhhGgOGBEnrntaC_1qMIioSB43U4ern5PRIJdkHVY-a1ClorwNuw3UkY90yuIYzRK0rmUZuNmqcPgobBk8ISOQ37aqePpKCAInTeUO_OiMioIpmHbmO2TIc089qmrqGHE1Fn7RFjLVF4wMRE-CvVhnsT2xm0qxE0ZaQWx7TzpWilwukNrzk1RZlhqMrOTWmYAypF8FTUb4GTWOn12gTGvXfyx2i7UrLhRvBIKCvORnvMcMjDs6lgDAfSGM27K8WR2iKwDEXQ_ug4EbZ8F3kPW21fIDA2CKoveGzQyJ2MxNn1ZjYdM-jvAGsWrn_yVObW1YtNbG4VAbAGsIBG4wxCdexfWzNsHqys_fLJwlDBQNWTXKSRevCp5lBNjwCw86rWcJzID_-JTOHn0elbYpc3yEFelaMSxd-afioXhBnxF3nkR0WFMi6jJMLpcbpIRb5WVnbjcQNviqU6vjlmO91LcndDQieWf4bBEYe6An2N1BT3nLBYuOG9WM56SI7dm772KXQOpaFzIcgBHj5Z4_4SLF-Wl12uyhs3fJNV3cA4Z4yjQczs9PhOTWoonUk40At1n1Cl62PqeSTEaMFPHYpqrNLCZCYwJ-M6uU4bcR_pYggfEOh7cJ2mcn3xwbLvKAX_pgxpvwOsWRdD6ZHJX8k8hBWHwcwMhXPJkadUDhYgTDTlDlDUQ2O8x9eHUGyO5i03FNIJyPlWH005KWseWTmR1YeOj0dR_pgRZxpGgmSeEPL9SSQQ7GOL4ShHeRgdUfMOQBUhJPBlmZRsQ6NjbFJPKK6RqBqau6SJBBJCEVV-TWPhpuvQndKCcgsgF3RpZ4FvE1vV4g0g816E7kz26iy8qfFK4qp9Euv44HCDxNxTjRSC7Y0FrUWBWZwWbvo0KkQXEWR4Vc05grBhNCQJJvfloH6O0bVq7TFwqx8ugJDrNNA30OeGtufCEPqK7Z6c5t3ELtGG9WLG7NFX3dqAcEfCt5r6lneiuCLCA1skZZ77xnZ2O-CylFV2FyARmKmggbDgnqH_gBe-2zltqCp3FSUYPhHgp8tfDrI3zQ0myMll83y2RffoyZGNAS104FwwmhGMNSlTuozN0Nxn9e3m77yxORlHi5HTnbJgx-47dT5j6eXgwK4T7IoDo88UCBBvafHZZoy1-FAA2VGFBg7ZVlfUjnN-7JHSZOuuYCgGnBLysNO87I2p5A65VqBuvHRIu-xzRfkYWixFbNOP4I6VF9N4EXi16JVOjPi4zbGJTZiFo0ekyYIjMN7DEaG1_KRTjVwmEL7D3keEXJvvt8ykzH1mPWjp8IF9p9R4aQU1cAghI-NcnOMaqi3PqAEON78OEaQGnbRhHKtsSFvIVWBdoo6w9m5tXPxioiXUclJjTshRQidNgMvlLW6pvZW2kAkVHk-rOt8u4BHzWgw3bKZDobROn4aw0CXUCem4M_mlhRasQrd664kMTo-U-xiUpYkKxm6P-PLhqvciNa0mUoxwHvok8SQbcZ5_7uz5zTVVr5ZyXGKUfAyf1ySfAfFMRsqbRVCSHnLPxKYSKQ6HIW5wLqVS2FPlI3XLD9NHAQuRhKfFGqax4Et8FEre_Ri7UanysrKfHmBpueS5tXrLO-8byhskcNsmwN-D6xFYGeJWyBu-ntctqOeSmJ6uYzW0ZMzKuc5rl64dpk3IfD_xmocMJRg4WLmpRP_4MeeumHVcl6culCokRj3quiOd2jpc=",
+                "status": null
+              },
+              {
+                "arguments": "{\"course_id\":\"BIOT5240\"}",
+                "call_id": "call_T4nAHmSM9DvESZkrchcChPqM",
+                "name": "get_course_details",
+                "type": "function_call",
+                "id": "fc_0c8361e40ceb15a9006aa0786ae25887d0b1d2c6f9833590d4",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              },
+              {
+                "arguments": "{\"course_id\":\"BIOT6240\"}",
+                "call_id": "call_81gCZP4MmKvSXsNRKe7JasVw",
+                "name": "get_course_details",
+                "type": "function_call",
+                "id": "fc_0c8361e40ceb15a9006aa0786ae26c87d087407f3f964d09a0",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              },
+              {
+                "arguments": "{\"course_id\":\"CHEM2305\"}",
+                "call_id": "call_m2c4KyNkpiB2vyaxKYEtgUfo",
+                "name": "get_course_details",
+                "type": "function_call",
+                "id": "fc_0c8361e40ceb15a9006aa0786ae27487d08b2610cc49b21e93",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788901483.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0c8361e40ceb15a9006aa07867ac0487d0bacec9f9b139659d",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1808,
+              "input_tokens_details": {
+                "cache_write_tokens": 369,
+                "cached_tokens": 1436
+              },
+              "output_tokens": 183,
+              "output_tokens_details": {
+                "reasoning_tokens": 104
+              },
+              "total_tokens": 1991
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_course_details",
+          "arguments": {
+            "course_id": "BIOT5240"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Does BCIT offer any biochemistry courses?",
+            "diploma_completed": false,
+            "global_catalog": true,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "course": {
+              "course_id": "BIOT5240",
+              "course_name": "Biochemistry 1",
+              "course_overview": "This course explores the structural and functional properties of proteins, and the diverse roles they play in living cells. Key principles of protein biochemistry will be applied to problems in the laboratory. Laboratory topics include the purification, quantification and characterization of proteins and enzymes. (UBC BIOT 311)",
+              "credits": "6.00",
+              "display_course_code": "BIOT 5240",
+              "last_checked": "2026-09-08",
+              "notes": "CHEM 4438",
+              "prerequisite_source": "authoritative_raw_text",
+              "prerequisite_status": "authoritative_raw_text",
+              "prerequisite_text": "CHEM 4438",
+              "prerequisite_text_clean": "CHEM 4438",
+              "prerequisite_text_raw": "CHEM 4438",
+              "source_url": "https://www.bcit.ca/programs/honours-in-biotechnology-bachelor-of-science-full-time-8910bsc/",
+              "status": "Active"
+            },
+            "prerequisites": []
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_course_details",
+          "arguments": {
+            "course_id": "BIOT6240"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Does BCIT offer any biochemistry courses?",
+            "diploma_completed": false,
+            "global_catalog": true,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "course": {
+              "course_id": "BIOT6240",
+              "course_name": "Biochemistry 2",
+              "course_overview": "(UBC BIOT 312) Discusses the generation of metabolic energy through an examination of the central pathways involved in the oxidation of fuel molecules. Examines the biosynthesis of macromolecular precursors. Analyzes the process of photosynthesis and its role in providing biological systems with free energy. Studies methods used for the isolation, purification and analysis of simple and complex biopolymers.",
+              "credits": "6.50",
+              "display_course_code": "BIOT 6240",
+              "last_checked": "2026-09-08",
+              "notes": "50% in BIOT 5240",
+              "prerequisite_source": "authoritative_raw_text",
+              "prerequisite_status": "authoritative_raw_text",
+              "prerequisite_text": "50% in BIOT 5240",
+              "prerequisite_text_clean": "50% in BIOT 5240",
+              "prerequisite_text_raw": "50% in BIOT 5240",
+              "source_url": "https://www.bcit.ca/programs/honours-in-biotechnology-bachelor-of-science-full-time-8910bsc/",
+              "status": "Active"
+            },
+            "prerequisites": []
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_course_details",
+          "arguments": {
+            "course_id": "CHEM2305"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": null,
+            "current_question": "Does BCIT offer any biochemistry courses?",
+            "diploma_completed": false,
+            "global_catalog": true,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "course": {
+              "course_id": "CHEM2305",
+              "course_name": "Biochemistry/Instrumental Analysis",
+              "course_overview": "This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.",
+              "credits": "5.00",
+              "display_course_code": "CHEM 2305",
+              "last_checked": "2026-09-08",
+              "notes": "CHEM 1205",
+              "prerequisite_source": "authoritative_raw_text",
+              "prerequisite_status": "authoritative_raw_text",
+              "prerequisite_text": "CHEM 1205",
+              "prerequisite_text_clean": "CHEM 1205",
+              "prerequisite_text_raw": "CHEM 1205",
+              "source_url": "https://www.bcit.ca/programs/biomedical-engineering-technology-diploma-full-time-5063dipma/",
+              "status": "Active"
+            },
+            "prerequisites": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_T4nAHmSM9DvESZkrchcChPqM",
+                "output": "{\"course\": {\"course_id\": \"BIOT5240\", \"course_name\": \"Biochemistry 1\", \"credits\": \"6.00\", \"course_overview\": \"This course explores the structural and functional properties of proteins, and the diverse roles they play in living cells. Key principles of protein biochemistry will be applied to problems in the laboratory. Laboratory topics include the purification, quantification and characterization of proteins and enzymes. (UBC BIOT 311)\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/honours-in-biotechnology-bachelor-of-science-full-time-8910bsc/\", \"last_checked\": \"2026-09-08\", \"notes\": \"CHEM 4438\", \"display_course_code\": \"BIOT 5240\", \"prerequisite_text_raw\": \"CHEM 4438\", \"prerequisite_text_clean\": \"CHEM 4438\", \"prerequisite_status\": \"authoritative_raw_text\", \"prerequisite_source\": \"authoritative_raw_text\", \"prerequisite_text\": \"CHEM 4438\"}, \"prerequisites\": []}",
+                "type": "function_call_output"
+              },
+              {
+                "call_id": "call_81gCZP4MmKvSXsNRKe7JasVw",
+                "output": "{\"course\": {\"course_id\": \"BIOT6240\", \"course_name\": \"Biochemistry 2\", \"credits\": \"6.50\", \"course_overview\": \"(UBC BIOT 312) Discusses the generation of metabolic energy through an examination of the central pathways involved in the oxidation of fuel molecules. Examines the biosynthesis of macromolecular precursors. Analyzes the process of photosynthesis and its role in providing biological systems with free energy. Studies methods used for the isolation, purification and analysis of simple and complex biopolymers.\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/honours-in-biotechnology-bachelor-of-science-full-time-8910bsc/\", \"last_checked\": \"2026-09-08\", \"notes\": \"50% in BIOT 5240\", \"display_course_code\": \"BIOT 6240\", \"prerequisite_text_raw\": \"50% in BIOT 5240\", \"prerequisite_text_clean\": \"50% in BIOT 5240\", \"prerequisite_status\": \"authoritative_raw_text\", \"prerequisite_source\": \"authoritative_raw_text\", \"prerequisite_text\": \"50% in BIOT 5240\"}, \"prerequisites\": []}",
+                "type": "function_call_output"
+              },
+              {
+                "call_id": "call_m2c4KyNkpiB2vyaxKYEtgUfo",
+                "output": "{\"course\": {\"course_id\": \"CHEM2305\", \"course_name\": \"Biochemistry/Instrumental Analysis\", \"credits\": \"5.00\", \"course_overview\": \"This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/biomedical-engineering-technology-diploma-full-time-5063dipma/\", \"last_checked\": \"2026-09-08\", \"notes\": \"CHEM 1205\", \"display_course_code\": \"CHEM 2305\", \"prerequisite_text_raw\": \"CHEM 1205\", \"prerequisite_text_clean\": \"CHEM 1205\", \"prerequisite_status\": \"authoritative_raw_text\", \"prerequisite_source\": \"authoritative_raw_text\", \"prerequisite_text\": \"CHEM 1205\"}, \"prerequisites\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x00000234D64FABD0>",
+            "tool_choice": "<openai.Omit object at 0x00000234D64FABD0>",
+            "previous_response_id": "resp_0c8361e40ceb15a9006aa07869044c87d0a0855cc11b772b30"
+          },
+          "response": {
+            "id": "resp_0c8361e40ceb15a9006aa0786c0f2487d09c0f4dd108925e90",
+            "created_at": 1788901484.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "msg_0c8361e40ceb15a9006aa0786c879887d09d22d3a3abbd8087",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788901485.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_0c8361e40ceb15a9006aa07869044c87d0a0855cc11b772b30",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 2766,
+              "input_tokens_details": {
+                "cache_write_tokens": 2763,
+                "cached_tokens": 0
+              },
+              "output_tokens": 99,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2865
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**",
+          "final_answer": "Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**"
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "request": {
+        "question": "I mean across BCIT, not within one program.",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "Does BCIT offer any biochemistry courses?"
+          },
+          {
+            "role": "assistant",
+            "content": "Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**"
+          }
+        ],
+        "conversation_state": {
+          "version": 1,
+          "scope": "course",
+          "program_id": null,
+          "course_id": "CHEM2305",
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "expectation": {
+        "question": "I mean across BCIT, not within one program.",
+        "expected": "Keep global course-discovery scope.",
+        "scope": "catalog",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": []
+      },
+      "http_status": 200,
+      "response": {
+        "answer": "Across BCIT, the active biochemistry-related courses identified are:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**\n\n**CHEM 2305 overview:** This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.",
+        "tools_used": [
+          "get_course_details"
+        ],
+        "verification": {
+          "count": 1,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "COURSE_INFO",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 1,
+          "scope": "course",
+          "program_id": null,
+          "course_id": "CHEM2305",
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "level": null,
+          "requirement_type": null
+        }
+      },
+      "elapsed_seconds": 4.438,
+      "events": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "campus_name": null,
+              "candidates": [],
+              "catalog_kind": null,
+              "course_id": "CHEM2305",
+              "level": null,
+              "program_id": null,
+              "requirement_type": null,
+              "result_query": null,
+              "scope": "course",
+              "scope_query": null,
+              "unique_result_program_id": null,
+              "version": 1
+            },
+            "course_id": "CHEM2305",
+            "global_catalog": false,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": "Student question: I mean across BCIT, not within one program.\nRouted intent: COURSE_INFO\nRequired response language from current turn: English\nActive structured subject (authoritative over recent conversation): {\"version\": 1, \"scope\": \"course\", \"program_id\": null, \"course_id\": \"CHEM2305\", \"scope_query\": null, \"result_query\": null, \"unique_result_program_id\": null, \"campus_name\": null, \"catalog_kind\": null, \"candidates\": [], \"level\": null, \"requirement_type\": null}\nRecent conversation:\nUser: Does BCIT offer any biochemistry courses?\nAssistant: Yes. BCIT offers these active biochemistry-related courses:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**",
+            "reasoning": "<openai.Omit object at 0x00000234D64FABD0>",
+            "tool_choice": {
+              "name": "get_course_details",
+              "type": "function"
+            },
+            "previous_response_id": "<openai.Omit object at 0x00000234D64FABD0>"
+          },
+          "response": {
+            "id": "resp_09a79e02a105888d006aa078721b2c87d0bae98c25e33bfb32",
+            "created_at": 1788901490.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "arguments": "{\"course_id\":\"CHEM2305\"}",
+                "call_id": "call_SyHLxyKu1qBlTLxDfaZHzasl",
+                "name": "get_course_details",
+                "type": "function_call",
+                "id": "fc_09a79e02a105888d006aa07872a16087d0b12018d2988c098a",
+                "caller": null,
+                "namespace": null,
+                "status": "completed"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": {
+              "name": "get_course_details",
+              "type": "function"
+            },
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788901490.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": null,
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1530,
+              "input_tokens_details": {
+                "cache_write_tokens": 233,
+                "cached_tokens": 1167
+              },
+              "output_tokens": 23,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1553
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "tool",
+          "name": "get_course_details",
+          "arguments": {
+            "course_id": "CHEM2305"
+          },
+          "context": {
+            "completed_courses": [],
+            "course_id": "CHEM2305",
+            "current_question": "I mean across BCIT, not within one program.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "gpa": null,
+            "level": null,
+            "pathway": null,
+            "program_id": null,
+            "program_name": null,
+            "program_set_query": false,
+            "program_set_scope": null,
+            "requirement_type": null,
+            "result_query": null,
+            "subject_course_ids": [],
+            "work_hours": 0
+          },
+          "result": {
+            "course": {
+              "course_id": "CHEM2305",
+              "course_name": "Biochemistry/Instrumental Analysis",
+              "course_overview": "This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.",
+              "credits": "5.00",
+              "display_course_code": "CHEM 2305",
+              "last_checked": "2026-09-08",
+              "notes": "CHEM 1205",
+              "prerequisite_source": "authoritative_raw_text",
+              "prerequisite_status": "authoritative_raw_text",
+              "prerequisite_text": "CHEM 1205",
+              "prerequisite_text_clean": "CHEM 1205",
+              "prerequisite_text_raw": "CHEM 1205",
+              "source_url": "https://www.bcit.ca/programs/biomedical-engineering-technology-diploma-full-time-5063dipma/",
+              "status": "Active"
+            },
+            "prerequisites": []
+          }
+        },
+        {
+          "kind": "model",
+          "request": {
+            "model": "gpt-5.6-luna",
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "input": [
+              {
+                "call_id": "call_SyHLxyKu1qBlTLxDfaZHzasl",
+                "output": "{\"course\": {\"course_id\": \"CHEM2305\", \"course_name\": \"Biochemistry/Instrumental Analysis\", \"credits\": \"5.00\", \"course_overview\": \"This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.\", \"status\": \"Active\", \"source_url\": \"https://www.bcit.ca/programs/biomedical-engineering-technology-diploma-full-time-5063dipma/\", \"last_checked\": \"2026-09-08\", \"notes\": \"CHEM 1205\", \"display_course_code\": \"CHEM 2305\", \"prerequisite_text_raw\": \"CHEM 1205\", \"prerequisite_text_clean\": \"CHEM 1205\", \"prerequisite_status\": \"authoritative_raw_text\", \"prerequisite_source\": \"authoritative_raw_text\", \"prerequisite_text\": \"CHEM 1205\"}, \"prerequisites\": []}",
+                "type": "function_call_output"
+              }
+            ],
+            "reasoning": "<openai.Omit object at 0x00000234D64FABD0>",
+            "tool_choice": "<openai.Omit object at 0x00000234D64FABD0>",
+            "previous_response_id": "resp_09a79e02a105888d006aa078721b2c87d0bae98c25e33bfb32"
+          },
+          "response": {
+            "id": "resp_09a79e02a105888d006aa07873ea5c87d09cbc111e55466bc9",
+            "created_at": 1788901492.0,
+            "error": null,
+            "incomplete_details": null,
+            "instructions": "You are Asteris, an academic advisor for the institution. The question has been routed as COURSE_INFO. Use the provided tools for every factual claim about courses, prerequisites, eligibility, or program progress. Never guess policy. If no tool can verify a factual or policy claim, say that it cannot be verified from the available Asteris data. Internal IDs are implementation details: never ask a student for a program ID. Course codes are normal student-facing information: whenever a course is named or returned, show its display_course_code alongside its course_name. Canonical course_id values are internal lookup keys; never show them when a display_course_code is available. Program IDs may be omitted in normal prose, but when the current question explicitly requests program IDs or codes, return the real program_id. Resolve course and program names with the search tools. When eligibility or progress requires a program that has not been identified, ask naturally which program the student is taking. Never expose internal naming, resolution, or identifier terminology unless the student explicitly asks for an ID. Treat the Civil Engineering Diploma and Bachelor of Engineering as related parts of one pathway. When a requested level is shared, list it directly instead of asking which credential the student means. An explicit statement that all courses through a level were completed is sufficient completion context for a progress calculation; do not request an official outline. For course information, describe the course and its prerequisites without discussing completed-course state or eligibility. When the student asks for a course overview, reproduce the complete stored course_overview faithfully; do not summarize it or drop its final words. For prerequisites, prefer structured prerequisite rows when present. If they are absent and prerequisite_source is authoritative_raw_text, state the stored prerequisite_text exactly. Only say a course has no prerequisites when prerequisite_source is explicit_none. If the source is unknown, say the prerequisite information is unavailable; never infer 'none' merely from an empty prerequisites list. Use display_course_code in student-facing text. For program information, aggregate the curated program record, its configured program courses, and its stored source URL. For an admissions scenario, inspect the resolved program's structured ADMISSION and INTERNATIONAL rules. Separate requirements directly met by the student's stated facts, facts still missing, and non-executable or institutionally verified requirements needing human confirmation; never invent an unstored requirement. Category questions must search programs by credential. For a family/category comparison, use compare_programs and report every returned member, including unknown results; never stop at the first match. An explicit whole-catalog question overrides all prior or selected program context; report its count, program list, or distinct credentials only from the search_programs result. Electives come only from choice groups: required=false does not mean elective, and work terms are not electives. Practical-work and progression answers come only from progression requirements. Progress percentages must be quoted only from the program-progress tool and never calculated from level numbers. If requested detail is missing and a verified source_url exists, provide that link as the fallback. Do not claim that an answer is official; encourage confirmation with the institution when data is missing or ambiguous. Be concise and clear. Before saying a verified requirement is unavailable, call every relevant deterministic tool provided for the routed intent. Course completion state comes only from explicit statements by the student in the current conversation. Describe it as courses the student told you they completed; never mention or imply an academic profile or stored student record. Spanish When a student-supplied numeric fact can be compared directly with a verified minimum, give the deterministic result and the exact difference. Qualify only whether the stated experience or credential meets the stored definition; do not say the result cannot be verified and then state the rule. Describe CMGT 8700 generically as requiring completion of required program coursework before the student's chosen final-project course; never describe CMGT 8800 as the only possible final project. Credit-based elective rules are MINIMUM_CREDITS_FROM_POOL rules, not course-count rules. Describe them as completing at least the stated credits from the approved pool. Never infer a fixed number of courses or assume every option has equal credits. Use choose-N wording only when a structured choice group provides a choose count. For every structured OR or choice group, clearly say the student chooses one option; never turn alternatives into cumulative requirements or call the set optional. A required A-or-B set is a graduation requirement even though each individual branch is an alternative. Keep ADMISSION/ENTRANCE rules separate from GRADUATION/CURRICULUM rules and never use one to answer the other. For graduation questions, call evaluate_program_curriculum when available and prefer it over individual course role labels. Department approval applies to CMGT 8800 and CMGT 8810, not CMGT 8700. CMGT 8700 itself requires the stored coursework-completion rule, two years of related work experience, an industry topic, and an industry sponsor. The standard Liberal Studies component totals 12 credits. For part-time students, explain that LIBS 7013 may be replaced by one additional 3-credit Liberal Studies elective while the other Liberal Studies requirements remain; do not call a replaceable course mandatory. A resolved active program is authoritative for every program-specific tool. Never substitute a different program because a search is empty or irrelevant. Never invent application, acceptance, reapplication, enrolment, or document timing. For a current student asking about another pathway, explain only stored pathway and curriculum facts; label unstored transition or reapplication rules unknown. Answer yes/no and discovery questions concisely unless the student asks to list, show, browse, compare, or explain. Clearly label any inference, or omit it. uses exactly the same tools and rules as English. Respond entirely in the language of the current student question: English. Conversation history may provide subject or entity context but must never determine or carry over the response language. Keep co-op work terms, practical-work hours, and academic level progression separate. A level explicitly named in the current question overrides unrelated levels in history; never offer progression to another level.",
+            "metadata": {},
+            "model": "gpt-5.6-luna",
+            "object": "response",
+            "output": [
+              {
+                "id": "msg_09a79e02a105888d006aa07874614087d098fce6a2a2afac8f",
+                "content": [
+                  {
+                    "annotations": [],
+                    "text": "Across BCIT, the active biochemistry-related courses identified are:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**\n\n**CHEM 2305 overview:** This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.",
+                    "type": "output_text",
+                    "logprobs": []
+                  }
+                ],
+                "role": "assistant",
+                "status": "completed",
+                "type": "message",
+                "phase": "final_answer"
+              }
+            ],
+            "parallel_tool_calls": true,
+            "temperature": 1.0,
+            "tool_choice": "auto",
+            "tools": [
+              {
+                "name": "search_courses",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Find active courses by course code or course-name text.",
+                "output_schema": null
+              },
+              {
+                "name": "get_course_details",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "course_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "course_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "strict": true,
+                "type": "function",
+                "allowed_callers": null,
+                "defer_loading": null,
+                "description": "Get verified details and prerequisites for one course code.",
+                "output_schema": null
+              }
+            ],
+            "top_p": 0.98,
+            "background": false,
+            "completed_at": 1788901493.0,
+            "conversation": null,
+            "max_output_tokens": null,
+            "max_tool_calls": null,
+            "moderation": null,
+            "previous_response_id": "resp_09a79e02a105888d006aa078721b2c87d0bae98c25e33bfb32",
+            "prompt": null,
+            "prompt_cache_key": null,
+            "prompt_cache_options": null,
+            "prompt_cache_retention": "24h",
+            "reasoning": {
+              "context": "all_turns",
+              "effort": "medium",
+              "generate_summary": null,
+              "mode": "standard",
+              "summary": null
+            },
+            "safety_identifier": null,
+            "service_tier": "default",
+            "status": "completed",
+            "text": {
+              "format": {
+                "type": "text"
+              },
+              "verbosity": "medium"
+            },
+            "top_logprobs": 0,
+            "truncation": "disabled",
+            "usage": {
+              "input_tokens": 1796,
+              "input_tokens_details": {
+                "cache_write_tokens": 266,
+                "cached_tokens": 1527
+              },
+              "output_tokens": 157,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1953
+            },
+            "user": null,
+            "billing": {
+              "payer": "developer"
+            },
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0,
+            "store": true,
+            "tool_usage": {
+              "image_gen": {
+                "input_tokens": 0,
+                "input_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "output_tokens": 0,
+                "output_tokens_details": {
+                  "image_tokens": 0,
+                  "text_tokens": 0
+                },
+                "total_tokens": 0
+              },
+              "web_search": {
+                "num_requests": 0
+              }
+            }
+          }
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "Across BCIT, the active biochemistry-related courses identified are:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**\n\n**CHEM 2305 overview:** This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules.",
+          "final_answer": "Across BCIT, the active biochemistry-related courses identified are:\n\n- **BIOT 5240 — Biochemistry 1**  \n  Prerequisite: **CHEM 4438**\n\n- **BIOT 6240 — Biochemistry 2**  \n  Prerequisite: **50% in BIOT 5240**\n\n- **CHEM 2305 — Biochemistry/Instrumental Analysis**  \n  Prerequisite: **CHEM 1205**\n\n**CHEM 2305 overview:** This course provides an introduction to instrumental techniques (i.e. spectroscopy, electrochemistry, chromatography) with a focus on applications for the clinical lab. The course also includes an overview of biological chemistry and the methods used to analyze relevant biological molecules."
+        }
+      ],
+      "assertions": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

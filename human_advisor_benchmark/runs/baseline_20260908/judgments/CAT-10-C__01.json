@@ -1,0 +1,112 @@
+{
+  "scenario_id": "CAT-10-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "77060d19f3881853ec784db25192a32e0f29fc522e4e4522cce9e4596e2881a2",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "4e5bf3f13c98e90f34a4514d1b75c4746ee80e053aaf06d3cc3e3a85a73ebee3",
+  "response_id": "resp_0c5037cd0f2233e1006aa0798866dc87d09ef55e0a3be6936d",
+  "usage": {
+    "input_tokens": 49141,
+    "input_tokens_details": {
+      "cache_write_tokens": 47748,
+      "cached_tokens": 1390
+    },
+    "output_tokens": 731,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 49872
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw model answer spends its entire second sentence enumerating all six course codes and titles despite a request for a brief introduction; finalization preserves it."
+        },
+        "notes": "Accurate program, campus, duration, delivery and curriculum; credits sum to 19. Both prose and state identify A700GRCERT. Meets two-sentence and under-100-word constraints, but the list makes the introduction somewhat catalog-like. Context is inapplicable on turn 1; no required clarification, frustration or next step."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 2,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "list_dump_or_repetition",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The raw answer repeats all six course names and codes from turn 1 in response to an employment-guarantee question, and the final answer retains that list."
+        },
+        "notes": "Correctly declines to guarantee employment and distinguishes opportunities from assured outcomes without inventing statistics. Academic claims match frozen records and the active program is preserved. The generic program-details link does not supply the expected practical employment-related next step. State remains broad program/PROGRAM_INFO, while prose does address outcomes. No clarification required or explicit frustration."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "After the explicit stop request, tool_choice forces get_program_details and the tool executes; tools_used is nonempty and intent remains PROGRAM_INFO. The final prose nevertheless stops respectfully."
+        },
+        "notes": "The final 'Understood. Take care!' fully honors the visible stop request and preserves A700GRCERT. The trace violates the frozen no-tools expectation; forced tool choice supports routing rather than discretionary model-tool attribution. No academic claims to assess, no required clarification, and no next step appropriate."
+      }
+    ]
+  },
+  "attempt": 2
+}

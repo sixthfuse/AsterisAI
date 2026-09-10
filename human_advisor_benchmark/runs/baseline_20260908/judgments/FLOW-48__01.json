@@ -1,0 +1,135 @@
+{
+  "scenario_id": "FLOW-48",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "bc50a9d29fa989a8604f9d40a7619c1c7d159596391262935f04ac49ed1c19f2",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "b337d3310eff36a80bbc2560fe0de9a7c8f5c9859d38eafff9f25e6b2dd550cb",
+  "packet_sha256": "0aeff997e893295375a2f5c192d789721e8ca2f150cce97b913513ab70c477eb",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_047695a013b0ba37006aa084ebd37887d0a44784ef0b3e2a8c",
+  "usage": {
+    "input_tokens": 24335,
+    "input_tokens_details": {
+      "cache_write_tokens": 22981,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1132,
+    "output_tokens_details": {
+      "reasoning_tokens": 80
+    },
+    "total_tokens": 25467
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 3,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "clarification_logic",
+          "pattern": "unknown_or_human_boundary",
+          "layer": "unresolved",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The advisor appropriately asks which program, but does not also request relevant completed courses, as the frozen expectation specifies."
+        },
+        "notes": "No academic factual claims to assess; context retention is inapplicable on turn 1. Asking for the program first is a reasonable staged clarification, with only a minor completeness gap. No frustration or stop intent."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 2,
+          "scope_accuracy": 1,
+          "unsupported_inference_avoidance": 2,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": null,
+          "response_relevance": 1,
+          "repetition_avoidance": 1,
+          "naturalness": 2,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 2
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "mixed",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The student supplies the program in response to a next-course planning question. The trace labels this PROGRAM_INFO and forces get_program_details; the unchanged raw/final model answer supplies a full curriculum and admission overview rather than asking about completions or advancing progression planning."
+        },
+        "notes": "Both resolver state and prose correctly identify 8800BTECH, Construction Management. Program facts, curriculum membership, credit pools, substitution and admission highlights generally match supplied records; course titles and individual credits appear in the tool evidence. However, the claim that CMGT 8700 requires completed program coursework, an industry topic and an industry sponsor is not established in the supplied raw records or tool result. Overall factual correctness is therefore not fully assessable, rather than treating those claims as false or verified. No student completions are invented. Clarification is allowed, so neither clarification applicability dimension is scored. Next-step guidance applies because the original planning request remains unresolved."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 3,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 1,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "response_generation_quality",
+          "pattern": "missing_next_step",
+          "layer": "model_language",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The unchanged model/final answer acknowledges 'completed no courses' but stops at bookkeeping and a program link, leaving the original 'What should I take next?' request without guidance."
+        },
+        "notes": "Accurately retains the program and the student's zero completions; no fixtures or fabricated eligibility are used. The acknowledgement meets the immediate frozen no-invention expectation but does not advance the full conversation's planning goal. Factual correctness is null because the answer restates student information rather than making substantive academic claims. The program remains correctly resolved in state. The trace again forces program-details retrieval, but that does not explain why the model offers no useful planning next step."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly concludes that the student is not ready because CMGT 8700 has not been completed, rather than interpreting missing work-experience information as zero experience. States the two-year related-experience requirement, admission-experience credit, department approval, and CMGT 8800 OR CMGT 8810 accurately against the frozen rules. Both state and prose resolve the correct program and final-project options. The tool context contains unsupported default work_hours=0 and diploma_completed=false, but the answer explicitly treats work experience as unknown and does not use those defaults to determine eligibility. Slightly stiff opening notwithstanding, this is a direct, evidence-disciplined answer. No frustration; no further clarification is needed to establish the known coursework blocker."
+      }
+    ]
+  },
+  "attempt": 1
+}

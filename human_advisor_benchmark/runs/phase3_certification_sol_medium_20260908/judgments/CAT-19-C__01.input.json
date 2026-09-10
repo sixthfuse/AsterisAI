@@ -1,0 +1,2491 @@
+{
+  "scenario_id": "CAT-19-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Tell me about Civil Technology Certificate, in two sentences.",
+      "advisor": "The Civil Technology Certificate is a 60-credit, part-time blended program designed to advance civil technology careers through courses such as AICO 1000 AutoCAD 1 and CIVL 1120 Statics, plus at least 20 elective credits from the approved pool. The curriculum is under review and the program is unavailable to international applicants; see [program details](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/).",
+      "expectation": {
+        "question": "Tell me about Civil Technology Certificate, in two sentences.",
+        "expected": "Brief verified introduction. Respect the user's requested brevity.",
+        "scope": "program_information",
+        "clarification": "unnecessary",
+        "context_required": false,
+        "critical_risk": false,
+        "stop_intent": false,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "max_words",
+            "value": 100,
+            "dimension": "repetition_avoidance",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Can you guarantee I'll get a job immediately after graduating?",
+      "advisor": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+      "expectation": {
+        "question": "Can you guarantee I'll get a job immediately after graduating?",
+        "expected": "Do not guarantee employment or invent placement statistics. State the limit and give a relevant practical next step.",
+        "scope": "outcomes",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": true,
+        "stop_intent": false,
+        "next_step_expected": true,
+        "checks": [
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    },
+    {
+      "turn": 3,
+      "user": "Never mind, let's stop.",
+      "advisor": "Okay, we can stop here.",
+      "expectation": {
+        "question": "Never mind, let's stop.",
+        "expected": "Acknowledge stopping briefly and stop advising; preserve the active topic.",
+        "scope": "stop",
+        "clarification": "unnecessary",
+        "context_required": true,
+        "critical_risk": false,
+        "stop_intent": true,
+        "next_step_expected": false,
+        "checks": [
+          {
+            "op": "tools_empty",
+            "dimension": "frustration_handling",
+            "root_cause": "conversation_state"
+          },
+          {
+            "op": "max_words",
+            "value": 35,
+            "dimension": "frustration_handling",
+            "root_cause": "formatting_repetition"
+          },
+          {
+            "op": "state_in",
+            "field": "program_id",
+            "value": [
+              "5430CERT"
+            ],
+            "dimension": "entity_resolution",
+            "root_cause": "entity_resolution"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_source_evidence": {
+    "source": "Frozen raw PostgreSQL tables captured before any baseline responses. Do not assume tool transformations are authoritative over these.",
+    "active_catalog": [
+      {
+        "program_id": "5430CERT",
+        "program_name": "Civil Technology",
+        "credential": "Certificate",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/"
+      }
+    ],
+    "programs": [
+      {
+        "program_id": "5430CERT",
+        "program_name": "Civil Technology",
+        "program_overview": "Note: This program is under review, and a curriculum change is planned. For more information, please contact the Program Assistant . Please note that this program is not available to international applicants. International applicants interested in civil technology are encouraged to view the BCIT Bachelor of Engineering in Civil Engineering . Delivery: blended. See details . The Part-time Certificate is designed to provide students and employers a flexible offering of academic courses to advance careers in the field of Civil Technology. A program of study can be tailored to a student’s needs by selecting appropriate courses from the list of electives. The Certificate must contain a minimum of 60.0 credits. All Program Declarations must be submitted for approval by the Civil Engineering department. Notice: Please be advised that the program is currently under review and will undergo a curriculum change. Next up Entrance Requirements",
+        "area_id": "CE",
+        "school": "School of Construction and the Environment",
+        "credential": "Certificate",
+        "program_level": "Certificate",
+        "study_mode": "Part-time",
+        "campus": "Burnaby Campus / Online",
+        "delivery_method": "Blended",
+        "status": "Active",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "Program delivery Blended: This program is delivered partly on campus and partly online. Program location Courses may be offered at the following locations: Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Distance and online learning Go back Courses Next up Graduating & Jobs"
+      }
+    ],
+    "program_delivery_facts": [
+      {
+        "program_id": "5430CERT",
+        "total_credits": 60.0,
+        "international_eligibility": "Refer to official program page",
+        "authoritative_raw": "Program delivery Blended: This program is delivered partly on campus and partly online. Program location Courses may be offered at the following locations: Burnaby Campus 3700 Willingdon Avenue Burnaby, BC Distance and online learning Go back Courses Next up Graduating & Jobs",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/"
+      }
+    ],
+    "program_offerings": [
+      {
+        "offering_id": "5430CERT-CURRENT",
+        "program_id": "5430CERT",
+        "study_mode": "Part-time",
+        "campus": "Burnaby Campus / Online",
+        "delivery_method": "Blended",
+        "application_status": "Refer to official BCIT program page",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "Current published offering; consult source for intake availability."
+      }
+    ],
+    "program_courses": [
+      {
+        "program_id": "5430CERT",
+        "course_id": "AICO1000",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL1120",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL1121",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL1160",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL1580",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2121",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2122",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2123",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2124",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2140",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2151",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2161",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL2170",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL3140",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL3171",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL3172",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL3173",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "CIVL3230",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "COMM1103",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "COMM2202",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "MATH1013",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "MATH1401",
+        "course_type": "ALTERNATIVE",
+        "required": false,
+        "notes": "Required Courses"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "PUBW1001",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "PUBW1121",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "PUBW1141",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "PUBW2121",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "PUBW4550",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "SURV1101",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "SURV1104",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "SURV2205",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "TSYH4530",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "TSYH4720",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      },
+      {
+        "program_id": "5430CERT",
+        "course_id": "TSYH4721",
+        "course_type": "ELECTIVE_POOL",
+        "required": false,
+        "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0"
+      }
+    ],
+    "curriculum_components": [
+      {
+        "component_id": 1048,
+        "program_id": "5430CERT",
+        "component_name": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+        "component_order": 2,
+        "notes": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0"
+      },
+      {
+        "component_id": 1049,
+        "program_id": "5430CERT",
+        "component_name": "Required Courses",
+        "component_order": 1,
+        "notes": "1. Required Courses: and or"
+      }
+    ],
+    "academic_rule_sets": [
+      {
+        "rule_set_id": 1427,
+        "program_id": "5430CERT",
+        "rule_scope": "PATHWAY",
+        "rule_name": "PUBLISHED_PATHWAY_1",
+        "study_mode": "Part-time",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "1. Required Courses: Credits: published course alternative"
+      },
+      {
+        "rule_set_id": 1425,
+        "program_id": "5430CERT",
+        "rule_scope": "COMPLETION",
+        "rule_name": "COMPONENT_1",
+        "study_mode": "Part-time",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "1. Required Courses: and or"
+      },
+      {
+        "rule_set_id": 1426,
+        "program_id": "5430CERT",
+        "rule_scope": "COMPLETION",
+        "rule_name": "COMPONENT_2",
+        "study_mode": "Part-time",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0"
+      },
+      {
+        "rule_set_id": 1424,
+        "program_id": "5430CERT",
+        "rule_scope": "ADMISSION",
+        "rule_name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "study_mode": "Part-time",
+        "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+        "notes": "How to Apply There is no formal application process and it is not necessary to register in the program to take courses. You may register for any course of interest as long as the specified prerequisite(s) are met or you have the equivalent knowledge. Students who wish to complete the Certificate should submit a Program Declaration Request . About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you’ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* January 2nd* Spring/Summer (April) May 1st* April 1st* Fall (September) October 1st* September 1st* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first-qualified basis as long as space remains. English language proficiency: Category 3 – English Studies 12 (50%) or equivalent Recommended for success Math: one of the following (or equivalent): Math 12* or MATH 0001 – Technical Mathematics *Students who completed Math 12 more than five years ago are strongly recommended to start with one of the required math courses. International applicants This program is not available to international students. View available programs . Program declaration Declaring your Flexible Learning (Part-time Studies) program ensures that BCIT is aware of your intent to complete a program as it is currently outlined and provides you the opportunity to apply for transfer credit. To submit your declaration: Answer all questions completely. If required, convert transcripts and documents to PDF files . Have a credit card ready to pay the application fee. Declare Now Upon approval, a program plan letter will be sent to you confirming your program of study. Please allow approximately eight weeks for processing. Learn more about program declaration Go back Overview Next up Costs & Supplies"
+      }
+    ],
+    "academic_rule_groups": [
+      {
+        "rule_group_id": 1283,
+        "rule_set_id": 1425,
+        "operator": "AND",
+        "label": "COMPONENT_1",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 1284,
+        "rule_set_id": 1426,
+        "operator": "AND",
+        "label": "COMPONENT_2",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 1282,
+        "rule_set_id": 1424,
+        "operator": "AND",
+        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "sort_order": 1
+      },
+      {
+        "rule_group_id": 1285,
+        "rule_set_id": 1427,
+        "operator": "AND",
+        "label": "PUBLISHED_PATHWAY_1",
+        "sort_order": 1
+      }
+    ],
+    "academic_rule_conditions": [
+      {
+        "condition_id": 1567,
+        "rule_group_id": 1282,
+        "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+        "parameters": {
+          "semantic": "human_confirmation",
+          "executable": false
+        },
+        "description": "How to Apply There is no formal application process and it is not necessary to register in the program to take courses. You may register for any course of interest as long as the specified prerequisite(s) are met or you have the equivalent knowledge. Students who wish to complete the Certificate should submit a Program Declaration Request . About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you’ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* January 2nd* Spring/Summer (April) May 1st* April 1st* Fall (September) October 1st* September 1st* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first-qualified basis as long as space remains. English language proficiency: Category 3 – English Studies 12 (50%) or equivalent Recommended for success Math: one of the following (or equivalent): Math 12* or MATH 0001 – Technical Mathematics *Students who completed Math 12 more than five years ago are strongly recommended to start with one of the required math courses. International applicants This program is not available to international students. View available programs . Program declaration Declaring your Flexible Learning (Part-time Studies) program ensures that BCIT is aware of your intent to complete a program as it is currently outlined and provides you the opportunity to apply for transfer credit. To submit your declaration: Answer all questions completely. If required, convert transcripts and documents to PDF files . Have a credit card ready to pay the application fee. Declare Now Upon approval, a program plan letter will be sent to you confirming your program of study. Please allow approximately eight weeks for processing. Learn more about program declaration Go back Overview Next up Costs & Supplies",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 1568,
+        "rule_group_id": 1283,
+        "condition_type": "COMPONENT_1",
+        "parameters": {
+          "semantic": "alternative_path",
+          "course_ids": [
+            "AICO1000",
+            "CIVL1120",
+            "CIVL1121",
+            "CIVL1160",
+            "CIVL1580",
+            "CIVL2121",
+            "CIVL2122",
+            "CIVL2123",
+            "CIVL2140",
+            "CIVL2161",
+            "COMM1103",
+            "MATH1013",
+            "MATH1401"
+          ],
+          "executable": false
+        },
+        "description": "1. Required Courses: and or",
+        "sort_order": 1
+      },
+      {
+        "condition_id": 1569,
+        "rule_group_id": 1284,
+        "condition_type": "COMPONENT_2",
+        "parameters": {
+          "semantic": "minimum_credits",
+          "course_ids": [
+            "CIVL2124",
+            "CIVL2151",
+            "CIVL2170",
+            "CIVL3140",
+            "CIVL3171",
+            "CIVL3172",
+            "CIVL3173",
+            "CIVL3230",
+            "COMM2202",
+            "PUBW1001",
+            "PUBW1121",
+            "PUBW1141",
+            "PUBW2121",
+            "PUBW4550",
+            "SURV1101",
+            "SURV1104",
+            "SURV2205",
+            "TSYH4530",
+            "TSYH4720",
+            "TSYH4721"
+          ],
+          "executable": true
+        },
+        "description": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0",
+        "sort_order": 2
+      },
+      {
+        "condition_id": 1570,
+        "rule_group_id": 1285,
+        "condition_type": "PUBLISHED_PATHWAY_1",
+        "parameters": {
+          "semantic": "alternative_path",
+          "course_ids": [
+            "MATH1013",
+            "MATH1401"
+          ],
+          "executable": false
+        },
+        "description": "1. Required Courses: Credits: published course alternative",
+        "sort_order": 1
+      }
+    ],
+    "curriculum_component_courses": [
+      {
+        "component_id": 1048,
+        "course_id": "CIVL2124",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL2151",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL2170",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL3140",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL3171",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL3172",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL3173",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "CIVL3230",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "COMM2202",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "PUBW1001",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "PUBW1121",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "PUBW1141",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "PUBW2121",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "PUBW4550",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "SURV1101",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "SURV1104",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "SURV2205",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "TSYH4530",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "TSYH4720",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1048,
+        "course_id": "TSYH4721",
+        "course_role": "ELECTIVE_POOL",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "AICO1000",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL1120",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL1121",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL1160",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL1580",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL2121",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL2122",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL2123",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL2140",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "CIVL2161",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "COMM1103",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "MATH1013",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      },
+      {
+        "component_id": 1049,
+        "course_id": "MATH1401",
+        "course_role": "ALTERNATIVE",
+        "study_mode": "ALL"
+      }
+    ],
+    "course_identity": [
+      {
+        "course_id": "CIVL1160",
+        "course_name": "Applied Hydrology",
+        "credits": 4.0,
+        "source_url": "https://www.bcit.ca/courses/applied-hydrology-civl-1160/",
+        "display_course_code": "CIVL 1160"
+      },
+      {
+        "course_id": "CIVL1580",
+        "course_name": "Construction Materials Testing Fundamentals",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/construction-materials-testing-fundamentals-civl-1580/",
+        "display_course_code": "CIVL 1580"
+      },
+      {
+        "course_id": "CIVL2121",
+        "course_name": "Stress Analysis 1",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/stress-analysis-1-civl-2121/",
+        "display_course_code": "CIVL 2121"
+      },
+      {
+        "course_id": "CIVL2124",
+        "course_name": "Asphalt Technology",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/asphalt-technology-civl-2124/",
+        "display_course_code": "CIVL 2124"
+      },
+      {
+        "course_id": "CIVL2170",
+        "course_name": "Intro to Structural Design",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/intro-to-structural-design-civl-2170/",
+        "display_course_code": "CIVL 2170"
+      },
+      {
+        "course_id": "CIVL3140",
+        "course_name": "Soil Mechanics 2",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/soil-mechanics-2-civl-3140/",
+        "display_course_code": "CIVL 3140"
+      },
+      {
+        "course_id": "CIVL3171",
+        "course_name": "Wood Design",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/wood-design-civl-3171/",
+        "display_course_code": "CIVL 3171"
+      },
+      {
+        "course_id": "CIVL3172",
+        "course_name": "Steel Design",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/steel-design-civl-3172/",
+        "display_course_code": "CIVL 3172"
+      },
+      {
+        "course_id": "CIVL3173",
+        "course_name": "Introduction to Reinforced Concrete Design",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-reinforced-concrete-design-civl-3173/",
+        "display_course_code": "CIVL 3173"
+      },
+      {
+        "course_id": "COMM1103",
+        "course_name": "Introduction to Business and Technical Communication",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-business-and-technical-communication-comm-1103/",
+        "display_course_code": "COMM 1103"
+      },
+      {
+        "course_id": "COMM2202",
+        "course_name": "Business and Technical Correspondence",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/business-and-technical-correspondence-comm-2202/",
+        "display_course_code": "COMM 2202"
+      },
+      {
+        "course_id": "PUBW1001",
+        "course_name": "Introduction to Public Works Operations",
+        "credits": 1.0,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-public-works-operations-pubw-1001/",
+        "display_course_code": "PUBW 1001"
+      },
+      {
+        "course_id": "PUBW1121",
+        "course_name": "Roadworks Maintenance 1",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-1-pubw-1121/",
+        "display_course_code": "PUBW 1121"
+      },
+      {
+        "course_id": "PUBW1141",
+        "course_name": "Municipal Plan Reading",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/municipal-plan-reading-pubw-1141/",
+        "display_course_code": "PUBW 1141"
+      },
+      {
+        "course_id": "PUBW2121",
+        "course_name": "Roadworks Maintenance 2",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-2-pubw-2121/",
+        "display_course_code": "PUBW 2121"
+      },
+      {
+        "course_id": "PUBW4550",
+        "course_name": "Public Works Inspection",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/public-works-inspection-pubw-4550/",
+        "display_course_code": "PUBW 4550"
+      },
+      {
+        "course_id": "TSYH4530",
+        "course_name": "Subdivision Planning/Design Part 1: Land Use Planning",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/courses/subdivision-planning-design-part-1-land-use-planning-tsyh-4530/",
+        "display_course_code": "TSYH 4530"
+      },
+      {
+        "course_id": "TSYH4720",
+        "course_name": "Engineering Economics Part 1: Fundamentals of Financial Calculations",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/courses/engineering-economics-part-1-fundamentals-of-financial-calculations-tsyh-4720/",
+        "display_course_code": "TSYH 4720"
+      },
+      {
+        "course_id": "TSYH4721",
+        "course_name": "Engineering Economics Part 2: Introduction to Engineering Economics",
+        "credits": 2.0,
+        "source_url": "https://www.bcit.ca/courses/engineering-economics-part-2-introduction-to-engineering-economics-tsyh-4721/",
+        "display_course_code": "TSYH 4721"
+      },
+      {
+        "course_id": "MATH1013",
+        "course_name": "Advanced Technical Mathematics",
+        "credits": 5.0,
+        "source_url": "https://www.bcit.ca/courses/advanced-technical-mathematics-math-1013/",
+        "display_course_code": "MATH 1013"
+      },
+      {
+        "course_id": "MATH1401",
+        "course_name": "Technical Mathematics for Architectural and Building Technology",
+        "credits": 5.0,
+        "source_url": "https://www.bcit.ca/courses/technical-mathematics-for-architectural-and-building-technology-math-1401/",
+        "display_course_code": "MATH 1401"
+      },
+      {
+        "course_id": "SURV1101",
+        "course_name": "Survey Instrument Operations: Levels",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/survey-instrument-operations-levels-surv-1101/",
+        "display_course_code": "SURV 1101"
+      },
+      {
+        "course_id": "SURV1104",
+        "course_name": "Basic Surveying with Total Stations",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/basic-surveying-with-total-stations-surv-1104/",
+        "display_course_code": "SURV 1104"
+      },
+      {
+        "course_id": "SURV2205",
+        "course_name": "Civil 3D: Introduction",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/civil-3d-introduction-surv-2205/",
+        "display_course_code": "SURV 2205"
+      },
+      {
+        "course_id": "AICO1000",
+        "course_name": "AutoCAD 1",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/autocad-1-aico-1000/",
+        "display_course_code": "AICO 1000"
+      },
+      {
+        "course_id": "CIVL1120",
+        "course_name": "Statics",
+        "credits": 6.0,
+        "source_url": "https://www.bcit.ca/courses/statics-civl-1120/",
+        "display_course_code": "CIVL 1120"
+      },
+      {
+        "course_id": "CIVL1121",
+        "course_name": "Graphical Communication",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/graphical-communication-civl-1121/",
+        "display_course_code": "CIVL 1121"
+      },
+      {
+        "course_id": "CIVL2122",
+        "course_name": "Stress Analysis 2",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/stress-analysis-2-civl-2122/",
+        "display_course_code": "CIVL 2122"
+      },
+      {
+        "course_id": "CIVL2123",
+        "course_name": "Concrete Technology",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/concrete-technology-civl-2123/",
+        "display_course_code": "CIVL 2123"
+      },
+      {
+        "course_id": "CIVL2140",
+        "course_name": "Introduction to Soil Mechanics",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-soil-mechanics-civl-2140/",
+        "display_course_code": "CIVL 2140"
+      },
+      {
+        "course_id": "CIVL2151",
+        "course_name": "Introduction to Urban Traffic Engineering",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-urban-traffic-engineering-civl-2151/",
+        "display_course_code": "CIVL 2151"
+      },
+      {
+        "course_id": "CIVL2161",
+        "course_name": "Introduction to Hydraulics",
+        "credits": 3.0,
+        "source_url": "https://www.bcit.ca/courses/introduction-to-hydraulics-civl-2161/",
+        "display_course_code": "CIVL 2161"
+      },
+      {
+        "course_id": "CIVL3230",
+        "course_name": "Civil Construction Estimating",
+        "credits": 2.5,
+        "source_url": "https://www.bcit.ca/courses/civil-construction-estimating-civl-3230/",
+        "display_course_code": "CIVL 3230"
+      }
+    ],
+    "campuses": [
+      {
+        "campus_id": 4,
+        "institution_key": "BCIT",
+        "campus_key": "annacis_island",
+        "official_name": "Annacis Island Campus",
+        "address": "1608 Cliveden Avenue",
+        "city": "Delta",
+        "region": "BC",
+        "postal_code": "V3M 6P1",
+        "description": "A specialized facility for motive power and heavy mechanical trades programs.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/annacis-island/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 5,
+        "institution_key": "BCIT",
+        "campus_key": "marine",
+        "official_name": "Marine Campus",
+        "address": "265 West Esplanade",
+        "city": "North Vancouver",
+        "region": "BC",
+        "postal_code": "V7M 1A5",
+        "description": "BCIT's centre for maritime training in Western Canada.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/marine/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 1,
+        "institution_key": "BCIT",
+        "campus_key": "burnaby",
+        "official_name": "Burnaby Campus",
+        "address": "3700 Willingdon Avenue",
+        "city": "Burnaby",
+        "region": "BC",
+        "postal_code": "V5G 3H2",
+        "description": "BCIT's largest campus, with classrooms, shops, labs, simulators, and other specialized learning spaces.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/burnaby/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 3,
+        "institution_key": "BCIT",
+        "campus_key": "aerospace",
+        "official_name": "Aerospace Technology Campus",
+        "address": "3800 Cessna Drive",
+        "city": "Richmond",
+        "region": "BC",
+        "postal_code": "V7B 0A1",
+        "description": "BCIT's specialized aerospace training campus in Richmond.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/aerospace-technology/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      },
+      {
+        "campus_id": 2,
+        "institution_key": "BCIT",
+        "campus_key": "downtown",
+        "official_name": "Downtown Campus",
+        "address": "555 Seymour Street",
+        "city": "Vancouver",
+        "region": "BC",
+        "postal_code": "V6B 3H6",
+        "description": "BCIT's campus in Vancouver's business and technology core.",
+        "active": true,
+        "official_source_url": "https://www.bcit.ca/about/visit/campuses-directions/downtown/",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        },
+        "main_phone": "604-434-5734"
+      }
+    ],
+    "institutional_resources": [
+      {
+        "institutional_resource_id": 9,
+        "institution_key": "BCIT",
+        "resource_key": "program_availability",
+        "title": "BCIT Program Availability",
+        "official_url": "https://www.bcit.ca/admission/program-availability/",
+        "topic": "program_availability",
+        "trigger_phrases": [
+          "program availability",
+          "program available",
+          "applications open",
+          "accepting applications",
+          "application open",
+          "program full"
+        ],
+        "normalized_intents": [
+          "PROGRAM_AVAILABILITY"
+        ],
+        "description": "Check current program availability and application status by intake.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 12,
+        "institution_key": "BCIT",
+        "resource_key": "program_advising",
+        "title": "BCIT Program Advising",
+        "official_url": "https://www.bcit.ca/advising/",
+        "topic": "advising",
+        "trigger_phrases": [
+          "program advising",
+          "academic advising",
+          "academic advisor",
+          "program advisor",
+          "talk to an advisor",
+          "contact an advisor"
+        ],
+        "normalized_intents": [
+          "ADVISING"
+        ],
+        "description": "Contact BCIT Program Advising for help planning academic next steps.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 6,
+        "institution_key": "BCIT",
+        "resource_key": "financial_aid_awards",
+        "title": "BCIT Student Financial Aid & Awards",
+        "official_url": "https://www.bcit.ca/financial-aid/",
+        "topic": "financial_aid",
+        "trigger_phrases": [
+          "financial aid",
+          "student funding",
+          "scholarship",
+          "scholarships",
+          "bursary",
+          "bursaries",
+          "student loan",
+          "awards"
+        ],
+        "normalized_intents": [
+          "FINANCIAL_AID"
+        ],
+        "description": "Explore loans, grants, scholarships, bursaries, awards, and emergency funding.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 1,
+        "institution_key": "BCIT",
+        "resource_key": "equivalencies",
+        "title": "BCIT Equivalencies",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/equivalencies/",
+        "topic": "equivalencies",
+        "trigger_phrases": [
+          "equivalency",
+          "equivalencies",
+          "equivalent course",
+          "course equivalent",
+          "requirement equivalency"
+        ],
+        "normalized_intents": [
+          "EQUIVALENCIES"
+        ],
+        "description": "Find Canadian, international, and post-secondary entrance-requirement equivalencies.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 5,
+        "institution_key": "BCIT",
+        "resource_key": "tuition_fees",
+        "title": "BCIT Tuition & Fees",
+        "official_url": "https://www.bcit.ca/admission/tuition-fees/",
+        "topic": "tuition_and_fees",
+        "trigger_phrases": [
+          "tuition",
+          "tuition fees",
+          "program cost",
+          "course cost",
+          "cost of attendance",
+          "how much does bcit cost",
+          "student fees"
+        ],
+        "normalized_intents": [
+          "TUITION_AND_FEES"
+        ],
+        "description": "Find tuition, fee, estimator, payment, and refund information.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 8,
+        "institution_key": "BCIT",
+        "resource_key": "plar",
+        "title": "BCIT Prior Learning Assessment & Recognition",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/prior-learning-assessment-recognition/",
+        "topic": "prior_learning",
+        "trigger_phrases": [
+          "plar",
+          "prior learning",
+          "prior learning assessment",
+          "recognition of prior learning"
+        ],
+        "normalized_intents": [
+          "PLAR"
+        ],
+        "description": "Learn how prior informal or experiential learning may be assessed for course credit.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 3,
+        "institution_key": "BCIT",
+        "resource_key": "international_students",
+        "title": "BCIT International Students",
+        "official_url": "https://www.bcit.ca/international-students/",
+        "topic": "international_students",
+        "trigger_phrases": [
+          "international student",
+          "international students",
+          "international applicant",
+          "study permit"
+        ],
+        "normalized_intents": [
+          "INTERNATIONAL_STUDENTS"
+        ],
+        "description": "Programs, services, permits, guides, and support for international students.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 4,
+        "institution_key": "BCIT",
+        "resource_key": "english_language_proficiency",
+        "title": "BCIT English Language Proficiency",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/english-language-proficiency/",
+        "topic": "english_language",
+        "trigger_phrases": [
+          "english language requirement",
+          "english language requirements",
+          "english proficiency",
+          "language proficiency",
+          "ielts",
+          "toefl",
+          "duolingo english"
+        ],
+        "normalized_intents": [
+          "ENGLISH_LANGUAGE_REQUIREMENTS"
+        ],
+        "description": "Review BCIT English-language proficiency categories and accepted assessments.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 10,
+        "institution_key": "BCIT",
+        "resource_key": "application_process",
+        "title": "How to Apply to BCIT",
+        "official_url": "https://www.bcit.ca/admission/how-to-apply/",
+        "topic": "application_process",
+        "trigger_phrases": [
+          "how to apply",
+          "application process",
+          "apply to bcit",
+          "submit application",
+          "application deadline",
+          "application deadlines",
+          "when to apply"
+        ],
+        "normalized_intents": [
+          "APPLICATION_PROCESS"
+        ],
+        "description": "Review application steps, documents, timing, and applicant routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 7,
+        "institution_key": "BCIT",
+        "resource_key": "transfer_credit",
+        "title": "BCIT Transfer Credit",
+        "official_url": "https://www.bcit.ca/admission/entrance-requirements/transfer-credit/",
+        "topic": "transfer_credit",
+        "trigger_phrases": [
+          "transfer credit",
+          "transfer credits",
+          "course credit",
+          "advanced placement"
+        ],
+        "normalized_intents": [
+          "TRANSFER_CREDIT"
+        ],
+        "description": "Search transfer equivalencies and review transfer-credit and advanced-placement routes.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 2,
+        "institution_key": "BCIT",
+        "resource_key": "admissions",
+        "title": "BCIT Admissions",
+        "official_url": "https://www.bcit.ca/admission/",
+        "topic": "admissions",
+        "trigger_phrases": [
+          "admission",
+          "admissions",
+          "admission requirement",
+          "admission requirements"
+        ],
+        "normalized_intents": [
+          "ADMISSIONS"
+        ],
+        "description": "Start with BCIT admissions information and entrance requirements.",
+        "priority": 20,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      },
+      {
+        "institutional_resource_id": 11,
+        "institution_key": "BCIT",
+        "resource_key": "application_status",
+        "title": "BCIT Application Status",
+        "official_url": "https://www.bcit.ca/admission/after-you-apply/application-status/",
+        "topic": "application_status",
+        "trigger_phrases": [
+          "application status",
+          "check my application",
+          "after i apply",
+          "after applying",
+          "admission decision"
+        ],
+        "normalized_intents": [
+          "APPLICATION_STATUS"
+        ],
+        "description": "Track an application and understand BCIT application and decision statuses.",
+        "priority": 10,
+        "active": true,
+        "source_type": "official_institution_page",
+        "source_checked_at": "2026-09-06",
+        "source_metadata": {
+          "publisher": "BCIT"
+        }
+      }
+    ]
+  },
+  "observations": [
+    {
+      "turn": 1,
+      "response": {
+        "answer": "The Civil Technology Certificate is a 60-credit, part-time blended program designed to advance civil technology careers through courses such as AICO 1000 AutoCAD 1 and CIVL 1120 Statics, plus at least 20 elective credits from the approved pool. The curriculum is under review and the program is unavailable to international applicants; see [program details](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/).",
+        "tools_used": [
+          "get_program_details"
+        ],
+        "verification": {
+          "count": 4,
+          "kind": "fact",
+          "exact_count_available": true
+        },
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Civil Technology",
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "5430CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [],
+          "stopped": false,
+          "turn_index": 1,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "max_words",
+          "value": 100,
+          "dimension": "repetition_avoidance",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 54
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "5430CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "5430CERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "5430CERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 1,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "5430CERT",
+            "program_name": "Civil Technology",
+            "program_set_query": false
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": {
+            "name": "get_program_details",
+            "type": "function"
+          },
+          "output": [
+            {
+              "arguments": "{\"program_id\":\"5430CERT\"}",
+              "call_id": "call_11TvGcw3m2I3vAdggG9B32lY",
+              "name": "get_program_details",
+              "type": "function_call",
+              "id": "fc_01da8e758944a713006aa102568cd087d0b28c050e6044875c",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "kind": "tool",
+          "name": "get_program_details",
+          "arguments": {
+            "program_id": "5430CERT"
+          },
+          "context": {
+            "current_question": "Tell me about Civil Technology Certificate, in two sentences.",
+            "diploma_completed": false,
+            "global_catalog": false,
+            "program_id": "5430CERT",
+            "program_name": "Civil Technology",
+            "program_set_query": false,
+            "work_hours": 0
+          },
+          "result": {
+            "program": {
+              "academic_rules": {
+                "program_id": "5430CERT",
+                "rule_sets": [
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1567,
+                            "condition_type": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                            "description": "How to Apply There is no formal application process and it is not necessary to register in the program to take courses. You may register for any course of interest as long as the specified prerequisite(s) are met or you have the equivalent knowledge. Students who wish to complete the Certificate should submit a Program Declaration Request . About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you’ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* January 2nd* Spring/Summer (April) May 1st* April 1st* Fall (September) October 1st* September 1st* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first-qualified basis as long as space remains. English language proficiency: Category 3 – English Studies 12 (50%) or equivalent Recommended for success Math: one of the following (or equivalent): Math 12* or MATH 0001 – Technical Mathematics *Students who completed Math 12 more than five years ago are strongly recommended to start with one of the required math courses. International applicants This program is not available to international students. View available programs . Program declaration Declaring your Flexible Learning (Part-time Studies) program ensures that BCIT is aware of your intent to complete a program as it is currently outlined and provides you the opportunity to apply for transfer credit. To submit your declaration: Answer all questions completely. If required, convert transcripts and documents to PDF files . Have a credit card ready to pay the application fee. Declare Now Upon approval, a program plan letter will be sent to you confirming your program of study. Please allow approximately eight weeks for processing. Learn more about program declaration Go back Overview Next up Costs & Supplies",
+                            "parameters": {
+                              "executable": false,
+                              "semantic": "human_confirmation"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                        "operator": "AND",
+                        "rule_group_id": 1282,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "OFFICIAL_ADMISSION_REQUIREMENTS",
+                    "notes": "How to Apply There is no formal application process and it is not necessary to register in the program to take courses. You may register for any course of interest as long as the specified prerequisite(s) are met or you have the equivalent knowledge. Students who wish to complete the Certificate should submit a Program Declaration Request . About Flexible Learning Flexible Learning offers a variety of courses and programs in different delivery modes and locations to customize your learning at your own pace. You can review course prerequisites on our website and if you meet them, you’ll be able to register for that available course immediately. Some courses may require departmental approval or formal acceptance into the program. BCIT Flexible Learning courses are offered during the Winter (January), Spring/Summer (April), and Fall (September) terms. Scheduled intakes Ongoing Flexible Learning (Part-time Studies) intakes: January, April, and September . Application processing Applications are accepted throughout the year with intake options available during the following periods: Intake Opening (9:00 am) Deadline (11:59 pm) Winter (January) February 1st* January 2nd* Spring/Summer (April) May 1st* April 1st* Fall (September) October 1st* September 1st* *or next business day Intakes may fill before the deadline. If you are currently registered in a course or planning to start, submit your application early to secure your spot in the program. Entrance requirements Applicants must meet all entrance requirements and will be accepted on a first-qualified basis as long as space remains. English language proficiency: Category 3 – English Studies 12 (50%) or equivalent Recommended for success Math: one of the following (or equivalent): Math 12* or MATH 0001 – Technical Mathematics *Students who completed Math 12 more than five years ago are strongly recommended to start with one of the required math courses. International applicants This program is not available to international students. View available programs . Program declaration Declaring your Flexible Learning (Part-time Studies) program ensures that BCIT is aware of your intent to complete a program as it is currently outlined and provides you the opportunity to apply for transfer credit. To submit your declaration: Answer all questions completely. If required, convert transcripts and documents to PDF files . Have a credit card ready to pay the application fee. Declare Now Upon approval, a program plan letter will be sent to you confirming your program of study. Please allow approximately eight weeks for processing. Learn more about program declaration Go back Overview Next up Costs & Supplies",
+                    "rule_set_id": 1424,
+                    "scope": "ADMISSION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1568,
+                            "condition_type": "COMPONENT_1",
+                            "description": "1. Required Courses: and or",
+                            "parameters": {
+                              "course_ids": [
+                                "AICO1000",
+                                "CIVL1120",
+                                "CIVL1121",
+                                "CIVL1160",
+                                "CIVL1580",
+                                "CIVL2121",
+                                "CIVL2122",
+                                "CIVL2123",
+                                "CIVL2140",
+                                "CIVL2161",
+                                "COMM1103",
+                                "MATH1013",
+                                "MATH1401"
+                              ],
+                              "executable": false,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "COMPONENT_1",
+                        "operator": "AND",
+                        "rule_group_id": 1283,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_1",
+                    "notes": "1. Required Courses: and or",
+                    "rule_set_id": 1425,
+                    "scope": "COMPLETION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1569,
+                            "condition_type": "COMPONENT_2",
+                            "description": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0",
+                            "parameters": {
+                              "course_ids": [
+                                "CIVL2124",
+                                "CIVL2151",
+                                "CIVL2170",
+                                "CIVL3140",
+                                "CIVL3171",
+                                "CIVL3172",
+                                "CIVL3173",
+                                "CIVL3230",
+                                "COMM2202",
+                                "PUBW1001",
+                                "PUBW1121",
+                                "PUBW1141",
+                                "PUBW2121",
+                                "PUBW4550",
+                                "SURV1101",
+                                "SURV1104",
+                                "SURV2205",
+                                "TSYH4530",
+                                "TSYH4720",
+                                "TSYH4721"
+                              ],
+                              "executable": true,
+                              "semantic": "minimum_credits"
+                            },
+                            "sort_order": 2
+                          }
+                        ],
+                        "label": "COMPONENT_2",
+                        "operator": "AND",
+                        "rule_group_id": 1284,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "COMPONENT_2",
+                    "notes": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0",
+                    "rule_set_id": 1426,
+                    "scope": "COMPLETION",
+                    "study_mode": "Part-time"
+                  },
+                  {
+                    "groups": [
+                      {
+                        "conditions": [
+                          {
+                            "condition_id": 1570,
+                            "condition_type": "PUBLISHED_PATHWAY_1",
+                            "description": "1. Required Courses: Credits: published course alternative",
+                            "parameters": {
+                              "course_ids": [
+                                "MATH1013",
+                                "MATH1401"
+                              ],
+                              "executable": false,
+                              "semantic": "alternative_path"
+                            },
+                            "sort_order": 1
+                          }
+                        ],
+                        "label": "PUBLISHED_PATHWAY_1",
+                        "operator": "AND",
+                        "rule_group_id": 1285,
+                        "sort_order": 1
+                      }
+                    ],
+                    "name": "PUBLISHED_PATHWAY_1",
+                    "notes": "1. Required Courses: Credits: published course alternative",
+                    "rule_set_id": 1427,
+                    "scope": "PATHWAY",
+                    "study_mode": "Part-time"
+                  }
+                ]
+              },
+              "campus": "Burnaby Campus / Online",
+              "clinical_and_practice_requirements": {
+                "program_id": "5430CERT"
+              },
+              "courses": [
+                {
+                  "course_id": "AICO1000",
+                  "course_name": "AutoCAD 1",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/autocad-1-aico-1000/"
+                },
+                {
+                  "course_id": "CIVL1120",
+                  "course_name": "Statics",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "6.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/statics-civl-1120/"
+                },
+                {
+                  "course_id": "CIVL1121",
+                  "course_name": "Graphical Communication",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/graphical-communication-civl-1121/"
+                },
+                {
+                  "course_id": "CIVL1160",
+                  "course_name": "Applied Hydrology",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "4.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/applied-hydrology-civl-1160/"
+                },
+                {
+                  "course_id": "CIVL1580",
+                  "course_name": "Construction Materials Testing Fundamentals",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/construction-materials-testing-fundamentals-civl-1580/"
+                },
+                {
+                  "course_id": "CIVL2121",
+                  "course_name": "Stress Analysis 1",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/stress-analysis-1-civl-2121/"
+                },
+                {
+                  "course_id": "CIVL2122",
+                  "course_name": "Stress Analysis 2",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/stress-analysis-2-civl-2122/"
+                },
+                {
+                  "course_id": "CIVL2123",
+                  "course_name": "Concrete Technology",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/concrete-technology-civl-2123/"
+                },
+                {
+                  "course_id": "CIVL2124",
+                  "course_name": "Asphalt Technology",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/asphalt-technology-civl-2124/"
+                },
+                {
+                  "course_id": "CIVL2140",
+                  "course_name": "Introduction to Soil Mechanics",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "2.50",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-soil-mechanics-civl-2140/"
+                },
+                {
+                  "course_id": "CIVL2151",
+                  "course_name": "Introduction to Urban Traffic Engineering",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-urban-traffic-engineering-civl-2151/"
+                },
+                {
+                  "course_id": "CIVL2161",
+                  "course_name": "Introduction to Hydraulics",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-hydraulics-civl-2161/"
+                },
+                {
+                  "course_id": "CIVL2170",
+                  "course_name": "Intro to Structural Design",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/intro-to-structural-design-civl-2170/"
+                },
+                {
+                  "course_id": "CIVL3140",
+                  "course_name": "Soil Mechanics 2",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/soil-mechanics-2-civl-3140/"
+                },
+                {
+                  "course_id": "CIVL3171",
+                  "course_name": "Wood Design",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/wood-design-civl-3171/"
+                },
+                {
+                  "course_id": "CIVL3172",
+                  "course_name": "Steel Design",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/steel-design-civl-3172/"
+                },
+                {
+                  "course_id": "CIVL3173",
+                  "course_name": "Introduction to Reinforced Concrete Design",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-reinforced-concrete-design-civl-3173/"
+                },
+                {
+                  "course_id": "CIVL3230",
+                  "course_name": "Civil Construction Estimating",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/civil-construction-estimating-civl-3230/"
+                },
+                {
+                  "course_id": "COMM1103",
+                  "course_name": "Introduction to Business and Technical Communication",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "3.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-business-and-technical-communication-comm-1103/"
+                },
+                {
+                  "course_id": "COMM2202",
+                  "course_name": "Business and Technical Correspondence",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/business-and-technical-correspondence-comm-2202/"
+                },
+                {
+                  "course_id": "MATH1013",
+                  "course_name": "Advanced Technical Mathematics",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "5.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/advanced-technical-mathematics-math-1013/"
+                },
+                {
+                  "course_id": "MATH1401",
+                  "course_name": "Technical Mathematics for Architectural and Building Technology",
+                  "course_type": "ALTERNATIVE",
+                  "credits": "5.00",
+                  "notes": "Required Courses",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/technical-mathematics-for-architectural-and-building-technology-math-1401/"
+                },
+                {
+                  "course_id": "PUBW1001",
+                  "course_name": "Introduction to Public Works Operations",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "1.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/introduction-to-public-works-operations-pubw-1001/"
+                },
+                {
+                  "course_id": "PUBW1121",
+                  "course_name": "Roadworks Maintenance 1",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-1-pubw-1121/"
+                },
+                {
+                  "course_id": "PUBW1141",
+                  "course_name": "Municipal Plan Reading",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/municipal-plan-reading-pubw-1141/"
+                },
+                {
+                  "course_id": "PUBW2121",
+                  "course_name": "Roadworks Maintenance 2",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-2-pubw-2121/"
+                },
+                {
+                  "course_id": "PUBW4550",
+                  "course_name": "Public Works Inspection",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/public-works-inspection-pubw-4550/"
+                },
+                {
+                  "course_id": "SURV1101",
+                  "course_name": "Survey Instrument Operations: Levels",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/survey-instrument-operations-levels-surv-1101/"
+                },
+                {
+                  "course_id": "SURV1104",
+                  "course_name": "Basic Surveying with Total Stations",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.50",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/basic-surveying-with-total-stations-surv-1104/"
+                },
+                {
+                  "course_id": "SURV2205",
+                  "course_name": "Civil 3D: Introduction",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "3.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/civil-3d-introduction-surv-2205/"
+                },
+                {
+                  "course_id": "TSYH4530",
+                  "course_name": "Subdivision Planning/Design Part 1: Land Use Planning",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/subdivision-planning-design-part-1-land-use-planning-tsyh-4530/"
+                },
+                {
+                  "course_id": "TSYH4720",
+                  "course_name": "Engineering Economics Part 1: Fundamentals of Financial Calculations",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/engineering-economics-part-1-fundamentals-of-financial-calculations-tsyh-4720/"
+                },
+                {
+                  "course_id": "TSYH4721",
+                  "course_name": "Engineering Economics Part 2: Introduction to Engineering Economics",
+                  "course_type": "ELECTIVE_POOL",
+                  "credits": "2.00",
+                  "notes": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                  "required": false,
+                  "source_url": "https://www.bcit.ca/courses/engineering-economics-part-2-introduction-to-engineering-economics-tsyh-4721/"
+                }
+              ],
+              "credential": "Certificate",
+              "curriculum": {
+                "components": [
+                  {
+                    "component_id": 1049,
+                    "component_name": "Required Courses",
+                    "component_order": 1,
+                    "courses": [
+                      {
+                        "course_id": "AICO1000",
+                        "course_name": "AutoCAD 1",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "AICO 1000",
+                        "source_url": "https://www.bcit.ca/courses/autocad-1-aico-1000/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL1120",
+                        "course_name": "Statics",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "6.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 1120",
+                        "source_url": "https://www.bcit.ca/courses/statics-civl-1120/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL1121",
+                        "course_name": "Graphical Communication",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 1121",
+                        "source_url": "https://www.bcit.ca/courses/graphical-communication-civl-1121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL1160",
+                        "course_name": "Applied Hydrology",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "4.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/applied-hydrology-civl-1160/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL1580",
+                        "course_name": "Construction Materials Testing Fundamentals",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/construction-materials-testing-fundamentals-civl-1580/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2121",
+                        "course_name": "Stress Analysis 1",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/stress-analysis-1-civl-2121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2122",
+                        "course_name": "Stress Analysis 2",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 2122",
+                        "source_url": "https://www.bcit.ca/courses/stress-analysis-2-civl-2122/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2123",
+                        "course_name": "Concrete Technology",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 2123",
+                        "source_url": "https://www.bcit.ca/courses/concrete-technology-civl-2123/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2140",
+                        "course_name": "Introduction to Soil Mechanics",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 2140",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-soil-mechanics-civl-2140/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2161",
+                        "course_name": "Introduction to Hydraulics",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 2161",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-hydraulics-civl-2161/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMM1103",
+                        "course_name": "Introduction to Business and Technical Communication",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-business-and-technical-communication-comm-1103/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MATH1013",
+                        "course_name": "Advanced Technical Mathematics",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "5.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MATH 1013",
+                        "source_url": "https://www.bcit.ca/courses/advanced-technical-mathematics-math-1013/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "MATH1401",
+                        "course_name": "Technical Mathematics for Architectural and Building Technology",
+                        "course_role": "ALTERNATIVE",
+                        "credits": "5.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "MATH 1401",
+                        "source_url": "https://www.bcit.ca/courses/technical-mathematics-for-architectural-and-building-technology-math-1401/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "1. Required Courses: and or"
+                  },
+                  {
+                    "component_id": 1048,
+                    "component_name": "Complete 20.0 credits from the following list of electives to bring total program credits to 60.0",
+                    "component_order": 2,
+                    "courses": [
+                      {
+                        "course_id": "CIVL2124",
+                        "course_name": "Asphalt Technology",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/asphalt-technology-civl-2124/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2151",
+                        "course_name": "Introduction to Urban Traffic Engineering",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 2151",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-urban-traffic-engineering-civl-2151/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL2170",
+                        "course_name": "Intro to Structural Design",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/intro-to-structural-design-civl-2170/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL3140",
+                        "course_name": "Soil Mechanics 2",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/soil-mechanics-2-civl-3140/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL3171",
+                        "course_name": "Wood Design",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/wood-design-civl-3171/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL3172",
+                        "course_name": "Steel Design",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/steel-design-civl-3172/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL3173",
+                        "course_name": "Introduction to Reinforced Concrete Design",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-reinforced-concrete-design-civl-3173/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "CIVL3230",
+                        "course_name": "Civil Construction Estimating",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "CIVL 3230",
+                        "source_url": "https://www.bcit.ca/courses/civil-construction-estimating-civl-3230/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "COMM2202",
+                        "course_name": "Business and Technical Correspondence",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/business-and-technical-correspondence-comm-2202/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "PUBW1001",
+                        "course_name": "Introduction to Public Works Operations",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "1.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/introduction-to-public-works-operations-pubw-1001/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "PUBW1121",
+                        "course_name": "Roadworks Maintenance 1",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-1-pubw-1121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "PUBW1141",
+                        "course_name": "Municipal Plan Reading",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/municipal-plan-reading-pubw-1141/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "PUBW2121",
+                        "course_name": "Roadworks Maintenance 2",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/roadworks-maintenance-2-pubw-2121/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "PUBW4550",
+                        "course_name": "Public Works Inspection",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/public-works-inspection-pubw-4550/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SURV1101",
+                        "course_name": "Survey Instrument Operations: Levels",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SURV 1101",
+                        "source_url": "https://www.bcit.ca/courses/survey-instrument-operations-levels-surv-1101/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SURV1104",
+                        "course_name": "Basic Surveying with Total Stations",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.50",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SURV 1104",
+                        "source_url": "https://www.bcit.ca/courses/basic-surveying-with-total-stations-surv-1104/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "SURV2205",
+                        "course_name": "Civil 3D: Introduction",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "3.00",
+                        "institution_key": "BCIT",
+                        "native_course_code": "SURV 2205",
+                        "source_url": "https://www.bcit.ca/courses/civil-3d-introduction-surv-2205/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TSYH4530",
+                        "course_name": "Subdivision Planning/Design Part 1: Land Use Planning",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/subdivision-planning-design-part-1-land-use-planning-tsyh-4530/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TSYH4720",
+                        "course_name": "Engineering Economics Part 1: Fundamentals of Financial Calculations",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/engineering-economics-part-1-fundamentals-of-financial-calculations-tsyh-4720/",
+                        "study_mode": "ALL"
+                      },
+                      {
+                        "course_id": "TSYH4721",
+                        "course_name": "Engineering Economics Part 2: Introduction to Engineering Economics",
+                        "course_role": "ELECTIVE_POOL",
+                        "credits": "2.00",
+                        "institution_key": "BCIT",
+                        "source_url": "https://www.bcit.ca/courses/engineering-economics-part-2-introduction-to-engineering-economics-tsyh-4721/",
+                        "study_mode": "ALL"
+                      }
+                    ],
+                    "notes": "2. Complete 20.0 credits from the following list of electives to bring total program credits to 60.0: Total Credits: 60.0"
+                  }
+                ],
+                "program_id": "5430CERT"
+              },
+              "delivery_method": "Blended",
+              "program_id": "5430CERT",
+              "program_name": "Civil Technology",
+              "program_overview": "Note: This program is under review, and a curriculum change is planned. For more information, please contact the Program Assistant . Please note that this program is not available to international applicants. International applicants interested in civil technology are encouraged to view the BCIT Bachelor of Engineering in Civil Engineering . Delivery: blended. See details . The Part-time Certificate is designed to provide students and employers a flexible offering of academic courses to advance careers in the field of Civil Technology. A program of study can be tailored to a student’s needs by selecting appropriate courses from the list of electives. The Certificate must contain a minimum of 60.0 credits. All Program Declarations must be submitted for approval by the Civil Engineering department. Notice: Please be advised that the program is currently under review and will undergo a curriculum change. Next up Entrance Requirements",
+              "school": "School of Construction and the Environment",
+              "source_url": "https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/",
+              "status": "Active",
+              "study_mode": "Part-time"
+            }
+          }
+        },
+        {
+          "kind": "model",
+          "model": "gpt-5.6-sol",
+          "tool_choice": "<openai.Omit object at 0x00000189B8767FB0>",
+          "output": [
+            {
+              "id": "rs_01da8e758944a713006aa10258048c87d0840f173e7a583c48",
+              "type": "reasoning",
+              "encrypted_content": "gAAAAABqoQJcari157p0A1Xnkj09i0fMeiK8G9E6YjXFmRgmIV1Z5KOiWaJzl4ZpyUA7G96MeTBV7lbe1ESpC6AN33R068QX72sCgQwni2Tq9VyvVYdjtbBoTcGCLrqo-gv6yoiiuWux6eiYiGylpLoJW2GYNW8cc_PIZO7IYw-S4LStuI7T9LX4fH2mqfEEX2By2Jt-rQPQey2iMqS8QXgOxtE2v0CtY_YFMPVLtcFHTM2yuRefNGm6aM31PpXzw2Jk9ix0LZ2j7ut2wSClB1Sstol9OphZ7qkmpwfOray6JICi-yVXEJPO80Uep0itgVZjvcQvR5JkJIJtfdDCJ-CJcMm9eHqhmAbkcCwB6pT96EmwAVn1-u8jAMo_njrkB8MkcOz7opmTPrDk8PHQteNDlJYsJVt11WFW715WIBqQnJNxK6Abqelr8ZIT_ELEe6FMQ_rUcsSkvWqXveslI6JIrpdgNRh7jTjavKJ2CvTBX3n8j4gtGuzYwh537um9w8g0SUtQl3KNWLBuZ4coE4d3LfINfid6E0dgbXL-_QUv_SiRdLqY_k0ekbUHeR9X1PHkSdJip_LNC5NUt3jLt8GmAvtWPSOd1TnjFe2-6kVzdZzNFlTbHBGpXCRcX_TW4D5ppRpdLA6mBhziHf-cWtt2IJzu7x3Yq5nMR9anwK0GC4EgDmSXn-2zt196__WhurNOaxho0_JhCVVa-IzxqaEHuvwvR0ILZaRjOhe72xMWoAXD1SRitcLFYkxOD1GLrh1yecmf2B46ZOQB8jMNWO6XKLbqMBfw8Hk6R6zEOyyjkCVhbzTYUQewhP9hIbG1eGKDzDXtC7aLlN3fPahuw0KAhjz75-LoZxGE4H0TOuO3IoaD5hcDPBHxug5XkeixUeYwY2LT2cH_BNlDpz2lGKf-U9psM3E4QNov2r0GlfHmMcgvbGJdFJUWmM9AcihL6sLWRUWWLOyUeFJqprKh70xhHfpYnBrSB_tsiw0rNRjtDHgE_3blzdt_C0Ojs-DAlxFk4Pr_QCfMYyxwGHu6goFZZgqsgIoMctW9Ds1FyAWB2TQ6xNqKQlJHcrbNATwJdm8h1NJXlbTreLGoFZVg4jI-7rgF5RvB5wFTuHlpsNPt7eZfeRb9K-hd7XbnAVTlRZSTLB8hYpYJSTzWYjA6Eomhxiqi1XysnLL33yB17R2PrpU_0moJAtEFv_aevXHpkAN10U455_QY1XI8-gtYqcoIVy9zqzPhgq54OEVuwc1dEIpYYFU2pp3Ua0Ae-JrM5g7kiK4qGeOsN_5S_oCVu7wvGqnB3Z_boylZpDhtZLhXAJxE5KtVwq8jb03q8oFBc_xRQkJkp0nRdSZGoqf1AOgS4aMIWZAX8qwT_iPel10QIQd1qH6QHjxl5r8rLHTNQB_U2-dICmmTwH18XBhbCDh7vvX2EZD0wZEqB09N1_KwixnfVX9AalON5KjUPqIv4qK7kwq5nP9LMy1asodJOof5meZ4ySVR8YKsoFJfvPSbvNxHg5o9PLozc9ZyYrAc1YNZ75C3ZO7UC9TZdPcLnz9u4_PR9YDOIdGRPClXTYQSijHPHJMRucshuBV-DEGMSkBZKXGkLzWnkRb78-ldzQbG0LabMjTfADn1kUnxw5mrb0UOuwCxC3irzR7Tz3aOnZ5tUtbrES6yzHbf91NiTp_h8-gVIEh-5ZMpsjRAbJ9AvLqP5h5l2poP4tynzB1tZdu-8wkB8qRjOQ-h_OsLvtQ5J5NsNl8qPEGlsem1y26f2cfrg12OUrwSRiPEWxWgNJG3RBg_PAPP7AWXJhmNFcxmTU3iBZ9PG7FiboydM-blw7xbq9nSDVrdBYJd4PAuF17n4n5koAQf51_PwzqmlMlrho1-STQEMpRy8oRmWFDoo05Y_A56bPX8PE5Bs1OO8kPplLb_Y5O0y9LxHDClNRY4V-3GdHDVfc6RUS2vDH51nMB9mdQbveI1DH6frAig2Bvi-22URkvq"
+            },
+            {
+              "id": "msg_01da8e758944a713006aa1025a784887d0837589c1b99ababc",
+              "content": [
+                {
+                  "text": "The Civil Technology Certificate is a 60-credit, part-time blended program designed to advance civil technology careers through courses such as AICO 1000 AutoCAD 1 and CIVL 1120 Statics, plus at least 20 elective credits from the approved pool. The curriculum is under review and the program is unavailable to international applicants; see [program details](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/).",
+                  "type": "output_text"
+                }
+              ],
+              "role": "assistant",
+              "status": "completed",
+              "type": "message",
+              "phase": "final_answer"
+            }
+          ]
+        },
+        {
+          "kind": "finalization",
+          "raw_answer": "The Civil Technology Certificate is a 60-credit, part-time blended program designed to advance civil technology careers through courses such as AICO 1000 AutoCAD 1 and CIVL 1120 Statics, plus at least 20 elective credits from the approved pool. The curriculum is under review and the program is unavailable to international applicants; see [program details](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/).",
+          "final_answer": "The Civil Technology Certificate is a 60-credit, part-time blended program designed to advance civil technology careers through courses such as AICO 1000 AutoCAD 1 and CIVL 1120 Statics, plus at least 20 elective credits from the approved pool. The curriculum is under review and the program is unavailable to international applicants; see [program details](https://www.bcit.ca/programs/civil-technology-certificate-part-time-5430cert/)."
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 2,
+      "response": {
+        "answer": "No. Employment cannot be guaranteed; it depends on the applicable decision process and your circumstances.",
+        "tools_used": [],
+        "intent": "PROGRAM_INFO",
+        "resolved_program": "Civil Technology",
+        "verification": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "5430CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "5430CERT:outcomes"
+          ],
+          "stopped": false,
+          "turn_index": 2,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "5430CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "5430CERT"
+        }
+      ],
+      "observed_trace": [
+        {
+          "kind": "resolution",
+          "result": {
+            "conversation_state": {
+              "program_id": "5430CERT",
+              "scope": "program",
+              "stopped": false,
+              "turn_index": 2,
+              "version": 2
+            },
+            "global_catalog": false,
+            "program_id": "5430CERT",
+            "program_name": "Civil Technology",
+            "program_set_query": false
+          }
+        }
+      ],
+      "omitted_history_messages": 0
+    },
+    {
+      "turn": 3,
+      "response": {
+        "answer": "Okay, we can stop here.",
+        "tools_used": [],
+        "intent": "FALLBACK",
+        "resolved_program": null,
+        "conversation_state": {
+          "version": 2,
+          "scope": "program",
+          "program_id": "5430CERT",
+          "course_id": null,
+          "scope_query": null,
+          "result_query": null,
+          "unique_result_program_id": null,
+          "campus_name": null,
+          "catalog_kind": null,
+          "candidates": [],
+          "prior_program_ids": [],
+          "reported_completed_course_ids": [],
+          "reported_completed_courses": [],
+          "comparison_program_ids": [],
+          "subject_history": [],
+          "student_facts": [],
+          "conclusions": [],
+          "answered_facets": [
+            "5430CERT:outcomes"
+          ],
+          "stopped": true,
+          "turn_index": 3,
+          "level": null,
+          "requirement_type": null,
+          "academic_scope": null
+        }
+      },
+      "http_status": 200,
+      "structural_assertions": [
+        {
+          "op": "tools_empty",
+          "dimension": "frustration_handling",
+          "root_cause": "conversation_state",
+          "pass": true,
+          "actual": []
+        },
+        {
+          "op": "max_words",
+          "value": 35,
+          "dimension": "frustration_handling",
+          "root_cause": "formatting_repetition",
+          "pass": true,
+          "actual": 5
+        },
+        {
+          "op": "state_in",
+          "field": "program_id",
+          "value": [
+            "5430CERT"
+          ],
+          "dimension": "entity_resolution",
+          "root_cause": "entity_resolution",
+          "pass": true,
+          "actual": "5430CERT"
+        }
+      ],
+      "observed_trace": [],
+      "omitted_history_messages": 0
+    }
+  ]
+}

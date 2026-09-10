@@ -1,0 +1,105 @@
+{
+  "scenario_id": "CAT-06-C",
+  "requested_turns": [
+    1,
+    2,
+    3
+  ],
+  "transcript_sha256": "7d6f129f3fe88088f5d869b29abcb6d5d632e61787236e67df1cb0cb12806b40",
+  "judge_model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "4f56130f37c31f1aaa8b20c1987afe333d5728496e0a15c219613567bca8d21a",
+  "response_id": "resp_0cf241114fcb4266006aa0792e007487d08d4d6e384bcb9774",
+  "usage": {
+    "input_tokens": 91442,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 91439
+    },
+    "output_tokens": 687,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 92129
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 3,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "formatting_repetition",
+          "pattern": "awkward_or_impersonal",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Finalization changed the clean raw label 'BIOC 203 Fundamentals of Biochemistry' to 'BIOC 203 UBC-BIOC-203 — Fundamentals of Biochemistry', redundantly exposing the internal identifier."
+        },
+        "notes": "Accurate two-sentence introduction within the requested brevity; program state and all cited course identities match the frozen records. The duplicated identifier is a minor presentation defect, not an academic error or catalog dump. Context retention is inapplicable on turn 1; no necessary clarification, frustration, or next step applies."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "Correctly refuses to guarantee immediate employment without inventing statistics or treating missing evidence as proof of unemployment. Four-year joint BSc and optional co-op claims match the snapshot. Provides a proportional institutional follow-up through the verified program page and preserves 9940BSC. Necessary clarification and frustration handling do not apply."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": 3,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "retrieval_routing",
+          "pattern": "stop_or_frustration_mishandled",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "Despite 'Never mind, let's stop.', the trace forces tool_choice=get_program_details and executes retrieval; tools_used is nonempty and intent remains PROGRAM_INFO. The final response nevertheless stops appropriately: 'Understood. Take care!'"
+        },
+        "notes": "The user-facing acknowledgment is concise and respectful, with no continued advising, and active program 9940BSC is preserved. Deduction reflects only the unnecessary forced retrieval contrary to the frozen stop expectation, not a language failure. No academic claims are made, so factual correctness is null; necessary clarification and next-step guidance do not apply."
+      }
+    ]
+  },
+  "attempt": 2
+}

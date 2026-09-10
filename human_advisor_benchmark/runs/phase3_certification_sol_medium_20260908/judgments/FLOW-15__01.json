@@ -1,0 +1,123 @@
+{
+  "scenario_id": "FLOW-15",
+  "requested_turns": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "transcript_sha256": "d3d90fa54beaab79cf0d4b9553d22b187626ca85d9ec74e694b04226ab4476ac",
+  "judge_model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "rubric_sha256": "6914b93df14d33149a5fe9927e1cfaf01f3aece7394a9431f50f810cb7b3f9a7",
+  "input_sha256": "9ce07e7ca4ae02f955c4f851cdcf5618c226f0904e27bee04de0d95ac80aa2c2",
+  "packet_sha256": "64280492ec218d779902bc166bb5f72f514cd3a08a9d30cc4aef505f328e5c73",
+  "packet_format": "lossless-evidence-references-v1",
+  "response_id": "resp_04784a9563d2092d006aa10a5a251087d08bad0dc203dce250",
+  "usage": {
+    "input_tokens": 33253,
+    "input_tokens_details": {
+      "cache_write_tokens": 31899,
+      "cached_tokens": 1351
+    },
+    "output_tokens": 1896,
+    "output_tokens_details": {
+      "reasoning_tokens": 1173
+    },
+    "total_tokens": 35149
+  },
+  "evaluation": {
+    "turns": [
+      {
+        "turn": 1,
+        "scores": {
+          "factual_correctness": null,
+          "entity_resolution": 4,
+          "context_retention": null,
+          "scope_accuracy": 2,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 2,
+          "response_relevance": 2,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 3,
+          "evidence_discipline": 4
+        },
+        "primary_issue": {
+          "root_cause": "scope_confusion",
+          "pattern": "scope_mismatch",
+          "layer": "deterministic",
+          "severity": "noncritical",
+          "confidence": "high",
+          "evidence": "The user asked about graduation, but the response said it would check “what courses you're eligible to take next,” and the resolver stored scope as “none.” It also asked only for the program, omitting the needed completion/coursework details. The trace contains no model call, supporting deterministic attribution."
+        },
+        "notes": "The program clarification was appropriate and gave the student a clear immediate action, but it only partially satisfied the required clarification and shifted from graduation to course eligibility. There were no checkable academic claims."
+      },
+      {
+        "turn": 2,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 3,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": null,
+          "response_relevance": 3,
+          "repetition_avoidance": 4,
+          "naturalness": 3,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response correctly identified program 8660BENG, accurately described the four-year program and interim diploma, and appropriately requested completed courses before judging graduation. The overview and sample later courses were somewhat more detailed than needed but caused no substantive harm."
+      },
+      {
+        "turn": 3,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": null,
+          "necessary_clarification_detection": 4,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": 4,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "It retained the Civil Engineering BEng context and correctly requested specific completed course codes, including electives, because “some courses” was insufficient to assess graduation. CIVL 7012 is a valid curriculum example."
+      },
+      {
+        "turn": 4,
+        "scores": {
+          "factual_correctness": 4,
+          "entity_resolution": 4,
+          "context_retention": 4,
+          "scope_accuracy": 4,
+          "unsupported_inference_avoidance": 4,
+          "unnecessary_clarification_avoidance": 4,
+          "necessary_clarification_detection": null,
+          "response_relevance": 4,
+          "repetition_avoidance": 4,
+          "naturalness": 4,
+          "frustration_handling": null,
+          "next_step_guidance": null,
+          "evidence_discipline": 4
+        },
+        "primary_issue": null,
+        "notes": "The response correctly distinguished the Civil Engineering Diploma earned after successful completion through Level 4 from the Bachelor of Engineering, whose curriculum continues through Level 8. Although the hidden academic_scope was stored as progression, the prose directly and accurately addressed the graduation question and did not equate Level 4 completion with completing the BEng."
+      }
+    ]
+  },
+  "validation_policy": "preserve_numeric_scores_flag_label_conflicts_v2",
+  "validation_warnings": [],
+  "attempt": 1
+}
